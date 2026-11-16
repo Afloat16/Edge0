@@ -1,0 +1,1278 @@
+﻿2026-11-16T22:10:44.2869300Z Current runner version: '2.338.2'
+2026-11-16T22:10:44.2904798Z ##[group]Runner Image Provisioner
+2026-11-16T22:10:44.2906446Z Hosted Compute Agent
+2026-11-16T22:10:44.2907392Z Version: 20261103.629
+2026-11-16T22:10:44.2908415Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-16T22:10:44.2909714Z Build Date: 2026-11-03T17:26:59Z
+2026-11-16T22:10:44.2910812Z Worker ID: {8a64b28c-3827-4f8e-b600-e3ec6c161121}
+2026-11-16T22:10:44.2911940Z Region: eastus2
+2026-11-16T22:10:44.2912936Z Cloud: Azure
+2026-11-16T22:10:44.2913777Z ##[endgroup]
+2026-11-16T22:10:44.2915937Z ##[group]Operating System
+2026-11-16T22:10:44.2916894Z Ubuntu
+2026-11-16T22:10:44.2917867Z 26.04.1
+2026-11-16T22:10:44.2918656Z LTS
+2026-11-16T22:10:44.2919504Z ##[endgroup]
+2026-11-16T22:10:44.2920459Z ##[group]Runner Image
+2026-11-16T22:10:44.2921405Z Image: ubuntu-26.04
+2026-11-16T22:10:44.2922656Z Version: 20261111.196.1
+2026-11-16T22:10:44.2924733Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+2026-11-16T22:10:44.2927860Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+2026-11-16T22:10:44.2929257Z ##[endgroup]
+2026-11-16T22:10:44.2930951Z ##[group]GITHUB_TOKEN Permissions
+2026-11-16T22:10:44.2934252Z Contents: read
+2026-11-16T22:10:44.2935189Z Metadata: read
+2026-11-16T22:10:44.2936010Z ##[endgroup]
+2026-11-16T22:10:44.2939442Z Secret source: Actions
+2026-11-16T22:10:44.2940959Z Cache mode: write
+2026-11-16T22:10:44.2942746Z Prepare workflow directory
+2026-11-16T22:10:44.3526162Z Prepare all required actions
+2026-11-16T22:10:44.3590234Z Getting action download info
+2026-11-16T22:10:44.5465293Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-16T22:10:44.6533966Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+2026-11-16T22:10:45.0249880Z Complete job name: cpu
+2026-11-16T22:10:45.1150459Z ##[group]Run actions/checkout@v4
+2026-11-16T22:10:45.1151329Z with:
+2026-11-16T22:10:45.1151791Z   repository: Afloat16/Edge0
+2026-11-16T22:10:45.1155968Z   token: ***
+2026-11-16T22:10:45.1156422Z   ssh-strict: true
+2026-11-16T22:10:45.1156886Z   ssh-user: git
+2026-11-16T22:10:45.1157345Z   persist-credentials: true
+2026-11-16T22:10:45.1157841Z   clean: true
+2026-11-16T22:10:45.1158292Z   sparse-checkout-cone-mode: true
+2026-11-16T22:10:45.1158817Z   fetch-depth: 1
+2026-11-16T22:10:45.1159257Z   fetch-tags: false
+2026-11-16T22:10:45.1159712Z   show-progress: true
+2026-11-16T22:10:45.1160173Z   lfs: false
+2026-11-16T22:10:45.1160601Z   submodules: false
+2026-11-16T22:10:45.1161066Z   set-safe-directory: true
+2026-11-16T22:10:45.1161591Z   allow-unsafe-pr-checkout: false
+2026-11-16T22:10:45.1162344Z env:
+2026-11-16T22:10:45.1162914Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:45.1163421Z ##[endgroup]
+2026-11-16T22:10:45.3696909Z Syncing repository: Afloat16/Edge0
+2026-11-16T22:10:45.3699411Z ##[group]Getting Git version info
+2026-11-16T22:10:45.3700373Z Working directory is '/home/runner/work/Edge0/Edge0'
+2026-11-16T22:10:45.3702120Z [command]/usr/bin/git version
+2026-11-16T22:10:45.3731388Z git version 2.56.1
+2026-11-16T22:10:45.3769936Z ##[endgroup]
+2026-11-16T22:10:45.3781924Z Temporarily overriding HOME='/home/runner/work/_temp/85df1f40-0c78-4d56-b50b-7e02cc5af47b' before making global git config changes
+2026-11-16T22:10:45.3792259Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-16T22:10:45.3794240Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Edge0/Edge0
+2026-11-16T22:10:45.3848958Z Deleting the contents of '/home/runner/work/Edge0/Edge0'
+2026-11-16T22:10:45.3853227Z ##[group]Initializing the repository
+2026-11-16T22:10:45.3857469Z [command]/usr/bin/git init /home/runner/work/Edge0/Edge0
+2026-11-16T22:10:45.3976602Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-16T22:10:45.3979885Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-16T22:10:45.3981992Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-16T22:10:45.3983605Z hint: call:
+2026-11-16T22:10:45.3984408Z hint:
+2026-11-16T22:10:45.3985401Z hint: 	git config --global init.defaultBranch <name>
+2026-11-16T22:10:45.3986548Z hint:
+2026-11-16T22:10:45.3987651Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-16T22:10:45.3989300Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-16T22:10:45.3990649Z hint:
+2026-11-16T22:10:45.3991458Z hint: 	git branch -m <name>
+2026-11-16T22:10:45.3992361Z hint:
+2026-11-16T22:10:45.3993718Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-16T22:10:45.3995538Z Initialized empty Git repository in /home/runner/work/Edge0/Edge0/.git/
+2026-11-16T22:10:45.4006031Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/Edge0
+2026-11-16T22:10:45.4069650Z ##[endgroup]
+2026-11-16T22:10:45.4070975Z ##[group]Disabling automatic garbage collection
+2026-11-16T22:10:45.4074597Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-16T22:10:45.4111710Z ##[endgroup]
+2026-11-16T22:10:45.4113278Z ##[group]Setting up auth
+2026-11-16T22:10:45.4120880Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-16T22:10:45.4159055Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-16T22:10:45.4613505Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-16T22:10:45.4649947Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-16T22:10:45.4949354Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-16T22:10:45.4988654Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-16T22:10:45.5280656Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-16T22:10:45.5321694Z ##[endgroup]
+2026-11-16T22:10:45.5322925Z ##[group]Fetching the repository
+2026-11-16T22:10:45.5331096Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +523a0b1c0206a570783bd49df44cc54e1ad8e8e5:refs/remotes/origin/validation/sse-event-framing-20261116
+2026-11-16T22:10:47.2656834Z From https://github.com/Afloat16/Edge0
+2026-11-16T22:10:47.2658535Z  * [new ref]         523a0b1c0206a570783bd49df44cc54e1ad8e8e5 -> origin/validation/sse-event-framing-20261116
+2026-11-16T22:10:47.2662784Z ##[endgroup]
+2026-11-16T22:10:47.2664758Z ##[group]Determining the checkout info
+2026-11-16T22:10:47.2666473Z ##[endgroup]
+2026-11-16T22:10:47.2670933Z [command]/usr/bin/git sparse-checkout disable
+2026-11-16T22:10:47.2724318Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-16T22:10:47.2756748Z ##[group]Checking out the ref
+2026-11-16T22:10:47.2761040Z [command]/usr/bin/git checkout --progress --force -B validation/sse-event-framing-20261116 refs/remotes/origin/validation/sse-event-framing-20261116
+2026-11-16T22:10:47.7464910Z Switched to a new branch 'validation/sse-event-framing-20261116'
+2026-11-16T22:10:47.7469312Z branch 'validation/sse-event-framing-20261116' set up to track 'origin/validation/sse-event-framing-20261116'.
+2026-11-16T22:10:47.7541534Z ##[endgroup]
+2026-11-16T22:10:47.7544998Z [command]/usr/bin/git log -1 --format=%H
+2026-11-16T22:10:47.7571812Z 523a0b1c0206a570783bd49df44cc54e1ad8e8e5
+2026-11-16T22:10:47.7811342Z ##[group]Run git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+2026-11-16T22:10:47.7812356Z [36;1mgit fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d[0m
+2026-11-16T22:10:47.7872953Z shell: /usr/bin/bash -e {0}
+2026-11-16T22:10:47.7873565Z env:
+2026-11-16T22:10:47.7874011Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:47.7874553Z ##[endgroup]
+2026-11-16T22:10:48.1193914Z From https://github.com/Afloat16/Edge0
+2026-11-16T22:10:48.1194798Z  * branch            f6bfa5546bcf89919f86946ec669bcc7f4cd526d -> FETCH_HEAD
+2026-11-16T22:10:48.1413402Z ##[group]Run astral-sh/setup-uv@v6
+2026-11-16T22:10:48.1413846Z with:
+2026-11-16T22:10:48.1414179Z   activate-environment: false
+2026-11-16T22:10:48.1414596Z   working-directory: /home/runner/work/Edge0/Edge0
+2026-11-16T22:10:48.1415061Z   server-url: https://github.com
+2026-11-16T22:10:48.1418131Z   github-token: ***
+2026-11-16T22:10:48.1418455Z   enable-cache: auto
+2026-11-16T22:10:48.1419239Z   cache-dependency-glob: **/*requirements*.txt
+**/*requirements*.in
+**/*constraints*.txt
+**/*constraints*.in
+**/pyproject.toml
+**/uv.lock
+**/*.py.lock
+
+2026-11-16T22:10:48.1420067Z   restore-cache: true
+2026-11-16T22:10:48.1420386Z   save-cache: true
+2026-11-16T22:10:48.1420692Z   prune-cache: true
+2026-11-16T22:10:48.1421030Z   ignore-nothing-to-cache: false
+2026-11-16T22:10:48.1421402Z   ignore-empty-workdir: false
+2026-11-16T22:10:48.1421765Z   add-problem-matchers: true
+2026-11-16T22:10:48.1422099Z env:
+2026-11-16T22:10:48.1422396Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:48.1423043Z ##[endgroup]
+2026-11-16T22:10:48.3282747Z (node:2509) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-16T22:10:48.3283668Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-16T22:10:48.3413927Z Trying to find version for uv in: /home/runner/work/Edge0/Edge0/uv.toml
+2026-11-16T22:10:48.3415208Z Could not find file: /home/runner/work/Edge0/Edge0/uv.toml
+2026-11-16T22:10:48.3416406Z Trying to find version for uv in: /home/runner/work/Edge0/Edge0/pyproject.toml
+2026-11-16T22:10:48.3417297Z Could not find file: /home/runner/work/Edge0/Edge0/pyproject.toml
+2026-11-16T22:10:48.3418114Z Could not determine uv version from uv.toml or pyproject.toml. Falling back to latest.
+2026-11-16T22:10:48.3419428Z Getting latest version from GitHub API...
+2026-11-16T22:10:48.5950086Z manifest-file not provided, reading from local file.
+2026-11-16T22:10:48.6001881Z manifest-file does not contain version 0.13.8, arch x86_64, platform unknown-linux-gnu. Falling back to GitHub releases.
+2026-11-16T22:10:48.6003440Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+2026-11-16T22:10:48.8882219Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/03487197-b08f-4699-a2d7-b17132d2f758 -f /home/runner/work/_temp/2eeb8844-686f-4f86-b484-cbb69d934052
+2026-11-16T22:10:49.1223440Z Added /home/runner/.local/bin to the path
+2026-11-16T22:10:49.1224069Z Added /opt/hostedtoolcache/uv/0.13.8/x86_64 to the path
+2026-11-16T22:10:49.1248421Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+2026-11-16T22:10:49.1249102Z Successfully installed uv version 0.13.8
+2026-11-16T22:10:49.1251558Z Searching files using cache dependency glob: /home/runner/work/Edge0/Edge0/**/*requirements*.txt,/home/runner/work/Edge0/Edge0/**/*requirements*.in,/home/runner/work/Edge0/Edge0/**/*constraints*.txt,/home/runner/work/Edge0/Edge0/**/*constraints*.in,/home/runner/work/Edge0/Edge0/**/pyproject.toml,/home/runner/work/Edge0/Edge0/**/uv.lock,/home/runner/work/Edge0/Edge0/**/*.py.lock
+2026-11-16T22:10:49.3763125Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/assets/pyproject.toml
+2026-11-16T22:10:49.3800590Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/assets/uv.lock
+2026-11-16T22:10:49.4331390Z /home/runner/work/Edge0/Edge0/edge0-strata/requirements-build.txt
+2026-11-16T22:10:49.4339654Z /home/runner/work/Edge0/Edge0/edge0-strata/requirements-monitor.txt
+2026-11-16T22:10:49.4346946Z /home/runner/work/Edge0/Edge0/edge0-strata/requirements-nvfp4-local.txt
+2026-11-16T22:10:49.4354079Z /home/runner/work/Edge0/Edge0/edge0-strata/requirements.txt
+2026-11-16T22:10:49.5234980Z Found 6 files to hash.
+2026-11-16T22:10:49.5979042Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.14.4-pruned-e00cd163d447fa8250d7c0d7e12c9e2c53b706f335423bb2c55b14ce696c5810
+2026-11-16T22:10:49.6804349Z Cache hit for: setup-uv-1-x86_64-unknown-linux-gnu-3.14.4-pruned-e00cd163d447fa8250d7c0d7e12c9e2c53b706f335423bb2c55b14ce696c5810
+2026-11-16T22:10:49.6910986Z (node:2509) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-16T22:10:49.7234687Z Received 2011 of 2011 (100.0%), 0.2 MBs/sec
+2026-11-16T22:10:49.7235207Z Cache Size: ~0 MB (2011 B)
+2026-11-16T22:10:49.7258178Z [command]/usr/bin/tar -xf /home/runner/work/_temp/ab2f5640-c0c7-4184-a1b2-9a2848863849/cache.tzst -P -C /home/runner/work/Edge0/Edge0 --use-compress-program unzstd
+2026-11-16T22:10:49.7333042Z Cache restored successfully
+2026-11-16T22:10:49.7337435Z uv cache restored from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.14.4-pruned-e00cd163d447fa8250d7c0d7e12c9e2c53b706f335423bb2c55b14ce696c5810
+2026-11-16T22:10:49.7509054Z ##[group]Run sudo apt-get update && sudo apt-get install -y ninja-build
+2026-11-16T22:10:49.7509580Z [36;1msudo apt-get update && sudo apt-get install -y ninja-build[0m
+2026-11-16T22:10:49.7570074Z shell: /usr/bin/bash -e {0}
+2026-11-16T22:10:49.7570361Z env:
+2026-11-16T22:10:49.7570613Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:49.7570951Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-11-16T22:10:49.7571286Z ##[endgroup]
+2026-11-16T22:10:49.8389416Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-16T22:10:49.8647238Z Get:6 https://packages.microsoft.com/ubuntu/26.04/prod resolute InRelease [3964 B]
+2026-11-16T22:10:49.8773737Z Hit:2 http://azure.archive.ubuntu.com/ubuntu resolute InRelease
+2026-11-16T22:10:49.8789942Z Get:3 http://azure.archive.ubuntu.com/ubuntu resolute-updates InRelease [137 kB]
+2026-11-16T22:10:49.8836343Z Get:4 http://azure.archive.ubuntu.com/ubuntu resolute-backports InRelease [137 kB]
+2026-11-16T22:10:49.8863574Z Get:5 http://azure.archive.ubuntu.com/ubuntu resolute-security InRelease [137 kB]
+2026-11-16T22:10:49.8967758Z Get:7 https://packages.microsoft.com/ubuntu/26.04/prod resolute/main arm64 Packages [146 kB]
+2026-11-16T22:10:49.9209121Z Get:8 https://packages.microsoft.com/ubuntu/26.04/prod resolute/main amd64 Packages [160 kB]
+2026-11-16T22:10:49.9393501Z Get:9 http://azure.archive.ubuntu.com/ubuntu resolute-updates/main amd64v3 Packages [873 kB]
+2026-11-16T22:10:49.9433116Z Get:10 http://azure.archive.ubuntu.com/ubuntu resolute-updates/main Translation-en [195 kB]
+2026-11-16T22:10:49.9493615Z Get:11 http://azure.archive.ubuntu.com/ubuntu resolute-updates/universe amd64v3 Packages [386 kB]
+2026-11-16T22:10:49.9513536Z Get:12 http://azure.archive.ubuntu.com/ubuntu resolute-updates/universe Translation-en [122 kB]
+2026-11-16T22:10:49.9765243Z Get:13 http://azure.archive.ubuntu.com/ubuntu resolute-security/main amd64v3 Packages [719 kB]
+2026-11-16T22:10:49.9802359Z Get:14 http://azure.archive.ubuntu.com/ubuntu resolute-security/main Translation-en [157 kB]
+2026-11-16T22:10:49.9816431Z Get:15 http://azure.archive.ubuntu.com/ubuntu resolute-security/universe amd64v3 Packages [221 kB]
+2026-11-16T22:10:49.9836882Z Get:16 http://azure.archive.ubuntu.com/ubuntu resolute-security/universe Translation-en [72.6 kB]
+2026-11-16T22:10:49.9873509Z Get:17 http://azure.archive.ubuntu.com/ubuntu resolute-security/restricted amd64v3 Packages [590 kB]
+2026-11-16T22:10:49.9893306Z Get:18 http://azure.archive.ubuntu.com/ubuntu resolute-security/restricted Translation-en [122 kB]
+2026-11-16T22:10:52.1096497Z Fetched 4178 kB in 0s (11.2 MB/s)
+2026-11-16T22:10:52.7866071Z Reading package lists...
+2026-11-16T22:10:52.8217810Z Reading package lists...
+2026-11-16T22:10:52.9766664Z Building dependency tree...
+2026-11-16T22:10:52.9774433Z Reading state information...
+2026-11-16T22:10:53.0688384Z Solving dependencies...
+2026-11-16T22:10:53.1781940Z The following NEW packages will be installed:
+2026-11-16T22:10:53.1782748Z   ninja-build
+2026-11-16T22:10:53.2002921Z 0 upgraded, 1 newly installed, 0 to remove and 25 not upgraded.
+2026-11-16T22:10:53.2003363Z Need to get 173 kB of archives.
+2026-11-16T22:10:53.2003935Z After this operation, 466 kB of additional disk space will be used.
+2026-11-16T22:10:53.2004527Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-16T22:10:53.2367150Z Get:2 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 ninja-build amd64 1.13.2-1 [173 kB]
+2026-11-16T22:10:53.5501679Z Fetched 173 kB in 0s (3393 kB/s)
+2026-11-16T22:10:53.5728749Z Selecting previously unselected package ninja-build.
+2026-11-16T22:10:53.6029629Z (Reading database ... 
+2026-11-16T22:10:53.6030269Z (Reading database ... 5%
+2026-11-16T22:10:53.6030998Z (Reading database ... 10%
+2026-11-16T22:10:53.6031547Z (Reading database ... 15%
+2026-11-16T22:10:53.6031963Z (Reading database ... 20%
+2026-11-16T22:10:53.6032342Z (Reading database ... 25%
+2026-11-16T22:10:53.6032875Z (Reading database ... 30%
+2026-11-16T22:10:53.6033620Z (Reading database ... 35%
+2026-11-16T22:10:53.6033886Z (Reading database ... 40%
+2026-11-16T22:10:53.6034115Z (Reading database ... 45%
+2026-11-16T22:10:53.6034352Z (Reading database ... 50%
+2026-11-16T22:10:53.6918550Z (Reading database ... 55%
+2026-11-16T22:10:53.8755725Z (Reading database ... 60%
+2026-11-16T22:10:54.0319843Z (Reading database ... 65%
+2026-11-16T22:10:54.1784745Z (Reading database ... 70%
+2026-11-16T22:10:54.3823421Z (Reading database ... 75%
+2026-11-16T22:10:54.5269388Z (Reading database ... 80%
+2026-11-16T22:10:54.7326439Z (Reading database ... 85%
+2026-11-16T22:10:54.9376693Z (Reading database ... 90%
+2026-11-16T22:10:55.0932679Z (Reading database ... 95%
+2026-11-16T22:10:55.0933161Z (Reading database ... 100%
+2026-11-16T22:10:55.0933716Z (Reading database ... 213946 files and directories currently installed.)
+2026-11-16T22:10:55.0983935Z Preparing to unpack .../ninja-build_1.13.2-1_amd64v3.deb ...
+2026-11-16T22:10:55.1009152Z Unpacking ninja-build (1.13.2-1) ...
+2026-11-16T22:10:55.1563135Z Setting up ninja-build (1.13.2-1) ...
+2026-11-16T22:10:55.1582836Z Processing triggers for man-db (2.13.1-1build1) ...
+2026-11-16T22:10:55.1603798Z Not building database; man-db/auto-update is not 'true'.
+2026-11-16T22:10:55.7785263Z 
+2026-11-16T22:10:55.7785723Z Running kernel seems to be up-to-date.
+2026-11-16T22:10:55.7785993Z 
+2026-11-16T22:10:55.7786112Z Restarting services...
+2026-11-16T22:10:55.7891230Z 
+2026-11-16T22:10:55.7891583Z Service restarts being deferred:
+2026-11-16T22:10:55.7894213Z  systemctl restart hosted-compute-agent.service
+2026-11-16T22:10:55.7894583Z 
+2026-11-16T22:10:55.7895289Z No containers need to be restarted.
+2026-11-16T22:10:55.7895582Z 
+2026-11-16T22:10:55.7895815Z No user sessions are running outdated binaries.
+2026-11-16T22:10:55.7896142Z 
+2026-11-16T22:10:55.7896453Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-11-16T22:10:56.6950740Z ##[group]Run uv sync --project tools/assets
+2026-11-16T22:10:56.6951270Z [36;1muv sync --project tools/assets[0m
+2026-11-16T22:10:56.7008932Z shell: /usr/bin/bash -e {0}
+2026-11-16T22:10:56.7009209Z env:
+2026-11-16T22:10:56.7009427Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:56.7009761Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-11-16T22:10:56.7010086Z ##[endgroup]
+2026-11-16T22:10:56.7183620Z Using CPython 3.14.4 interpreter at: /usr/bin/python3
+2026-11-16T22:10:56.7184237Z Creating virtual environment at: tools/assets/.venv
+2026-11-16T22:10:56.7206302Z Resolved 15 packages in 0.81ms
+2026-11-16T22:10:56.8432363Z Downloading pygments (1.2MiB)
+2026-11-16T22:10:56.8433287Z Downloading numpy (15.9MiB)
+2026-11-16T22:10:56.9082636Z  Downloaded pygments
+2026-11-16T22:10:57.0611529Z  Downloaded numpy
+2026-11-16T22:10:57.0615390Z Prepared 8 packages in 340ms
+2026-11-16T22:10:57.0915779Z Installed 8 packages in 29ms
+2026-11-16T22:10:57.0916267Z  + iniconfig==2.3.1
+2026-11-16T22:10:57.0916729Z  + jinja2==3.1.6
+2026-11-16T22:10:57.0917077Z  + markupsafe==3.0.4
+2026-11-16T22:10:57.0917451Z  + numpy==2.5.4
+2026-11-16T22:10:57.0917779Z  + packaging==26.3
+2026-11-16T22:10:57.0918194Z  + pluggy==1.6.0
+2026-11-16T22:10:57.0918532Z  + pygments==2.21.0
+2026-11-16T22:10:57.0918746Z  + pytest==9.1.1
+2026-11-16T22:10:57.1001409Z ##[group]Run for file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do
+2026-11-16T22:10:57.1003757Z [36;1mfor file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do[0m
+2026-11-16T22:10:57.1005301Z [36;1m  git show "f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/$file" > "$file"[0m
+2026-11-16T22:10:57.1006058Z [36;1mdone[0m
+2026-11-16T22:10:57.1006669Z [36;1mgit -C .. diff --exit-code f6bfa5546bcf89919f86946ec669bcc7f4cd526d -- edge0-infer[0m
+2026-11-16T22:10:57.1007376Z [36;1mcmake --preset cpu[0m
+2026-11-16T22:10:57.1007787Z [36;1mcmake --build --preset cpu[0m
+2026-11-16T22:10:57.1008322Z [36;1mpython -u ../validation/sse_runtime_baseline.py[0m
+2026-11-16T22:10:57.1078448Z shell: /usr/bin/bash -e {0}
+2026-11-16T22:10:57.1078851Z env:
+2026-11-16T22:10:57.1079225Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:10:57.1079723Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-11-16T22:10:57.1080197Z ##[endgroup]
+2026-11-16T22:10:58.9488667Z -- The C compiler identification is GNU 15.2.0
+2026-11-16T22:10:59.1434120Z -- The CXX compiler identification is GNU 15.2.0
+2026-11-16T22:10:59.1933942Z -- Detecting C compiler ABI info
+2026-11-16T22:10:59.3503194Z -- Detecting C compiler ABI info - done
+2026-11-16T22:10:59.3670289Z -- Check for working C compiler: /usr/bin/cc - skipped
+2026-11-16T22:10:59.3711226Z -- Detecting C compile features
+2026-11-16T22:10:59.3761886Z -- Detecting C compile features - done
+2026-11-16T22:10:59.4248309Z -- Detecting CXX compiler ABI info
+2026-11-16T22:10:59.4943035Z -- Detecting CXX compiler ABI info - done
+2026-11-16T22:10:59.5116123Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+2026-11-16T22:10:59.5120694Z -- Detecting CXX compile features
+2026-11-16T22:10:59.5131042Z -- Detecting CXX compile features - done
+2026-11-16T22:10:59.5355328Z -- The ASM compiler identification is GNU
+2026-11-16T22:10:59.5377721Z -- Found assembler: /usr/bin/cc
+2026-11-16T22:10:59.6177268Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+2026-11-16T22:10:59.6892768Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+2026-11-16T22:10:59.6947317Z -- Found Threads: TRUE
+2026-11-16T22:10:59.7061533Z -- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+2026-11-16T22:10:59.7245866Z -- CMAKE_SYSTEM_PROCESSOR: x86_64
+2026-11-16T22:10:59.7246550Z -- GGML_SYSTEM_ARCH: x86
+2026-11-16T22:10:59.7305818Z -- Including CPU backend
+2026-11-16T22:10:59.7352361Z -- x86 detected
+2026-11-16T22:10:59.7353227Z -- Adding CPU backend variant ggml-cpu: -march=native 
+2026-11-16T22:10:59.7531282Z -- ggml version: 0.24.0
+2026-11-16T22:10:59.7531686Z -- ggml commit:  523a0b1
+2026-11-16T22:10:59.7806191Z -- Configuring done (1.2s)
+2026-11-16T22:10:59.8920555Z -- Generating done (0.1s)
+2026-11-16T22:10:59.8927395Z -- Build files have been written to: /home/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:10:59.9137763Z [0/2] Re-checking globbed directories...
+2026-11-16T22:11:00.2021464Z [1/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+2026-11-16T22:11:00.8152191Z [2/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+2026-11-16T22:11:02.4496835Z [3/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+2026-11-16T22:11:02.7050316Z [4/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+2026-11-16T22:11:03.8638106Z [5/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+2026-11-16T22:11:03.9784282Z [6/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+2026-11-16T22:11:06.7145885Z [7/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+2026-11-16T22:11:10.4788629Z [8/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+2026-11-16T22:11:11.7814820Z [9/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+2026-11-16T22:11:11.9668944Z [10/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+2026-11-16T22:11:12.6753715Z [11/290] Linking CXX static library third_party/ggml/src/libggml-base.a
+2026-11-16T22:11:12.8601506Z [12/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+2026-11-16T22:11:14.0669374Z [13/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/iqp.cpp.o
+2026-11-16T22:11:14.0790117Z [14/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+2026-11-16T22:11:15.5526052Z [15/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+2026-11-16T22:11:16.2665185Z [16/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+2026-11-16T22:11:17.0690071Z [17/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+2026-11-16T22:11:17.8691251Z [18/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+2026-11-16T22:11:19.8850635Z [19/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+2026-11-16T22:11:20.5638321Z [20/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+2026-11-16T22:11:21.5105808Z [21/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+2026-11-16T22:11:22.9374911Z [22/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+2026-11-16T22:11:24.0000902Z [23/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o
+2026-11-16T22:11:26.6621753Z [24/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o
+2026-11-16T22:11:27.0766363Z [25/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml.dir/ggml-backend-dl.cpp.o
+2026-11-16T22:11:28.4720190Z [26/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o
+2026-11-16T22:11:29.2486220Z [27/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/backend.cpp.o
+2026-11-16T22:11:29.9040702Z [28/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/file.cpp.o
+2026-11-16T22:11:30.5887180Z [29/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/memory.cpp.o
+2026-11-16T22:11:30.7621729Z [30/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+2026-11-16T22:11:30.8762914Z [31/290] Linking CXX static library third_party/ggml/src/libggml-cpu.a
+2026-11-16T22:11:30.9710806Z [32/290] Linking CXX static library third_party/ggml/src/libggml.a
+2026-11-16T22:11:31.5734062Z [33/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/system.cpp.o
+2026-11-16T22:11:31.6689091Z [34/290] Linking CXX static library src/platform/libmoe_platform.a
+2026-11-16T22:11:32.0197729Z [35/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/runtime.cpp.o
+2026-11-16T22:11:33.5158050Z [36/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/mixed.cpp.o
+2026-11-16T22:11:34.9874894Z [37/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/execution.cpp.o
+2026-11-16T22:11:35.0882934Z [38/290] Linking CXX static library src/exec/libmoe_exec.a
+2026-11-16T22:11:37.2577268Z [39/290] Building CXX object src/weights/CMakeFiles/moe_weights.dir/expert_slots.cpp.o
+2026-11-16T22:11:39.1377903Z [40/290] Building CXX object src/session/CMakeFiles/moe_session.dir/runtime.cpp.o
+2026-11-16T22:11:39.2522694Z [41/290] Building CXX object src/weights/CMakeFiles/moe_weights.dir/runtime.cpp.o
+2026-11-16T22:11:39.3537878Z [42/290] Linking CXX static library src/weights/libmoe_weights.a
+2026-11-16T22:11:39.8427913Z [43/290] Building CXX object src/model/CMakeFiles/moe_model.dir/sha256.cpp.o
+2026-11-16T22:11:40.8169184Z [44/290] Building CXX object src/session/CMakeFiles/moe_session.dir/session.cpp.o
+2026-11-16T22:11:43.5823169Z [45/290] Building CXX object src/model/CMakeFiles/moe_model.dir/asset_index.cpp.o
+2026-11-16T22:11:43.8213610Z [46/290] Building CXX object src/model/CMakeFiles/moe_model.dir/adapter.cpp.o
+2026-11-16T22:11:45.1355535Z [47/290] Building CXX object src/model/CMakeFiles/moe_model.dir/json.cpp.o
+2026-11-16T22:11:48.4952007Z [48/290] Building CXX object src/model/CMakeFiles/moe_model.dir/mixed_loading.cpp.o
+2026-11-16T22:11:48.4955163Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp: In function ‘edge0::exec::Status edge0::model::{anonymous}::add_estimate(edge0::model::WeightEstimate&, const edge0::model::WeightEstimate&)’:
+2026-11-16T22:11:48.4957342Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4958623Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4959322Z       |                                                                     ^
+2026-11-16T22:11:48.4960497Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:30:45: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4961681Z    30 |     for (const auto& pair : {std::make_pair(&total.buffer_bytes, item.buffer_bytes),
+2026-11-16T22:11:48.4962601Z       |                                             ^~~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.4963818Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4965083Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4965764Z       |                                                                     ^
+2026-11-16T22:11:48.4966873Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:31:24: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4968247Z    31 |         std::make_pair(&total.metadata_bytes, item.metadata_bytes), std::make_pair(&total.total_bytes, item.total_bytes),
+2026-11-16T22:11:48.4969153Z       |                        ^~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.4970280Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4971547Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4972232Z       |                                                                     ^
+2026-11-16T22:11:48.4973551Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:31:84: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4974929Z    31 |         std::make_pair(&total.metadata_bytes, item.metadata_bytes), std::make_pair(&total.total_bytes, item.total_bytes),
+2026-11-16T22:11:48.4975923Z       |                                                                                    ^~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.4977152Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4978381Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4979031Z       |                                                                     ^
+2026-11-16T22:11:48.4980520Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:32:24: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4981915Z    32 |         std::make_pair(&total.resident_bytes, item.resident_bytes), std::make_pair(&total.pool_bytes, item.pool_bytes),
+2026-11-16T22:11:48.4982971Z       |                        ^~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.4984387Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4985669Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4986336Z       |                                                                     ^
+2026-11-16T22:11:48.4987488Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:32:84: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4988874Z    32 |         std::make_pair(&total.resident_bytes, item.resident_bytes), std::make_pair(&total.pool_bytes, item.pool_bytes),
+2026-11-16T22:11:48.4989863Z       |                                                                                    ^~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.4991087Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:69: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:48.4992372Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4993185Z       |                                                                     ^
+2026-11-16T22:11:48.4994328Z /home/runner/work/Edge0/Edge0/edge0-infer/src/model/mixed_loading.cpp:33:24: note: ‘long unsigned int*’ temporary created here
+2026-11-16T22:11:48.4995424Z    33 |         std::make_pair(&total.temporary_bytes, item.temporary_bytes)}) {
+2026-11-16T22:11:48.4996053Z       |                        ^~~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:48.5944570Z [49/290] Linking CXX static library src/session/libmoe_session.a
+2026-11-16T22:11:48.6513465Z [50/290] Building CXX object src/model/CMakeFiles/moe_model.dir/loading.cpp.o
+2026-11-16T22:11:48.7591605Z [51/290] Linking CXX static library src/model/libmoe_model.a
+2026-11-16T22:11:48.7840752Z [52/290] Refreshing build identity
+2026-11-16T22:11:49.4146906Z [53/290] Building CXX object src/models/api/CMakeFiles/moe_models_api.dir/api.cpp.o
+2026-11-16T22:11:49.5074820Z [54/290] Linking CXX static library src/models/api/libmoe_models_api.a
+2026-11-16T22:11:49.9251043Z [55/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/text.cpp.o
+2026-11-16T22:11:50.7992319Z [56/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/output.cpp.o
+2026-11-16T22:11:53.7963242Z [57/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/assets.cpp.o
+2026-11-16T22:11:53.7966287Z /home/runner/work/Edge0/Edge0/edge0-infer/src/models/edge0_35b/assets.cpp: In member function ‘virtual edge0::Result<edge0::model::ModelDefinition> edge0::models::edge0_35b::{anonymous}::Edge0Adapter::describe_assets(const edge0::model::AssetView&) const’:
+2026-11-16T22:11:53.7968671Z /home/runner/work/Edge0/Edge0/edge0-infer/src/models/edge0_35b/assets.cpp:286:25: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:11:53.7969973Z   286 |             const auto& owners=get<std::vector<std::uint32_t>>(pr,"prerouter.owners");
+2026-11-16T22:11:53.7970654Z       |                         ^~~~~~
+2026-11-16T22:11:53.7971846Z /home/runner/work/Edge0/Edge0/edge0-infer/src/models/edge0_35b/assets.cpp:286:67: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:11:53.7973022Z   286 |             const auto& owners=get<std::vector<std::uint32_t>>(pr,"prerouter.owners");
+2026-11-16T22:11:53.7973679Z       |                                                                   ^~~~~~~~~~~~~~~~~~
+2026-11-16T22:11:54.0010470Z [58/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/compute.cpp.o
+2026-11-16T22:11:56.5770477Z [59/290] Building CXX object src/app/CMakeFiles/moe_app.dir/runtime.cpp.o
+2026-11-16T22:11:58.6777176Z [60/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/bpe.cpp.o
+2026-11-16T22:11:59.0095982Z [61/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/decode.cpp.o
+2026-11-16T22:12:03.2746180Z [62/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/forward.cpp.o
+2026-11-16T22:12:03.3758400Z [63/290] Linking CXX static library src/models/edge0_35b/libmoe_models_edge0_35b.a
+2026-11-16T22:12:04.0986900Z [64/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/unicode-data.cpp.o
+2026-11-16T22:12:05.0948946Z [65/290] Building CXX object src/app/CMakeFiles/moe_app.dir/adapters.cpp.o
+2026-11-16T22:12:07.3582014Z [66/290] Building CXX object src/app/CMakeFiles/moe_app.dir/assets.cpp.o
+2026-11-16T22:12:07.3915230Z [67/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/unicode.cpp.o
+2026-11-16T22:12:09.0474871Z [68/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/api.cpp.o
+2026-11-16T22:12:09.5820444Z [69/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/rules.cpp.o
+2026-11-16T22:12:11.6393961Z [70/290] Building CXX object src/app/CMakeFiles/moe_app.dir/forward_check.cpp.o
+2026-11-16T22:12:12.8285381Z [71/290] Building CXX object src/app/CMakeFiles/moe_app.dir/diagnostics.cpp.o
+2026-11-16T22:12:12.8285927Z In file included from /usr/include/c++/15/map:64,
+2026-11-16T22:12:12.8286430Z                  from /home/runner/work/Edge0/Edge0/edge0-infer/include/edge0/diagnostics.h:4,
+2026-11-16T22:12:12.8287223Z                  from /home/runner/work/Edge0/Edge0/edge0-infer/src/app/diagnostics.cpp:1:
+2026-11-16T22:12:12.8289809Z In member function ‘std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Node_ptr std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_begin_node() const [with _Key = std::__cxx11::basic_string<char>; _Val = std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory>; _KeyOfValue = std::_Select1st<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >; _Compare = std::less<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >]’,
+2026-11-16T22:12:12.8293675Z     inlined from ‘std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::~_Rb_tree() [with _Key = std::__cxx11::basic_string<char>; _Val = std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory>; _KeyOfValue = std::_Select1st<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >; _Compare = std::less<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >]’ at /usr/include/c++/15/bits/stl_tree.h:1609:17,
+2026-11-16T22:12:12.8300185Z     inlined from ‘std::map<_Key, _Tp, _Compare, _Alloc>::~map() [with _Key = std::__cxx11::basic_string<char>; _Tp = edge0::DeviceMemory; _Compare = std::less<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >]’ at /usr/include/c++/15/bits/stl_map.h:337:7,
+2026-11-16T22:12:12.8303498Z     inlined from ‘edge0::Result<edge0::MemorySnapshot> edge0::memory_snapshot(const RuntimeReference&)’ at /home/runner/work/Edge0/Edge0/edge0-infer/src/app/diagnostics.cpp:18:123:
+2026-11-16T22:12:12.8313147Z /usr/include/c++/15/bits/stl_tree.h:1383:19: warning: ‘result.edge0::MemorySnapshot::ledger.edge0::MemoryLedger::by_device.std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, edge0::DeviceMemory, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, edge0::DeviceMemory> > >::_M_t.std::_Rb_tree<std::__cxx11::basic_string<char>, std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory>, std::_Select1st<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >, std::less<std::__cxx11::basic_string<char> >, std::allocator<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> > >::_M_impl.std::_Rb_tree<std::__cxx11::basic_string<char>, std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory>, std::_Select1st<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> >, std::less<std::__cxx11::basic_string<char> >, std::allocator<std::pair<const std::__cxx11::basic_string<char>, edge0::DeviceMemory> > >::_Rb_tree_impl<std::less<std::__cxx11::basic_string<char> >, true>::std::_Rb_tree_header.std::_Rb_tree_header::_M_header.std::_Rb_tree_node_base::_M_parent’ may be used uninitialized [-Wmaybe-uninitialized]
+2026-11-16T22:12:12.8320907Z  1383 |         _Base_ptr __begin = this->_M_impl._M_header._M_parent;
+2026-11-16T22:12:12.8321461Z       |                   ^~~~~~~
+2026-11-16T22:12:12.8323149Z /home/runner/work/Edge0/Edge0/edge0-infer/src/app/diagnostics.cpp: In function ‘edge0::Result<edge0::MemorySnapshot> edge0::memory_snapshot(const RuntimeReference&)’:
+2026-11-16T22:12:12.8324731Z /home/runner/work/Edge0/Edge0/edge0-infer/src/app/diagnostics.cpp:18:20: note: ‘result’ declared here
+2026-11-16T22:12:12.8326016Z    18 |     MemorySnapshot result{{snapshot.limit, snapshot.current, snapshot.peak}, metric(process.rss), metric(process.physical)};
+2026-11-16T22:12:12.8326916Z       |                    ^~~~~~
+2026-11-16T22:12:14.1402133Z [72/290] Building CXX object src/app/CMakeFiles/moe_app.dir/submission_timing.cpp.o
+2026-11-16T22:12:14.7154295Z [73/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/history.cpp.o
+2026-11-16T22:12:15.7556216Z [74/290] Building CXX object src/app/CMakeFiles/moe_app.dir/sampling.cpp.o
+2026-11-16T22:12:16.3488100Z [75/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/tool_results.cpp.o
+2026-11-16T22:12:16.6715389Z [76/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/stop.cpp.o
+2026-11-16T22:12:17.6324758Z [77/290] Building CXX object src/app/CMakeFiles/moe_app.dir/runtime_hooks.cpp.o
+2026-11-16T22:12:17.8969709Z [78/290] Building CXX object src/app/CMakeFiles/moe_app.dir/generation.cpp.o
+2026-11-16T22:12:17.9091069Z [79/290] Building CXX object CMakeFiles/edge0.dir/cmake/aggregate.cpp.o
+2026-11-16T22:12:18.6651270Z [80/290] Building CXX object src/app/CMakeFiles/moe_app.dir/stage_forward.cpp.o
+2026-11-16T22:12:18.7905737Z [81/290] Linking CXX static library src/app/libmoe_app.a
+2026-11-16T22:12:18.8842080Z [82/290] Linking CXX static library libedge0.a
+2026-11-16T22:12:19.0574915Z [83/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/main.cpp.o
+2026-11-16T22:12:19.5653355Z [84/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/info.cpp.o
+2026-11-16T22:12:19.8670429Z [85/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/inspect.cpp.o
+2026-11-16T22:12:20.3636508Z [86/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/text.cpp.o
+2026-11-16T22:12:21.2844968Z [87/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/forward.cpp.o
+2026-11-16T22:12:21.7503939Z [88/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/logging.cpp.o
+2026-11-16T22:12:22.1599884Z [89/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/weight_activity.cpp.o
+2026-11-16T22:12:22.8708439Z [90/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/diagnostics.cpp.o
+2026-11-16T22:12:24.2445254Z [91/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/describe.cpp.o
+2026-11-16T22:12:25.2292717Z [92/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/run.cpp.o
+2026-11-16T22:12:28.3015669Z [93/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/bench.cpp.o
+2026-11-16T22:12:28.3016887Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp: In function ‘int bench_command(int, char**)’:
+2026-11-16T22:12:28.3018207Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:286:1: warning: dangling pointer to an unnamed temporary may be used [-Wdangling-pointer=]
+2026-11-16T22:12:28.3019029Z   286 | }
+2026-11-16T22:12:28.3019227Z       | ^
+2026-11-16T22:12:28.3019665Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:227:108: note: unnamed temporary defined here
+2026-11-16T22:12:28.3020913Z   227 |         const auto input=turn_mode?std::vector<std::int32_t>{}:token_file.empty()?take(edge0::render_prompt(directory,{{"user",read(user_file)}},{false,{}})).tokens:cli::tokens(read(token_file),"input");
+2026-11-16T22:12:28.3021818Z       |                                                                                        ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:12:28.3023218Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:286:1: warning: dangling pointer to an unnamed temporary may be used [-Wdangling-pointer=]
+2026-11-16T22:12:28.3023987Z   286 | }
+2026-11-16T22:12:28.3024342Z       | ^
+2026-11-16T22:12:28.3024987Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:227:108: note: unnamed temporary defined here
+2026-11-16T22:12:28.3026289Z   227 |         const auto input=turn_mode?std::vector<std::int32_t>{}:token_file.empty()?take(edge0::render_prompt(directory,{{"user",read(user_file)}},{false,{}})).tokens:cli::tokens(read(token_file),"input");
+2026-11-16T22:12:28.3027510Z       |                                                                                        ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:12:28.3040852Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:286:1: warning: dangling pointer to an unnamed temporary may be used [-Wdangling-pointer=]
+2026-11-16T22:12:28.3042048Z   286 | }
+2026-11-16T22:12:28.3042357Z       | ^
+2026-11-16T22:12:28.3043291Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:227:108: note: unnamed temporary defined here
+2026-11-16T22:12:28.3045072Z   227 |         const auto input=turn_mode?std::vector<std::int32_t>{}:token_file.empty()?take(edge0::render_prompt(directory,{{"user",read(user_file)}},{false,{}})).tokens:cli::tokens(read(token_file),"input");
+2026-11-16T22:12:28.3046627Z       |                                                                                        ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:12:28.3047960Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:286:1: warning: dangling pointer to an unnamed temporary may be used [-Wdangling-pointer=]
+2026-11-16T22:12:28.3048947Z   286 | }
+2026-11-16T22:12:28.3049221Z       | ^
+2026-11-16T22:12:28.3049874Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/bench.cpp:227:108: note: unnamed temporary defined here
+2026-11-16T22:12:28.3051469Z   227 |         const auto input=turn_mode?std::vector<std::int32_t>{}:token_file.empty()?take(edge0::render_prompt(directory,{{"user",read(user_file)}},{false,{}})).tokens:cli::tokens(read(token_file),"input");
+2026-11-16T22:12:28.3053106Z       |                                                                                        ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-11-16T22:12:28.5106186Z [94/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat.cpp.o
+2026-11-16T22:12:28.6207269Z [95/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat_line.cpp.o
+2026-11-16T22:12:29.1799507Z [96/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat_history.cpp.o
+2026-11-16T22:12:29.3371486Z [97/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/generation_summary.cpp.o
+2026-11-16T22:12:29.7771795Z [98/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/sampling.cpp.o
+2026-11-16T22:12:29.8080697Z [99/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/output.cpp.o
+2026-11-16T22:12:41.1289558Z [100/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_protocol.cpp.o
+2026-11-16T22:12:41.1292227Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::{anonymous}::parse_messages(const portal::Json&, const std::string&, bool)’:
+2026-11-16T22:12:41.1294439Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:25: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1295775Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:12:41.1296702Z       |                         ^~~~~~
+2026-11-16T22:12:41.1298275Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:43: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1299661Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:12:41.1300390Z       |                                           ^~~~~~~~~~~~~~
+2026-11-16T22:12:41.1301586Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:17: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1303008Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:12:41.1303514Z       |                 ^~~~~~~~
+2026-11-16T22:12:41.1304989Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:37: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1306240Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:12:41.1306769Z       |                                     ^~~~~~~~~~
+2026-11-16T22:12:41.1307838Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1309236Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:12:41.1309817Z       |                     ^~~~~~
+2026-11-16T22:12:41.1311289Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:36: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1312750Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:12:41.1313347Z       |                                    ^~~~~~~~~
+2026-11-16T22:12:41.1314441Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1315881Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:12:41.1316718Z       |                                 ^~~~~
+2026-11-16T22:12:41.1318319Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:51: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1319867Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:12:41.1320680Z       |                                                   ^~~~~~~
+2026-11-16T22:12:41.1322166Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::parse(const Json&, Protocol, const std::string&, bool)’:
+2026-11-16T22:12:41.1334499Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1336032Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:12:41.1336881Z       |                     ^~~~~~~~
+2026-11-16T22:12:41.1338453Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:41: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1340354Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:12:41.1341236Z       |                                         ^~~~~~~~~~
+2026-11-16T22:12:41.1342369Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1344200Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:12:41.1344990Z       |                                 ^
+2026-11-16T22:12:41.1346467Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:49: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1347914Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:12:41.1348734Z       |                                                 ^~~~~~~~~~
+2026-11-16T22:12:41.1349855Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:79: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1351605Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:12:41.1363269Z       |                                                                               ^
+2026-11-16T22:12:41.1364395Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:100: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1365625Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:12:41.1366492Z       |                                                                                                    ^~~~~~~~
+2026-11-16T22:12:41.1367265Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:12:41.1367978Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:12:41.1368303Z       |                     ^~~~~
+2026-11-16T22:12:41.1369162Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:38: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:12:41.1369884Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:12:41.1370215Z       |                                      ^~~~~~~
+2026-11-16T22:12:42.6469183Z [101/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_engine.cpp.o
+2026-11-16T22:12:46.4912586Z [102/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_status.cpp.o
+2026-11-16T22:12:51.9181087Z [103/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve.cpp.o
+2026-11-16T22:12:53.2253605Z [104/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_registry.cpp.o
+2026-11-16T22:12:54.1417737Z [105/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_commands.cpp.o
+2026-11-16T22:12:59.5976725Z [106/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_status.cpp.o
+2026-11-16T22:13:12.5876362Z [107/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_process.cpp.o
+2026-11-16T22:13:22.7365328Z [108/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_proxy.cpp.o
+2026-11-16T22:13:24.3603791Z [109/290] Building CXX object examples/CMakeFiles/moe_example_native_chat.dir/native_chat.cpp.o
+2026-11-16T22:13:24.9177193Z [110/290] Building CXX object tests/CMakeFiles/moe_test_platform.dir/unit/platform/backend_test.cpp.o
+2026-11-16T22:13:27.3288179Z [111/290] Building CXX object tests/CMakeFiles/moe_test_app.dir/unit/app/runtime_test.cpp.o
+2026-11-16T22:13:27.8639298Z [112/290] Building CXX object tests/CMakeFiles/moe_test_metal_runtime.dir/device/metal_test.cpp.o
+2026-11-16T22:13:31.2278061Z [113/290] Building CXX object tests/CMakeFiles/moe_test_text_bpe.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:13:32.8995467Z [114/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_chat.cpp.o
+2026-11-16T22:13:34.6138021Z [115/290] Building CXX object tests/CMakeFiles/moe_test_text_decode.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:13:36.2580811Z [116/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_text.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:13:37.9846788Z [117/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_text_tokens.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:13:39.6818924Z [118/290] Building CXX object tests/CMakeFiles/moe_test_text_corpus.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:13:40.3459440Z [119/290] Building CXX object tests/CMakeFiles/moe_test_model_catalog.dir/unit/model/catalog_test.cpp.o
+2026-11-16T22:13:40.4005724Z [120/290] Building CXX object tests/CMakeFiles/moe_test_model_index.dir/support/fread_probe.cpp.o
+2026-11-16T22:13:42.8897491Z [121/290] Building CXX object tests/CMakeFiles/moe_test_model_index.dir/unit/model/index_test.cpp.o
+2026-11-16T22:13:43.6431465Z [122/290] Building CXX object tests/CMakeFiles/moe_test_model_adapter.dir/unit/model/adapter_test.cpp.o
+2026-11-16T22:13:46.9131604Z [123/290] Building CXX object tests/CMakeFiles/moe_test_model_inspect.dir/unit/app/inspect_test.cpp.o
+2026-11-16T22:13:47.8095162Z [124/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_assets.dir/unit/models/edge0_35b/assets_test.cpp.o
+2026-11-16T22:13:48.1267297Z [125/290] Building CXX object tests/CMakeFiles/moe_model_variant_tool.dir/unit/model/variant_tool.cpp.o
+2026-11-16T22:13:48.6899016Z [126/290] Building CXX object tests/CMakeFiles/moe_test_text_api.dir/integration/text_api_test.cpp.o
+2026-11-16T22:13:49.4135188Z [127/290] Building CXX object tests/CMakeFiles/moe_test_platform_runtime.dir/unit/platform/runtime_test.cpp.o
+2026-11-16T22:13:49.6972076Z [128/290] Building CXX object tests/CMakeFiles/moe_test_text_rules.dir/unit/app/text_rules_test.cpp.o
+2026-11-16T22:13:50.7779901Z [129/290] Building CXX object tests/CMakeFiles/moe_test_exec_budget.dir/unit/exec/budget_test.cpp.o
+2026-11-16T22:13:52.1158216Z [130/290] Building CXX object tests/CMakeFiles/moe_test_exec_runtime.dir/unit/exec/execution_test.cpp.o
+2026-11-16T22:13:52.5533903Z [131/290] Building CXX object tests/CMakeFiles/moe_test_session_storage.dir/unit/session/storage_test.cpp.o
+2026-11-16T22:13:54.1582143Z [132/290] Building CXX object tests/CMakeFiles/moe_test_weights_staged.dir/unit/weights/staged_fill_test.cpp.o
+2026-11-16T22:13:54.6829290Z [133/290] Building CXX object tests/CMakeFiles/moe_test_weights_storage.dir/unit/weights/storage_test.cpp.o
+2026-11-16T22:13:55.8120916Z [134/290] Building CXX object tests/CMakeFiles/moe_test_weights_vulkan_fill.dir/unit/weights/vulkan_fill_test.cpp.o
+2026-11-16T22:13:56.4910049Z [135/290] Building CXX object tests/CMakeFiles/moe_test_weights_vulkan_concurrent.dir/unit/weights/vulkan_concurrent_test.cpp.o
+2026-11-16T22:13:58.1811767Z [136/290] Building CXX object tests/CMakeFiles/moe_test_weights_compute.dir/unit/weights/compute_test.cpp.o
+2026-11-16T22:13:58.3366262Z [137/290] Building CXX object tests/CMakeFiles/moe_test_session_attention.dir/unit/session/attention_test.cpp.o
+2026-11-16T22:13:59.8594797Z [138/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_admission.dir/unit/app/admission_test.cpp.o
+2026-11-16T22:14:02.5554984Z [139/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_loading.dir/unit/models/edge0_35b/loading_test.cpp.o
+2026-11-16T22:14:03.9147632Z [140/290] Building CXX object tests/CMakeFiles/moe_test_session_transactions.dir/unit/session/session_test.cpp.o
+2026-11-16T22:14:04.6109401Z [141/290] Building CXX object tests/CMakeFiles/moe_test_model_generation_defaults.dir/unit/model/generation_test.cpp.o
+2026-11-16T22:14:05.9133168Z [142/290] Building CXX object tests/CMakeFiles/moe_test_session_rows.dir/unit/session/rows_test.cpp.o
+2026-11-16T22:14:07.0754679Z [143/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_forward.dir/unit/models/edge0_35b/forward_test.cpp.o
+2026-11-16T22:14:08.8819551Z [144/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_reuse.dir/unit/models/edge0_35b/reuse_test.cpp.o
+2026-11-16T22:14:08.9928672Z [145/290] Building CXX object tests/CMakeFiles/moe_test_app_generation.dir/support/file_read_counter.cpp.o
+2026-11-16T22:14:12.4595800Z [146/290] Building CXX object tests/CMakeFiles/moe_test_generate.dir/unit/app/generate_model_test.cpp.o
+2026-11-16T22:14:12.8926027Z [147/290] Building CXX object tests/CMakeFiles/moe_test_cli_logging.dir/unit/app/cli_logging_test.cpp.o
+2026-11-16T22:14:13.3677194Z [148/290] Building CXX object tests/CMakeFiles/moe_test_cli_logging.dir/__/tools/cli/logging.cpp.o
+2026-11-16T22:14:16.1784610Z [149/290] Building CXX object tests/CMakeFiles/moe_test_weights_lifecycle.dir/unit/weights/lifecycle_test.cpp.o
+2026-11-16T22:14:18.6181331Z [150/290] Building CXX object tests/CMakeFiles/moe_test_weights_slots.dir/unit/weights/slots_test.cpp.o
+2026-11-16T22:14:21.6148808Z [151/290] Building CXX object tests/CMakeFiles/moe_test_app_generation.dir/unit/app/generation_test.cpp.o
+2026-11-16T22:14:24.7524858Z [152/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots.dir/unit/models/edge0_35b/slots_test.cpp.o
+2026-11-16T22:14:25.2190016Z [153/290] Building CXX object tests/CMakeFiles/moe_test_model_slots_loading.dir/unit/model/slots_loading_test.cpp.o
+2026-11-16T22:14:28.4218840Z [154/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots_failure.dir/unit/app/slots_failure_test.cpp.o
+2026-11-16T22:14:28.8220196Z [155/290] Building CXX object tests/CMakeFiles/moe_test_platform_memory.dir/unit/platform/memory_test.cpp.o
+2026-11-16T22:14:29.7363954Z [156/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots_config.dir/unit/models/edge0_35b/slots_config_test.cpp.o
+2026-11-16T22:14:30.6084115Z [157/290] Building CXX object tests/CMakeFiles/moe_test_weights_read_batch.dir/unit/weights/read_batch_test.cpp.o
+2026-11-16T22:14:31.1919662Z [158/290] Building CXX object tests/CMakeFiles/moe_test_state_bytes.dir/unit/app/state_bytes_test.cpp.o
+2026-11-16T22:14:33.0323684Z [159/290] Building CXX object tests/CMakeFiles/moe_test_weights_priority.dir/unit/weights/priority_test.cpp.o
+2026-11-16T22:14:34.4492287Z [160/290] Building CXX object tests/CMakeFiles/moe_test_prerouter_state.dir/unit/models/edge0_35b/prerouter_test.cpp.o
+2026-11-16T22:14:35.8100087Z [161/290] Building CXX object tests/CMakeFiles/moe_test_session_reuse.dir/unit/session/reuse_test.cpp.o
+2026-11-16T22:14:37.0504273Z [162/290] Building CXX object tests/CMakeFiles/moe_template_probe.dir/unit/app/template_probe.cpp.o
+2026-11-16T22:14:37.4428046Z [163/290] Building CXX object tests/CMakeFiles/moe_test_prerouter_admission.dir/unit/models/edge0_35b/prerouter_admission_test.cpp.o
+2026-11-16T22:14:37.7817556Z [164/290] Building CXX object tests/CMakeFiles/moe_test_history.dir/unit/app/history_test.cpp.o
+2026-11-16T22:14:39.1095773Z [165/290] Building CXX object tests/CMakeFiles/moe_test_checkpoint_budget.dir/unit/app/checkpoint_budget_test.cpp.o
+2026-11-16T22:14:40.4443723Z [166/290] Building CXX object tests/CMakeFiles/moe_test_checkpoint.dir/unit/models/edge0_35b/checkpoint_test.cpp.o
+2026-11-16T22:14:40.4612805Z [167/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/unit/app/chat_line_test.cpp.o
+2026-11-16T22:14:40.7777281Z [168/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/__/tools/cli/chat_line.cpp.o
+2026-11-16T22:14:40.7863489Z [169/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/unit/cli/chat_lines_test.cpp.o
+2026-11-16T22:14:41.1626109Z [170/290] Building CXX object tests/CMakeFiles/moe_json_probe.dir/unit/model/json_probe.cpp.o
+2026-11-16T22:14:41.4427822Z [171/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/__/tools/cli/chat_history.cpp.o
+2026-11-16T22:14:42.0260786Z [172/290] Building CXX object tests/CMakeFiles/moe_template_tools_probe.dir/unit/app/template_tools_probe.cpp.o
+2026-11-16T22:14:42.9216673Z [173/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_output.dir/unit/models/edge0_35b/output_parser_test.cpp.o
+2026-11-16T22:14:43.0833074Z [174/290] Building CXX object tests/CMakeFiles/moe_test_tool_results.dir/unit/app/tool_results_test.cpp.o
+2026-11-16T22:14:43.7042825Z [175/290] Building CXX object tests/CMakeFiles/moe_test_stop_match.dir/unit/app/stop_match_test.cpp.o
+2026-11-16T22:14:45.1577472Z [176/290] Building CXX object tests/CMakeFiles/moe_thinking_rerender_probe.dir/unit/app/thinking_rerender_test.cpp.o
+2026-11-16T22:14:46.5919695Z [177/290] Building CXX object tests/CMakeFiles/moe_test_sampling_rules.dir/unit/app/sampling_test.cpp.o
+2026-11-16T22:14:48.8926256Z [178/290] Building CXX object tests/CMakeFiles/moe_test_thinking_tools_35b.dir/integration/thinking_tools_35b_test.cpp.o
+2026-11-16T22:14:59.7570354Z [179/290] Building CXX object tests/CMakeFiles/moe_test_serve_protocol.dir/unit/cli/serve_protocol_test.cpp.o
+2026-11-16T22:15:00.2198351Z [180/290] Building CXX object tests/CMakeFiles/moe_test_serve_protocol.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:15:00.2201035Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::{anonymous}::parse_messages(const portal::Json&, const std::string&, bool)’:
+2026-11-16T22:15:00.2203309Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:25: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2204777Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:00.2205529Z       |                         ^~~~~~
+2026-11-16T22:15:00.2207128Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:43: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2208645Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:00.2209828Z       |                                           ^~~~~~~~~~~~~~
+2026-11-16T22:15:00.2211266Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:17: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2212831Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:00.2213604Z       |                 ^~~~~~~~
+2026-11-16T22:15:00.2215392Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:37: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2216653Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:00.2217193Z       |                                     ^~~~~~~~~~
+2026-11-16T22:15:00.2218342Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2219628Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:00.2220197Z       |                     ^~~~~~
+2026-11-16T22:15:00.2221551Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:36: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2223013Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:00.2223580Z       |                                    ^~~~~~~~~
+2026-11-16T22:15:00.2224633Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2226516Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:00.2227283Z       |                                 ^~~~~
+2026-11-16T22:15:00.2228719Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:51: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2230401Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:00.2231198Z       |                                                   ^~~~~~~
+2026-11-16T22:15:00.2233017Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::parse(const Json&, Protocol, const std::string&, bool)’:
+2026-11-16T22:15:00.2234791Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2236215Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:00.2236967Z       |                     ^~~~~~~~
+2026-11-16T22:15:00.2238298Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:41: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2239747Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:00.2240562Z       |                                         ^~~~~~~~~~
+2026-11-16T22:15:00.2241639Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2243160Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:00.2243915Z       |                                 ^
+2026-11-16T22:15:00.2245369Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:49: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2246851Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:00.2247617Z       |                                                 ^~~~~~~~~~
+2026-11-16T22:15:00.2248690Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:79: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2250425Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:00.2251679Z       |                                                                               ^
+2026-11-16T22:15:00.2253412Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:100: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2255310Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:00.2256731Z       |                                                                                                    ^~~~~~~~
+2026-11-16T22:15:00.2258003Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:00.2259182Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:00.2259669Z       |                     ^~~~~
+2026-11-16T22:15:00.2261074Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:38: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:00.2262668Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:00.2263142Z       |                                      ^~~~~~~
+2026-11-16T22:15:02.4634995Z [181/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/unit/cli/serve_engine_test.cpp.o
+2026-11-16T22:15:03.9999667Z [182/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/__/tools/cli/serve_engine.cpp.o
+2026-11-16T22:15:04.3796898Z [183/290] Building CXX object tests/CMakeFiles/moe_portal_decode.dir/integration/portal_decode.cpp.o
+2026-11-16T22:15:06.2141874Z [184/290] Building CXX object tests/CMakeFiles/moe_test_delivery_failure_continue.dir/integration/portal_failure_probe.cpp.o
+2026-11-16T22:15:07.1992761Z [185/290] Building CXX object tests/CMakeFiles/moe_test_threads_cli_selection.dir/unit/app/thread_selection_test.cpp.o
+2026-11-16T22:15:07.8396560Z [186/290] Building CXX object tests/CMakeFiles/moe_test_mixed_buffers.dir/unit/platform/mixed_buffers_test.cpp.o
+2026-11-16T22:15:08.8286684Z [187/290] Building CXX object tests/CMakeFiles/moe_test_exec_stages.dir/unit/exec/stages_test.cpp.o
+2026-11-16T22:15:10.4039690Z [188/290] Building CXX object tests/CMakeFiles/moe_test_exec_replicas.dir/unit/exec/replicas_test.cpp.o
+2026-11-16T22:15:11.6416878Z [189/290] Building CXX object tests/CMakeFiles/moe_test_exec_vulkan_replicas.dir/unit/exec/vulkan_replicas_test.cpp.o
+2026-11-16T22:15:11.8138613Z [190/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:15:11.8140730Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::{anonymous}::parse_messages(const portal::Json&, const std::string&, bool)’:
+2026-11-16T22:15:11.8142573Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:25: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8143988Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:11.8144599Z       |                         ^~~~~~
+2026-11-16T22:15:11.8146234Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:43: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8147599Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:11.8148329Z       |                                           ^~~~~~~~~~~~~~
+2026-11-16T22:15:11.8149449Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:17: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8150652Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:11.8151157Z       |                 ^~~~~~~~
+2026-11-16T22:15:11.8152362Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:37: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8153763Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:11.8154257Z       |                                     ^~~~~~~~~~
+2026-11-16T22:15:11.8155031Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8155766Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:11.8156129Z       |                     ^~~~~~
+2026-11-16T22:15:11.8156977Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:36: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8157762Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:11.8158135Z       |                                    ^~~~~~~~~
+2026-11-16T22:15:11.8159092Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8159940Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:11.8160421Z       |                                 ^~~~~
+2026-11-16T22:15:11.8161446Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:51: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8162374Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:11.8163514Z       |                                                   ^~~~~~~
+2026-11-16T22:15:11.8164418Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::parse(const Json&, Protocol, const std::string&, bool)’:
+2026-11-16T22:15:11.8165478Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8166688Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:11.8167462Z       |                     ^~~~~~~~
+2026-11-16T22:15:11.8168933Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:41: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8170452Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:11.8171264Z       |                                         ^~~~~~~~~~
+2026-11-16T22:15:11.8172297Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8173852Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:11.8174579Z       |                                 ^
+2026-11-16T22:15:11.8175998Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:49: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8177453Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:11.8178243Z       |                                                 ^~~~~~~~~~
+2026-11-16T22:15:11.8179312Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:79: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8181074Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:11.8182350Z       |                                                                               ^
+2026-11-16T22:15:11.8184045Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:100: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8186068Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:11.8187368Z       |                                                                                                    ^~~~~~~~
+2026-11-16T22:15:11.8188594Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:11.8189982Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:11.8190437Z       |                     ^~~~~
+2026-11-16T22:15:11.8191759Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:38: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:11.8193417Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:11.8194108Z       |                                      ^~~~~~~
+2026-11-16T22:15:13.0697576Z [191/290] Building CXX object tests/CMakeFiles/moe_test_session_mixed_kv.dir/unit/session/mixed_kv_test.cpp.o
+2026-11-16T22:15:13.5408561Z [192/290] Building CXX object tests/CMakeFiles/moe_test_weights_mixed.dir/unit/weights/mixed_storage_test.cpp.o
+2026-11-16T22:15:17.5412668Z [193/290] Building CXX object tests/CMakeFiles/moe_test_mixed_metal.dir/unit/app/mixed_metal_test.cpp.o
+2026-11-16T22:15:18.0460872Z [194/290] Building CXX object tests/CMakeFiles/moe_test_mixed_stages.dir/unit/app/mixed_stages_test.cpp.o
+2026-11-16T22:15:18.8151503Z [195/290] Building CXX object tests/CMakeFiles/moe_test_platform_ios_cleanup.dir/unit/cli/ios_cleanup_test.cpp.o
+2026-11-16T22:15:19.3636585Z [196/290] Building CXX object tests/CMakeFiles/moe_test_platform_system.dir/unit/platform/system_test.cpp.o
+2026-11-16T22:15:20.1408986Z [197/290] Building CXX object tests/CMakeFiles/moe_test_mixed_vulkan_stages.dir/unit/app/mixed_vulkan_stages_test.cpp.o
+2026-11-16T22:15:21.8743356Z [198/290] Building CXX object tests/CMakeFiles/moe_test_observe_concurrency.dir/unit/app/observe_concurrency_test.cpp.o
+2026-11-16T22:15:24.2738485Z [199/290] Building CXX object tests/CMakeFiles/moe_test_serve_status.dir/unit/cli/serve_status_test.cpp.o
+2026-11-16T22:15:25.6338684Z [200/290] Building CXX object tests/CMakeFiles/moe_test_delegated_directory.dir/unit/app/delegated_directory_test.cpp.o
+2026-11-16T22:15:25.7609956Z [201/290] Building CXX object tests/CMakeFiles/moe_test_serve_status.dir/__/tools/cli/serve_status.cpp.o
+2026-11-16T22:15:32.6659225Z [202/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_delegate_registry.cpp.o
+2026-11-16T22:15:38.3580967Z [203/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_delegate_status.cpp.o
+2026-11-16T22:15:40.1983857Z [204/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/unit/cli/strata_registry_test.cpp.o
+2026-11-16T22:15:40.4313472Z [205/290] Linking CXX executable bin/edge0-infer
+2026-11-16T22:15:40.5782700Z [206/290] Linking CXX executable bin/moe_example_native_chat
+2026-11-16T22:15:40.6638130Z [207/290] Linking CXX executable bin/moe_test_platform
+2026-11-16T22:15:40.8129240Z [208/290] Linking CXX executable bin/moe_test_app
+2026-11-16T22:15:40.9598083Z [209/290] Linking CXX executable bin/moe_test_metal_runtime
+2026-11-16T22:15:41.0982270Z [210/290] Linking CXX executable bin/moe_test_text_bpe
+2026-11-16T22:15:41.2343012Z [211/290] Linking CXX executable bin/moe_test_text_decode
+2026-11-16T22:15:41.3734906Z [212/290] Linking CXX executable bin/moe_test_edge0_35b_text
+2026-11-16T22:15:41.5102249Z [213/290] Linking CXX executable bin/moe_test_edge0_35b_text_tokens
+2026-11-16T22:15:41.6454818Z [214/290] Linking CXX executable bin/moe_test_text_corpus
+2026-11-16T22:15:41.7232087Z [215/290] Linking CXX executable bin/moe_test_model_catalog
+2026-11-16T22:15:41.8033392Z [216/290] Linking CXX executable bin/moe_test_model_index
+2026-11-16T22:15:41.8852130Z [217/290] Linking CXX executable bin/moe_test_model_adapter
+2026-11-16T22:15:42.0085659Z [218/290] Linking CXX executable bin/moe_test_edge0_35b_assets
+2026-11-16T22:15:42.1541413Z [219/290] Linking CXX executable bin/moe_test_model_inspect
+2026-11-16T22:15:42.2279651Z [220/290] Linking CXX executable bin/moe_model_variant_tool
+2026-11-16T22:15:42.3729229Z [221/290] Linking CXX executable bin/moe_test_text_api
+2026-11-16T22:15:42.5102019Z [222/290] Linking CXX executable bin/moe_test_text_rules
+2026-11-16T22:15:42.5957679Z [223/290] Linking CXX executable bin/moe_test_platform_runtime
+2026-11-16T22:15:42.6532236Z [224/290] Linking CXX executable bin/moe_test_exec_budget
+2026-11-16T22:15:42.7451288Z [225/290] Linking CXX executable bin/moe_test_exec_runtime
+2026-11-16T22:15:42.8386790Z [226/290] Linking CXX executable bin/moe_test_session_storage
+2026-11-16T22:15:42.9368465Z [227/290] Linking CXX executable bin/moe_test_weights_storage
+2026-11-16T22:15:43.0333863Z [228/290] Linking CXX executable bin/moe_test_weights_staged
+2026-11-16T22:15:43.1312263Z [229/290] Linking CXX executable bin/moe_test_weights_vulkan_fill
+2026-11-16T22:15:43.2297703Z [230/290] Linking CXX executable bin/moe_test_weights_vulkan_concurrent
+2026-11-16T22:15:43.3282791Z [231/290] Linking CXX executable bin/moe_test_weights_compute
+2026-11-16T22:15:43.4225464Z [232/290] Linking CXX executable bin/moe_test_session_attention
+2026-11-16T22:15:43.5457820Z [233/290] Linking CXX executable bin/moe_test_edge0_35b_loading
+2026-11-16T22:15:43.6899757Z [234/290] Linking CXX executable bin/moe_test_edge0_35b_admission
+2026-11-16T22:15:43.8163112Z [235/290] Linking CXX executable bin/moe_test_edge0_35b_forward
+2026-11-16T22:15:43.9122994Z [236/290] Linking CXX executable bin/moe_test_session_transactions
+2026-11-16T22:15:43.9888321Z [237/290] Linking CXX executable bin/moe_test_model_generation_defaults
+2026-11-16T22:15:44.0839116Z [238/290] Linking CXX executable bin/moe_test_session_rows
+2026-11-16T22:15:44.2073767Z [239/290] Linking CXX executable bin/moe_test_edge0_35b_reuse
+2026-11-16T22:15:44.3615457Z [240/290] Linking CXX executable bin/moe_test_app_generation
+2026-11-16T22:15:44.5075541Z [241/290] Linking CXX executable bin/moe_test_generate
+2026-11-16T22:15:44.5643445Z [242/290] Linking CXX executable bin/moe_test_cli_logging
+2026-11-16T22:15:44.6637407Z [243/290] Linking CXX executable bin/moe_test_weights_lifecycle
+2026-11-16T22:15:44.7645979Z [244/290] Linking CXX executable bin/moe_test_weights_slots
+2026-11-16T22:15:44.8938513Z [245/290] Linking CXX executable bin/moe_test_edge0_35b_slots
+2026-11-16T22:15:45.0090391Z [246/290] Linking CXX executable bin/moe_test_model_slots_loading
+2026-11-16T22:15:45.1614473Z [247/290] Linking CXX executable bin/moe_test_edge0_35b_slots_failure
+2026-11-16T22:15:45.2869180Z [248/290] Linking CXX executable bin/moe_test_edge0_35b_slots_config
+2026-11-16T22:15:45.3440282Z [249/290] Linking CXX executable bin/moe_test_platform_memory
+2026-11-16T22:15:45.4427329Z [250/290] Linking CXX executable bin/moe_test_weights_read_batch
+2026-11-16T22:15:45.5883655Z [251/290] Linking CXX executable bin/moe_test_state_bytes
+2026-11-16T22:15:45.6890338Z [252/290] Linking CXX executable bin/moe_test_weights_priority
+2026-11-16T22:15:45.8153632Z [253/290] Linking CXX executable bin/moe_test_prerouter_state
+2026-11-16T22:15:45.9383315Z [254/290] Linking CXX executable bin/moe_test_prerouter_admission
+2026-11-16T22:15:46.0349196Z [255/290] Linking CXX executable bin/moe_test_session_reuse
+2026-11-16T22:15:46.1731516Z [256/290] Linking CXX executable bin/moe_template_probe
+2026-11-16T22:15:46.2324502Z [257/290] Linking CXX executable bin/moe_test_history
+2026-11-16T22:15:46.3579604Z [258/290] Linking CXX executable bin/moe_test_checkpoint
+2026-11-16T22:15:46.5068005Z [259/290] Linking CXX executable bin/moe_test_checkpoint_budget
+2026-11-16T22:15:46.5660999Z [260/290] Linking CXX executable bin/moe_test_chat_line
+2026-11-16T22:15:46.6254023Z [261/290] Linking CXX executable bin/moe_json_probe
+2026-11-16T22:15:46.6858677Z [262/290] Linking CXX executable bin/moe_template_tools_probe
+2026-11-16T22:15:46.7458446Z [263/290] Linking CXX executable bin/moe_test_edge0_35b_output
+2026-11-16T22:15:46.8058651Z [264/290] Linking CXX executable bin/moe_test_tool_results
+2026-11-16T22:15:46.8653556Z [265/290] Linking CXX executable bin/moe_test_stop_match
+2026-11-16T22:15:47.0182774Z [266/290] Linking CXX executable bin/moe_test_thinking_tools_35b
+2026-11-16T22:15:47.1584359Z [267/290] Linking CXX executable bin/moe_thinking_rerender_probe
+2026-11-16T22:15:47.2237200Z [268/290] Linking CXX executable bin/moe_test_sampling_rules
+2026-11-16T22:15:47.2965425Z [269/290] Linking CXX executable bin/moe_test_serve_protocol
+2026-11-16T22:15:47.3658987Z [270/290] Linking CXX executable bin/moe_test_serve_engine
+2026-11-16T22:15:47.5082170Z [271/290] Linking CXX executable bin/moe_portal_decode
+2026-11-16T22:15:47.6605101Z [272/290] Linking CXX executable bin/moe_test_delivery_failure_continue
+2026-11-16T22:15:47.8145319Z [273/290] Linking CXX executable bin/moe_test_threads_cli_selection
+2026-11-16T22:15:47.9075255Z [274/290] Linking CXX executable bin/moe_test_mixed_buffers
+2026-11-16T22:15:48.0044289Z [275/290] Linking CXX executable bin/moe_test_exec_stages
+2026-11-16T22:15:48.0984989Z [276/290] Linking CXX executable bin/moe_test_exec_replicas
+2026-11-16T22:15:48.1901587Z [277/290] Linking CXX executable bin/moe_test_exec_vulkan_replicas
+2026-11-16T22:15:48.2876180Z [278/290] Linking CXX executable bin/moe_test_weights_mixed
+2026-11-16T22:15:48.3794572Z [279/290] Linking CXX executable bin/moe_test_session_mixed_kv
+2026-11-16T22:15:48.5320569Z [280/290] Linking CXX executable bin/moe_test_mixed_stages
+2026-11-16T22:15:48.6837457Z [281/290] Linking CXX executable bin/moe_test_mixed_metal
+2026-11-16T22:15:48.8327791Z [282/290] Linking CXX executable bin/moe_test_mixed_vulkan_stages
+2026-11-16T22:15:48.8907020Z [283/290] Linking CXX executable bin/moe_test_platform_ios_cleanup
+2026-11-16T22:15:48.9779660Z [284/290] Linking CXX executable bin/moe_test_platform_system
+2026-11-16T22:15:49.1285555Z [285/290] Linking CXX executable bin/moe_test_observe_concurrency
+2026-11-16T22:15:49.2828636Z [286/290] Linking CXX executable bin/moe_test_serve_status
+2026-11-16T22:15:49.4302771Z [287/290] Linking CXX executable bin/moe_test_delegated_directory
+2026-11-16T22:15:50.2590758Z [288/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:15:50.2593040Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::{anonymous}::parse_messages(const portal::Json&, const std::string&, bool)’:
+2026-11-16T22:15:50.2594835Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:25: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2596195Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:50.2596836Z       |                         ^~~~~~
+2026-11-16T22:15:50.2598239Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:176:43: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2599505Z   176 |             const auto& schema=field(tool,"input_schema","tools.input_schema");
+2026-11-16T22:15:50.2600180Z       |                                           ^~~~~~~~~~~~~~
+2026-11-16T22:15:50.2601271Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:17: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2602027Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:50.2602631Z       |                 ^~~~~~~~
+2026-11-16T22:15:50.2603510Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:182:37: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2604241Z   182 |     const auto& messages=required(j,"messages");
+2026-11-16T22:15:50.2604566Z       |                                     ^~~~~~~~~~
+2026-11-16T22:15:50.2605214Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2605918Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:50.2606277Z       |                     ^~~~~~
+2026-11-16T22:15:50.2607079Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:189:36: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2608115Z   189 |         const auto& blocks=field(m,"content","messages.content");
+2026-11-16T22:15:50.2608469Z       |                                    ^~~~~~~~~
+2026-11-16T22:15:50.2609127Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2610133Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:50.2610638Z       |                                 ^~~~~
+2026-11-16T22:15:50.2611531Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:214:51: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2612651Z   214 |                     const auto& input=field(block,"input",path+".input");if(!input.is_object())bad(path+".input");
+2026-11-16T22:15:50.2613203Z       |                                                   ^~~~~~~
+2026-11-16T22:15:50.2614066Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp: In function ‘portal::Request portal::parse(const Json&, Protocol, const std::string&, bool)’:
+2026-11-16T22:15:50.2615117Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2615986Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:50.2616477Z       |                     ^~~~~~~~
+2026-11-16T22:15:50.2617297Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:266:41: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2618176Z   266 |         const auto& messages=required(j,"messages"); if(!messages.is_array() || messages.empty()) bad("messages");
+2026-11-16T22:15:50.2618723Z       |                                         ^~~~~~~~~~
+2026-11-16T22:15:50.2619368Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:33: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2620191Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:50.2620661Z       |                                 ^
+2026-11-16T22:15:50.2621485Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:283:49: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2622360Z   283 |                     const auto& f=required(call,"function");keys(f,{"name","arguments"},"tool_calls.function");
+2026-11-16T22:15:50.2623037Z       |                                                 ^~~~~~~~~~
+2026-11-16T22:15:50.2623703Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:79: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2624861Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:50.2625664Z       |                                                                               ^
+2026-11-16T22:15:50.2626593Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:319:100: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2627729Z   319 |         if(j.contains("text")) {keys(j["text"],{"format"},"text");const auto& f=required(j["text"],"format");keys(f,{"type"},"text.format");if(str(required(f,"type"),"text.format.type")!="text")bad("text.format");}
+2026-11-16T22:15:50.2628720Z       |                                                                                                    ^~~~~~~~
+2026-11-16T22:15:50.2629454Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:21: warning: possibly dangling reference to a temporary [-Wdangling-reference]
+2026-11-16T22:15:50.2630125Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:50.2630439Z       |                     ^~~~~
+2026-11-16T22:15:50.2633652Z /home/runner/work/Edge0/Edge0/edge0-infer/tools/cli/serve_protocol.cpp:322:38: note: ‘const std::string’ {aka ‘const std::__cxx11::basic_string<char>’} temporary created here
+2026-11-16T22:15:50.2634741Z   322 |         const auto& input=required(j,"input");
+2026-11-16T22:15:50.2635216Z       |                                      ^~~~~~~
+2026-11-16T22:15:50.3394982Z [289/290] Linking CXX executable bin/moe_test_strata_registry
+2026-11-16T22:15:54.3133548Z SSE_UNMODIFIED_PROBE={"test": "moe_test_edge0_35b_slots_config", "attempts": 100, "workers": 1, "failed": 0}
+2026-11-16T22:20:16.3006841Z SSE_UNMODIFIED_FAILURE={"test": "moe_test_edge0_35b_slots_config", "workers": 4, "attempt": 94, "code": 1, "stdout": "auto: maximum writing banks=1; active compute bank never written\n", "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/models/edge0_35b/slots_config_test.cpp:101: check failed: observed_reads>0 && maximum_writing==1 && overlap && !violation\n"}
+2026-11-16T22:20:16.3008510Z SSE_UNMODIFIED_PROBE={"test": "moe_test_edge0_35b_slots_config", "attempts": 300, "workers": 4, "failed": 1}
+2026-11-16T22:20:17.5221700Z SSE_UNMODIFIED_FAILURE={"test": "moe_test_weights_mixed", "workers": 1, "attempt": 73, "code": 1, "stdout": "", "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/weights/mixed_storage_test.cpp:33: check failed: storage.size() == 1 && budget.current(exec::Purpose::resident_weights) == ggml_backend_buffer_get_size(storage.front()->allocation()->buffer)\n"}
+2026-11-16T22:20:17.5224311Z SSE_UNMODIFIED_FAILURE={"test": "moe_test_weights_mixed", "workers": 1, "attempt": 89, "code": 1, "stdout": "", "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/weights/mixed_storage_test.cpp:33: check failed: storage.size() == 1 && budget.current(exec::Purpose::resident_weights) == ggml_backend_buffer_get_size(storage.front()->allocation()->buffer)\n"}
+2026-11-16T22:20:17.5225827Z SSE_UNMODIFIED_PROBE={"test": "moe_test_weights_mixed", "attempts": 100, "workers": 1, "failed": 2}
+2026-11-16T22:20:17.5274260Z SSE_UNMODIFIED_BASELINE={"base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d", "native_tree_exactly_upstream": true, "slots": [{"attempts": 100, "workers": 1, "failed": 0}, {"attempts": 300, "workers": 4, "failed": 1}], "weights": {"attempts": 100, "workers": 1, "failed": 2}, "slots_binary_sha256": "081f2b54ff37609d377845f4ebfd26a19ad77ec17b967a6973adfd97c5bf7414"}
+2026-11-16T22:20:17.5418401Z ##[group]Run for file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do
+2026-11-16T22:20:17.5419684Z [36;1mfor file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do[0m
+2026-11-16T22:20:17.5420435Z [36;1m  git show "HEAD:edge0-infer/$file" > "$file"[0m
+2026-11-16T22:20:17.5420762Z [36;1mdone[0m
+2026-11-16T22:20:17.5421035Z [36;1mgit -C .. diff --exit-code -- edge0-infer[0m
+2026-11-16T22:20:17.5421363Z [36;1mcmake --build --preset cpu[0m
+2026-11-16T22:20:17.5421648Z [36;1mpython - <<'PYTEST'[0m
+2026-11-16T22:20:17.5421921Z [36;1mimport hashlib, json, os[0m
+2026-11-16T22:20:17.5422203Z [36;1mfrom pathlib import Path[0m
+2026-11-16T22:20:17.5423012Z [36;1mevidence = json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-unmodified-baseline.json').read_text())[0m
+2026-11-16T22:20:17.5423783Z [36;1mfinal = hashlib.sha256(Path('build/cpu/bin/moe_test_edge0_35b_slots_config').read_bytes()).hexdigest()[0m
+2026-11-16T22:20:17.5424706Z [36;1mprint('Slots test binary before/after CLI-only changes:', evidence['slots_binary_sha256'], final)[0m
+2026-11-16T22:20:17.5425264Z [36;1massert final == evidence['slots_binary_sha256'][0m
+2026-11-16T22:20:17.5425600Z [36;1mPYTEST[0m
+2026-11-16T22:20:17.5425849Z [36;1mbuild/cpu/bin/moe_test_strata_registry[0m
+2026-11-16T22:20:17.5426296Z [36;1mpython -u ../validation/sse_http.py --label final-with-proven-baseline[0m
+2026-11-16T22:20:17.5426712Z [36;1mset +e[0m
+2026-11-16T22:20:17.5427184Z [36;1mctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/sse-final.xml"[0m
+2026-11-16T22:20:17.5427696Z [36;1mresult=$?[0m
+2026-11-16T22:20:17.5427916Z [36;1mset -e[0m
+2026-11-16T22:20:17.5428167Z [36;1mecho "final full-suite exit: $result"[0m
+2026-11-16T22:20:17.5428535Z [36;1muv run --project tools/assets python - <<'PYTEST'[0m
+2026-11-16T22:20:17.5428914Z [36;1mimport os, json, xml.etree.ElementTree as ET[0m
+2026-11-16T22:20:17.5429245Z [36;1mfrom pathlib import Path[0m
+2026-11-16T22:20:17.5429631Z [36;1mroot = ET.parse(Path(os.environ['RUNNER_TEMP'], 'sse-final.xml'))[0m
+2026-11-16T22:20:17.5430039Z [36;1mtests = list(root.iter('testcase'))[0m
+2026-11-16T22:20:17.5430459Z [36;1mfailures = {t.attrib['name'] for t in tests if t.find('failure') is not None}[0m
+2026-11-16T22:20:17.5430986Z [36;1mskipped = [t.attrib['name'] for t in tests if t.find('skipped') is not None][0m
+2026-11-16T22:20:17.5431558Z [36;1mprevious = json.loads(Path('../validation/sse-baseline-evidence.json').read_text())[0m
+2026-11-16T22:20:17.5432198Z [36;1mobserved = json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-unmodified-baseline.json').read_text())[0m
+2026-11-16T22:20:17.5432887Z [36;1mpermitted = set(previous['unchanged_full_suite_failures'])[0m
+2026-11-16T22:20:17.5433361Z [36;1mif any(item['failed'] for item in observed['slots']):[0m
+2026-11-16T22:20:17.5433780Z [36;1m    permitted.add('moe_test_edge0_35b_slots_config')[0m
+2026-11-16T22:20:17.5434143Z [36;1mif observed['weights']['failed']:[0m
+2026-11-16T22:20:17.5434470Z [36;1m    permitted.add('moe_test_weights_mixed')[0m
+2026-11-16T22:20:17.5434868Z [36;1mprint('SSE final full-suite failures:', sorted(failures))[0m
+2026-11-16T22:20:17.5435348Z [36;1mprint('SSE actually reproduced baseline failures:', sorted(permitted))[0m
+2026-11-16T22:20:17.5435889Z [36;1mprint('SSE final runnable passes:', len(tests) - len(failures) - len(skipped))[0m
+2026-11-16T22:20:17.5436358Z [36;1mprint('SSE final device skips:', len(skipped))[0m
+2026-11-16T22:20:17.5436741Z [36;1massert failures <= permitted, (failures, permitted)[0m
+2026-11-16T22:20:17.5437072Z [36;1mPYTEST[0m
+2026-11-16T22:20:17.5437418Z [36;1mctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata[0m
+2026-11-16T22:20:17.5490237Z shell: /usr/bin/bash -e {0}
+2026-11-16T22:20:17.5490748Z env:
+2026-11-16T22:20:17.5490968Z   CMAKE_BUILD_PARALLEL_LEVEL: 2
+2026-11-16T22:20:17.5491290Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-11-16T22:20:17.5491639Z ##[endgroup]
+2026-11-16T22:20:17.5906652Z [0/2] Re-checking globbed directories...
+2026-11-16T22:20:17.6292635Z [1/42] Refreshing build identity
+2026-11-16T22:20:20.3112313Z [2/42] Building CXX object src/app/CMakeFiles/moe_app.dir/runtime.cpp.o
+2026-11-16T22:20:20.4392873Z [3/42] Linking CXX static library src/app/libmoe_app.a
+2026-11-16T22:20:26.0155625Z [4/42] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_status.cpp.o
+2026-11-16T22:20:31.6990245Z [5/42] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_delegate_status.cpp.o
+2026-11-16T22:20:31.9362644Z [6/42] Linking CXX executable bin/edge0-infer
+2026-11-16T22:20:32.0846969Z [7/42] Linking CXX executable bin/moe_example_native_chat
+2026-11-16T22:20:32.2340669Z [8/42] Linking CXX executable bin/moe_test_app
+2026-11-16T22:20:32.3834324Z [9/42] Linking CXX executable bin/moe_test_metal_runtime
+2026-11-16T22:20:32.5203931Z [10/42] Linking CXX executable bin/moe_test_text_bpe
+2026-11-16T22:20:32.6547526Z [11/42] Linking CXX executable bin/moe_test_text_decode
+2026-11-16T22:20:32.7016820Z [12/42] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/unit/cli/strata_registry_test.cpp.o
+2026-11-16T22:20:32.7931938Z [13/42] Linking CXX executable bin/moe_test_edge0_35b_text
+2026-11-16T22:20:32.8421659Z [14/42] Linking CXX executable bin/moe_test_edge0_35b_text_tokens
+2026-11-16T22:20:32.9286459Z [15/42] Linking CXX executable bin/moe_test_text_corpus
+2026-11-16T22:20:32.9930373Z [16/42] Linking CXX executable bin/moe_test_model_inspect
+2026-11-16T22:20:33.0735203Z [17/42] Linking CXX executable bin/moe_test_text_api
+2026-11-16T22:20:33.1331559Z [18/42] Linking CXX executable bin/moe_test_text_rules
+2026-11-16T22:20:33.2163872Z [19/42] Linking CXX executable bin/moe_test_edge0_35b_admission
+2026-11-16T22:20:33.2883023Z [20/42] Linking CXX executable bin/moe_test_app_generation
+2026-11-16T22:20:33.3589824Z [21/42] Linking CXX executable bin/moe_test_generate
+2026-11-16T22:20:33.4350496Z [22/42] Linking CXX executable bin/moe_test_edge0_35b_slots_failure
+2026-11-16T22:20:33.5026667Z [23/42] Linking CXX executable bin/moe_test_state_bytes
+2026-11-16T22:20:33.5603569Z [24/42] Linking CXX executable bin/moe_test_history
+2026-11-16T22:20:33.5729066Z [25/42] Linking CXX executable bin/moe_template_probe
+2026-11-16T22:20:33.6326076Z [26/42] Linking CXX executable bin/moe_test_tool_results
+2026-11-16T22:20:33.6907015Z [27/42] Linking CXX executable bin/moe_test_stop_match
+2026-11-16T22:20:33.7069089Z [28/42] Linking CXX executable bin/moe_test_checkpoint_budget
+2026-11-16T22:20:33.8427300Z [29/42] Linking CXX executable bin/moe_test_thinking_tools_35b
+2026-11-16T22:20:33.8436886Z [30/42] Linking CXX executable bin/moe_thinking_rerender_probe
+2026-11-16T22:20:33.9074514Z [31/42] Linking CXX executable bin/moe_test_sampling_rules
+2026-11-16T22:20:33.9831463Z [32/42] Linking CXX executable bin/moe_portal_decode
+2026-11-16T22:20:34.0508919Z [33/42] Linking CXX executable bin/moe_test_delivery_failure_continue
+2026-11-16T22:20:34.1302318Z [34/42] Linking CXX executable bin/moe_test_threads_cli_selection
+2026-11-16T22:20:34.1986215Z [35/42] Linking CXX executable bin/moe_test_mixed_stages
+2026-11-16T22:20:34.2830644Z [36/42] Linking CXX executable bin/moe_test_mixed_metal
+2026-11-16T22:20:34.3435470Z [37/42] Linking CXX executable bin/moe_test_mixed_vulkan_stages
+2026-11-16T22:20:34.4340253Z [38/42] Linking CXX executable bin/moe_test_observe_concurrency
+2026-11-16T22:20:34.4917320Z [39/42] Linking CXX executable bin/moe_test_serve_status
+2026-11-16T22:20:34.5709777Z [40/42] Linking CXX executable bin/moe_test_strata_registry
+2026-11-16T22:20:34.5826107Z [41/42] Linking CXX executable bin/moe_test_delegated_directory
+2026-11-16T22:20:34.6135007Z Slots test binary before/after CLI-only changes: 081f2b54ff37609d377845f4ebfd26a19ad77ec17b967a6973adfd97c5bf7414 081f2b54ff37609d377845f4ebfd26a19ad77ec17b967a6973adfd97c5bf7414
+2026-11-16T22:20:34.7364154Z PASS strata registry: matching, options, devices, template, contract, accounting, status assembly
+2026-11-16T22:20:38.3824148Z PASS SSE framing: three protocols, multi-data fields, LF/CRLF/CR, fragmented HTTP bodies and incomplete EOF
+2026-11-16T22:20:38.3824923Z SSE_HTTP_FIXED={"label": "final-with-proven-baseline", "cases": 15, "protocols": 3}
+2026-11-16T22:20:39.1311586Z Test project /home/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:20:39.2645703Z         Start   1: moe_test_platform
+2026-11-16T22:20:39.2656262Z         Start   2: moe_test_app
+2026-11-16T22:20:39.2665456Z         Start   3: moe_public_header_check
+2026-11-16T22:20:39.2693112Z         Start   4: moe_public_app_check
+2026-11-16T22:20:39.2781114Z   1/104 Test   #1: moe_test_platform ........................   Passed    0.01 sec
+2026-11-16T22:20:39.2782054Z         Start   8: check_docs
+2026-11-16T22:20:39.2923899Z   2/104 Test   #2: moe_test_app .............................   Passed    0.03 sec
+2026-11-16T22:20:39.2929451Z         Start   9: check_language
+2026-11-16T22:20:39.4813851Z   3/104 Test   #8: check_docs ...............................   Passed    0.20 sec
+2026-11-16T22:20:39.4843142Z         Start  10: check_layers
+2026-11-16T22:20:39.6000369Z   4/104 Test   #9: check_language ...........................   Passed    0.30 sec
+2026-11-16T22:20:39.6013013Z         Start  11: check_deps
+2026-11-16T22:20:39.7661941Z   5/104 Test  #10: check_layers .............................   Passed    0.29 sec
+2026-11-16T22:20:39.7693505Z         Start  12: check_app_deps
+2026-11-16T22:20:40.0633906Z   6/104 Test  #12: check_app_deps ...........................   Passed    0.30 sec
+2026-11-16T22:20:40.0663427Z         Start  13: check_app_tokens
+2026-11-16T22:20:40.1853842Z   7/104 Test  #13: check_app_tokens .........................   Passed    0.12 sec
+2026-11-16T22:20:40.1913479Z         Start  14: check_ggml_origin
+2026-11-16T22:20:40.3974156Z   8/104 Test   #4: moe_public_app_check .....................   Passed    1.13 sec
+2026-11-16T22:20:40.4013300Z         Start  15: check_model_terms
+2026-11-16T22:20:40.4843814Z   9/104 Test  #14: check_ggml_origin ........................   Passed    0.30 sec
+2026-11-16T22:20:40.4873108Z         Start  16: check_public_options
+2026-11-16T22:20:40.6164054Z  10/104 Test  #16: check_public_options .....................   Passed    0.13 sec
+2026-11-16T22:20:40.6193090Z         Start  17: check_signing
+2026-11-16T22:20:40.7206539Z  11/104 Test  #11: check_deps ...............................   Passed    1.12 sec
+2026-11-16T22:20:40.7214559Z         Start  18: test_layers
+2026-11-16T22:20:40.7783912Z  12/104 Test  #15: check_model_terms ........................   Passed    0.38 sec
+2026-11-16T22:20:40.7813140Z         Start  19: test_deps
+2026-11-16T22:20:41.3654109Z  13/104 Test   #3: moe_public_header_check ..................   Passed    2.10 sec
+2026-11-16T22:20:41.3674451Z         Start  20: test_app_deps
+2026-11-16T22:20:42.0241290Z  14/104 Test  #20: test_app_deps ............................   Passed    0.66 sec
+2026-11-16T22:20:42.0250624Z         Start  21: test_app_tokens
+2026-11-16T22:20:42.1427184Z  15/104 Test  #21: test_app_tokens ..........................   Passed    0.12 sec
+2026-11-16T22:20:42.1435766Z         Start  22: test_ggml_origin
+2026-11-16T22:20:42.9323269Z  16/104 Test  #22: test_ggml_origin .........................   Passed    0.79 sec
+2026-11-16T22:20:42.9353178Z         Start  23: test_run_checks
+2026-11-16T22:20:43.0372767Z  17/104 Test  #23: test_run_checks ..........................   Passed    0.10 sec
+2026-11-16T22:20:43.0395123Z         Start  24: test_docs
+2026-11-16T22:20:43.7711665Z  18/104 Test  #19: test_deps ................................   Passed    2.99 sec
+2026-11-16T22:20:43.7736117Z         Start  25: test_language
+2026-11-16T22:20:43.8876771Z  19/104 Test  #25: test_language ............................   Passed    0.12 sec
+2026-11-16T22:20:43.8905551Z         Start  26: test_model_terms
+2026-11-16T22:20:44.0251011Z  20/104 Test  #24: test_docs ................................   Passed    0.99 sec
+2026-11-16T22:20:44.0275740Z         Start  27: test_signing
+2026-11-16T22:20:44.1273754Z  21/104 Test  #27: test_signing .............................   Passed    0.10 sec
+2026-11-16T22:20:44.1303389Z         Start  28: moe_test_text_bpe
+2026-11-16T22:20:44.1338711Z  22/104 Test  #28: moe_test_text_bpe ........................   Passed    0.01 sec
+2026-11-16T22:20:44.1339596Z         Start  29: moe_test_text_decode
+2026-11-16T22:20:45.9828044Z  23/104 Test  #26: test_model_terms .........................   Passed    2.09 sec
+2026-11-16T22:20:45.9871008Z         Start  30: moe_test_edge0_35b_text
+2026-11-16T22:20:45.9873842Z  24/104 Test  #30: moe_test_edge0_35b_text ..................   Passed    0.00 sec
+2026-11-16T22:20:45.9942977Z         Start  33: moe_test_text_upstream
+2026-11-16T22:20:46.0801679Z  25/104 Test  #33: moe_test_text_upstream ...................   Passed    0.09 sec
+2026-11-16T22:20:46.0809567Z         Start  34: moe_test_model_catalog
+2026-11-16T22:20:46.1275303Z  26/104 Test  #34: moe_test_model_catalog ...................   Passed    0.05 sec
+2026-11-16T22:20:46.1283383Z         Start  35: moe_test_model_index
+2026-11-16T22:20:46.1372324Z  27/104 Test  #35: moe_test_model_index .....................   Passed    0.01 sec
+2026-11-16T22:20:46.1379024Z         Start  36: moe_test_model_adapter
+2026-11-16T22:20:46.1443797Z  28/104 Test  #36: moe_test_model_adapter ...................   Passed    0.01 sec
+2026-11-16T22:20:46.1444785Z         Start  37: moe_test_edge0_35b_assets
+2026-11-16T22:20:46.3346626Z  29/104 Test  #37: moe_test_edge0_35b_assets ................   Passed    0.19 sec
+2026-11-16T22:20:46.3374987Z         Start  38: moe_test_model_inspect
+2026-11-16T22:20:46.3553508Z  30/104 Test  #38: moe_test_model_inspect ...................   Passed    0.02 sec
+2026-11-16T22:20:46.3583213Z         Start  39: moe_test_edge0_35b_manifest
+2026-11-16T22:20:46.6183504Z  31/104 Test  #18: test_layers ..............................   Passed    5.90 sec
+2026-11-16T22:20:46.6205276Z         Start  48: moe_test_text_rules
+2026-11-16T22:20:46.6255500Z  32/104 Test  #48: moe_test_text_rules ......................   Passed    0.00 sec
+2026-11-16T22:20:46.6256485Z         Start  49: moe_test_platform_runtime
+2026-11-16T22:20:46.6296979Z  33/104 Test  #49: moe_test_platform_runtime ................   Passed    0.01 sec
+2026-11-16T22:20:46.6297903Z         Start  50: check_runtime_backends
+2026-11-16T22:20:46.6509281Z  34/104 Test  #39: moe_test_edge0_35b_manifest ..............   Passed    0.30 sec
+2026-11-16T22:20:46.6534721Z         Start  51: check_strata_files
+2026-11-16T22:20:46.6937027Z  35/104 Test  #50: check_runtime_backends ...................   Passed    0.06 sec
+2026-11-16T22:20:46.6963346Z         Start  52: moe_test_exec_budget
+2026-11-16T22:20:46.7047593Z  36/104 Test  #52: moe_test_exec_budget .....................   Passed    0.01 sec
+2026-11-16T22:20:46.7048581Z         Start  53: moe_test_exec_runtime
+2026-11-16T22:20:46.7083619Z  37/104 Test  #51: check_strata_files .......................   Passed    0.06 sec
+2026-11-16T22:20:46.7092884Z         Start  54: moe_test_session_storage
+2026-11-16T22:20:46.7203177Z  38/104 Test  #54: moe_test_session_storage .................   Passed    0.01 sec
+2026-11-16T22:20:46.7262926Z         Start  55: moe_test_weights_storage
+2026-11-16T22:20:46.7443286Z  39/104 Test  #55: moe_test_weights_storage .................   Passed    0.02 sec
+2026-11-16T22:20:46.7444007Z         Start  56: moe_test_weights_staged
+2026-11-16T22:20:46.9343824Z  40/104 Test  #56: moe_test_weights_staged ..................   Passed    0.19 sec
+2026-11-16T22:20:46.9392959Z         Start  63: check_model_no_compute
+2026-11-16T22:20:46.9792951Z  41/104 Test  #53: moe_test_exec_runtime ....................   Passed    0.27 sec
+2026-11-16T22:20:46.9814868Z         Start  64: moe_test_edge0_35b_estimate
+2026-11-16T22:20:46.9843821Z  42/104 Test  #63: check_model_no_compute ...................   Passed    0.05 sec
+2026-11-16T22:20:46.9893580Z         Start  73: moe_test_answers_judge
+2026-11-16T22:20:46.9923397Z  43/104 Test  #64: moe_test_edge0_35b_estimate ..............   Passed    0.01 sec
+2026-11-16T22:20:46.9947916Z         Start  74: moe_test_asset_tools_l1
+2026-11-16T22:20:47.1883976Z  44/104 Test  #17: check_signing ............................   Passed    6.57 sec
+2026-11-16T22:20:47.1886962Z         Start  76: moe_test_answers_inventory
+2026-11-16T22:20:48.0796620Z  45/104 Test  #76: moe_test_answers_inventory ...............   Passed    0.89 sec
+2026-11-16T22:20:48.0797779Z         Start  79: check_cpu_kernels
+2026-11-16T22:20:48.1405798Z  46/104 Test  #79: check_cpu_kernels ........................   Passed    0.06 sec
+2026-11-16T22:20:48.1430710Z         Start  80: moe_test_session_transactions
+2026-11-16T22:20:48.1495319Z  47/104 Test  #80: moe_test_session_transactions ............   Passed    0.01 sec
+2026-11-16T22:20:48.1501189Z         Start  81: moe_test_model_generation_defaults
+2026-11-16T22:20:48.1551599Z  48/104 Test  #81: moe_test_model_generation_defaults .......   Passed    0.01 sec
+2026-11-16T22:20:48.1553219Z         Start  83: moe_test_session_rows
+2026-11-16T22:20:48.1825537Z  49/104 Test  #83: moe_test_session_rows ....................   Passed    0.02 sec
+2026-11-16T22:20:48.1853558Z         Start  91: moe_test_app_generation
+2026-11-16T22:20:48.2654024Z  50/104 Test  #73: moe_test_answers_judge ...................   Passed    1.28 sec
+2026-11-16T22:20:48.2683658Z         Start  95: moe_test_cli_logging
+2026-11-16T22:20:48.2693335Z  51/104 Test  #95: moe_test_cli_logging .....................   Passed    0.00 sec
+2026-11-16T22:20:48.2723528Z         Start  97: moe_test_weights_lifecycle
+2026-11-16T22:20:48.3466978Z  52/104 Test  #97: moe_test_weights_lifecycle ...............   Passed    0.08 sec
+2026-11-16T22:20:48.3473231Z         Start  98: moe_test_weights_slots
+2026-11-16T22:20:48.3952630Z  53/104 Test  #98: moe_test_weights_slots ...................   Passed    0.05 sec
+2026-11-16T22:20:48.3983212Z         Start 103: moe_test_model_slots_loading
+2026-11-16T22:20:48.4362007Z  54/104 Test #103: moe_test_model_slots_loading .............   Passed    0.04 sec
+2026-11-16T22:20:48.4363395Z         Start 105: moe_test_edge0_35b_slots_config
+2026-11-16T22:20:48.9106362Z  55/104 Test  #91: moe_test_app_generation ..................   Passed    0.73 sec
+2026-11-16T22:20:48.9124660Z         Start 106: moe_test_platform_memory
+2026-11-16T22:20:48.9195554Z  56/104 Test #106: moe_test_platform_memory .................***Failed    0.01 sec
+2026-11-16T22:20:48.9263090Z /home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/platform/memory_test.cpp:73: check failed: !before.rss.values && !before.rss.reason.empty()
+2026-11-16T22:20:48.9319793Z 
+2026-11-16T22:20:48.9361729Z         Start 112: moe_test_single_turn_metrics
+2026-11-16T22:20:49.4165845Z  57/104 Test #112: moe_test_single_turn_metrics .............   Passed    0.49 sec
+2026-11-16T22:20:49.4194193Z         Start 113: moe_test_build_identity
+2026-11-16T22:20:49.8884949Z  58/104 Test #105: moe_test_edge0_35b_slots_config ..........   Passed    1.45 sec
+2026-11-16T22:20:49.8899454Z         Start 114: moe_test_subproject
+2026-11-16T22:20:50.1243900Z  59/104 Test #113: moe_test_build_identity ..................   Passed    0.71 sec
+2026-11-16T22:20:50.1264033Z         Start 115: moe_test_abba
+2026-11-16T22:20:50.5221122Z  60/104 Test #115: moe_test_abba ............................   Passed    0.40 sec
+2026-11-16T22:20:50.5225951Z         Start 116: moe_test_perf_hosts
+2026-11-16T22:20:50.7169705Z  61/104 Test  #74: moe_test_asset_tools_l1 ..................   Passed    3.73 sec
+2026-11-16T22:20:50.7170577Z         Start 117: moe_test_perf_report
+2026-11-16T22:20:51.0478730Z  62/104 Test #116: moe_test_perf_hosts ......................   Passed    0.53 sec
+2026-11-16T22:20:51.0479232Z         Start 118: moe_test_perf_turns
+2026-11-16T22:20:51.2309690Z  63/104 Test #118: moe_test_perf_turns ......................   Passed    0.18 sec
+2026-11-16T22:20:51.2310455Z         Start 119: moe_test_model_support
+2026-11-16T22:20:51.4033249Z  64/104 Test #119: moe_test_model_support ...................   Passed    0.17 sec
+2026-11-16T22:20:51.4037571Z         Start 120: moe_test_perf_sweep
+2026-11-16T22:20:51.4701504Z  65/104 Test #117: moe_test_perf_report .....................   Passed    0.75 sec
+2026-11-16T22:20:51.4702207Z         Start 122: moe_test_weights_read_batch
+2026-11-16T22:20:51.6071374Z  66/104 Test #122: moe_test_weights_read_batch ..............   Passed    0.14 sec
+2026-11-16T22:20:51.6072896Z         Start 130: moe_test_weights_priority
+2026-11-16T22:20:51.6083453Z  67/104 Test #120: moe_test_perf_sweep ......................   Passed    0.20 sec
+2026-11-16T22:20:51.6084639Z         Start 141: moe_test_route_trace
+2026-11-16T22:20:51.6205278Z  68/104 Test #130: moe_test_weights_priority ................   Passed    0.01 sec
+2026-11-16T22:20:51.6206110Z         Start 144: moe_test_edge0_35b_prerouter_admission
+2026-11-16T22:20:51.6929194Z  69/104 Test #144: moe_test_edge0_35b_prerouter_admission ...   Passed    0.07 sec
+2026-11-16T22:20:51.6930317Z         Start 147: moe_test_session_reuse
+2026-11-16T22:20:51.6986390Z  70/104 Test #147: moe_test_session_reuse ...................   Passed    0.01 sec
+2026-11-16T22:20:51.6987076Z         Start 151: moe_test_template_preserve
+2026-11-16T22:20:51.7164105Z  71/104 Test #141: moe_test_route_trace .....................   Passed    0.11 sec
+2026-11-16T22:20:51.7164946Z         Start 152: moe_test_history
+2026-11-16T22:20:51.7183671Z  72/104 Test #152: moe_test_history .........................   Passed    0.00 sec
+2026-11-16T22:20:51.7184395Z         Start 158: moe_test_chat_line
+2026-11-16T22:20:51.7208008Z  73/104 Test #158: moe_test_chat_line .......................   Passed    0.00 sec
+2026-11-16T22:20:51.7208899Z         Start 164: moe_test_ordered_json
+2026-11-16T22:20:51.8663587Z  74/104 Test #151: moe_test_template_preserve ...............   Passed    0.17 sec
+2026-11-16T22:20:51.8679619Z         Start 165: moe_test_template_tools
+2026-11-16T22:20:51.9512159Z  75/104 Test #164: moe_test_ordered_json ....................***Failed    0.23 sec
+2026-11-16T22:20:51.9513634Z Traceback (most recent call last):
+2026-11-16T22:20:51.9523643Z   File "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/model/check_json.py", line 32, in <module>
+2026-11-16T22:20:51.9524985Z     assert got == want, (source, got, want)
+2026-11-16T22:20:51.9525626Z            ^^^^^^^^^^^
+2026-11-16T22:20:51.9526313Z AssertionError: ('1.7976931348623157e308', '2e+308', '1.7976931348623157e+308')
+2026-11-16T22:20:51.9526966Z 
+2026-11-16T22:20:51.9527347Z         Start 166: moe_test_edge0_35b_output
+2026-11-16T22:20:51.9880486Z  76/104 Test #166: moe_test_edge0_35b_output ................   Passed    0.04 sec
+2026-11-16T22:20:51.9885107Z         Start 167: moe_test_tool_results
+2026-11-16T22:20:51.9913998Z  77/104 Test #167: moe_test_tool_results ....................   Passed    0.00 sec
+2026-11-16T22:20:51.9914920Z         Start 168: moe_test_stop_match
+2026-11-16T22:20:51.9941830Z  78/104 Test #168: moe_test_stop_match ......................   Passed    0.00 sec
+2026-11-16T22:20:51.9943099Z         Start 172: moe_test_sampling_rules
+2026-11-16T22:20:52.0043403Z  79/104 Test #172: moe_test_sampling_rules ..................   Passed    0.01 sec
+2026-11-16T22:20:52.0044079Z         Start 175: moe_test_serve_protocol
+2026-11-16T22:20:52.0156950Z  80/104 Test #175: moe_test_serve_protocol ..................   Passed    0.01 sec
+2026-11-16T22:20:52.0157810Z         Start 176: moe_test_serve_engine
+2026-11-16T22:20:52.0197255Z  81/104 Test #176: moe_test_serve_engine ....................   Passed    0.00 sec
+2026-11-16T22:20:52.0198037Z         Start 184: moe_test_memory_metric
+2026-11-16T22:20:52.1088019Z  82/104 Test #184: moe_test_memory_metric ...................   Passed    0.09 sec
+2026-11-16T22:20:52.1089011Z         Start 185: moe_test_multi_turn_counts
+2026-11-16T22:20:52.2167696Z  83/104 Test #185: moe_test_multi_turn_counts ...............   Passed    0.11 sec
+2026-11-16T22:20:52.2175802Z         Start 188: moe_test_platform_android
+2026-11-16T22:20:53.0637525Z  84/104 Test #165: moe_test_template_tools ..................***Failed    1.20 sec
+2026-11-16T22:20:53.0638767Z Traceback (most recent call last):
+2026-11-16T22:20:53.0640115Z   File "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/model/check_json.py", line 32, in <module>
+2026-11-16T22:20:53.0641191Z     assert got == want, (source, got, want)
+2026-11-16T22:20:53.0641885Z            ^^^^^^^^^^^
+2026-11-16T22:20:53.0642908Z AssertionError: ('1.7976931348623157e308', '2e+308', '1.7976931348623157e+308')
+2026-11-16T22:20:53.0643854Z Traceback (most recent call last):
+2026-11-16T22:20:53.0645155Z   File "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/app/check_template_tools.py", line 48, in <module>
+2026-11-16T22:20:53.0646744Z     subprocess.run([sys.executable, str(root / "tests/unit/model/check_json.py"), sys.argv[2]], check=True)
+2026-11-16T22:20:53.0652351Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-16T22:20:53.0653964Z   File "/usr/lib/python3.14/subprocess.py", line 578, in run
+2026-11-16T22:20:53.0654958Z     raise CalledProcessError(retcode, process.args,
+2026-11-16T22:20:53.0655782Z                              output=stdout, stderr=stderr)
+2026-11-16T22:20:53.0659961Z subprocess.CalledProcessError: Command '['/home/runner/work/Edge0/Edge0/edge0-infer/tools/assets/.venv/bin/python', '/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/model/check_json.py', '/home/runner/work/Edge0/Edge0/edge0-infer/build/cpu/bin/moe_json_probe']' returned non-zero exit status 1.
+2026-11-16T22:20:53.0662091Z 
+2026-11-16T22:20:53.0662680Z         Start 189: moe_test_platform_android_cli
+2026-11-16T22:20:53.3924118Z  85/104 Test  #29: moe_test_text_decode .....................   Passed    9.26 sec
+2026-11-16T22:20:53.3924895Z         Start 190: moe_test_platform_serve_sync
+2026-11-16T22:20:53.5210848Z  86/104 Test #190: moe_test_platform_serve_sync .............   Passed    0.13 sec
+2026-11-16T22:20:53.5211622Z         Start 193: moe_test_exec_stages
+2026-11-16T22:20:53.5303227Z  87/104 Test #193: moe_test_exec_stages .....................   Passed    0.01 sec
+2026-11-16T22:20:53.5304204Z         Start 194: moe_test_exec_replicas
+2026-11-16T22:20:53.5614381Z  88/104 Test #194: moe_test_exec_replicas ...................   Passed    0.03 sec
+2026-11-16T22:20:53.5615444Z         Start 196: moe_test_weights_mixed
+2026-11-16T22:20:53.5793452Z  89/104 Test #196: moe_test_weights_mixed ...................   Passed    0.02 sec
+2026-11-16T22:20:53.5794680Z         Start 197: moe_test_session_mixed_kv
+2026-11-16T22:20:53.5900261Z  90/104 Test #197: moe_test_session_mixed_kv ................   Passed    0.01 sec
+2026-11-16T22:20:53.5901729Z         Start 202: moe_test_platform_ios_cleanup
+2026-11-16T22:20:53.5940985Z  91/104 Test #202: moe_test_platform_ios_cleanup ............   Passed    0.00 sec
+2026-11-16T22:20:53.5942039Z         Start 203: moe_test_platform_ios
+2026-11-16T22:20:56.1341806Z  92/104 Test #203: moe_test_platform_ios ....................   Passed    2.54 sec
+2026-11-16T22:20:56.1343267Z         Start 204: moe_test_platform_ios_cli
+2026-11-16T22:20:59.5914217Z  93/104 Test #188: moe_test_platform_android ................   Passed    7.37 sec
+2026-11-16T22:20:59.5915309Z         Start 205: moe_test_platform_system
+2026-11-16T22:20:59.5939434Z  94/104 Test #205: moe_test_platform_system .................   Passed    0.00 sec
+2026-11-16T22:20:59.5940366Z         Start 207: moe_test_serve_status
+2026-11-16T22:20:59.5975301Z  95/104 Test #207: moe_test_serve_status ....................   Passed    0.00 sec
+2026-11-16T22:20:59.5976265Z         Start 208: moe_test_delegated_directory
+2026-11-16T22:20:59.6077286Z  96/104 Test #208: moe_test_delegated_directory .............   Passed    0.01 sec
+2026-11-16T22:20:59.6078497Z         Start 209: moe_test_fake_strata
+2026-11-16T22:21:00.2670998Z  97/104 Test #209: moe_test_fake_strata .....................   Passed    0.66 sec
+2026-11-16T22:21:00.2672240Z         Start 210: moe_test_strata_registry
+2026-11-16T22:21:00.4569453Z  98/104 Test #210: moe_test_strata_registry .................   Passed    0.19 sec
+2026-11-16T22:21:02.2014431Z  99/104 Test #114: moe_test_subproject ......................   Passed   12.31 sec
+2026-11-16T22:21:02.8423633Z 100/104 Test #204: moe_test_platform_ios_cli ................   Passed    6.71 sec
+2026-11-16T22:21:10.5501042Z 101/104 Test #189: moe_test_platform_android_cli ............   Passed   17.49 sec
+2026-11-16T22:21:10.5501781Z         Start  57: moe_test_weights_vulkan_fill
+2026-11-16T22:21:10.5540577Z 102/104 Test  #57: moe_test_weights_vulkan_fill .............***Skipped   0.00 sec
+2026-11-16T22:21:10.5541361Z         Start  58: moe_test_weights_vulkan_concurrent
+2026-11-16T22:21:10.5576022Z 103/104 Test  #58: moe_test_weights_vulkan_concurrent .......***Skipped   0.00 sec
+2026-11-16T22:21:10.5576786Z         Start 195: moe_test_exec_vulkan_replicas
+2026-11-16T22:21:10.5609609Z 104/104 Test #195: moe_test_exec_vulkan_replicas ............***Skipped   0.00 sec
+2026-11-16T22:21:10.5613809Z 
+2026-11-16T22:21:10.5614511Z 97% tests passed, 3 tests failed out of 104
+2026-11-16T22:21:10.5614893Z 
+2026-11-16T22:21:10.5615058Z Label Time Summary:
+2026-11-16T22:21:10.5615453Z L0        =  12.04 sec*proc (15 tests)
+2026-11-16T22:21:10.5615913Z L1        =  86.91 sec*proc (89 tests)
+2026-11-16T22:21:10.5616370Z device    =   0.01 sec*proc (3 tests)
+2026-11-16T22:21:10.5616658Z 
+2026-11-16T22:21:10.5616829Z Total Test time (real) =  31.43 sec
+2026-11-16T22:21:10.5617101Z 
+2026-11-16T22:21:10.5617282Z The following tests did not run:
+2026-11-16T22:21:10.5617795Z 	 57 - moe_test_weights_vulkan_fill (Skipped)
+2026-11-16T22:21:10.5618373Z 	 58 - moe_test_weights_vulkan_concurrent (Skipped)
+2026-11-16T22:21:10.5618967Z 	195 - moe_test_exec_vulkan_replicas (Skipped)
+2026-11-16T22:21:10.5619312Z 
+2026-11-16T22:21:10.5619483Z The following tests FAILED:
+2026-11-16T22:21:10.5619995Z 	106 - moe_test_platform_memory (Failed)                 L1
+2026-11-16T22:21:10.5620656Z 	164 - moe_test_ordered_json (Failed)                    L1
+2026-11-16T22:21:10.5621259Z 	165 - moe_test_template_tools (Failed)                  L1
+2026-11-16T22:21:10.5627023Z Errors while running CTest
+2026-11-16T22:21:10.5822278Z final full-suite exit: 8
+2026-11-16T22:21:10.6166687Z SSE final full-suite failures: ['moe_test_ordered_json', 'moe_test_platform_memory', 'moe_test_template_tools']
+2026-11-16T22:21:10.6168305Z SSE actually reproduced baseline failures: ['moe_test_edge0_35b_slots_config', 'moe_test_ordered_json', 'moe_test_platform_memory', 'moe_test_template_tools', 'moe_test_weights_mixed']
+2026-11-16T22:21:10.6169516Z SSE final runnable passes: 98
+2026-11-16T22:21:10.6169922Z SSE final device skips: 3
+2026-11-16T22:21:10.6251821Z Test project /home/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:21:10.6297606Z     Start 211: moe_test_serve_strata
+2026-11-16T22:21:10.6307695Z     Start 212: moe_test_chat_strata
+2026-11-16T22:21:21.7805381Z 1/2 Test #212: moe_test_chat_strata .............   Passed   11.15 sec
+2026-11-16T22:21:47.4826742Z 2/2 Test #211: moe_test_serve_strata ............   Passed   36.85 sec
+2026-11-16T22:21:47.4831851Z 
+2026-11-16T22:21:47.4832052Z 100% tests passed out of 2
+2026-11-16T22:21:47.4832264Z 
+2026-11-16T22:21:47.4832365Z Label Time Summary:
+2026-11-16T22:21:47.4832805Z L2    =  48.00 sec*proc (2 tests)
+2026-11-16T22:21:47.4832991Z 
+2026-11-16T22:21:47.4833203Z Total Test time (real) =  36.86 sec
+2026-11-16T22:21:47.4975643Z Post job cleanup.
+2026-11-16T22:21:47.6293737Z Cache hit occurred on key setup-uv-1-x86_64-unknown-linux-gnu-3.14.4-pruned-e00cd163d447fa8250d7c0d7e12c9e2c53b706f335423bb2c55b14ce696c5810, not saving cache.
+2026-11-16T22:21:47.6295579Z (node:23641) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-16T22:21:47.6296775Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-16T22:21:47.6464124Z Post job cleanup.
+2026-11-16T22:21:47.7366118Z [command]/usr/bin/git version
+2026-11-16T22:21:47.7414135Z git version 2.56.1
+2026-11-16T22:21:47.7452305Z Temporarily overriding HOME='/home/runner/work/_temp/bfd50baf-6f11-4695-9ac9-d3ba647a8ea3' before making global git config changes
+2026-11-16T22:21:47.7454230Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-16T22:21:47.7458381Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Edge0/Edge0
+2026-11-16T22:21:47.7500639Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-16T22:21:47.7540045Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-16T22:21:47.7868454Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-16T22:21:47.7906594Z http.https://github.com/.extraheader
+2026-11-16T22:21:47.7943715Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-16T22:21:47.7985881Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-16T22:21:47.8500027Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-16T22:21:47.8541347Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-16T22:21:47.9046044Z Cleaning up orphan processes
+2026-11-16T22:21:47.9449051Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

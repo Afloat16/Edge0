@@ -1,0 +1,75 @@
+{
+  "run": 43967469449,
+  "job": 133650571284,
+  "head": "523a0b1c0206a570783bd49df44cc54e1ad8e8e5",
+  "conclusion": "success",
+  "url": "https://github.com/Afloat16/Edge0/actions/runs/43967469449/job/133650571284",
+  "native_regression": "passed",
+  "http": {
+    "passed": 15,
+    "protocols": 3
+  },
+  "full_l0_l1": {
+    "passed": 98,
+    "skipped": 3,
+    "failures": [
+      "moe_test_ordered_json",
+      "moe_test_platform_memory",
+      "moe_test_template_tools"
+    ]
+  },
+  "l2": {
+    "passed": 2,
+    "failed": 0
+  },
+  "baseline": {
+    "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+    "native_tree_exactly_upstream": true,
+    "slots": [
+      {
+        "attempts": 100,
+        "workers": 1,
+        "failed": 0
+      },
+      {
+        "attempts": 300,
+        "workers": 4,
+        "failed": 1
+      }
+    ],
+    "weights": {
+      "attempts": 100,
+      "workers": 1,
+      "failed": 2
+    },
+    "slots_binary_sha256": "081f2b54ff37609d377845f4ebfd26a19ad77ec17b967a6973adfd97c5bf7414"
+  },
+  "baseline_failures": [
+    {
+      "test": "moe_test_edge0_35b_slots_config",
+      "workers": 4,
+      "attempt": 94,
+      "code": 1,
+      "stdout": "auto: maximum writing banks=1; active compute bank never written\n",
+      "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/models/edge0_35b/slots_config_test.cpp:101: check failed: observed_reads>0 && maximum_writing==1 && overlap && !violation\n"
+    },
+    {
+      "test": "moe_test_weights_mixed",
+      "workers": 1,
+      "attempt": 73,
+      "code": 1,
+      "stdout": "",
+      "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/weights/mixed_storage_test.cpp:33: check failed: storage.size() == 1 && budget.current(exec::Purpose::resident_weights) == ggml_backend_buffer_get_size(storage.front()->allocation()->buffer)\n"
+    },
+    {
+      "test": "moe_test_weights_mixed",
+      "workers": 1,
+      "attempt": 89,
+      "code": 1,
+      "stdout": "",
+      "stderr": "/home/runner/work/Edge0/Edge0/edge0-infer/tests/unit/weights/mixed_storage_test.cpp:33: check failed: storage.size() == 1 && budget.current(exec::Purpose::resident_weights) == ggml_backend_buffer_get_size(storage.front()->allocation()->buffer)\n"
+    }
+  ],
+  "slots_binary_before_after_identical": true,
+  "log": "validation-evidence/sse-final-native-linux.log"
+}
