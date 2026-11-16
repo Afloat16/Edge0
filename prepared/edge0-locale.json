@@ -148,5 +148,53 @@
     "platform_dependency_allowed": false,
     "policy_change_made": false,
     "next_step": "Resolve numeric conversion within the existing module boundaries, or obtain scope agreement for a platform abstraction and its dependency. Do not weaken or disguise source checks."
+  },
+  "architecture_review": {
+    "status": "blocked_pending_compatible_design",
+    "verified_source_revision": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+    "new_code_written": false,
+    "checks_or_dependency_rules_changed": false,
+    "sources": [
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/tools/checks/layers.toml",
+        "finding": "The model module may depend directly only on weights and exec; platform is not an allowed direct dependency."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/tools/checks/check_layers.py",
+        "finding": "The changed model file's locale.h and xlocale.h includes fail the real source-layer check; moving the implementation to platform still requires a supported header and dependency design."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/src/model/json.cpp",
+        "finding": "The private number serializer uses classic-locale streams but deliberately accepts underflow including signed zero; it is not equivalent to the current generation-config std::stod range contract."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/src/exec/budget.h",
+        "finding": "No exposed string-to-floating-point conversion helper was found in this existing allowed module interface."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/src/exec/execution.h",
+        "finding": "No exposed string-to-floating-point conversion helper was found in this existing allowed module interface."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/src/weights/expert_slots.h",
+        "finding": "No exposed string-to-floating-point conversion helper was found in this existing allowed module interface."
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/src/weights/storage.h",
+        "finding": "No exposed string-to-floating-point conversion helper was found in this existing allowed module interface."
+      }
+    ],
+    "rejected_shortcuts": [
+      "Do not use global setlocale in production; it mutates process-wide state.",
+      "Do not reuse localeconv shared buffers.",
+      "Do not add wrapper forwarding solely to evade the layer boundary.",
+      "Do not claim stringstream or from_chars preserves native range and errno semantics without cross-platform evidence.",
+      "Do not modify a source-check allowlist just to hide the failure."
+    ],
+    "required_next_steps": [
+      "A small conversion preserving the existing accepted/rejected input behavior, complete consumption and range semantics within current dependencies; otherwise upstream architecture agreement.",
+      "Native before/after and full source/test checks on the final production diff.",
+      "Actual macOS execution and iOS compilation; previously cancelled job is not evidence of either."
+    ]
   }
 }
