@@ -1,0 +1,446 @@
+{
+  "summary": {
+    "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+    "all_author_prs": 126,
+    "upstream_pr_refs": 126,
+    "fork_branch_refs": 43,
+    "pre_task_fork_branches": [
+      "afloat/20261111-next-batched-gguf-arrays",
+      "afloat/20261111-next-bounded-cpu-defaults",
+      "afloat/20261111-next-bounded-logprob-candidates",
+      "afloat/20261111-next-linear-output-parser",
+      "afloat/20261111-next-linear-response-assembly",
+      "afloat/20261111-next-optional-reasoning-content",
+      "afloat/20261111-next-plain-tokenization-fastpath",
+      "afloat/20261111-next-replay-drain-errors",
+      "afloat/20261111-next-reuse-source-digests",
+      "afloat/20261111-next-writer-readiness",
+      "fix/20261111-download-resume-eof",
+      "fix/20261111-ignore-large-generation-metadata",
+      "fix/20261111-q41-finite-metadata",
+      "fix/20261111-response-done-logprobs",
+      "fix/20261111-response-truncated-status",
+      "fix/20261111-session-pending-release",
+      "fix/20261111-tokenizer-byte-fallback",
+      "main",
+      "perf/20261111-bpe-adjacent-merge-queue",
+      "perf/20261111-incremental-stop-matching",
+      "perf/20261111-stream-prerouter-payloads"
+    ],
+    "reachable_commits": 425,
+    "aliases": [
+      "edge0-infer/tools/cli/serve_delegate_proxy.cpp",
+      "edge0-infer/tools/cli/serve_delegate_status.cpp",
+      "edge0-infer/tools/cli/serve_delegate_status.h"
+    ],
+    "pr249_native_parser_unchanged": "64312a2ab51cc81411ee131eacc628fe9231cd43",
+    "production_candidate_excluded_from_history": true,
+    "source_version_count": 15,
+    "parser_versions": [
+      {
+        "blob": "dfb48adced089e694f3efd7178ff51991ee8dba3",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      },
+      {
+        "blob": "d3392871690c74b4fca4cb21d30c74d6351d54df",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      },
+      {
+        "blob": "94efabdc13c39918f87ea14e4edaf654eb709311",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      },
+      {
+        "blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      },
+      {
+        "blob": "d1fc57fecaeb91171d048f6dff7381a81a642fb2",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      },
+      {
+        "blob": "c6408d086d53c159ea2e30f7d92aaf6fd13ad2c5",
+        "paths": [
+          "edge0-infer/tools/cli/serve_delegate_status.cpp"
+        ],
+        "per_line_parser_markers": true
+      }
+    ]
+  },
+  "changes": [
+    {
+      "commit": "b894877cd2a14d6593061f7fb121432249943af8",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "b894877cd2a14d6593061f7fb121432249943af8",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "b894877cd2a14d6593061f7fb121432249943af8",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.h"
+      ]
+    },
+    {
+      "commit": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "5a2a296ec792baf47147a31a80bf81d57896c56a",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "5a2a296ec792baf47147a31a80bf81d57896c56a",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "5a2a296ec792baf47147a31a80bf81d57896c56a",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.h"
+      ]
+    },
+    {
+      "commit": "d9cee6d8f5409fef8fd82dda931ec741abcbaac9",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "1b70770cab421834d94c9ab2c72287bc17c17899",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "5c7f5c2378be9fef41b50a27fa309a0b922b165b",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "5c7f5c2378be9fef41b50a27fa309a0b922b165b",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "399497a2c5d57e64187d1e288c3a570fc4190e5d",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "399497a2c5d57e64187d1e288c3a570fc4190e5d",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "399497a2c5d57e64187d1e288c3a570fc4190e5d",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.h"
+      ]
+    },
+    {
+      "commit": "250d6d533bc3d529969a9372ab2f12b6bdc77f7f",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "e2d2c5920cd6e1871c09d272cb5394f7501cbc5d",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "e2d2c5920cd6e1871c09d272cb5394f7501cbc5d",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "e2d2c5920cd6e1871c09d272cb5394f7501cbc5d",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.h"
+      ]
+    },
+    {
+      "commit": "e61aea4d70eb116456d2aef52334ba202fb1a33a",
+      "status": "M",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "4cca27cfe0e8e2351b63fd8bd022668799a772b1",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ]
+    },
+    {
+      "commit": "4cca27cfe0e8e2351b63fd8bd022668799a772b1",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp"
+      ]
+    },
+    {
+      "commit": "4cca27cfe0e8e2351b63fd8bd022668799a772b1",
+      "status": "A",
+      "paths": [
+        "edge0-infer/tools/cli/serve_delegate_status.h"
+      ]
+    }
+  ],
+  "refs": {
+    "refs/audit/fork/afloat/20261111-next-batched-gguf-arrays": "1873b169e204d90321e316e378a2924ac60b03e6",
+    "refs/audit/fork/afloat/20261111-next-bounded-cpu-defaults": "22192214469f1510be42360f9abc0aca719ab574",
+    "refs/audit/fork/afloat/20261111-next-bounded-logprob-candidates": "c69358e381834b21c032b05ff3714dd0470f2c04",
+    "refs/audit/fork/afloat/20261111-next-linear-output-parser": "3bc29038418a213dd8e757d72fb4d5ee1f6bc070",
+    "refs/audit/fork/afloat/20261111-next-linear-response-assembly": "77b484ae4affd6f07d00aa94e1596272698a98dc",
+    "refs/audit/fork/afloat/20261111-next-optional-reasoning-content": "ac53763bf20688bec39ca37ee1924d1a117a267d",
+    "refs/audit/fork/afloat/20261111-next-plain-tokenization-fastpath": "86e5837f1207f0de49a0161432cb928ba19528e1",
+    "refs/audit/fork/afloat/20261111-next-replay-drain-errors": "528fed23d055590273d0a860690655421d6bd2b1",
+    "refs/audit/fork/afloat/20261111-next-reuse-source-digests": "605641018da53e4c2ddb9cdb60c579696c137577",
+    "refs/audit/fork/afloat/20261111-next-writer-readiness": "4ef3a9c02ec1ffc2efbf2cf49993441918906245",
+    "refs/audit/fork/fix/20261111-download-resume-eof": "c8e79f83a65c03cbffd7fd69610e399bd295e4ef",
+    "refs/audit/fork/fix/20261111-ignore-large-generation-metadata": "786bbd42900232d4e36c72274c0e85bbc142f4f5",
+    "refs/audit/fork/fix/20261111-q41-finite-metadata": "e21c6e6d94598546f50c99dc8e02dbc87de07d07",
+    "refs/audit/fork/fix/20261111-response-done-logprobs": "89b9664dc61d61c6660d5bcd530b49a39806048c",
+    "refs/audit/fork/fix/20261111-response-truncated-status": "a8a025f142887b6861d8902d5873b2e27ddc59e4",
+    "refs/audit/fork/fix/20261111-session-pending-release": "241887030cbfb7c15b2b9bdd5e90df5ac3439a92",
+    "refs/audit/fork/fix/20261111-tokenizer-byte-fallback": "9e26e0218269c19591b638a56b6f49bb8c4ffa4a",
+    "refs/audit/fork/fix/asset-manifest-grammar-20261116": "a94243737db10ca80166648ca1943edd39a54cd2",
+    "refs/audit/fork/fix/asset-root-selection-20261116": "80219f28ef6ebc2a3e9d8533b4e413af03f52473",
+    "refs/audit/fork/fix/conversation-edit-state-20261116": "e4177591e033fd7363ddbe9544b682df8530f153",
+    "refs/audit/fork/fix/delegated-stream-errors-20261116": "b894877cd2a14d6593061f7fb121432249943af8",
+    "refs/audit/fork/fix/desktop-sse-completion-20261116": "9706e5b570008e3e7e347a6e026a20112924ff86",
+    "refs/audit/fork/fix/generation-defaults-locale-20261116": "7d42d53669f3c848efad9c2628dba68e0099bc73",
+    "refs/audit/fork/fix/json-binary64-limits-20261116": "d36c82352bc1784a23268f7284bb77067b3480d9",
+    "refs/audit/fork/fix/linux-memory-coverage-20261116": "d76c93facd857207b7bd7cd05c1549457dd8880c",
+    "refs/audit/fork/fix/messages-cache-counts-20261116": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
+    "refs/audit/fork/fix/weight-read-completion-20261116": "d78c7f643029d0bcbef2f7e9f649bdff8138abbe",
+    "refs/audit/fork/main": "c685070b598be0f33eed1118b0f0b8fedf42d402",
+    "refs/audit/fork/perf/20261111-bpe-adjacent-merge-queue": "d5dd6261dddb925337aba8cecf6af53d58b459e1",
+    "refs/audit/fork/perf/20261111-incremental-stop-matching": "106b7d2936131d3b2ce339954f9a890d357d3535",
+    "refs/audit/fork/perf/20261111-stream-prerouter-payloads": "6952a60db933e600ffa532bd5bf7be06c2175fab",
+    "refs/audit/fork/validation/20261116-contribution-checkpoint": "688411128af504b5ac2a73eb54138cda0c336b33",
+    "refs/audit/fork/validation/asset-manifest-20261116": "a964c2f88ef2d93212a5cbf5dd21dccad89d71c2",
+    "refs/audit/fork/validation/asset-root-selection-20261116": "b4f9d554989905c2a53b5593035b95e957c14a9c",
+    "refs/audit/fork/validation/conversation-edit-20261116": "f33c4ce5b4f34ed66100d30c1393c1c0ac49b7f3",
+    "refs/audit/fork/validation/delegated-stream-errors-20261116": "4dc10e984e9f52b476ea67d251d26874d78b405f",
+    "refs/audit/fork/validation/generation-defaults-full-linux-20261116": "c053638c8777d48e625b9081472a75e8c95a13e0",
+    "refs/audit/fork/validation/generation-defaults-locale-20261116": "62855b4e87f5a42a8d3a98954f5bef29308e1c02",
+    "refs/audit/fork/validation/json-binary64-20261116": "c6175bd7cbb1ff1db937e68d95bf78cb172d1e7a",
+    "refs/audit/fork/validation/linux-memory-coverage-20261116": "8cb3928a02d2c33ce685837e659e14057aabd57d",
+    "refs/audit/fork/validation/messages-cache-20261116": "d9cee6d8f5409fef8fd82dda931ec741abcbaac9",
+    "refs/audit/fork/validation/sse-completion-20261116": "8f5380fb2f06e3fecfed2f2312b9e6fe0d02aba8",
+    "refs/audit/fork/validation/weight-read-completion-20261116": "ef03270b47c780f88a6289af8de91f314fe0eaac",
+    "refs/audit/upstream-pr/1": "3c065922f21a9050f028a609071f4c34690cde41",
+    "refs/audit/upstream-pr/10": "d455012e0ca1138e3996d5c3fa10d85775f8d6d5",
+    "refs/audit/upstream-pr/100": "78c3ceaac19e64388da0c7c8e152524ab4674afe",
+    "refs/audit/upstream-pr/102": "62dcab22479b51f1c5781fc060e9ff98b948fb47",
+    "refs/audit/upstream-pr/105": "55e3e091048b20ba67d06f28f78c72c46edb781d",
+    "refs/audit/upstream-pr/108": "82e9f7ad145a7c03e7969695ba268d458cbc5e2f",
+    "refs/audit/upstream-pr/111": "62291e1a80e55651f0c8cd0c5be57343f81c8f1b",
+    "refs/audit/upstream-pr/112": "34720456c920526622ebdf8ab7ac70a2e55d12b5",
+    "refs/audit/upstream-pr/116": "8dbfe6368457802abdc03c5037619869e93de75d",
+    "refs/audit/upstream-pr/117": "772bdcffb6a64ba08023c09828c0185067d42ec4",
+    "refs/audit/upstream-pr/118": "538b6695b709188d9c8bfd7062782637ec68791b",
+    "refs/audit/upstream-pr/119": "185bd9ddcae340f344140e928c41f49295a19aa1",
+    "refs/audit/upstream-pr/12": "a8392a81f5f3afc059667d3e525ee127d1bf83ee",
+    "refs/audit/upstream-pr/120": "2c609e3b0e44f93ee8589df6da9f8c83d2681fb3",
+    "refs/audit/upstream-pr/121": "12635619286fd922b63985e66efe9cf2c1857a38",
+    "refs/audit/upstream-pr/123": "88c7141c962895da814eeba21a58c87062c017fd",
+    "refs/audit/upstream-pr/124": "4a9aa57f4ecfe7ce18bdc9003c1139ef55d7fcc7",
+    "refs/audit/upstream-pr/126": "592912ed41c1757b343ceb331980b71d5e68a858",
+    "refs/audit/upstream-pr/13": "a6ad384550aabc1f387a447a5410f10aaf44224c",
+    "refs/audit/upstream-pr/132": "2924af9a35a47ecb6a1d0128ed2d00ae1f7a0a0a",
+    "refs/audit/upstream-pr/133": "4e2b26e5e6a12194d87bdc7f43ca236d10aa233b",
+    "refs/audit/upstream-pr/134": "ae76a1ae2117b9742cc5c5546c215d2858c3d6f0",
+    "refs/audit/upstream-pr/135": "8b0ea9c00d11b11582030dd7418574a494e2e791",
+    "refs/audit/upstream-pr/136": "fc743a4f7a69a01766e3c71f0af4a8a14637ce3b",
+    "refs/audit/upstream-pr/137": "76e04779f59594570289841139f23ce4a23980a5",
+    "refs/audit/upstream-pr/14": "1e6f8c66545f4709ed1221eabf74437f838cec23",
+    "refs/audit/upstream-pr/143": "85407d4178bd5ca4aaf215cfdcb64602736a58ef",
+    "refs/audit/upstream-pr/144": "ed627fcf080eb906c90bcc22d1c4c2c8915fd649",
+    "refs/audit/upstream-pr/145": "40f2bf192b5095ac9aac47f6d959a338bdea88c8",
+    "refs/audit/upstream-pr/146": "8631c5e6438e8ccedfe73e396e2ea91c49a7dc6d",
+    "refs/audit/upstream-pr/147": "bc7e8c4b609b2a230845bdeb8fae76ba9930a536",
+    "refs/audit/upstream-pr/148": "73194387b239069db34aaa5ec445dfebfa76bb73",
+    "refs/audit/upstream-pr/149": "37075514b549a434b71ff12a2b8d2dcf0d9ce63f",
+    "refs/audit/upstream-pr/150": "bf267d4fbae37355adc3ea2b0c345b15c2d904c4",
+    "refs/audit/upstream-pr/151": "6e67349ff16ee075f7eefe780035a8342c815dbb",
+    "refs/audit/upstream-pr/153": "65547b26a26124ba12194d6c631c25b266e8b684",
+    "refs/audit/upstream-pr/155": "89155ae30c47d5e78dfee48f87194ba314884294",
+    "refs/audit/upstream-pr/156": "ae8440870a6f63e6dba2a7b6f5fa93e6e4d2585c",
+    "refs/audit/upstream-pr/158": "7f447b35e39cb0ead9bea43a5ea6d054e530afd8",
+    "refs/audit/upstream-pr/159": "ff3eecb3b58a175d6ccecf0d2f126e04cf736c41",
+    "refs/audit/upstream-pr/160": "a1addb4e5cb32d21b0baee33272019192970de35",
+    "refs/audit/upstream-pr/161": "2e32b77b29cc58241c0f4b49f6f7277971a786c0",
+    "refs/audit/upstream-pr/162": "64e7074d1f16170aa9916ebe6a3616accaa36ef3",
+    "refs/audit/upstream-pr/163": "3d25778db5dc530195a5e91bbfa5f3257f6eacdd",
+    "refs/audit/upstream-pr/164": "4d905e7f8cf86c6ee4f297dc24263248ce209507",
+    "refs/audit/upstream-pr/166": "36ade193946e7cab15f97cc99d36025eca35e677",
+    "refs/audit/upstream-pr/167": "777a482b0c76fffa6641ba38ca84dfe78b8bddba",
+    "refs/audit/upstream-pr/168": "d948541bbf87bb7b4270141420b7eb19b6b2eef2",
+    "refs/audit/upstream-pr/169": "3b139488c9875a4d47615ec0a927562f0ef9ee25",
+    "refs/audit/upstream-pr/170": "c8e79f83a65c03cbffd7fd69610e399bd295e4ef",
+    "refs/audit/upstream-pr/171": "6952a60db933e600ffa532bd5bf7be06c2175fab",
+    "refs/audit/upstream-pr/172": "e21c6e6d94598546f50c99dc8e02dbc87de07d07",
+    "refs/audit/upstream-pr/173": "786bbd42900232d4e36c72274c0e85bbc142f4f5",
+    "refs/audit/upstream-pr/174": "106b7d2936131d3b2ce339954f9a890d357d3535",
+    "refs/audit/upstream-pr/175": "9e26e0218269c19591b638a56b6f49bb8c4ffa4a",
+    "refs/audit/upstream-pr/176": "89b9664dc61d61c6660d5bcd530b49a39806048c",
+    "refs/audit/upstream-pr/177": "a8a025f142887b6861d8902d5873b2e27ddc59e4",
+    "refs/audit/upstream-pr/178": "241887030cbfb7c15b2b9bdd5e90df5ac3439a92",
+    "refs/audit/upstream-pr/179": "d5dd6261dddb925337aba8cecf6af53d58b459e1",
+    "refs/audit/upstream-pr/180": "761f14abb4d39d942a57333725c93a0cc66d6f80",
+    "refs/audit/upstream-pr/181": "1873b169e204d90321e316e378a2924ac60b03e6",
+    "refs/audit/upstream-pr/182": "22192214469f1510be42360f9abc0aca719ab574",
+    "refs/audit/upstream-pr/183": "c69358e381834b21c032b05ff3714dd0470f2c04",
+    "refs/audit/upstream-pr/184": "3bc29038418a213dd8e757d72fb4d5ee1f6bc070",
+    "refs/audit/upstream-pr/185": "77b484ae4affd6f07d00aa94e1596272698a98dc",
+    "refs/audit/upstream-pr/186": "ac53763bf20688bec39ca37ee1924d1a117a267d",
+    "refs/audit/upstream-pr/187": "86e5837f1207f0de49a0161432cb928ba19528e1",
+    "refs/audit/upstream-pr/188": "528fed23d055590273d0a860690655421d6bd2b1",
+    "refs/audit/upstream-pr/189": "605641018da53e4c2ddb9cdb60c579696c137577",
+    "refs/audit/upstream-pr/19": "49299865b2e31c15df117c918d8e39811046450d",
+    "refs/audit/upstream-pr/190": "4ef3a9c02ec1ffc2efbf2cf49993441918906245",
+    "refs/audit/upstream-pr/191": "ae700287624deedfb7b9f57d9451086ecf625ce4",
+    "refs/audit/upstream-pr/192": "773b3737d2533effae01c4aef90b1e42c28c7e0f",
+    "refs/audit/upstream-pr/193": "b1fac3412d57b5786dff7943caaca94c3a05502c",
+    "refs/audit/upstream-pr/194": "6419ae9d3d66dddcede6288c622254394c3d14d4",
+    "refs/audit/upstream-pr/196": "78fe2d46ef82b8c726ef5c136c4198b14d307a8f",
+    "refs/audit/upstream-pr/199": "a7ad5843983960a6c6518406d8af8f785bd7c8a4",
+    "refs/audit/upstream-pr/2": "bc353dc810bd0bade736c36573e76d13d66dd20a",
+    "refs/audit/upstream-pr/203": "90192eb3e7f4f5abe78205593f4bf2db1ac77c1b",
+    "refs/audit/upstream-pr/204": "d7d5510bf664a4c9cb94d18aaf00d8b5a4349f45",
+    "refs/audit/upstream-pr/21": "44c39f9951722c7b847c9d4278c120b1e2be9683",
+    "refs/audit/upstream-pr/210": "621a139c5d0219317b4c87f5edcbe0dfe60388e5",
+    "refs/audit/upstream-pr/211": "130802beb502cdacf4da0352aa2f9ac9d654e29c",
+    "refs/audit/upstream-pr/212": "22a5f5df9f68ae7648f3206b3d620bd12afd48a4",
+    "refs/audit/upstream-pr/213": "8c490f68361c952a81a507a0130bc6327caf436c",
+    "refs/audit/upstream-pr/214": "267847db0460ff45cf588a220beda3dc76f3da93",
+    "refs/audit/upstream-pr/215": "840ba3833a32869568b89ba6f97b446fefb55e08",
+    "refs/audit/upstream-pr/218": "d09d6f7e8fa0d83db15d8cece9f3bde7198b1150",
+    "refs/audit/upstream-pr/221": "f0d344250cdd4fd25daf24185cb50323d4765fad",
+    "refs/audit/upstream-pr/223": "ad2f74949bb57f478f4a5d3674a840d6492b01d1",
+    "refs/audit/upstream-pr/224": "681527a90c13bd7065073bcf82305542ac85020c",
+    "refs/audit/upstream-pr/226": "5d983dc414e06b2b91e3685339c6c896c8937f95",
+    "refs/audit/upstream-pr/227": "8388d3c526a649e1ec5637fe9496a83eb15649c1",
+    "refs/audit/upstream-pr/228": "acdee5134e3c9e49af1d9273e263477f7787b9ca",
+    "refs/audit/upstream-pr/229": "6daf63d99f8e40b69decaecec15398db1bada297",
+    "refs/audit/upstream-pr/23": "8d64a7872584a21f104b06449c8e99aebb9c187e",
+    "refs/audit/upstream-pr/230": "1e32f09d6665ab79482ab34d7ee5c55586faae87",
+    "refs/audit/upstream-pr/231": "753269aad1f4cebc8714ab79dec55197cfd5b1f5",
+    "refs/audit/upstream-pr/232": "c8143918ddb20dfdcc22dcbc87fb37a25e13e8ee",
+    "refs/audit/upstream-pr/234": "2a84e52b95c9b598dee628c2d7c57b4ea8232a8b",
+    "refs/audit/upstream-pr/235": "d835efaa19daed225b6439809b423ad864d79591",
+    "refs/audit/upstream-pr/237": "e6a268e682a71cb2c5605c71720b2ef2deca82c3",
+    "refs/audit/upstream-pr/238": "f72d523f77cc932fa7a511d25c98eda2b101e9e3",
+    "refs/audit/upstream-pr/240": "5decd1e2dcd545d3453a135f86d0a86bc5202ae7",
+    "refs/audit/upstream-pr/241": "db6a146f69397476fce8f63f5df3641a0461762f",
+    "refs/audit/upstream-pr/243": "cc08264159322fa22bcafdf93d635d0d5ee89bc2",
+    "refs/audit/upstream-pr/246": "824ea534ea0a59c0afb0b3b31def71528c926b30",
+    "refs/audit/upstream-pr/247": "786fcc7eab30afd13438e4df1cd68c49cb61bca6",
+    "refs/audit/upstream-pr/249": "9706e5b570008e3e7e347a6e026a20112924ff86",
+    "refs/audit/upstream-pr/250": "a94243737db10ca80166648ca1943edd39a54cd2",
+    "refs/audit/upstream-pr/251": "d36c82352bc1784a23268f7284bb77067b3480d9",
+    "refs/audit/upstream-pr/252": "e4177591e033fd7363ddbe9544b682df8530f153",
+    "refs/audit/upstream-pr/253": "80219f28ef6ebc2a3e9d8533b4e413af03f52473",
+    "refs/audit/upstream-pr/254": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
+    "refs/audit/upstream-pr/255": "b894877cd2a14d6593061f7fb121432249943af8",
+    "refs/audit/upstream-pr/256": "d78c7f643029d0bcbef2f7e9f649bdff8138abbe",
+    "refs/audit/upstream-pr/257": "d76c93facd857207b7bd7cd05c1549457dd8880c",
+    "refs/audit/upstream-pr/3": "528be589bd589298aa05733581db29f69bce124e",
+    "refs/audit/upstream-pr/4": "621064a12c74114fac76ba072cfc66b86e67e950",
+    "refs/audit/upstream-pr/6": "95af271b12e21c455c17372a0dbe178a8533ba5a",
+    "refs/audit/upstream-pr/7": "5c439d03106d6452763bb934326e2bf8c011e5a4",
+    "refs/audit/upstream-pr/9": "0d52bf8c11c56a38f8dd50a3a1b5bc23ccce060d",
+    "refs/audit/upstream-pr/95": "b57d83ae2b9ed848c3f024c84d55d03634ff6df3",
+    "refs/audit/upstream-pr/97": "b413a229cd594fd4ede3cadf22862245d482f438",
+    "refs/audit/upstream-pr/98": "e4cd73ced88485b551a5bcc006898e6c21151471",
+    "refs/audit/upstream-pr/99": "dd633cd9ea8a824902e958d6f9ea5a92eb8a6753",
+    "refs/audit/upstream/backup/pre-edge0-infer": "8a52b68b7777b2f3da849c0603bfddc564c0fb77",
+    "refs/audit/upstream/codex/usage-help-20261113": "90192eb3e7f4f5abe78205593f4bf2db1ac77c1b",
+    "refs/audit/upstream/docs/capacity-controls": "d7d5510bf664a4c9cb94d18aaf00d8b5a4349f45",
+    "refs/audit/upstream/docs/drop-prefill-ondemand-news": "4a9aa57f4ecfe7ce18bdc9003c1139ef55d7fcc7",
+    "refs/audit/upstream/docs/vision-in-all-readmes": "c8143918ddb20dfdcc22dcbc87fb37a25e13e8ee",
+    "refs/audit/upstream/feat/app-model-download": "05aa0e3c5b929a9903f65d882d5f88f50c718e15",
+    "refs/audit/upstream/feat/edge0-infer": "777a482b0c76fffa6641ba38ca84dfe78b8bddba",
+    "refs/audit/upstream/feat/edge0-strata": "761f14abb4d39d942a57333725c93a0cc66d6f80",
+    "refs/audit/upstream/feat/edge0-strata-mac": "267847db0460ff45cf588a220beda3dc76f3da93",
+    "refs/audit/upstream/feat/latent-multigpu": "1e32f09d6665ab79482ab34d7ee5c55586faae87",
+    "refs/audit/upstream/feat/prefill-ondemand-cli": "34720456c920526622ebdf8ab7ac70a2e55d12b5",
+    "refs/audit/upstream/feat/streaming-willneed-readahead": "4d1dda24871a2c783afa994c0b805b339d9cc6c4",
+    "refs/audit/upstream/feat/windows-package-script": "5decd1e2dcd545d3453a135f86d0a86bc5202ae7",
+    "refs/audit/upstream/fix/35b-nan-hidden-clip": "dd633cd9ea8a824902e958d6f9ea5a92eb8a6753",
+    "refs/audit/upstream/fix/8b-prefill-full-layer-noop": "62291e1a80e55651f0c8cd0c5be57343f81c8f1b",
+    "refs/audit/upstream/fix/app_icon": "fc743a4f7a69a01766e3c71f0af4a8a14637ce3b",
+    "refs/audit/upstream/fix/gcc15-missing-algorithm": "840ba3833a32869568b89ba6f97b446fefb55e08",
+    "refs/audit/upstream/fix/latent-helper-rows": "d835efaa19daed225b6439809b423ad864d79591",
+    "refs/audit/upstream/fix/latent-split-du-load": "753269aad1f4cebc8714ab79dec55197cfd5b1f5",
+    "refs/audit/upstream/fix/linux-host": "ae76a1ae2117b9742cc5c5546c215d2858c3d6f0",
+    "refs/audit/upstream/fix/mlx-0.30.6-nax-a18": "e4cd73ced88485b551a5bcc006898e6c21151471",
+    "refs/audit/upstream/fix/mlx-converter-missing-repack-core": "592912ed41c1757b343ceb331980b71d5e68a858",
+    "refs/audit/upstream/fix/prerouter-switch-and-ling-sync": "78c3ceaac19e64388da0c7c8e152524ab4674afe",
+    "refs/audit/upstream/fix/release-acceptance": "b1fac3412d57b5786dff7943caaca94c3a05502c",
+    "refs/audit/upstream/fix/split-mtp-embed": "2a84e52b95c9b598dee628c2d7c57b4ea8232a8b",
+    "refs/audit/upstream/fix/windows-issue-128": "8b0ea9c00d11b11582030dd7418574a494e2e791",
+    "refs/audit/upstream/linyubupa-patch-1": "ae700287624deedfb7b9f57d9451086ecf625ce4",
+    "refs/audit/upstream/main": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+    "refs/audit/upstream/refactor/multi-platform-layout": "88c7141c962895da814eeba21a58c87062c017fd",
+    "refs/audit/upstream/release/android-gguf-import": "89155ae30c47d5e78dfee48f87194ba314884294",
+    "refs/audit/upstream/release/ios-documents-models": "120fd3c6dc550dfd3f74673b493db408a99e4a75"
+  },
+  "parser_implementations": [
+    "void account_sse(Accounting& a, std::string& pending, const char* data, std::size_t size, double elapsed) {\n    pending.append(data, size);\n    std::size_t start = 0;\n    for (;;) {\n        const auto end = pending.find('\\n', start);\n        if (end == std::string::npos) break;\n        std::string line = pending.substr(start, end - start);\n        start = end + 1;\n        if (!line.empty() && line.back() == '\\r') line.pop_back();\n        if (line.compare(0, 5, \"data:\") != 0) continue;\n        auto payload = line.substr(5);\n        if (!payload.empty() && payload.front() == ' ') payload.erase(0, 1);\n        if (payload == \"[DONE]\") {\n            if (a.endpoint == \"/v1/chat/completions\") a.complete = true;\n            continue;\n        }\n        const auto value = Json::parse(payload, nullptr, false);\n        if (value.is_discarded()) continue;\n        try {\n            const auto type = text(value, \"type\");\n            if (a.endpoint == \"/v1/responses\") {\n                if (type == \"response.completed\" || type == \"response.incomplete\" || type == \"response.failed\") a.complete = true;\n                if (value.contains(\"response\") && value[\"response\"].is_object()) {\n                    const auto id = text(value[\"response\"], \"id\");\n                    if (!id.empty()) a.response_id = id;\n                }\n                const auto id = text(value, \"response_id\");\n                if (!id.empty()) a.response_id = id;\n                if (value.contains(\"sequence_number\") && value[\"sequence_number\"].is_number_integer() && value[\"sequence_number\"] >= 0) {\n                    const auto n = value[\"sequence_number\"].get<std::uint64_t>();\n                    if (n < std::numeric_limits<std::size_t>::max()) a.next_sequence = std::max(a.next_sequence, static_cast<std::size_t>(n) + 1);\n                }\n            } else if (a.endpoint == \"/v1/messages\" && (type == \"message_stop\" || type == \"error\")) a.complete = true;\n            else if (a.endpoint == \"/v1/chat/completions\" && value.contains(\"error\")) a.complete = true;\n            account(a, value);\n            if (const auto fragments = content_fragments(value)) {\n                a.streamed_tokens = a.streamed_tokens.value_or(0) + fragments;\n                if (!a.saw_content) a.first_token_seconds = elapsed;\n                a.saw_content = true;\n            }\n        } catch (const std::exception&) {\n            // Accounting never affects forwarding: an event that cannot be read is left out of the record.\n        }\n    }\n    pending.erase(0, start);\n}",
+    "void account_sse(Accounting& a, std::string& pending, const char* data, std::size_t size, double elapsed) {\n    pending.append(data, size);\n    std::size_t start = 0;\n    for (;;) {\n        const auto end = pending.find('\\n', start);\n        if (end == std::string::npos) break;\n        std::string line = pending.substr(start, end - start);\n        start = end + 1;\n        if (!line.empty() && line.back() == '\\r') line.pop_back();\n        if (line.compare(0, 5, \"data:\") != 0) continue;\n        auto payload = line.substr(5);\n        if (!payload.empty() && payload.front() == ' ') payload.erase(0, 1);\n        if (payload == \"[DONE]\") continue;\n        const auto value = Json::parse(payload, nullptr, false);\n        if (value.is_discarded()) continue;\n        try {\n            account(a, value);\n            if (const auto fragments = content_fragments(value)) {\n                a.streamed_tokens = a.streamed_tokens.value_or(0) + fragments;\n                if (!a.saw_content) a.first_token_seconds = elapsed;\n                a.saw_content = true;\n            }\n        } catch (const std::exception&) {\n            // Accounting never affects forwarding: an event that cannot be read is left out of the record.\n        }\n    }\n    pending.erase(0, start);\n}"
+  ]
+}

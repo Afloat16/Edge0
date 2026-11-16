@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T21:31:47Z",
+  "updated": "2026-11-16T21:54:49Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -941,6 +941,48 @@
         "l2_strata_passed": 2,
         "log": "audit/edge0_pr256_official_macos.log.gz"
       }
+    },
+    {
+      "batch": 11,
+      "repository": "Edge0-AI/Edge0",
+      "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+      "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+      "title": "fix(server): account complete delegated SSE events",
+      "status": "validating_native_http",
+      "published": false,
+      "files": [
+        "edge0-infer/tools/cli/serve_delegate_status.cpp",
+        "edge0-infer/tests/unit/cli/strata_registry_test.cpp",
+        "edge0-infer/tests/integration/fake_strata.py",
+        "edge0-infer/tests/integration/serve_strata_test.py"
+      ],
+      "validation_branch": "validation/sse-event-framing-20261116",
+      "validation_head": "1e1c013542034d5db144e1a45220896f2863a139",
+      "validation_tree": "34ff61a53988f4dfa615a3c9aae2fb2a7a7cae7c",
+      "validation_run": 43963750094,
+      "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094",
+      "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
+      "contract": "Join data fields with LF; dispatch at a blank line; incomplete event data at EOF is not dispatched. Handle LF, CRLF and CR line endings as one event-framing issue.",
+      "dedupe": {
+        "all_author_prs": 126,
+        "all_current_fork_branches": 43,
+        "pre_task_fork_branches": 21,
+        "reachable_commits": 425,
+        "relevant_source_blobs": 15,
+        "status_cpp_versions": 6,
+        "distinct_account_sse_implementations": 2,
+        "renamed_aliases": [],
+        "history_job": 133637634318,
+        "history_conclusion": "success",
+        "history_log": "validation-evidence/sse-history.log",
+        "review": "Read both distinct historical parser bodies; each parses individual data lines and erases them immediately. All historical proxy variants pass raw chunks directly to account_sse. No equivalent event grouping fix was found.",
+        "pr249_native_parser_blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
+        "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
+        "pr255_control": "Native HTTP control with the old diagnostic fix is running."
+      },
+      "validation_state": "Original-source native/HTTP baseline step completed as expected; prior-PR control and corrected suites still running.",
+      "pending_revision": "Read-only review found comment-only heartbeats should be discarded promptly while no data event is pending. A small corrective refinement and regression are staged but have not been committed or validated.",
+      "production_branch_created": false
     }
   ],
   "dedupe": {
@@ -3823,7 +3865,7 @@
     "linux_memory_test": "Published #257; official macOS run43955882674/job133610175032 passed 101 runnable L0/L1, 3 device skips and 2 L2 tests.",
     "native_locale": "Prepared only; no PR. Targeted native Linux/Windows comparisons and Android API28 compile passed. Full Linux run43958711925/job133620460669 failed a new check_layers rejection for locale.h/xlocale.h in the model layer; 97 passes,3 skips,4 failures. Three remaining failures were reproduced in baseline, and original weights failed4/100. Mac job cancelled; iOS compile not run. Header/dependency policy unchanged; upstream Draft create returned403 once. Existing permitted module interfaces expose no equivalent conversion helper; the model JSON serializer intentionally uses a different underflow contract. Compatible design or upstream architecture agreement remains outstanding.",
     "sse_multiline_events": {
-      "status": "unconfirmed_static_analysis",
+      "status": "validating_native_http_and_full_suites",
       "counted": false,
       "production_change_created": false,
       "source_head": "b894877cd2a14d6593061f7fb121432249943af8",
@@ -3834,10 +3876,34 @@
       "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
       "suspected_effect": "A valid event whose JSON spans multiple data fields is parsed per-line, so terminal state and usage can be missed; proxy EOF handling may then append an engine_unavailable error.",
       "remaining": [
-        "Native HTTP reproduction",
-        "Candidate-specific complete historical PR and old-fork dedupe",
-        "Verify full SSE event framing as one problem; do not split CRLF, multi-line data and related framing boundaries into artificial items"
-      ]
+        "Inspect completed native HTTP logs and full-suite results",
+        "Validate the heartbeat buffer refinement on the final production files",
+        "Create independent production branch only after final checks; no upstream PR yet"
+      ],
+      "validation": {
+        "branch": "validation/sse-event-framing-20261116",
+        "head": "1e1c013542034d5db144e1a45220896f2863a139",
+        "tree": "34ff61a53988f4dfa615a3c9aae2fb2a7a7cae7c",
+        "run": 43963750094,
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094"
+      },
+      "history_verified": {
+        "all_author_prs": 126,
+        "all_current_fork_branches": 43,
+        "pre_task_fork_branches": 21,
+        "reachable_commits": 425,
+        "relevant_source_blobs": 15,
+        "status_cpp_versions": 6,
+        "distinct_account_sse_implementations": 2,
+        "renamed_aliases": [],
+        "history_job": 133637634318,
+        "history_conclusion": "success",
+        "history_log": "validation-evidence/sse-history.log",
+        "review": "Read both distinct historical parser bodies; each parses individual data lines and erases them immediately. All historical proxy variants pass raw chunks directly to account_sse. No equivalent event grouping fix was found.",
+        "pr249_native_parser_blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
+        "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
+        "pr255_control": "Native HTTP control with the old diagnostic fix is running."
+      }
     }
   },
   "environment_status": "Local executor and browser unavailable; repository-backed code, logs, proposal and portfolio preserved through GitHub MCP."

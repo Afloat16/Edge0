@@ -1,0 +1,42 @@
+{
+  "batch": 11,
+  "repository": "Edge0-AI/Edge0",
+  "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+  "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+  "title": "fix(server): account complete delegated SSE events",
+  "status": "validating_native_http",
+  "published": false,
+  "files": [
+    "edge0-infer/tools/cli/serve_delegate_status.cpp",
+    "edge0-infer/tests/unit/cli/strata_registry_test.cpp",
+    "edge0-infer/tests/integration/fake_strata.py",
+    "edge0-infer/tests/integration/serve_strata_test.py"
+  ],
+  "validation_branch": "validation/sse-event-framing-20261116",
+  "validation_head": "1e1c013542034d5db144e1a45220896f2863a139",
+  "validation_tree": "34ff61a53988f4dfa615a3c9aae2fb2a7a7cae7c",
+  "validation_run": 43963750094,
+  "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094",
+  "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
+  "contract": "Join data fields with LF; dispatch at a blank line; incomplete event data at EOF is not dispatched. Handle LF, CRLF and CR line endings as one event-framing issue.",
+  "dedupe": {
+    "all_author_prs": 126,
+    "all_current_fork_branches": 43,
+    "pre_task_fork_branches": 21,
+    "reachable_commits": 425,
+    "relevant_source_blobs": 15,
+    "status_cpp_versions": 6,
+    "distinct_account_sse_implementations": 2,
+    "renamed_aliases": [],
+    "history_job": 133637634318,
+    "history_conclusion": "success",
+    "history_log": "validation-evidence/sse-history.log",
+    "review": "Read both distinct historical parser bodies; each parses individual data lines and erases them immediately. All historical proxy variants pass raw chunks directly to account_sse. No equivalent event grouping fix was found.",
+    "pr249_native_parser_blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
+    "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
+    "pr255_control": "Native HTTP control with the old diagnostic fix is running."
+  },
+  "validation_state": "Original-source native/HTTP baseline step completed as expected; prior-PR control and corrected suites still running.",
+  "pending_revision": "Read-only review found comment-only heartbeats should be discarded promptly while no data event is pending. A small corrective refinement and regression are staged but have not been committed or validated.",
+  "production_branch_created": false
+}
