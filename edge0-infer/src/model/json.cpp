@@ -159,7 +159,8 @@ std::string number(const std::string& text) {
         check.imbue(std::locale::classic());
         double roundtrip=0;
         check>>roundtrip;
-        if(roundtrip==d) break;
+        // Overflow may set failbit and saturate to +/-max instead of infinity.
+        if(!check.fail() && roundtrip==d) break;
     }
     const auto e=s.find('e');
     const int exponent=std::stoi(s.substr(e+1));

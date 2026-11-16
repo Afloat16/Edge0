@@ -1,0 +1,63 @@
+name: JSON binary64 boundary validation
+on:
+  push:
+    branches: [validation/json-binary64-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: astral-sh/setup-uv@v6
+      - name: Install build tools
+        run: |
+          if [ "$RUNNER_OS" = macOS ]; then brew install ninja; else sudo apt-get update && sudo apt-get install -y ninja-build; fi
+      - run: uv sync --project tools/assets
+      - name: Record the upstream binary64 results
+        run: |
+          cp src/model/json.cpp "$RUNNER_TEMP/json-fixed.cpp"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/src/model/json.cpp > src/model/json.cpp
+          cmake --preset cpu
+          cmake --build --preset cpu
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/json-before.xml"
+          before=$?
+          set -e
+          echo "upstream test exit: $before"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'json-before.xml'))
+          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
+          expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'} if os.environ['RUNNER_OS'] == 'Linux' else set()
+          print('upstream failures:', sorted(failures))
+          assert failures == expected, (failures, expected)
+          PYTEST
+      - name: Validate the fix with all L0 and L1 tests
+        run: |
+          cp "$RUNNER_TEMP/json-fixed.cpp" src/model/json.cpp
+          cmake --build --preset cpu
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/json-after.xml"
+          after=$?
+          set -e
+          echo "fixed test exit: $after"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'json-after.xml'))
+          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
+          expected = {'moe_test_platform_memory'} if os.environ['RUNNER_OS'] == 'Linux' else set()
+          print('remaining pre-existing platform test failures:', sorted(failures))
+          assert failures == expected, (failures, expected)
+          PYTEST
+          uv run --project tools/assets python tests/unit/model/check_json.py build/cpu/bin/moe_json_probe
