@@ -1,0 +1,235 @@
+{
+  "host_reference": "Aider-AI/aider v0.86.2 args.py YAMLConfigFileParser and --read action=append",
+  "configargparse": "1.7.1",
+  "pyyaml": "6.0.3",
+  "before": [
+    {
+      "case": "plain apostrophe",
+      "native_initial_read": [
+        "docs/user's-guide.md",
+        "NOTES.md"
+      ],
+      "install_exit": 1,
+      "config_unchanged_after_install": true,
+      "diagnostic": "[SETTINGS] Created settings file with defaults: /workspace/scratch/4bed741d4966/tmp-claude-mem/tmppvant727/data/settings.json\nFailed to install Aider context: `read:` flow list is unclosed or spans lines; write it as a block list and try again"
+    },
+    {
+      "case": "plain embedded quote",
+      "native_initial_read": [
+        "docs/user\"guide.md",
+        "NOTES.md"
+      ],
+      "install_exit": 1,
+      "config_unchanged_after_install": true,
+      "diagnostic": "[SETTINGS] Created settings file with defaults: /workspace/scratch/4bed741d4966/tmp-claude-mem/tmp9_2zfbzu/data/settings.json\nFailed to install Aider context: `read:` flow list is unclosed or spans lines; write it as a block list and try again"
+    },
+    {
+      "case": "quoted brackets",
+      "native_initial_read": [
+        "docs/[team], notes.md",
+        "NOTES.md"
+      ],
+      "install_exit": 1,
+      "config_unchanged_after_install": true,
+      "diagnostic": "[SETTINGS] Created settings file with defaults: /workspace/scratch/4bed741d4966/tmp-claude-mem/tmpex_3sh90/data/settings.json\nFailed to install Aider context: `read:` flow list is unclosed or spans lines; write it as a block list and try again"
+    },
+    {
+      "case": "escaped double quotes",
+      "native_initial_read": [
+        "docs/team \"blue, green\".md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/team \"blue, green\".md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "\"docs/team \\\"blue",
+        "green\\\".md\"",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": false,
+      "all_remaining_files_exist": false
+    },
+    {
+      "case": "doubled single quote",
+      "native_initial_read": [
+        "docs/it's, [shared].md",
+        "NOTES.md"
+      ],
+      "install_exit": 1,
+      "config_unchanged_after_install": true,
+      "diagnostic": "[SETTINGS] Created settings file with defaults: /workspace/scratch/4bed741d4966/tmp-claude-mem/tmp4ugksthp/data/settings.json\nFailed to install Aider context: `read:` flow list is unclosed or spans lines; write it as a block list and try again"
+    },
+    {
+      "case": "quoted comma control",
+      "native_initial_read": [
+        "docs/team, notes.md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/team, notes.md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/team, notes.md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    }
+  ],
+  "after": [
+    {
+      "case": "plain apostrophe",
+      "native_initial_read": [
+        "docs/user's-guide.md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/user's-guide.md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/user's-guide.md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    },
+    {
+      "case": "plain embedded quote",
+      "native_initial_read": [
+        "docs/user\"guide.md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/user\"guide.md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/user\"guide.md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    },
+    {
+      "case": "quoted brackets",
+      "native_initial_read": [
+        "docs/[team], notes.md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/[team], notes.md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/[team], notes.md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    },
+    {
+      "case": "escaped double quotes",
+      "native_initial_read": [
+        "docs/team \"blue, green\".md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/team \"blue, green\".md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/team \"blue, green\".md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    },
+    {
+      "case": "doubled single quote",
+      "native_initial_read": [
+        "docs/it's, [shared].md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/it's, [shared].md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/it's, [shared].md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    },
+    {
+      "case": "quoted comma control",
+      "native_initial_read": [
+        "docs/team, notes.md",
+        "NOTES.md"
+      ],
+      "install_exit": 0,
+      "config_unchanged_after_install": false,
+      "native_installed_read": [
+        "docs/team, notes.md",
+        "NOTES.md",
+        ".claude-mem/aider-memory.md"
+      ],
+      "status_exit": 0,
+      "second_install_unchanged": true,
+      "uninstall_exit": 0,
+      "native_uninstalled_read": [
+        "docs/team, notes.md",
+        "NOTES.md"
+      ],
+      "original_paths_preserved": true,
+      "all_remaining_files_exist": true
+    }
+  ],
+  "external_model_calls": 0
+}

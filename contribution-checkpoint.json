@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T22:53:15.854Z",
+  "updated": "2026-11-16T23:11:53.339Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -1282,7 +1282,7 @@
     "app_dependency_approval": "Adding/replacing an App library or changing its major version requires maintainer approval, per edge0-infer/tools/checks/README.md#example-app-dependencies. No allowlist change made."
   },
   "portfolio": {
-    "updated": "2026-11-16T22:53:15.854Z",
+    "updated": "2026-11-16T23:11:53.339Z",
     "repositories": [
       {
         "repository": "serengil/deepface",
@@ -4065,23 +4065,23 @@
             "maintainer_can_modify": false,
             "official_ci": [
               {
-                "id": 43973824279,
-                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279",
-                "name": "Windows",
-                "status": "in_progress",
-                "conclusion": null
-              },
-              {
                 "id": 43973824185,
                 "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824185",
                 "name": "CI",
-                "status": "in_progress",
-                "conclusion": null
+                "status": "completed",
+                "conclusion": "success"
               },
               {
                 "id": 43973824170,
                 "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824170",
                 "name": "Native ODS integration",
+                "status": "completed",
+                "conclusion": "success"
+              },
+              {
+                "id": 43973824279,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279",
+                "name": "Windows",
                 "status": "completed",
                 "conclusion": "success"
               }
@@ -4107,21 +4107,95 @@
               }
             },
             "created_at": "2026-11-16T22:50:15Z"
+          },
+          {
+            "number": 6231,
+            "url": "https://github.com/thedotmack/claude-mem/pull/6231",
+            "title": "fix(aider): preserve quoted file paths in flow lists",
+            "state": "open",
+            "merged": false,
+            "draft": false,
+            "head": "7536d3f3a4984f223890e2c3b4b24c621182dc4d",
+            "maintainer_can_modify": false,
+            "official_ci": [
+              {
+                "id": 43977034891,
+                "name": "Windows",
+                "status": "in_progress",
+                "conclusion": null,
+                "run_number": 8117,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/logs",
+                "workflow_id": 268562650,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
+              },
+              {
+                "id": 43977034970,
+                "name": "CI",
+                "status": "in_progress",
+                "conclusion": null,
+                "run_number": 8097,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/logs",
+                "workflow_id": 285261453,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
+              },
+              {
+                "id": 43977034876,
+                "name": "Native ODS integration",
+                "status": "completed",
+                "conclusion": "success",
+                "run_number": 60,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/logs",
+                "workflow_id": 392578694,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
+              }
+            ],
+            "validation_local": {
+              "regression_before": {
+                "passed": 5,
+                "failed": 5
+              },
+              "related_after": {
+                "passed": 70,
+                "failed": 0
+              },
+              "typecheck": "success",
+              "build": "success",
+              "native_cli": {
+                "cases": 6,
+                "baseline_install_failures": 4,
+                "baseline_uninstall_corruptions": 1,
+                "after_cases_passed": 6,
+                "configargparse": "1.7.1",
+                "pyyaml": "6.0.3",
+                "external_model_calls": 0
+              },
+              "dedupe": {
+                "pr_heads": 3452,
+                "fork_branches": 468,
+                "reachable_commits": 16234,
+                "distinct_installer_source_blobs": 3,
+                "exact_equivalent_found": false
+              }
+            },
+            "created_at": "2026-11-16T23:11:07Z"
           }
         ],
         "counts": {
-          "submitted": 1,
-          "open": 1,
+          "submitted": 2,
+          "open": 2,
           "merged": 0,
           "closed_unmerged": 0,
           "draft_open": 0,
-          "ready_open": 1,
-          "effective": 1
+          "ready_open": 2,
+          "effective": 2
         },
-        "remaining_to_20": 19
+        "remaining_to_20": 18
       }
     ],
-    "verification_scope": "Claude-Mem #6230 state/head/maintainer permission and official CI refreshed; Edge0 SSE is prepared, not a published PR. Other repositories preserve their previously verified durable records."
+    "verification_scope": "Refreshed claude-mem #6231 PR state/head/maintainer permissions and workflow attachment, and #6230 official CI; other projects retain their previously verified snapshots."
   },
   "new_findings": {
     "sse_errors": {

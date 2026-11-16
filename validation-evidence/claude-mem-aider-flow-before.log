@@ -1,0 +1,79 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/integrations/aider-flow-scalars.test.ts:
+280 | 
+281 |   if (valueText !== '') {
+282 |     if (valueText.startsWith('[')) {
+283 |       const items = parseFlowList(rest);
+284 |       if (items === null) {
+285 |         throw new Error('`read:` flow list is unclosed or spans lines; write it as a block list and try again');
+                                                                                                                    ^
+error: `read:` flow list is unclosed or spans lines; write it as a block list and try again
+      at findAiderReadSpan (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:285:111)
+      at upsertAiderReadEntry (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:377:16)
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-flow-scalars.test.ts:23:25)
+(fail) Aider flow-list file paths > preserves a plain apostrophe through install and uninstall [3.31ms]
+280 | 
+281 |   if (valueText !== '') {
+282 |     if (valueText.startsWith('[')) {
+283 |       const items = parseFlowList(rest);
+284 |       if (items === null) {
+285 |         throw new Error('`read:` flow list is unclosed or spans lines; write it as a block list and try again');
+                                                                                                                    ^
+error: `read:` flow list is unclosed or spans lines; write it as a block list and try again
+      at findAiderReadSpan (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:285:111)
+      at upsertAiderReadEntry (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:377:16)
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-flow-scalars.test.ts:23:25)
+(fail) Aider flow-list file paths > preserves a plain embedded quote through install and uninstall [0.25ms]
+280 | 
+281 |   if (valueText !== '') {
+282 |     if (valueText.startsWith('[')) {
+283 |       const items = parseFlowList(rest);
+284 |       if (items === null) {
+285 |         throw new Error('`read:` flow list is unclosed or spans lines; write it as a block list and try again');
+                                                                                                                    ^
+error: `read:` flow list is unclosed or spans lines; write it as a block list and try again
+      at findAiderReadSpan (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:285:111)
+      at upsertAiderReadEntry (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:377:16)
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-flow-scalars.test.ts:23:25)
+(fail) Aider flow-list file paths > preserves a quoted brackets through install and uninstall [0.12ms]
+22 |       const original = `read: [${scalar}, NOTES.md] # [shared docs]\nmodel: local\n`;
+23 |       const installed = upsertAiderReadEntry(original, memory);
+24 |       expect(installed).toBe(
+25 |         `read: [${scalar}, NOTES.md, ${memory}] # [shared docs] ${AIDER_MANAGED_ENTRY_COMMENT}\nmodel: local\n`,
+26 |       );
+27 |       expect(hasAiderReadEntry(installed, value!)).toBe(true);
+                                                        ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-flow-scalars.test.ts:27:52)
+(fail) Aider flow-list file paths > preserves a escaped double quotes through install and uninstall [1.74ms]
+280 | 
+281 |   if (valueText !== '') {
+282 |     if (valueText.startsWith('[')) {
+283 |       const items = parseFlowList(rest);
+284 |       if (items === null) {
+285 |         throw new Error('`read:` flow list is unclosed or spans lines; write it as a block list and try again');
+                                                                                                                    ^
+error: `read:` flow list is unclosed or spans lines; write it as a block list and try again
+      at findAiderReadSpan (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:285:111)
+      at upsertAiderReadEntry (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/src/services/integrations/AiderInstaller.ts:377:16)
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-flow-scalars.test.ts:23:25)
+(fail) Aider flow-list file paths > preserves a doubled single quote through install and uninstall [0.14ms]
+(pass) Aider flow-list file paths > preserves a quoted comma control through install and uninstall [2.19ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: [[nested.md], NOTES.md]
+ [0.46ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: [docs/[team].md, NOTES.md]
+ [0.05ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: ["unterminated.md, NOTES.md]
+ [0.06ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: ["docs/\x5bteam].md", NOTES.md]
+ [0.03ms]
+
+ 5 pass
+ 5 fail
+ 14 expect() calls
+Ran 10 tests across 1 file. [132.00ms]

@@ -1,0 +1,32 @@
+{
+  "paths": [
+    "src/services/integrations/AiderInstaller.ts",
+    "src/shared/aider-paths.ts"
+  ],
+  "source_blobs": [
+    {
+      "blob": "1a18b51c60666fe388387ea60f54986bcb062f6a",
+      "snippets": {
+        "stripYamlComment": "\n  let quote: string | null = null;\n  for (let i = 0; i < rest.length; i++) {\n    const ch = rest[i];\n    if (quote) {\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') quote = ch;\n    else if (ch === '#' && (i === 0 || /\\s/.test(rest[i - 1]))) return rest.slice(0, i);\n  }\n  return rest;",
+        "parseFlowList": "\n  const trimmed = stripYamlComment(rest).trim();\n  if (!trimmed.startsWith('[') || !trimmed.endsWith(']')) return null;\n  const inner = trimmed.slice(1, -1);\n  if (inner.includes('[') || inner.includes(']')) return null;\n  const items: string[] = [];\n  let current = '';\n  let quote: string | null = null;\n  for (let i = 0; i < inner.length; i++) {\n    const ch = inner[i];\n    if (quote) {\n      current += ch;\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') {\n      quote = ch;\n      current += ch;\n    } else if (ch === ',') {\n      items.push(current.trim());\n      current = '';\n    } else {\n      current += ch;\n    }\n  }\n  if (quote) return null;\n  if (current.trim() !== '') items.push(current.trim());\n  return items\n    .map((item) => (item === '' ? null : (unquoteYamlScalar(item) ?? item)))\n    .filter((item): item is string => item !== null);",
+        "flowListCloseIndex": "\n  return stripYamlComment(line).lastIndexOf(']');"
+      }
+    },
+    {
+      "blob": "3798a1f625214f51b8afc1fe4f0e1a3aa3041206",
+      "snippets": {
+        "stripYamlComment": "\n  let quote: string | null = null;\n  for (let i = 0; i < rest.length; i++) {\n    const ch = rest[i];\n    if (quote) {\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') quote = ch;\n    else if (ch === '#' && (i === 0 || /\\s/.test(rest[i - 1]))) return rest.slice(0, i);\n  }\n  return rest;",
+        "parseFlowList": "\n  const trimmed = stripYamlComment(rest).trim();\n  if (!trimmed.startsWith('[') || !trimmed.endsWith(']')) return null;\n  const inner = trimmed.slice(1, -1);\n  if (inner.includes('[') || inner.includes(']')) return null;\n  const items: string[] = [];\n  let current = '';\n  let quote: string | null = null;\n  for (let i = 0; i < inner.length; i++) {\n    const ch = inner[i];\n    if (quote) {\n      current += ch;\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') {\n      quote = ch;\n      current += ch;\n    } else if (ch === ',') {\n      items.push(current.trim());\n      current = '';\n    } else {\n      current += ch;\n    }\n  }\n  if (quote) return null;\n  if (current.trim() !== '') items.push(current.trim());\n  return items\n    .map((item) => (item === '' ? null : (unquoteYamlScalar(item) ?? item)))\n    .filter((item): item is string => item !== null);",
+        "flowListCloseIndex": "\n  return stripYamlComment(line).lastIndexOf(']');"
+      }
+    },
+    {
+      "blob": "59157b00b13eda6602c372e2bf15680607778604",
+      "snippets": {
+        "stripYamlComment": "\n  let quote: string | null = null;\n  for (let i = 0; i < rest.length; i++) {\n    const ch = rest[i];\n    if (quote) {\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') quote = ch;\n    else if (ch === '#' && (i === 0 || /\\s/.test(rest[i - 1]))) return rest.slice(0, i);\n  }\n  return rest;",
+        "parseFlowList": "\n  const trimmed = stripYamlComment(rest).trim();\n  if (!trimmed.startsWith('[') || !trimmed.endsWith(']')) return null;\n  const inner = trimmed.slice(1, -1);\n  if (inner.includes('[') || inner.includes(']')) return null;\n  const items: string[] = [];\n  let current = '';\n  let quote: string | null = null;\n  for (let i = 0; i < inner.length; i++) {\n    const ch = inner[i];\n    if (quote) {\n      current += ch;\n      if (ch === quote) quote = null;\n      continue;\n    }\n    if (ch === \"'\" || ch === '\"') {\n      quote = ch;\n      current += ch;\n    } else if (ch === ',') {\n      items.push(current.trim());\n      current = '';\n    } else {\n      current += ch;\n    }\n  }\n  if (quote) return null;\n  if (current.trim() !== '') items.push(current.trim());\n  return items\n    .map((item) => (item === '' ? null : (unquoteYamlScalar(item) ?? item)))\n    .filter((item): item is string => item !== null);",
+        "flowListCloseIndex": null
+      }
+    }
+  ]
+}

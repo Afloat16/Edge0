@@ -1,0 +1,97 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/integrations/aider-sync.test.ts:
+(pass) Aider sync against the real worker routes > saves a note via POST /api/memory/save and retrieves session memory via aider sync [695.02ms]
+
+tests/integrations/aider-config.test.ts:
+(pass) upsertAiderReadEntry > creates a managed read block in an empty config [0.89ms]
+(pass) upsertAiderReadEntry > appends the managed block after existing keys, preserving order and comments [0.16ms]
+(pass) upsertAiderReadEntry > inserts into an existing block list after the last item [0.36ms]
+(pass) upsertAiderReadEntry > column-zero block list items are recognised and keep their indentation [0.32ms]
+(pass) upsertAiderReadEntry > column-zero list followed by another key inserts before that key [0.14ms]
+(pass) upsertAiderReadEntry > re-install is byte-identical (idempotent) [0.19ms]
+(pass) upsertAiderReadEntry > managed-block re-install replaces the block, never duplicates it [0.38ms]
+(pass) upsertAiderReadEntry > a user-added entry for the same file is left alone [0.13ms]
+(pass) upsertAiderReadEntry > appends inside a flow list, preserving the other entries [0.39ms]
+(pass) upsertAiderReadEntry > a flow list with a trailing comma does not gain a second comma [0.66ms]
+(pass) upsertAiderReadEntry > a flow list entry goes before the closing bracket, not into a trailing comment [0.12ms]
+(pass) upsertAiderReadEntry > flow list already containing the file is unchanged [0.05ms]
+(pass) upsertAiderReadEntry > converts a scalar read entry to a block list, preserving the scalar [0.04ms]
+(pass) upsertAiderReadEntry > converts a quoted scalar, keeping its quoting [0.11ms]
+(pass) upsertAiderReadEntry > converting a scalar keeps its trailing comment on the original entry [0.03ms]
+(pass) upsertAiderReadEntry > a commented-out read key is ignored, not merged into [0.04ms]
+(pass) upsertAiderReadEntry > a nested read key under another mapping is ignored [0.09ms]
+(pass) upsertAiderReadEntry > duplicate top-level read keys throw instead of guessing [0.53ms]
+(pass) upsertAiderReadEntry > an unclosed flow list throws [0.08ms]
+(pass) upsertAiderReadEntry > a mapping value under read throws [0.04ms]
+(pass) upsertAiderReadEntry > tab indentation in the read list throws [0.10ms]
+(pass) upsertAiderReadEntry > inconsistent list indentation throws [0.22ms]
+(pass) upsertAiderReadEntry > BOM is stripped and the merge still works [0.08ms]
+(pass) upsertAiderReadEntry > CRLF line endings are preserved [0.18ms]
+(pass) upsertAiderReadEntry > realistic fixture: keys, comments and Windows path preserved [0.60ms]
+(pass) upsertAiderReadEntry > flow-list fixture merges inside the brackets [0.28ms]
+(pass) upsertAiderReadEntry > scalar fixture converts to a block list [0.31ms]
+(pass) removeAiderReadEntry > removes a managed block and restores the original byte-for-byte [0.58ms]
+(pass) removeAiderReadEntry > removes only the managed entry from a user list [0.16ms]
+(pass) removeAiderReadEntry > leaves an entry without the managed marker alone [0.40ms]
+(pass) removeAiderReadEntry > removes an installer-added flow entry and restores the original [0.54ms]
+(pass) removeAiderReadEntry > removes an installer-added flow entry with a trailing comment, keeping the comment [0.39ms]
+(pass) removeAiderReadEntry > leaves a user-written flow entry alone [0.19ms]
+(pass) removeAiderReadEntry > no entry to remove returns null [0.12ms]
+(pass) removeAiderReadEntry > a scalar read of the memory file is not ours to remove [0.08ms]
+(pass) hasAiderReadEntry > detects managed block, list, flow and scalar forms [0.45ms]
+(pass) installAiderConfigFile > first install writes the block and backs up owner-only [3.28ms]
+(pass) installAiderConfigFile > second install is a no-op and writes no second backup [2.12ms]
+(pass) installAiderConfigFile > creates the config when none exists [1.44ms]
+(pass) installAiderConfigFile > malformed config throws and the file stays untouched [0.28ms]
+  Aider context: not installed
+  Aider context: installed (/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-WCdIcl/.aider.conf.yml)
+  Memory file: /workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-WCdIcl/.claude-mem/aider-memory.md
+  Removed claude-mem entry from /workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-WCdIcl/.aider.conf.yml
+  Memory file left untouched and still excluded from git. Delete .claude-mem/aider-memory.md yourself if you no longer want it, then run uninstall again to drop the exclude line.
+  Aider context: not installed
+(pass) install / status / uninstall (integration) > install creates config + placeholder memory file; status flips; uninstall restores [21.56ms]
+(pass) install / status / uninstall (integration) > install with noAutoStart uses a running worker without probing to start one [81.22ms]
+(pass) install / status / uninstall (integration) > install refreshes the memory file when the worker answers [8.34ms]
+(pass) install / status / uninstall (integration) > install succeeds with the placeholder when the worker is down [6.93ms]
+(pass) install / status / uninstall (integration) > install refuses a malformed config and returns 1 with the file untouched [0.36ms]
+(pass) install / status / uninstall (integration) > secret leakage: keys survive in the file and never appear in console output [11.14ms]
+  No .aider.conf.yml found; nothing to uninstall
+(pass) install / status / uninstall (integration) > uninstall with no config is a no-op success [0.32ms]
+  Refreshed Aider memory from project aider-install-test-dfQ7gX (/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-dfQ7gX/.claude-mem/aider-memory.md)
+  Refreshed Aider memory from project aider-install-test-dfQ7gX (/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-dfQ7gX/.claude-mem/aider-memory.md)
+(pass) refreshAiderMemoryFile > writes fetched context into the managed block, preserving user notes [9.09ms]
+  Refreshed Aider memory from project parent-proj/feature-wt (/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-worktree-test-rvHbwC/feature-wt/.claude-mem/aider-memory.md)
+(pass) refreshAiderMemoryFile > refresh asks the worker for every project the checkout reads, not just the primary [33.78ms]
+(pass) refreshAiderMemoryFile > worker failure returns 1 and leaves the file untouched [3.59ms]
+  No context yet — run `npx claude-mem aider sync` again after your first session.
+(pass) refreshAiderMemoryFile > empty context is a no-op success, not a wipe [3.90ms]
+(pass) handleAiderCommand > unknown subcommand prints usage and returns 1 [0.30ms]
+(pass) handleAiderCommand > no subcommand prints usage and returns 0 [0.16ms]
+(pass) opt-in, per-project only > the global installer does not offer Aider: it is not in the detected agent list [27.00ms]
+(pass) opt-in, per-project only > --help after a verb prints usage and changes nothing [7.57ms]
+(pass) opt-in, per-project only > refuses to install or sync when the project folder is the home directory [73.23ms]
+(pass) keeps the memory file out of git > install adds one exclude line, keeps user lines, and git status does not list the memory file [27.34ms]
+(pass) keeps the memory file out of git > uninstall keeps the exclude line while the memory file exists, then removes only that line [25.67ms]
+(pass) keeps the memory file out of git > outside a git repo install still succeeds and says nothing was excluded [9.75ms]
+
+tests/integrations/aider-flow-scalars.test.ts:
+(pass) Aider flow-list file paths > preserves a plain apostrophe through install and uninstall [3.33ms]
+(pass) Aider flow-list file paths > preserves a plain embedded quote through install and uninstall [0.37ms]
+(pass) Aider flow-list file paths > preserves a quoted brackets through install and uninstall [0.33ms]
+(pass) Aider flow-list file paths > preserves a escaped double quotes through install and uninstall [0.33ms]
+(pass) Aider flow-list file paths > preserves a doubled single quote through install and uninstall [0.22ms]
+(pass) Aider flow-list file paths > preserves a quoted comma control through install and uninstall [0.27ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: [[nested.md], NOTES.md]
+ [0.18ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: [docs/[team].md, NOTES.md]
+ [0.04ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: ["unterminated.md, NOTES.md]
+ [0.02ms]
+(pass) Aider flow-list file paths > still refuses unsupported or unclosed flow syntax: read: ["docs/\x5bteam].md", NOTES.md]
+ [0.19ms]
+
+ 70 pass
+ 0 fail
+ 225 expect() calls
+Ran 70 tests across 3 files. [1181.00ms]

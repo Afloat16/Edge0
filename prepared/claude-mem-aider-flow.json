@@ -1,0 +1,118 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "branch": "fix/aider-flow-scalars-20261116",
+  "head": "7536d3f3a4984f223890e2c3b4b24c621182dc4d",
+  "base": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+  "tree": "23e04554c56373a4590db707a1b5356664ddecd6",
+  "title": "fix(aider): preserve quoted file paths in flow lists",
+  "body": "## Problem\n\nThe Aider installer treats every quote as a string delimiter and rejects brackets even inside quoted paths. Valid single-line `read:` lists such as `[docs/user's-guide.md, NOTES.md]` and `['docs/[team].md', NOTES.md]` therefore cannot be installed. An escaped quote followed by a comma is worse: uninstall can split one existing filename into two different entries.\n\n## Change\n\nTrack scalar boundaries and escaped/doubled quotes when locating comments and flow-list separators. Brackets inside quoted filenames remain literal; nested lists, unclosed strings and unsupported quoted escapes are refused before rewriting. The existing text merge keeps other settings and trailing comments intact. Rebuild the installed worker bundle and source map.\n\n## Validation\n\n- 70 related Aider tests pass, including 10 new regression/control cases. On the unchanged source, 5 of those cases fail.\n- `npm run typecheck` and `npm run build` pass.\n- Actual built CLI install, repeated install, status and uninstall exercised against a local HTTP context fixture, with ConfigArgParse 1.7.1 / PyYAML 6.0.3 using Aider 0.86.2's `YAMLConfigFileParser` and `--read` append option. The original bundle refuses 4 valid cases and corrupts the original filename on uninstall in 1 case; the rebuilt bundle preserves all 6 native file lists, including the ordinary quoted-comma control. No model calls are needed.\n\nThe scalar-boundary rules follow [YAML flow scalar syntax](https://yaml.org/spec/1.2.2/#73-flow-scalar-styles). The installer retains its limited, single-line text merge.",
+  "published": true,
+  "url": "https://github.com/thedotmack/claude-mem/pull/6231",
+  "number": 6231,
+  "state": "open",
+  "merged": false,
+  "draft": false,
+  "maintainer_can_modify": false,
+  "created_at": "2026-11-16T23:11:07Z",
+  "validation": {
+    "regression_before": {
+      "passed": 5,
+      "failed": 5
+    },
+    "related_after": {
+      "passed": 70,
+      "failed": 0
+    },
+    "typecheck": "success",
+    "build": "success",
+    "native_cli": {
+      "cases": 6,
+      "baseline_install_failures": 4,
+      "baseline_uninstall_corruptions": 1,
+      "after_cases_passed": 6,
+      "configargparse": "1.7.1",
+      "pyyaml": "6.0.3",
+      "external_model_calls": 0
+    },
+    "dedupe": {
+      "pr_heads": 3452,
+      "fork_branches": 468,
+      "reachable_commits": 16234,
+      "distinct_installer_source_blobs": 3,
+      "exact_equivalent_found": false
+    }
+  },
+  "official_ci": [
+    {
+      "id": 43977034891,
+      "name": "Windows",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_number": 8117,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/logs",
+      "workflow_id": 268562650,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
+    },
+    {
+      "id": 43977034970,
+      "name": "CI",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_number": 8097,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/logs",
+      "workflow_id": 285261453,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
+    },
+    {
+      "id": 43977034876,
+      "name": "Native ODS integration",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 60,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/logs",
+      "workflow_id": 392578694,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
+    }
+  ],
+  "production_files": [
+    {
+      "path": "src/services/integrations/AiderInstaller.ts",
+      "mode": "100644",
+      "bytes": 30298,
+      "utf16_length": 30264,
+      "git_blob": "d1bd7827042da4e30153031ad264e8eb4a80f9b5",
+      "sha256": "2b36f1d92ec879dddb9a5944248145aee38fde308419a2b234d2fc861dd8f4c7",
+      "codepoint_length": 30264
+    },
+    {
+      "path": "tests/integrations/aider-flow-scalars.test.ts",
+      "mode": "100644",
+      "bytes": 2201,
+      "utf16_length": 2201,
+      "git_blob": "b4379b7a4b7de0f61ac808505ddf6bb391544dde",
+      "sha256": "f2fd185c77926032f0746dc4545af3e95d3c5d02ee58f136f55001e628741456",
+      "codepoint_length": 2201
+    },
+    {
+      "path": "plugin/scripts/worker-service.cjs",
+      "mode": "100755",
+      "bytes": 5301455,
+      "utf16_length": 5301367,
+      "git_blob": "94aeb0615649953ae5391155e5702c57da9fdb44",
+      "sha256": "58f5eaa2503bd88844e0c046a83c3a7c0a5f27b611b26f244b84c8a8fb8870f5",
+      "codepoint_length": 5301367
+    },
+    {
+      "path": "plugin/scripts/worker-service.cjs.map",
+      "mode": "100644",
+      "bytes": 5665251,
+      "utf16_length": 5665251,
+      "git_blob": "2cd3fa0a3a76d9b25f9d0700064a8362be04a624",
+      "sha256": "3d2e0b12e990bf95446382298398f6d31b44cdacd7fad2cba8cb92c4328d22f8",
+      "codepoint_length": 5665251
+    }
+  ]
+}
