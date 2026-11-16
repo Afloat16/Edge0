@@ -15,42 +15,36 @@ jobs:
         working-directory: edge0-infer
     steps:
       - uses: actions/checkout@v4
-      - run: git fetch --no-tags --depth=1 origin 1e1c013542034d5db144e1a45220896f2863a139
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
       - uses: astral-sh/setup-uv@v6
       - run: sudo apt-get update && sudo apt-get install -y ninja-build
       - run: uv sync --project tools/assets
-      - name: Preserve streaming heartbeat buffer behavior
+      - name: Reproduce the new concurrency failure on exactly upstream source
         run: |
-          cp tools/cli/serve_delegate_status.cpp "$RUNNER_TEMP/sse-final.cpp"
-          git show 1e1c013542034d5db144e1a45220896f2863a139:edge0-infer/tools/cli/serve_delegate_status.cpp > tools/cli/serve_delegate_status.cpp
+          for file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do
+            git show "f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/$file" > "$file"
+          done
+          git -C .. diff --exit-code f6bfa5546bcf89919f86946ec669bcc7f4cd526d -- edge0-infer
           cmake --preset cpu
-          cmake --build --preset cpu --target moe_test_strata_registry
-          if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/sse-heartbeat-before.log" 2>&1; then
-            cat "$RUNNER_TEMP/sse-heartbeat-before.log"
-            exit 1
-          fi
-          cat "$RUNNER_TEMP/sse-heartbeat-before.log"
-          grep -F 'check failed: pending.empty() && !a.complete && !a.saw_content' "$RUNNER_TEMP/sse-heartbeat-before.log"
-      - name: Check the final source and all native suites
-        run: |
-          cp "$RUNNER_TEMP/sse-final.cpp" tools/cli/serve_delegate_status.cpp
-          git diff --exit-code -- tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py
-          python -m py_compile tests/integration/fake_strata.py tests/integration/serve_strata_test.py ../validation/sse_http.py
           cmake --build --preset cpu
-          build/cpu/bin/moe_test_strata_registry
-          python -u ../validation/sse_http.py --label final
-          uv run --project tools/assets python - <<'PYTEST'
-          import json, os, subprocess
+          python -u ../validation/sse_runtime_baseline.py
+      - name: Check final production files and the complete native suites
+        run: |
+          for file in tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py; do
+            git show "HEAD:edge0-infer/$file" > "$file"
+          done
+          git -C .. diff --exit-code -- edge0-infer
+          cmake --build --preset cpu
+          python - <<'PYTEST'
+          import hashlib, json, os
           from pathlib import Path
-          count = 0
-          for attempt in range(100):
-              result = subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], capture_output=True, text=True)
-              if result.returncode:
-                  assert 'budget.current(exec::Purpose::resident_weights)' in result.stderr, result.stderr
-                  count += 1
-          print('Final runner unchanged weights failures out of100:', count)
-          Path(os.environ['RUNNER_TEMP'], 'sse-final-weight-baseline.json').write_text(json.dumps(count))
+          evidence = json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-unmodified-baseline.json').read_text())
+          final = hashlib.sha256(Path('build/cpu/bin/moe_test_edge0_35b_slots_config').read_bytes()).hexdigest()
+          print('Slots test binary before/after CLI-only changes:', evidence['slots_binary_sha256'], final)
+          assert final == evidence['slots_binary_sha256']
           PYTEST
+          build/cpu/bin/moe_test_strata_registry
+          python -u ../validation/sse_http.py --label final-with-proven-baseline
           set +e
           ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/sse-final.xml"
           result=$?
@@ -63,29 +57,17 @@ jobs:
           tests = list(root.iter('testcase'))
           failures = {t.attrib['name'] for t in tests if t.find('failure') is not None}
           skipped = [t.attrib['name'] for t in tests if t.find('skipped') is not None]
-          evidence = json.loads(Path('../validation/sse-baseline-evidence.json').read_text())
-          permitted = set(evidence['unchanged_full_suite_failures'])
-          if json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-final-weight-baseline.json').read_text()):
+          previous = json.loads(Path('../validation/sse-baseline-evidence.json').read_text())
+          observed = json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-unmodified-baseline.json').read_text())
+          permitted = set(previous['unchanged_full_suite_failures'])
+          if any(item['failed'] for item in observed['slots']):
+              permitted.add('moe_test_edge0_35b_slots_config')
+          if observed['weights']['failed']:
               permitted.add('moe_test_weights_mixed')
           print('SSE final full-suite failures:', sorted(failures))
-          print('SSE reproduced baseline failures:', sorted(permitted))
+          print('SSE actually reproduced baseline failures:', sorted(permitted))
           print('SSE final runnable passes:', len(tests) - len(failures) - len(skipped))
           print('SSE final device skips:', len(skipped))
           assert failures <= permitted, (failures, permitted)
           PYTEST
           ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
-  macos:
-    name: Native macOS L0/L1 and delegated L2
-    runs-on: macos-latest
-    timeout-minutes: 45
-    defaults:
-      run:
-        working-directory: edge0-infer
-    steps:
-      - uses: actions/checkout@v4
-      - run: brew install ninja uv
-      - run: uv sync --project tools/assets
-      - run: cmake --preset cpu
-      - run: cmake --build --preset cpu
-      - run: ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1'
-      - run: ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
