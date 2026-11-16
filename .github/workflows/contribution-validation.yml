@@ -25,6 +25,18 @@ jobs:
           done
           cmake --preset cpu
           cmake --build --preset cpu
+          uv run --project tools/assets python - <<'PYTEST'
+          import json, os, subprocess
+          failures = []
+          for attempt in range(100):
+              result = subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], capture_output=True, text=True)
+              if result.returncode:
+                  failures.append({'attempt': attempt, 'stdout': result.stdout, 'stderr': result.stderr})
+          print('Unmodified upstream weights_mixed baseline failures:', len(failures), '/ 100')
+          print(json.dumps(failures))
+          with open(os.path.join(os.environ['RUNNER_TEMP'], 'weights-baseline.json'), 'w') as handle:
+              json.dump(failures, handle)
+          PYTEST
           if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/errors-unit-before.log" 2>&1; then exit 1; fi
           cat "$RUNNER_TEMP/errors-unit-before.log"
           grep -F 'check failed: stop_reason(failed.finish) == "failed"' "$RUNNER_TEMP/errors-unit-before.log"
@@ -52,11 +64,14 @@ jobs:
           set -e
           echo "full-suite exit: $after"
           uv run --project tools/assets python - <<'PYTEST'
-          import os, xml.etree.ElementTree as ET
+          import json, os, xml.etree.ElementTree as ET
           root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'errors-after.xml'))
           failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
           expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'}
-          print('remaining pre-existing upstream failures:', sorted(failures))
-          assert failures == expected, (failures, expected)
+          baseline = json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'weights-baseline.json')))
+          permitted = expected | ({'moe_test_weights_mixed'} if baseline else set())
+          print('Full-suite failures:', sorted(failures))
+          print('Previously reproduced baseline failures:', sorted(permitted))
+          assert expected <= failures <= permitted, (failures, permitted)
           PYTEST
           ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
