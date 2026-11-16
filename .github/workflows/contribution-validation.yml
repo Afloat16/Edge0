@@ -1,0 +1,62 @@
+name: Delegated stream error validation
+on:
+  push:
+    branches: [validation/delegated-stream-errors-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: astral-sh/setup-uv@v6
+      - run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - run: uv sync --project tools/assets
+      - name: Reproduce upstream error-recording failures
+        run: |
+          for file in serve_delegate_status.h serve_delegate_status.cpp serve_delegate_proxy.cpp; do
+            cp "tools/cli/$file" "$RUNNER_TEMP/$file"
+            git show "f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/tools/cli/$file" > "tools/cli/$file"
+          done
+          cmake --preset cpu
+          cmake --build --preset cpu
+          if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/errors-unit-before.log" 2>&1; then exit 1; fi
+          cat "$RUNNER_TEMP/errors-unit-before.log"
+          grep -F 'check failed: stop_reason(failed.finish) == "failed"' "$RUNNER_TEMP/errors-unit-before.log"
+          if uv run --project tools/assets python -u - <<'PYTEST' > "$RUNNER_TEMP/errors-http-before.log" 2>&1
+          import sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tests/integration').resolve()))
+          import serve_strata_test as t
+          with tempfile.TemporaryDirectory() as folder:
+              t.reported_errors(str(Path('build/cpu/bin/edge0-infer').resolve()), Path(folder))
+          PYTEST
+          then exit 1; fi
+          cat "$RUNNER_TEMP/errors-http-before.log"
+          grep -F "'stop_reason': 'unknown', 'code': None" "$RUNNER_TEMP/errors-http-before.log"
+          grep -F 'assert not mismatches, mismatches' "$RUNNER_TEMP/errors-http-before.log"
+      - name: Validate corrected records and unchanged wire responses
+        run: |
+          for file in serve_delegate_status.h serve_delegate_status.cpp serve_delegate_proxy.cpp; do
+            cp "$RUNNER_TEMP/$file" "tools/cli/$file"
+          done
+          cmake --build --preset cpu
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/errors-after.xml"
+          after=$?
+          set -e
+          echo "full-suite exit: $after"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'errors-after.xml'))
+          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
+          expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'}
+          print('remaining pre-existing upstream failures:', sorted(failures))
+          assert failures == expected, (failures, expected)
+          PYTEST
+          ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
