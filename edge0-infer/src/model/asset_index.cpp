@@ -2,26 +2,62 @@
 #include "model/sha256.h"
 #include "gguf.h"
 #include <algorithm>
+#include <cerrno>
 #include <cctype>
 #include <cmath>
+#include <cstdlib>
 #include <cstring>
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <limits>
-#include <locale>
+#include <locale.h>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
+#if defined(__APPLE__)
+#include <xlocale.h>
+#endif
 namespace edge0::model {
 namespace {
 Error invalid(const std::string &file, const std::string &why) {
     return {ErrorCategory::asset_invalid, file + ": " + why};
 }
+// JSON's numeric syntax is independent of the embedding application's locale.
+// Keep a private native locale so strtod's platform range handling is preserved.
+struct JsonNumberLocale {
+#if defined(_WIN32)
+    const _locale_t handle = _create_locale(LC_NUMERIC, "C");
+    ~JsonNumberLocale() { if (handle) _free_locale(handle); }
+#else
+    const locale_t handle = newlocale(LC_NUMERIC_MASK, "C", nullptr);
+    ~JsonNumberLocale() { if (handle) freelocale(handle); }
+#endif
+    JsonNumberLocale() {
+        if (!handle) throw std::runtime_error("cannot create JSON numeric locale");
+    }
+    JsonNumberLocale(const JsonNumberLocale&) = delete;
+    double parse(const std::string& number) const {
+        char* end = nullptr;
+        const int previous_errno = errno;
+        errno = 0;
+#if defined(_WIN32)
+        const double value = _strtod_l(number.c_str(), &end, handle);
+#else
+        const double value = strtod_l(number.c_str(), &end, handle);
+#endif
+        const int error = errno;
+        if (!error) errno = previous_errno;
+        if (error == ERANGE) throw std::out_of_range("JSON number out of range");
+        if (end != number.c_str() + number.size()) throw std::runtime_error("invalid JSON number");
+        return value;
+    }
+};
 // This parser deliberately accepts only the catalog's JSON subset.
 struct Json {
     std::string text;
     std::size_t pos = 0;
+    JsonNumberLocale numeric_locale{};
     void ws() {
         while (pos < text.size() &&
                (text[pos] == ' ' || text[pos] == '\t' || text[pos] == '\n' || text[pos] == '\r'))
@@ -212,13 +248,7 @@ struct Json {
         }
         const auto number = text.substr(start, pos - start);
         try {
-            if (floating) {
-                std::istringstream input(number);
-                input.imbue(std::locale::classic());
-                double value = 0;
-                if (!(input >> value)) return std::monostate{};
-                return value;
-            }
+            if (floating) return numeric_locale.parse(number);
             return std::stoll(number);
         } catch (const std::out_of_range&) {
             // Unknown provider metadata is ignored, even when a valid JSON

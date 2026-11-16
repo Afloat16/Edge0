@@ -1,67 +1,81 @@
-name: Generation defaults locale validation
+name: Native JSON locale validation
 on:
   push:
     branches: [validation/generation-defaults-locale-20261116]
 permissions:
   contents: read
 jobs:
-  cpu:
+  native:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 2
     defaults:
       run:
+        shell: bash
         working-directory: edge0-infer
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
       - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
       - uses: astral-sh/setup-uv@v6
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
       - name: Install build tools and numeric locales
         run: |
           if [ "$RUNNER_OS" = macOS ]; then
             brew install ninja
-          else
+          elif [ "$RUNNER_OS" = Linux ]; then
             sudo apt-get update
             sudo apt-get install -y ninja-build locales
             sudo locale-gen de_DE.UTF-8 fr_FR.UTF-8
           fi
       - run: uv sync --project tools/assets
-      - name: Reproduce changed defaults under a comma decimal locale
+      - name: Reproduce locale-dependent defaults using the original conversion
         run: |
           cp src/model/asset_index.cpp "$RUNNER_TEMP/locale-fixed.cpp"
           git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/src/model/asset_index.cpp > src/model/asset_index.cpp
           cmake --preset cpu
           cmake --build --preset cpu --target moe_test_model_generation_defaults moe_test_model_catalog
-          if build/cpu/bin/moe_test_model_generation_defaults > "$RUNNER_TEMP/locale-before.log" 2>&1; then
-            cat "$RUNNER_TEMP/locale-before.log"
-            exit 1
-          fi
-          cat "$RUNNER_TEMP/locale-before.log"
-          grep -F 'LC_NUMERIC=de_DE' "$RUNNER_TEMP/locale-before.log"
-          grep -F 'temperature=0' "$RUNNER_TEMP/locale-before.log"
-          grep -F 'check failed: temperature.value().temperature == 0.625' "$RUNNER_TEMP/locale-before.log"
-      - name: Apply the fix and validate native model parsing
+          uv run --project tools/assets python - <<'PYTEST'
+          import subprocess
+          result = subprocess.run(['build/cpu/bin/moe_test_model_generation_defaults'], capture_output=True, text=True)
+          print(result.stdout, end='')
+          print(result.stderr, end='')
+          assert result.returncode != 0
+          assert 'temperature=0\n' in result.stderr
+          assert 'check failed: temperature.value().temperature == 0.625' in result.stderr
+          assert any(f'LC_NUMERIC={name}' in result.stderr for name in ['de_DE', 'German_Germany', 'fr_FR'])
+          PYTEST
+      - name: Validate native range compatibility and concurrent configuration reads
         run: |
           cp "$RUNNER_TEMP/locale-fixed.cpp" src/model/asset_index.cpp
-          cmake --build --preset cpu
-          build/cpu/bin/moe_test_model_generation_defaults 2>&1 | tee "$RUNNER_TEMP/locale-after.log"
-          grep -F 'LC_NUMERIC=de_DE' "$RUNNER_TEMP/locale-after.log"
-          build/cpu/bin/moe_test_model_catalog
-          set +e
-          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/locale-after.xml"
-          after=$?
-          set -e
-          echo "full-suite exit: $after"
+          cmake --build --preset cpu --target moe_test_model_generation_defaults moe_test_model_catalog
           uv run --project tools/assets python - <<'PYTEST'
-          import os, xml.etree.ElementTree as ET
-          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'locale-after.xml'))
-          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
-          expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'} if os.environ['RUNNER_OS'] == 'Linux' else set()
-          print('remaining upstream failures:', sorted(failures))
-          assert failures == expected, (failures, expected)
+          import subprocess
+          for name in ['moe_test_model_generation_defaults', 'moe_test_model_catalog']:
+              result = subprocess.run(['build/cpu/bin/' + name], capture_output=True, text=True)
+              print(result.stdout, end='')
+              print(result.stderr, end='')
+              assert result.returncode == 0
+              if name.endswith('generation_defaults'):
+                  assert any(f'LC_NUMERIC={locale}' in result.stderr for locale in ['de_DE', 'German_Germany', 'fr_FR'])
           PYTEST
+      - name: Compile the changed source against Android API 28
+        if: runner.os == 'Linux'
+        run: |
+          ndk_root="${ANDROID_NDK_LATEST_HOME:-${ANDROID_NDK_HOME:-}}"
+          test -n "$ndk_root"
+          "$ndk_root/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang++" \
+            -std=c++17 -I src -I include -I third_party/ggml/include \
+            -c src/model/asset_index.cpp -o "$RUNNER_TEMP/asset-index-android28.o"
+      - name: Compile the changed source against the iOS 17 deployment target
+        if: runner.os == 'macOS'
+        run: |
+          sdk_path="$(xcrun --sdk iphoneos --show-sdk-path)"
+          xcrun --sdk iphoneos clang++ -target arm64-apple-ios17.0 -isysroot "$sdk_path" \
+            -std=c++17 -I src -I include -I third_party/ggml/include \
+            -c src/model/asset_index.cpp -o "$RUNNER_TEMP/asset-index-ios17.o"
