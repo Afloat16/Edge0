@@ -1,0 +1,42 @@
+name: Conversation editing validation
+on:
+  push:
+    branches: [validation/conversation-edit-20261116]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['24.15.0', '26.3.1']
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: edge0-infer/examples/desktop
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci --no-audit --no-fund
+      - name: Reproduce stale editing state with ReactDOM
+        run: |
+          cp src/pages/Chat.tsx "$RUNNER_TEMP/chat-edit-fixed.tsx"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/examples/desktop/src/pages/Chat.tsx > src/pages/Chat.tsx
+          if npm test -- src/chat-editing.test.tsx --reporter=json --outputFile="$RUNNER_TEMP/edit-before.json"; then exit 1; fi
+          node --input-type=module - <<'JSTEST'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const result = JSON.parse(fs.readFileSync(`${process.env.RUNNER_TEMP}/edit-before.json`, 'utf8'));
+          assert.equal(result.numFailedTests, 2);
+          assert.equal(result.numPassedTests, 1);
+          console.log('Reproduced two stale-edit failures; same-conversation control passed.');
+          JSTEST
+      - name: Validate the fix, all frontend tests, and production build
+        run: |
+          cp "$RUNNER_TEMP/chat-edit-fixed.tsx" src/pages/Chat.tsx
+          npm test
+          npm run build
