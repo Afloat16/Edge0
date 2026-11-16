@@ -1,0 +1,44 @@
+name: Desktop SSE completion validation
+on:
+  push:
+    branches: [validation/sse-completion-20261116]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['24.15.0', '26.3.1']
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FORCE_COLOR: '0'
+      EDGE0_VALIDATION_REPOSITORY: ${{ github.workspace }}
+    defaults:
+      run:
+        working-directory: edge0-infer/examples/desktop
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci --no-audit --no-fund
+      - name: Reproduce all four regressions on upstream
+        run: |
+          cp src/chat.ts "$RUNNER_TEMP/chat-fixed.ts"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/examples/desktop/src/chat.ts > src/chat.ts
+          if npm test -- src/chat-completion.test.ts > "$RUNNER_TEMP/sse-before.log" 2>&1; then
+            cat "$RUNNER_TEMP/sse-before.log"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/sse-before.log"
+          grep -F 'Tests  4 failed (4)' "$RUNNER_TEMP/sse-before.log"
+      - name: Validate all frontend tests, build, and real HTTP completion
+        run: |
+          cp "$RUNNER_TEMP/chat-fixed.ts" src/chat.ts
+          npm test
+          npm run build
+          node ../../../validation/sse-http.mjs
