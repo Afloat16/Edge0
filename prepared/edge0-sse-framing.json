@@ -4,7 +4,7 @@
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
   "title": "fix(server): account complete delegated SSE events",
-  "status": "validating_final_native_suites",
+  "status": "validating_runtime_baseline",
   "published": false,
   "files": [
     "edge0-infer/tools/cli/serve_delegate_status.cpp",
@@ -13,10 +13,10 @@
     "edge0-infer/tests/integration/serve_strata_test.py"
   ],
   "validation_branch": "validation/sse-event-framing-20261116",
-  "validation_head": "f8d66d6bef40b6716f8549bb87aa9d241d6484bf",
-  "validation_tree": "6c8d6730cba434a651ab11624328773fd22abba7",
-  "validation_run": 43965538547,
-  "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43965538547",
+  "validation_head": "523a0b1c0206a570783bd49df44cc54e1ad8e8e5",
+  "validation_tree": "f5faacd105c468ba89b3b66ad5ce38c3edfea5a8",
+  "validation_run": 43967469449,
+  "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43967469449",
   "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
   "contract": "Join data fields with LF; dispatch at a blank line; incomplete event data at EOF is not dispatched. Handle LF, CRLF and CR line endings as one event-framing issue.",
   "dedupe": {
@@ -36,7 +36,7 @@
     "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
     "pr255_control": "The existing #255 fix still reproduces all12 HTTP failures; three single-line controls pass."
   },
-  "validation_state": "All source history and original/#255 native HTTP controls completed successfully. Final Linux suite is running and a first normal macOS run is queued; neither is counted passed yet.",
+  "validation_state": "Final targeted native and 15 real HTTP cases pass. The final complete suite exposed a slots_config failure in an untouched test. A new pristine-upstream baseline probe completed its step successfully, but the raw evidence and final full-suite result have not yet been read. macOS was cancelled before running; no macOS success is claimed.",
   "pending_revision": null,
   "production_branch_created": false,
   "first_validation": {
@@ -77,9 +77,37 @@
     "run": 43965538547,
     "url": "https://github.com/Afloat16/Edge0/actions/runs/43965538547",
     "linux_job": 133643890924,
-    "linux_status": "in_progress",
+    "linux_status": "completed",
     "macos_job": 133643891585,
-    "macos_status": "queued"
+    "macos_status": "completed",
+    "linux_conclusion": "failure",
+    "macos_conclusion": "cancelled",
+    "native_regression": "passed",
+    "http_cases_passed": 15,
+    "l0_l1": {
+      "passed": 97,
+      "skipped": 3,
+      "failures": [
+        "moe_test_ordered_json",
+        "moe_test_platform_memory",
+        "moe_test_template_tools",
+        "moe_test_edge0_35b_slots_config"
+      ]
+    },
+    "new_failure": "Untouched slots_config assertion not yet classified; pristine-upstream reproduction is running.",
+    "l2": "not_run_after_l0_l1_failure",
+    "log": "validation-evidence/sse-second-native-linux.log"
   },
-  "revision_reason": "Keep ignored fields and comment-only heartbeats from accumulating while no data event is pending; add a100-iteration native regression. Final job first reproduced the provisional version's buffer retention, then tests the corrected production files."
+  "revision_reason": "Keep ignored fields and comment-only heartbeats from accumulating while no data event is pending; add a100-iteration native regression. Final job first reproduced the provisional version's buffer retention, then tests the corrected production files.",
+  "baseline_resolution_validation": {
+    "head": "523a0b1c0206a570783bd49df44cc54e1ad8e8e5",
+    "tree": "f5faacd105c468ba89b3b66ad5ce38c3edfea5a8",
+    "run": 43967469449,
+    "url": "https://github.com/Afloat16/Edge0/actions/runs/43967469449",
+    "linux_job": 133650571284,
+    "status": "in_progress",
+    "pristine_baseline_step": "success; raw evidence and exact counts pending completed log retrieval",
+    "production_files": "Identical four production files to f8d66d6bef40b6716f8549bb87aa9d241d6484bf",
+    "macos": "The previous job was cancelled before steps ran; this Linux-only diagnostic run does not start another macOS job."
+  }
 }
