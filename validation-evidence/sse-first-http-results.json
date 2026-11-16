@@ -1,0 +1,414 @@
+[
+  {
+    "label": "original",
+    "failures": [
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "unknown",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": true,
+        "appended_bytes": ""
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "unknown",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": true,
+        "appended_bytes": ""
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\ndata: {\"error\":{\"message\":\"edge0-strata did not finish its response\",\"type\":\"server_error\",\"param\":null,\"code\":\"engine_unavailable\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_3077f203eef4cc6463784ea8\",\"object\":\"response\",\"created_at\":1794866004,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_dbcf63079c532252f654b9ef\",\"object\":\"response\",\"created_at\":1794866005,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_566a0148d4436dbd5dcfa64e\",\"object\":\"response\",\"created_at\":1794866006,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      }
+    ]
+  },
+  {
+    "label": "existing-pr255",
+    "failures": [
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "unknown",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": true,
+        "appended_bytes": ""
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "unknown",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": true,
+        "appended_bytes": ""
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\ndata: {\"error\":{\"message\":\"edge0-strata did not finish its response\",\"type\":\"server_error\",\"param\":null,\"code\":\"engine_unavailable\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/chat/completions",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 7,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_09f2634de3e55565bf6d0d37\",\"object\":\"response\",\"created_at\":1794866078,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_94d98b40cee4a98f66836c17\",\"object\":\"response\",\"created_at\":1794866079,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: response.failed\ndata: {\"response\":{\"id\":\"resp_bd5e08038a66be45bd50383e\",\"object\":\"response\",\"created_at\":1794866080,\"model\":\"edge0_145b\",\"status\":\"failed\",\"output\":[],\"error\":{\"code\":\"engine_unavailable\",\"message\":\"edge0-strata did not finish its response\"},\"incomplete_details\":null,\"usage\":null,\"store\":false,\"parallel_tool_calls\":true,\"tools\":[],\"tool_choice\":\"auto\",\"reasoning\":{\"effort\":null,\"summary\":null},\"text\":{\"format\":{\"type\":\"text\"}}},\"type\":\"response.failed\",\"sequence_number\":0}\n\n"
+      },
+      {
+        "endpoint": "/v1/responses",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_lf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_crlf",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "multiline_cr",
+        "expected": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "actual": {
+          "http_status": 502,
+          "stop_reason": "failed",
+          "input_tokens": null,
+          "generated_tokens": null
+        },
+        "wire_unchanged": false,
+        "appended_bytes": "\n\nevent: error\ndata: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"edge0-strata did not finish its response\"}}\n\n"
+      },
+      {
+        "endpoint": "/v1/messages",
+        "case": "no_final_blank_line",
+        "expected": "incomplete event must not finish the request",
+        "actual": {
+          "http_status": 200,
+          "stop_reason": "end_of_generation",
+          "input_tokens": 10,
+          "generated_tokens": 8
+        },
+        "code": null,
+        "wire_unchanged": true
+      }
+    ]
+  }
+]

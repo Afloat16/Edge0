@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T21:54:49Z",
+  "updated": "2026-11-16T22:01:51Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -948,7 +948,7 @@
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
       "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
       "title": "fix(server): account complete delegated SSE events",
-      "status": "validating_native_http",
+      "status": "validating_final_native_suites",
       "published": false,
       "files": [
         "edge0-infer/tools/cli/serve_delegate_status.cpp",
@@ -957,10 +957,10 @@
         "edge0-infer/tests/integration/serve_strata_test.py"
       ],
       "validation_branch": "validation/sse-event-framing-20261116",
-      "validation_head": "1e1c013542034d5db144e1a45220896f2863a139",
-      "validation_tree": "34ff61a53988f4dfa615a3c9aae2fb2a7a7cae7c",
-      "validation_run": 43963750094,
-      "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094",
+      "validation_head": "f8d66d6bef40b6716f8549bb87aa9d241d6484bf",
+      "validation_tree": "6c8d6730cba434a651ab11624328773fd22abba7",
+      "validation_run": 43965538547,
+      "validation_url": "https://github.com/Afloat16/Edge0/actions/runs/43965538547",
       "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
       "contract": "Join data fields with LF; dispatch at a blank line; incomplete event data at EOF is not dispatched. Handle LF, CRLF and CR line endings as one event-framing issue.",
       "dedupe": {
@@ -978,11 +978,54 @@
         "review": "Read both distinct historical parser bodies; each parses individual data lines and erases them immediately. All historical proxy variants pass raw chunks directly to account_sse. No equivalent event grouping fix was found.",
         "pr249_native_parser_blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
         "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
-        "pr255_control": "Native HTTP control with the old diagnostic fix is running."
+        "pr255_control": "The existing #255 fix still reproduces all12 HTTP failures; three single-line controls pass."
       },
-      "validation_state": "Original-source native/HTTP baseline step completed as expected; prior-PR control and corrected suites still running.",
-      "pending_revision": "Read-only review found comment-only heartbeats should be discarded promptly while no data event is pending. A small corrective refinement and regression are staged but have not been committed or validated.",
-      "production_branch_created": false
+      "validation_state": "All source history and original/#255 native HTTP controls completed successfully. Final Linux suite is running and a first normal macOS run is queued; neither is counted passed yet.",
+      "pending_revision": null,
+      "production_branch_created": false,
+      "first_validation": {
+        "run": 43963750094,
+        "job": 133637634704,
+        "head": "1e1c013542034d5db144e1a45220896f2863a139",
+        "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094/job/133637634704",
+        "unchanged_full_suite_failures": [
+          "moe_test_ordered_json",
+          "moe_test_platform_memory",
+          "moe_test_template_tools"
+        ],
+        "original_new_native_regression": "framed.streamed_tokens == c.fragments fails",
+        "original_http_failures": 12,
+        "old_pr255_http_failures": 12,
+        "fixed_http_cases_passed": 15,
+        "fixed_l0_l1": {
+          "passed": 98,
+          "skipped": 3,
+          "baseline_failures": 3
+        },
+        "fixed_l2_passed": 2,
+        "unchanged_weights_probe": {
+          "failed": 14,
+          "attempts": 100
+        },
+        "conclusion": "success",
+        "history_job": 133637634318,
+        "history_conclusion": "success",
+        "log": "validation-evidence/sse-first-native-http.log",
+        "baseline_results": "validation-evidence/sse-first-http-results.json"
+      },
+      "final_validation": {
+        "branch": "validation/sse-event-framing-20261116",
+        "head": "f8d66d6bef40b6716f8549bb87aa9d241d6484bf",
+        "tree": "6c8d6730cba434a651ab11624328773fd22abba7",
+        "run": 43965538547,
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43965538547",
+        "linux_job": 133643890924,
+        "linux_status": "in_progress",
+        "macos_job": 133643891585,
+        "macos_status": "queued"
+      },
+      "revision_reason": "Keep ignored fields and comment-only heartbeats from accumulating while no data event is pending; add a100-iteration native regression. Final job first reproduced the provisional version's buffer retention, then tests the corrected production files."
     }
   ],
   "dedupe": {
@@ -3865,7 +3908,7 @@
     "linux_memory_test": "Published #257; official macOS run43955882674/job133610175032 passed 101 runnable L0/L1, 3 device skips and 2 L2 tests.",
     "native_locale": "Prepared only; no PR. Targeted native Linux/Windows comparisons and Android API28 compile passed. Full Linux run43958711925/job133620460669 failed a new check_layers rejection for locale.h/xlocale.h in the model layer; 97 passes,3 skips,4 failures. Three remaining failures were reproduced in baseline, and original weights failed4/100. Mac job cancelled; iOS compile not run. Header/dependency policy unchanged; upstream Draft create returned403 once. Existing permitted module interfaces expose no equivalent conversion helper; the model JSON serializer intentionally uses a different underflow contract. Compatible design or upstream architecture agreement remains outstanding.",
     "sse_multiline_events": {
-      "status": "validating_native_http_and_full_suites",
+      "status": "final_validation",
       "counted": false,
       "production_change_created": false,
       "source_head": "b894877cd2a14d6593061f7fb121432249943af8",
@@ -3876,16 +3919,16 @@
       "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
       "suspected_effect": "A valid event whose JSON spans multiple data fields is parsed per-line, so terminal state and usage can be missed; proxy EOF handling may then append an engine_unavailable error.",
       "remaining": [
-        "Inspect completed native HTTP logs and full-suite results",
-        "Validate the heartbeat buffer refinement on the final production files",
-        "Create independent production branch only after final checks; no upstream PR yet"
+        "Read final Linux and macOS results",
+        "Refresh intervening PR/fork heads before publication",
+        "Create the independently reviewed production branch and PR or complete prefilled fallback"
       ],
       "validation": {
         "branch": "validation/sse-event-framing-20261116",
-        "head": "1e1c013542034d5db144e1a45220896f2863a139",
-        "tree": "34ff61a53988f4dfa615a3c9aae2fb2a7a7cae7c",
-        "run": 43963750094,
-        "url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094"
+        "head": "f8d66d6bef40b6716f8549bb87aa9d241d6484bf",
+        "tree": "6c8d6730cba434a651ab11624328773fd22abba7",
+        "run": 43965538547,
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43965538547"
       },
       "history_verified": {
         "all_author_prs": 126,
@@ -3903,7 +3946,39 @@
         "pr249_native_parser_blob": "64312a2ab51cc81411ee131eacc628fe9231cd43",
         "pr249_scope": "Desktop TS terminal lifecycle only; native parser blob identical to upstream.",
         "pr255_control": "Native HTTP control with the old diagnostic fix is running."
-      }
+      },
+      "first_validation": {
+        "run": 43963750094,
+        "job": 133637634704,
+        "head": "1e1c013542034d5db144e1a45220896f2863a139",
+        "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094/job/133637634704",
+        "unchanged_full_suite_failures": [
+          "moe_test_ordered_json",
+          "moe_test_platform_memory",
+          "moe_test_template_tools"
+        ],
+        "original_new_native_regression": "framed.streamed_tokens == c.fragments fails",
+        "original_http_failures": 12,
+        "old_pr255_http_failures": 12,
+        "fixed_http_cases_passed": 15,
+        "fixed_l0_l1": {
+          "passed": 98,
+          "skipped": 3,
+          "baseline_failures": 3
+        },
+        "fixed_l2_passed": 2,
+        "unchanged_weights_probe": {
+          "failed": 14,
+          "attempts": 100
+        },
+        "conclusion": "success",
+        "history_job": 133637634318,
+        "history_conclusion": "success",
+        "log": "validation-evidence/sse-first-native-http.log",
+        "baseline_results": "validation-evidence/sse-first-http-results.json"
+      },
+      "observed": "Original and #255 controls lose counts in all9 valid multi-data streams; Responses/Messages append false in-band engine_unavailable errors. All3 unterminated-event controls are falsely completed. Provisional fix passes all15 HTTP cases; final heartbeat refinement under validation."
     }
   },
   "environment_status": "Local executor and browser unavailable; repository-backed code, logs, proposal and portfolio preserved through GitHub MCP."
