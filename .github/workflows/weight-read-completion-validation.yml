@@ -1,0 +1,64 @@
+name: Weight read completion validation
+on:
+  push:
+    branches: [validation/weight-read-completion-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: astral-sh/setup-uv@v6
+      - run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - run: uv sync --project tools/assets
+      - name: Reproduce retained weight budget after completed reads
+        run: |
+          cp src/weights/runtime.cpp "$RUNNER_TEMP/weights-runtime-fixed.cpp"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/src/weights/runtime.cpp > src/weights/runtime.cpp
+          cmake --preset cpu
+          cmake --build --preset cpu
+          uv run --project tools/assets python - <<'PYTEST'
+          import subprocess
+          reproduced = False
+          for attempt in range(10):
+              result = subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], capture_output=True, text=True)
+              print(f'Baseline attempt {attempt + 1}: exit={result.returncode}')
+              print(result.stdout, end='')
+              print(result.stderr, end='')
+              if result.returncode:
+                  assert 'check failed: retained == 0' in result.stderr, result.stderr
+                  reproduced = True
+                  break
+          assert reproduced, 'Baseline race did not reproduce within 10 stress runs'
+          PYTEST
+      - name: Validate completion releases budget before becoming ready
+        run: |
+          cp "$RUNNER_TEMP/weights-runtime-fixed.cpp" src/weights/runtime.cpp
+          cmake --build --preset cpu
+          uv run --project tools/assets python - <<'PYTEST'
+          import subprocess
+          for attempt in range(10):
+              print(f'Fixed attempt {attempt + 1}', flush=True)
+              subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], check=True)
+          PYTEST
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/weights-after.xml"
+          after=$?
+          set -e
+          echo "full-suite exit: $after"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'weights-after.xml'))
+          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
+          expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'}
+          print('Full-suite failures:', sorted(failures))
+          print('Previously reproduced baseline failures:', sorted(expected))
+          assert failures == expected, (failures, expected)
+          PYTEST
+          ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R '^moe_test_weights_(compute|group_compute)$'
