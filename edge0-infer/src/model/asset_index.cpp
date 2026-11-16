@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <locale>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
@@ -211,7 +212,13 @@ struct Json {
         }
         const auto number = text.substr(start, pos - start);
         try {
-            if (floating) return std::stod(number);
+            if (floating) {
+                std::istringstream input(number);
+                input.imbue(std::locale::classic());
+                double value = 0;
+                if (!(input >> value)) return std::monostate{};
+                return value;
+            }
             return std::stoll(number);
         } catch (const std::out_of_range&) {
             // Unknown provider metadata is ignored, even when a valid JSON

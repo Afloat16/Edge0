@@ -1,0 +1,67 @@
+name: Generation defaults locale validation
+on:
+  push:
+    branches: [validation/generation-defaults-locale-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: astral-sh/setup-uv@v6
+      - name: Install build tools and numeric locales
+        run: |
+          if [ "$RUNNER_OS" = macOS ]; then
+            brew install ninja
+          else
+            sudo apt-get update
+            sudo apt-get install -y ninja-build locales
+            sudo locale-gen de_DE.UTF-8 fr_FR.UTF-8
+          fi
+      - run: uv sync --project tools/assets
+      - name: Reproduce changed defaults under a comma decimal locale
+        run: |
+          cp src/model/asset_index.cpp "$RUNNER_TEMP/locale-fixed.cpp"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/src/model/asset_index.cpp > src/model/asset_index.cpp
+          cmake --preset cpu
+          cmake --build --preset cpu --target moe_test_model_generation_defaults moe_test_model_catalog
+          if build/cpu/bin/moe_test_model_generation_defaults > "$RUNNER_TEMP/locale-before.log" 2>&1; then
+            cat "$RUNNER_TEMP/locale-before.log"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/locale-before.log"
+          grep -F 'LC_NUMERIC=de_DE' "$RUNNER_TEMP/locale-before.log"
+          grep -F 'temperature=0' "$RUNNER_TEMP/locale-before.log"
+          grep -F 'check failed: temperature.value().temperature == 0.625' "$RUNNER_TEMP/locale-before.log"
+      - name: Apply the fix and validate native model parsing
+        run: |
+          cp "$RUNNER_TEMP/locale-fixed.cpp" src/model/asset_index.cpp
+          cmake --build --preset cpu
+          build/cpu/bin/moe_test_model_generation_defaults 2>&1 | tee "$RUNNER_TEMP/locale-after.log"
+          grep -F 'LC_NUMERIC=de_DE' "$RUNNER_TEMP/locale-after.log"
+          build/cpu/bin/moe_test_model_catalog
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/locale-after.xml"
+          after=$?
+          set -e
+          echo "full-suite exit: $after"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          root = ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'locale-after.xml'))
+          failures = {test.attrib['name'] for test in root.iter('testcase') if test.find('failure') is not None}
+          expected = {'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools'} if os.environ['RUNNER_OS'] == 'Linux' else set()
+          print('remaining upstream failures:', sorted(failures))
+          assert failures == expected, (failures, expected)
+          PYTEST

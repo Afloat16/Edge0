@@ -4,6 +4,7 @@
 #include <fstream>
 #include <chrono>
 #include <cstdlib>
+#include <clocale>
 using namespace edge0;
 int main(int argc, char**) {
     if (argc > 1) {
@@ -43,5 +44,27 @@ int main(int argc, char**) {
         auto result = model::read_generation_defaults(root.string());
         CHECK(!result && result.error().category == ErrorCategory::asset_invalid);
     }
+    const std::string original_locale = std::setlocale(LC_NUMERIC, nullptr);
+    for (const auto* locale : {"C", "de_DE.UTF-8", "de_DE.utf8", "fr_FR.UTF-8", "German_Germany.1252"}) {
+        if (!std::setlocale(LC_NUMERIC, locale)) continue;
+        std::cerr << "generation defaults with LC_NUMERIC=" << locale << '\n';
+        { std::ofstream out(root / "generation_config.json"); out << R"({"temperature":0.625})"; }
+        const auto temperature = model::read_generation_defaults(root.string());
+        CHECK(temperature);
+        std::cerr << "temperature=" << temperature.value().temperature.value_or(-1) << '\n';
+        CHECK(temperature.value().temperature == 0.625);
+        for (const auto& text : {
+            R"({"temperature":0.625,"top_p":0.95,"repetition_penalty":1.25,"top_k":20})",
+            R"({"temperature":6.25e-1,"top_p":9.5e-1,"repetition_penalty":1.25e0,"top_k":20})"}) {
+            { std::ofstream out(root / "generation_config.json"); out << text; }
+            const auto result = model::read_generation_defaults(root.string());
+            CHECK(result);
+            CHECK(result.value().temperature == 0.625 && result.value().top_p == 0.95);
+            CHECK(result.value().repetition_penalty == 1.25 && result.value().top_k == 20);
+        }
+        { std::ofstream out(root / "generation_config.json"); out << R"({"temperature":1.8e308})"; }
+        CHECK(!model::read_generation_defaults(root.string()));
+    }
+    CHECK(std::setlocale(LC_NUMERIC, original_locale.c_str()));
     std::filesystem::remove_all(root);
 }
