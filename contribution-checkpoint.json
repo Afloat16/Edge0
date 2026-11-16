@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T21:20:16Z",
+  "updated": "2026-11-16T21:29:12Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -499,7 +499,7 @@
       "title": "fix(model): parse generation defaults independently of numeric locale",
       "batch": 6,
       "repository": "Edge0-AI/Edge0",
-      "status": "prepared_waiting_platform_checks",
+      "status": "prepared_blocked_checks",
       "dedupe": "audit/edge0_defaults_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -547,8 +547,8 @@
       "validation_tree": "8936c745256788c51a0414c8ae83560bb241ea0b",
       "head": "7d42d53669f3c848efad9c2628dba68e0099bc73",
       "tree": "f5c000aba701cbece24d3e4b6479cdd230137b58",
-      "body": "## What & why\n\n`generation_config.json` uses JSON's decimal point, but the native reader converts floating values with `std::stod`, which follows the embedding application's current numeric locale. With a German locale, a valid temperature of `0.625` becomes `0`, changing the sampling configuration.\n\nGive each parser its own C numeric locale and use the platform's locale-specific conversion (`strtod_l` or `_strtod_l`). This keeps the existing native range handling, including underflow and overflow, without changing the process locale. Unknown provider fields continue to be ignored when their numeric values are outside the supported range.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\nThe production branch contains the same two source/test files as validation commit `62855b4e87f5a42a8d3a98954f5bef29308e1c02`.\n\n- [Linux native validation](https://github.com/Afloat16/Edge0/actions/runs/43955376404/job/133608432523): the original implementation fails the real configuration test with German `0.625` becoming `0`; the revised generation-defaults and model-catalog tests pass. The changed source also compiles against Android API 28.\n- [Windows/MSVC native validation](https://github.com/Afloat16/Edge0/actions/runs/43955376404/job/133608432586): the same original-source failure and revised-source success were reproduced with native Windows binaries.\n- The regression compares 13 numeric inputs with that platform's original C-locale `std::stod` behavior, including signed zero, binary64 boundaries, subnormal inputs, underflow and overflow. It also checks ignored provider fields and 800 concurrent configuration reads per available locale, verifying that the process locale remains unchanged.\n- Local Linux: the two affected tests pass in C, German and French locales after reproducing the original failure. Commands: `cmake --build --preset cpu --target moe_test_model_generation_defaults moe_test_model_catalog` and `ctest --preset cpu --output-on-failure -R '^moe_test_model_(generation_defaults|catalog)$'`.\n\nThis is prepared as a draft while platform validation remains incomplete. The macOS native/iOS 17 job was cancelled without a successful validation result. The independent [full Linux L0/L1 comparison](https://github.com/Afloat16/Edge0/actions/runs/43958711925) is queued. Linux and Windows native success does not establish the outstanding macOS/iOS results.\n\n## Checklist\n\n- [ ] Full L0/L1 suite passes.\n- [x] Ran the affected native tests on Linux and Windows.\n- [x] Added locale, range-compatibility and concurrent-read regressions.\n- [x] Reviewed documentation impact: valid JSON generation defaults retain their numeric values independently of the host locale.\n",
-      "validation_state": "linux_windows_success_android28_compiled_macos_cancelled_ios_unverified_full_linux_queued",
+      "body": "## What & why\n\n`generation_config.json` uses JSON's decimal point, but the native reader converts floating values with `std::stod`, which follows the embedding application's current numeric locale. With a German locale, a valid temperature of `0.625` becomes `0`, changing the sampling configuration.\n\nGive each parser its own C numeric locale and use the platform's locale-specific conversion (`strtod_l` or `_strtod_l`). This keeps the existing native range handling, including underflow and overflow, without changing the process locale. Unknown provider fields continue to be ignored when their numeric values are outside the supported range.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\nThe production branch contains the same two source/test files as validation commit `62855b4e87f5a42a8d3a98954f5bef29308e1c02`.\n\n- [Linux native validation](https://github.com/Afloat16/Edge0/actions/runs/43955376404/job/133608432523): the original implementation fails the real configuration test with German `0.625` becoming `0`; the revised generation-defaults and model-catalog tests pass. The changed source also compiles against Android API 28.\n- [Windows/MSVC native validation](https://github.com/Afloat16/Edge0/actions/runs/43955376404/job/133608432586): the same original-source failure and revised-source success were reproduced with native Windows binaries.\n- The regression compares 13 numeric inputs with that platform's original C-locale `std::stod` behavior, including signed zero, binary64 boundaries, subnormal inputs, underflow and overflow. It also checks ignored provider fields and 800 concurrent configuration reads per available locale, verifying that the process locale remains unchanged.\n- Local Linux: the two affected tests pass in C, German and French locales after reproducing the original failure. Commands: `cmake --build --preset cpu --target moe_test_model_generation_defaults moe_test_model_catalog` and `ctest --preset cpu --output-on-failure -R '^moe_test_model_(generation_defaults|catalog)$'`.\n\n**Validation blockers:** This branch is not ready for review. The [complete Linux L0/L1 comparison](https://github.com/Afloat16/Edge0/actions/runs/43958711925/job/133620460669) completed and failed: the revised generation-defaults test passes, but the platform headers added to `src/model/asset_index.cpp` introduce a new `check_layers` failure. The revised suite has 97 runnable passes, 3 device skips and 4 failures. The other three failures (`moe_test_platform_memory`, `moe_test_ordered_json`, `moe_test_template_tools`) were reproduced with the original parser in the same job; the unchanged weights test also failed 4 of 100 baseline repetitions. No source-check rule has been weakened. The macOS native/iOS 17 job was cancelled without a successful validation result, so those platform checks also remain outstanding. Keep this proposal as a draft until these blockers are resolved.\n\n## Checklist\n\n- [ ] Full L0/L1 suite passes.\n- [x] Ran the affected native tests on Linux and Windows.\n- [x] Added locale, range-compatibility and concurrent-read regressions.\n- [x] Reviewed documentation impact: valid JSON generation defaults retain their numeric values independently of the host locale.\n",
+      "validation_state": "new_L0_failure_and_incomplete_macos_ios_validation",
       "published": false,
       "validation_run": 43955376404,
       "intended_draft": true,
@@ -584,16 +584,63 @@
         "final_failure_list_verified": false,
         "reason": "Local full run ended before environment loss, but its final JUnit failure list could not be recovered."
       },
-      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/generation-defaults-locale-20261116?expand=1&title=fix(model)%3A%20parse%20generation%20defaults%20independently%20of%20numeric%20locale&body=%23%23%20What%20%26%20why%0A%0A%60generation_config.json%60%20uses%20JSON's%20decimal%20point%2C%20but%20the%20native%20reader%20converts%20floating%20values%20with%20%60std%3A%3Astod%60%2C%20which%20follows%20the%20embedding%20application's%20current%20numeric%20locale.%20With%20a%20German%20locale%2C%20a%20valid%20temperature%20of%20%600.625%60%20becomes%20%600%60%2C%20changing%20the%20sampling%20configuration.%0A%0AGive%20each%20parser%20its%20own%20C%20numeric%20locale%20and%20use%20the%20platform's%20locale-specific%20conversion%20(%60strtod_l%60%20or%20%60_strtod_l%60).%20This%20keeps%20the%20existing%20native%20range%20handling%2C%20including%20underflow%20and%20overflow%2C%20without%20changing%20the%20process%20locale.%20Unknown%20provider%20fields%20continue%20to%20be%20ignored%20when%20their%20numeric%20values%20are%20outside%20the%20supported%20range.%0A%0A%23%23%20Area%0A%0A-%20%5Bx%5D%20Engine%2C%20CLI%20or%20server%20(%60edge0-infer%2F%60)%0A%0A%23%23%20How%20was%20it%20tested%3F%0A%0AThe%20production%20branch%20contains%20the%20same%20two%20source%2Ftest%20files%20as%20validation%20commit%20%6062855b4e87f5a42a8d3a98954f5bef29308e1c02%60.%0A%0A-%20%5BLinux%20native%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43955376404%2Fjob%2F133608432523)%3A%20the%20original%20implementation%20fails%20the%20real%20configuration%20test%20with%20German%20%600.625%60%20becoming%20%600%60%3B%20the%20revised%20generation-defaults%20and%20model-catalog%20tests%20pass.%20The%20changed%20source%20also%20compiles%20against%20Android%20API%2028.%0A-%20%5BWindows%2FMSVC%20native%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43955376404%2Fjob%2F133608432586)%3A%20the%20same%20original-source%20failure%20and%20revised-source%20success%20were%20reproduced%20with%20native%20Windows%20binaries.%0A-%20The%20regression%20compares%2013%20numeric%20inputs%20with%20that%20platform's%20original%20C-locale%20%60std%3A%3Astod%60%20behavior%2C%20including%20signed%20zero%2C%20binary64%20boundaries%2C%20subnormal%20inputs%2C%20underflow%20and%20overflow.%20It%20also%20checks%20ignored%20provider%20fields%20and%20800%20concurrent%20configuration%20reads%20per%20available%20locale%2C%20verifying%20that%20the%20process%20locale%20remains%20unchanged.%0A-%20Local%20Linux%3A%20the%20two%20affected%20tests%20pass%20in%20C%2C%20German%20and%20French%20locales%20after%20reproducing%20the%20original%20failure.%20Commands%3A%20%60cmake%20--build%20--preset%20cpu%20--target%20moe_test_model_generation_defaults%20moe_test_model_catalog%60%20and%20%60ctest%20--preset%20cpu%20--output-on-failure%20-R%20'%5Emoe_test_model_(generation_defaults%7Ccatalog)%24'%60.%0A%0AThis%20is%20prepared%20as%20a%20draft%20while%20platform%20validation%20remains%20incomplete.%20The%20macOS%20native%2FiOS%2017%20job%20was%20cancelled%20without%20a%20successful%20validation%20result.%20The%20independent%20%5Bfull%20Linux%20L0%2FL1%20comparison%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43958711925)%20is%20queued.%20Linux%20and%20Windows%20native%20success%20does%20not%20establish%20the%20outstanding%20macOS%2FiOS%20results.%0A%0A%23%23%20Checklist%0A%0A-%20%5B%20%5D%20Full%20L0%2FL1%20suite%20passes.%0A-%20%5Bx%5D%20Ran%20the%20affected%20native%20tests%20on%20Linux%20and%20Windows.%0A-%20%5Bx%5D%20Added%20locale%2C%20range-compatibility%20and%20concurrent-read%20regressions.%0A-%20%5Bx%5D%20Reviewed%20documentation%20impact%3A%20valid%20JSON%20generation%20defaults%20retain%20their%20numeric%20values%20independently%20of%20the%20host%20locale.%0A",
-      "fallback_note": "Compare form is prefilled. Keep as draft while the outstanding platform/full-suite gates remain incomplete; no PR was created by the connector.",
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/generation-defaults-locale-20261116?expand=1&title=fix(model)%3A%20parse%20generation%20defaults%20independently%20of%20numeric%20locale&body=%23%23%20What%20%26%20why%0A%0A%60generation_config.json%60%20uses%20JSON's%20decimal%20point%2C%20but%20the%20native%20reader%20converts%20floating%20values%20with%20%60std%3A%3Astod%60%2C%20which%20follows%20the%20embedding%20application's%20current%20numeric%20locale.%20With%20a%20German%20locale%2C%20a%20valid%20temperature%20of%20%600.625%60%20becomes%20%600%60%2C%20changing%20the%20sampling%20configuration.%0A%0AGive%20each%20parser%20its%20own%20C%20numeric%20locale%20and%20use%20the%20platform's%20locale-specific%20conversion%20(%60strtod_l%60%20or%20%60_strtod_l%60).%20This%20keeps%20the%20existing%20native%20range%20handling%2C%20including%20underflow%20and%20overflow%2C%20without%20changing%20the%20process%20locale.%20Unknown%20provider%20fields%20continue%20to%20be%20ignored%20when%20their%20numeric%20values%20are%20outside%20the%20supported%20range.%0A%0A%23%23%20Area%0A%0A-%20%5Bx%5D%20Engine%2C%20CLI%20or%20server%20(%60edge0-infer%2F%60)%0A%0A%23%23%20How%20was%20it%20tested%3F%0A%0AThe%20production%20branch%20contains%20the%20same%20two%20source%2Ftest%20files%20as%20validation%20commit%20%6062855b4e87f5a42a8d3a98954f5bef29308e1c02%60.%0A%0A-%20%5BLinux%20native%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43955376404%2Fjob%2F133608432523)%3A%20the%20original%20implementation%20fails%20the%20real%20configuration%20test%20with%20German%20%600.625%60%20becoming%20%600%60%3B%20the%20revised%20generation-defaults%20and%20model-catalog%20tests%20pass.%20The%20changed%20source%20also%20compiles%20against%20Android%20API%2028.%0A-%20%5BWindows%2FMSVC%20native%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43955376404%2Fjob%2F133608432586)%3A%20the%20same%20original-source%20failure%20and%20revised-source%20success%20were%20reproduced%20with%20native%20Windows%20binaries.%0A-%20The%20regression%20compares%2013%20numeric%20inputs%20with%20that%20platform's%20original%20C-locale%20%60std%3A%3Astod%60%20behavior%2C%20including%20signed%20zero%2C%20binary64%20boundaries%2C%20subnormal%20inputs%2C%20underflow%20and%20overflow.%20It%20also%20checks%20ignored%20provider%20fields%20and%20800%20concurrent%20configuration%20reads%20per%20available%20locale%2C%20verifying%20that%20the%20process%20locale%20remains%20unchanged.%0A-%20Local%20Linux%3A%20the%20two%20affected%20tests%20pass%20in%20C%2C%20German%20and%20French%20locales%20after%20reproducing%20the%20original%20failure.%20Commands%3A%20%60cmake%20--build%20--preset%20cpu%20--target%20moe_test_model_generation_defaults%20moe_test_model_catalog%60%20and%20%60ctest%20--preset%20cpu%20--output-on-failure%20-R%20'%5Emoe_test_model_(generation_defaults%7Ccatalog)%24'%60.%0A%0A**Validation%20blockers%3A**%20This%20branch%20is%20not%20ready%20for%20review.%20The%20%5Bcomplete%20Linux%20L0%2FL1%20comparison%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43958711925%2Fjob%2F133620460669)%20completed%20and%20failed%3A%20the%20revised%20generation-defaults%20test%20passes%2C%20but%20the%20platform%20headers%20added%20to%20%60src%2Fmodel%2Fasset_index.cpp%60%20introduce%20a%20new%20%60check_layers%60%20failure.%20The%20revised%20suite%20has%2097%20runnable%20passes%2C%203%20device%20skips%20and%204%20failures.%20The%20other%20three%20failures%20(%60moe_test_platform_memory%60%2C%20%60moe_test_ordered_json%60%2C%20%60moe_test_template_tools%60)%20were%20reproduced%20with%20the%20original%20parser%20in%20the%20same%20job%3B%20the%20unchanged%20weights%20test%20also%20failed%204%20of%20100%20baseline%20repetitions.%20No%20source-check%20rule%20has%20been%20weakened.%20The%20macOS%20native%2FiOS%2017%20job%20was%20cancelled%20without%20a%20successful%20validation%20result%2C%20so%20those%20platform%20checks%20also%20remain%20outstanding.%20Keep%20this%20proposal%20as%20a%20draft%20until%20these%20blockers%20are%20resolved.%0A%0A%23%23%20Checklist%0A%0A-%20%5B%20%5D%20Full%20L0%2FL1%20suite%20passes.%0A-%20%5Bx%5D%20Ran%20the%20affected%20native%20tests%20on%20Linux%20and%20Windows.%0A-%20%5Bx%5D%20Added%20locale%2C%20range-compatibility%20and%20concurrent-read%20regressions.%0A-%20%5Bx%5D%20Reviewed%20documentation%20impact%3A%20valid%20JSON%20generation%20defaults%20retain%20their%20numeric%20values%20independently%20of%20the%20host%20locale.%0A",
+      "fallback_note": "Upstream connector returned403 once; no PR was created. The prefilled compare URL must remain a Draft if submitted while the new source-layer failure or macOS/iOS checks remain unresolved.",
       "full_suite_validation": {
         "head": "c053638c8777d48e625b9081472a75e8c95a13e0",
         "tree": "41e729f25dd2ac896f0659ee7c86a31627465c99",
         "branch": "validation/generation-defaults-full-linux-20261116",
         "run": 43958711925,
-        "status": "queued",
-        "conclusion": null,
-        "url": "https://github.com/Afloat16/Edge0/actions/runs/43958711925"
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/Afloat16/Edge0/actions/runs/43958711925",
+        "job": 133620460669,
+        "verified_at": "2026-11-16T21:29:12Z",
+        "log": "validation-evidence/locale-full-linux.log",
+        "before": {
+          "passed": 97,
+          "skipped": 3,
+          "failed": 4,
+          "failures": [
+            "moe_test_model_generation_defaults",
+            "moe_test_platform_memory",
+            "moe_test_ordered_json",
+            "moe_test_template_tools"
+          ],
+          "unchanged_weights_probe": {
+            "attempts": 100,
+            "failures": 4
+          }
+        },
+        "after": {
+          "passed": 97,
+          "skipped": 3,
+          "failed": 4,
+          "failures": [
+            "check_layers",
+            "moe_test_platform_memory",
+            "moe_test_ordered_json",
+            "moe_test_template_tools"
+          ],
+          "generation_defaults": "passed"
+        },
+        "new_failure": "check_layers: src/model/asset_index.cpp:14 and :19 module-include: unrecognized header",
+        "gate_passed": false
+      },
+      "source_check_blocker": {
+        "file": "edge0-infer/src/model/asset_index.cpp",
+        "headers": [
+          "locale.h",
+          "xlocale.h"
+        ],
+        "evidence": "https://github.com/Afloat16/Edge0/actions/runs/43958711925/job/133620460669",
+        "model_allowed_dependencies": [
+          "weights",
+          "exec"
+        ],
+        "platform_dependency_allowed": false,
+        "policy_change_made": false,
+        "next_step": "Resolve numeric conversion within the existing module boundaries, or obtain scope agreement for a platform abstraction and its dependency. Do not weaken or disguise source checks."
       }
     },
     {
@@ -3693,11 +3740,13 @@
     "sse_errors": {
       "dedupe": "10 commits, 10 unique source versions; all omit in-stream error fields",
       "before_http": "audit/edge0_batch8_before_http.json",
-      "status": "testing",
-      "validation_run": 43945833532
+      "status": "published",
+      "validation_run": 43945833532,
+      "url": "https://github.com/Edge0-AI/Edge0/pull/255",
+      "official_ci": "success"
     },
     "weights_completion": {
-      "status": "fix_validation",
+      "status": "published",
       "dedupe": "audit/edge0_weights_history.json.gz",
       "commits": 12,
       "source_versions": 6,
@@ -3705,10 +3754,12 @@
       "before": "1/100 original mixed_storage tests fail with upstream-equal source",
       "evidence": "audit/edge0_weights_mixed_baseline_probe.json",
       "before_stress": "14/1000 completed load/close iterations retain resident budget charge",
-      "test_log": "audit/edge0_batch9_before.log"
+      "test_log": "audit/edge0_batch9_before.log",
+      "url": "https://github.com/Edge0-AI/Edge0/pull/256",
+      "official_ci": "success"
     },
     "weight_read_completion": {
-      "status": "validating",
+      "status": "published",
       "validation_head": "ef03270b47c780f88a6289af8de91f314fe0eaac",
       "local_before": "14/1000 completed reads retained worker allocation budget",
       "local_after": "0/1000; existing mixed shared/copy/group checks pass",
@@ -3716,11 +3767,30 @@
       "production_files": [
         "edge0-infer/src/weights/runtime.cpp",
         "edge0-infer/tests/unit/weights/mixed_storage_test.cpp"
-      ]
+      ],
+      "url": "https://github.com/Edge0-AI/Edge0/pull/256",
+      "official_ci": "success"
     },
     "localeconv_rejected": "GNU libc declares localeconv MT-Unsafe; keep locale parsing on hold while checking immutable native C locale API compatibility.",
     "linux_memory_test": "Published #257; official macOS run43955882674/job133610175032 passed 101 runnable L0/L1, 3 device skips and 2 L2 tests.",
-    "native_locale": "Linux/Windows native comparisons and Android28 compilation passed. The Mac job ended cancelled, so Mac/iOS results remain unverified. Full Linux comparison run43958711925/headc053638c8777d48e625b9081472a75e8c95a13e0 queued. Upstream Draft create received403 once; complete prefilled fallback preserved."
+    "native_locale": "Prepared only; no PR. Targeted native Linux/Windows comparisons and Android API28 compile passed. Full Linux run43958711925/job133620460669 failed a new check_layers rejection for locale.h/xlocale.h in the model layer; 97 passes,3 skips,4 failures. Three remaining failures were reproduced in baseline, and original weights failed4/100. Mac job cancelled; iOS compile not run. Header/dependency policy unchanged; upstream Draft create returned403 once.",
+    "sse_multiline_events": {
+      "status": "unconfirmed_static_analysis",
+      "counted": false,
+      "production_change_created": false,
+      "source_head": "b894877cd2a14d6593061f7fb121432249943af8",
+      "source_urls": [
+        "https://github.com/Afloat16/Edge0/blob/b894877cd2a14d6593061f7fb121432249943af8/edge0-infer/tools/cli/serve_delegate_status.cpp",
+        "https://github.com/Afloat16/Edge0/blob/b894877cd2a14d6593061f7fb121432249943af8/edge0-infer/tools/cli/serve_delegate_proxy.cpp"
+      ],
+      "specification": "https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream",
+      "suspected_effect": "A valid event whose JSON spans multiple data fields is parsed per-line, so terminal state and usage can be missed; proxy EOF handling may then append an engine_unavailable error.",
+      "remaining": [
+        "Native HTTP reproduction",
+        "Candidate-specific complete historical PR and old-fork dedupe",
+        "Verify full SSE event framing as one problem; do not split CRLF, multi-line data and related framing boundaries into artificial items"
+      ]
+    }
   },
   "environment_status": "Local executor and browser unavailable; repository-backed code, logs, proposal and portfolio preserved through GitHub MCP."
 }
