@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T20:07:43.942964+00:00",
+  "updated": "2026-11-16T20:14:45.002273+00:00",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -11,7 +11,7 @@
       "title": "fix(server): retain delegated cache counts from protocol usage",
       "batch": 1,
       "repository": "Edge0-AI/Edge0",
-      "status": "validating",
+      "status": "ready_draft",
       "validation_head": "d9cee6d8f5409fef8fd82dda931ec741abcbaac9",
       "validation_tree": "9db9d24173c695f0c5c80a03624ada0ad2959920",
       "dedupe": "audit/edge0_protocol_history.json.gz",
@@ -61,7 +61,13 @@
         "steps": null,
         "retry_job": 133571714469,
         "retry_status": "queued"
-      }
+      },
+      "head": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
+      "tree": "eab3559b5d6e9c7af7c1817dadbdf5019752c712",
+      "draft": true,
+      "validation_state": "waiting_platform_checks",
+      "body": "## Problem and result\n\nDelegated Messages and Responses requests can report cache hits through their protocol usage objects without a `timings` object. The proxy currently leaves `reused_tokens` null for those requests, so `/status`, the last request and aggregate totals lose reported cache reuse.\n\nRead Messages `usage.cache_read_input_tokens` from both the initial message and final delta, and Responses `usage.input_tokens_details.cached_tokens`. Preserve an explicitly reported zero and the existing timing-count precedence. Forwarded HTTP bodies and SSE bytes stay unchanged.\n\n## Validation\n\nThe isolated [before/after validation](https://github.com/Afloat16/Edge0/actions/runs/43935975780/job/133540536441) starts from upstream `f6bfa5546bcf89919f86946ec669bcc7f4cd526d` and tests the exact source and regressions in this PR.\n\n- Before: the native Messages reuse assertion fails; real HTTP requests through the native proxy also reproduce missing cache counts. A separate Responses control remained red with only the Messages correction applied.\n- After on Linux: native accounting regressions pass, including one-byte SSE chunks, zero counts, malformed optional fields and timing precedence. Full L0/L1: 98 passed, 3 device skips and 3 reproduced upstream failures (`platform_memory`, `ordered_json`, `template_tools`). Full `ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata`: 2 passed.\n- The HTTP regressions exercise both streaming and ordinary Messages/Responses, check byte-exact forwarding and verify per-request and aggregate counts. They use the repository's fake engine with the real native proxy, without a model or GPU claim.\n- Local Linux native and HTTP checks also passed. The local combined worktree's full L0/L1 retains the existing `app_generation` temporary-file and `platform_memory` environment failures; the production dependency-manifest check passes.\n\n**Draft pending macOS validation.** The fork's macOS job has not obtained a runner, including one retry. Linux results are available above; macOS has not run for this change. This draft uses the repository's existing official macOS CI and will be marked ready after that check succeeds.\n",
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/messages-cache-counts-20261116?expand=1&title=fix%28server%29%3A+retain+delegated+cache+counts+from+protocol+usage&body=%23%23+Problem+and+result%0A%0ADelegated+Messages+and+Responses+requests+can+report+cache+hits+through+their+protocol+usage+objects+without+a+%60timings%60+object.+The+proxy+currently+leaves+%60reused_tokens%60+null+for+those+requests%2C+so+%60%2Fstatus%60%2C+the+last+request+and+aggregate+totals+lose+reported+cache+reuse.%0A%0ARead+Messages+%60usage.cache_read_input_tokens%60+from+both+the+initial+message+and+final+delta%2C+and+Responses+%60usage.input_tokens_details.cached_tokens%60.+Preserve+an+explicitly+reported+zero+and+the+existing+timing-count+precedence.+Forwarded+HTTP+bodies+and+SSE+bytes+stay+unchanged.%0A%0A%23%23+Validation%0A%0AThe+isolated+%5Bbefore%2Fafter+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43935975780%2Fjob%2F133540536441%29+starts+from+upstream+%60f6bfa5546bcf89919f86946ec669bcc7f4cd526d%60+and+tests+the+exact+source+and+regressions+in+this+PR.%0A%0A-+Before%3A+the+native+Messages+reuse+assertion+fails%3B+real+HTTP+requests+through+the+native+proxy+also+reproduce+missing+cache+counts.+A+separate+Responses+control+remained+red+with+only+the+Messages+correction+applied.%0A-+After+on+Linux%3A+native+accounting+regressions+pass%2C+including+one-byte+SSE+chunks%2C+zero+counts%2C+malformed+optional+fields+and+timing+precedence.+Full+L0%2FL1%3A+98+passed%2C+3+device+skips+and+3+reproduced+upstream+failures+%28%60platform_memory%60%2C+%60ordered_json%60%2C+%60template_tools%60%29.+Full+%60ctest+--preset+cpu+--no-tests%3Derror+--output-on-failure+-L+L2+-R+strata%60%3A+2+passed.%0A-+The+HTTP+regressions+exercise+both+streaming+and+ordinary+Messages%2FResponses%2C+check+byte-exact+forwarding+and+verify+per-request+and+aggregate+counts.+They+use+the+repository%27s+fake+engine+with+the+real+native+proxy%2C+without+a+model+or+GPU+claim.%0A-+Local+Linux+native+and+HTTP+checks+also+passed.+The+local+combined+worktree%27s+full+L0%2FL1+retains+the+existing+%60app_generation%60+temporary-file+and+%60platform_memory%60+environment+failures%3B+the+production+dependency-manifest+check+passes.%0A%0A%2A%2ADraft+pending+macOS+validation.%2A%2A+The+fork%27s+macOS+job+has+not+obtained+a+runner%2C+including+one+retry.+Linux+results+are+available+above%3B+macOS+has+not+run+for+this+change.+This+draft+uses+the+repository%27s+existing+official+macOS+CI+and+will+be+marked+ready+after+that+check+succeeds.%0A&draft=true"
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -491,7 +497,7 @@
       "title": "fix(server): retain errors reported inside delegated streams",
       "batch": 8,
       "repository": "Edge0-AI/Edge0",
-      "status": "validating",
+      "status": "ready",
       "dedupe": "audit/edge0_proxy_error_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -502,7 +508,19 @@
       "dedupe_notes": "All ten historical versions omit in-stream error fields; rename audit confirms these basenames were introduced directly, not renamed. Earlier incomplete-transport handling forwards proxy-generated errors, whereas this issue loses completed upstream-reported error details.",
       "local_tests": {
         "before": "Three non-streaming controls pass; all three streaming records lose fields, two also report unknown stop_reason",
-        "evidence": "audit/edge0_batch8_before_test.log"
+        "evidence": "audit/edge0_batch8_before_test.log",
+        "after": {
+          "native": "strata_registry passed",
+          "http": "all six streaming/nonstreaming cases passed; wire byte identity retained",
+          "l0_l1": "98 passed, 3 skipped; app_generation tmpfile and platform_memory platform expectation fail as on baseline; private DOM-harness dependency check subsequently restored and passed",
+          "scope": "combined worktree also includes independent JSON, cache-count and locale candidates",
+          "logs": [
+            "audit/edge0_batch8_local_native_after.log",
+            "audit/edge0_batch8_local_http_after.log",
+            "audit/edge0_batch8_local_l0_l1.log",
+            "audit/edge0_batch8_local_dependencies_after.log"
+          ]
+        }
       },
       "production_evidence": {
         "chat": "edge0-strata/serve/server.py: Handler mid-stream EngineDied/QueueWaitExpired/ValueError",
@@ -532,7 +550,26 @@
         "runs": 100,
         "failures": 1,
         "source_equals_upstream": true
-      }
+      },
+      "validation_result": {
+        "run": 43945833532,
+        "job": 133575120819,
+        "conclusion": "success",
+        "native_before": "strata_registry error frame stop_reason assertion fails",
+        "http_before": "3 streaming records lose error details; 3 nonstreaming controls pass",
+        "after": "98 passed, 3 skipped, 3 known upstream failures in L0/L1; full strata L2 2 passed",
+        "known_upstream_failures": [
+          "moe_test_platform_memory",
+          "moe_test_ordered_json",
+          "moe_test_template_tools"
+        ],
+        "mixed_weights_baseline": "42 failures in 100 runs of unmodified upstream mixed_storage test; after full suite did not reproduce this transient failure",
+        "log": "audit/edge0_batch8_linux_final.log.gz"
+      },
+      "head": "b894877cd2a14d6593061f7fb121432249943af8",
+      "tree": "05b1d612abc582ffb2310a83e2fc968d67383d50",
+      "body": "## Problem and result\n\nThe delegated engine can report a protocol error after HTTP 200 stream headers have been sent. The proxy forwards that error correctly, but loses its diagnostic fields when recording the request. Chat and Messages then show `stop_reason: unknown`; Responses keeps `failed` but loses the error code. This makes `/status` and recent request history incomplete when diagnosing engine failures.\n\nRetain the error's `code` (falling back to `type`), `message` and `param`, and record the terminal reason as `failed`. The HTTP status and all forwarded bytes remain unchanged. Successful Responses objects with `error: null` retain their normal completion status.\n\n## Validation\n\nThe [isolated native before/after run](https://github.com/Afloat16/Edge0/actions/runs/43945833532/job/133575120819) tests the exact production changes and regressions in this PR against upstream `f6bfa5546bcf89919f86946ec669bcc7f4cd526d`.\n\n- Before: all three streaming protocols reproduce the missing fields; Chat and Messages also reproduce the unknown stop reason. Three ordinary HTTP-error controls pass.\n- After: native regressions pass with complete, seven-byte and one-byte SSE chunks, plus successful `error: null` controls. The HTTP test checks all six requests, recent and last request records, and byte-exact forwarding.\n- Full Linux L0/L1: 98 passed, 3 device skips and the 3 reproduced upstream failures (`platform_memory`, `ordered_json`, `template_tools`). Full `ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata`: 2 passed.\n- A first full run also encountered the existing `weights_mixed` timing failure. The unmodified upstream test reproduced it in 42 of 100 runs in the same validation environment; the final full-suite run did not encounter it. No weights code is changed here.\n- Local Linux native and six-request HTTP checks pass. Local full L0/L1 retains the existing temporary-file and platform-memory failures; the production dependency-manifest check passes.\n\nThese tests run the real native proxy against the repository's fake engine. They do not require or claim GPU/model execution.\n",
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/delegated-stream-errors-20261116?expand=1&title=fix%28server%29%3A+retain+errors+reported+inside+delegated+streams&body=%23%23+Problem+and+result%0A%0AThe+delegated+engine+can+report+a+protocol+error+after+HTTP+200+stream+headers+have+been+sent.+The+proxy+forwards+that+error+correctly%2C+but+loses+its+diagnostic+fields+when+recording+the+request.+Chat+and+Messages+then+show+%60stop_reason%3A+unknown%60%3B+Responses+keeps+%60failed%60+but+loses+the+error+code.+This+makes+%60%2Fstatus%60+and+recent+request+history+incomplete+when+diagnosing+engine+failures.%0A%0ARetain+the+error%27s+%60code%60+%28falling+back+to+%60type%60%29%2C+%60message%60+and+%60param%60%2C+and+record+the+terminal+reason+as+%60failed%60.+The+HTTP+status+and+all+forwarded+bytes+remain+unchanged.+Successful+Responses+objects+with+%60error%3A+null%60+retain+their+normal+completion+status.%0A%0A%23%23+Validation%0A%0AThe+%5Bisolated+native+before%2Fafter+run%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43945833532%2Fjob%2F133575120819%29+tests+the+exact+production+changes+and+regressions+in+this+PR+against+upstream+%60f6bfa5546bcf89919f86946ec669bcc7f4cd526d%60.%0A%0A-+Before%3A+all+three+streaming+protocols+reproduce+the+missing+fields%3B+Chat+and+Messages+also+reproduce+the+unknown+stop+reason.+Three+ordinary+HTTP-error+controls+pass.%0A-+After%3A+native+regressions+pass+with+complete%2C+seven-byte+and+one-byte+SSE+chunks%2C+plus+successful+%60error%3A+null%60+controls.+The+HTTP+test+checks+all+six+requests%2C+recent+and+last+request+records%2C+and+byte-exact+forwarding.%0A-+Full+Linux+L0%2FL1%3A+98+passed%2C+3+device+skips+and+the+3+reproduced+upstream+failures+%28%60platform_memory%60%2C+%60ordered_json%60%2C+%60template_tools%60%29.+Full+%60ctest+--preset+cpu+--no-tests%3Derror+--output-on-failure+-L+L2+-R+strata%60%3A+2+passed.%0A-+A+first+full+run+also+encountered+the+existing+%60weights_mixed%60+timing+failure.+The+unmodified+upstream+test+reproduced+it+in+42+of+100+runs+in+the+same+validation+environment%3B+the+final+full-suite+run+did+not+encounter+it.+No+weights+code+is+changed+here.%0A-+Local+Linux+native+and+six-request+HTTP+checks+pass.+Local+full+L0%2FL1+retains+the+existing+temporary-file+and+platform-memory+failures%3B+the+production+dependency-manifest+check+passes.%0A%0AThese+tests+run+the+real+native+proxy+against+the+repository%27s+fake+engine.+They+do+not+require+or+claim+GPU%2Fmodel+execution.%0A"
     }
   ],
   "dedupe": {
@@ -3245,13 +3282,15 @@
       "validation_run": 43945833532
     },
     "weights_completion": {
-      "status": "reproduced",
+      "status": "fix_validation",
       "dedupe": "audit/edge0_weights_history.json.gz",
       "commits": 12,
       "source_versions": 6,
       "rename_audit": "runtime.cpp added directly; all history has same packaged_task allocation capture",
       "before": "1/100 original mixed_storage tests fail with upstream-equal source",
-      "evidence": "audit/edge0_weights_mixed_baseline_probe.json"
+      "evidence": "audit/edge0_weights_mixed_baseline_probe.json",
+      "before_stress": "14/1000 completed load/close iterations retain resident budget charge",
+      "test_log": "audit/edge0_batch9_before.log"
     }
   }
 }
