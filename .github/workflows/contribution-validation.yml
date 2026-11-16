@@ -1,0 +1,42 @@
+name: Asset root selection validation
+on:
+  push:
+    branches: [validation/asset-root-selection-20261116]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['24.15.0', '26.3.1']
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: edge0-infer/examples/desktop
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci --no-audit --no-fund
+      - name: Reproduce root path corruption with ReactDOM
+        run: |
+          cp src/main.tsx "$RUNNER_TEMP/asset-location-fixed.tsx"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/examples/desktop/src/main.tsx > src/main.tsx
+          if npm test -- src/asset-location.test.tsx --reporter=json --outputFile="$RUNNER_TEMP/location-before.json"; then exit 1; fi
+          node --input-type=module - <<'JSTEST'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const result = JSON.parse(fs.readFileSync(`${process.env.RUNNER_TEMP}/location-before.json`, 'utf8'));
+          assert.equal(result.numFailedTests, 2);
+          assert.equal(result.numPassedTests, 3);
+          console.log('Reproduced two root path failures; ordinary locations and cancellation controls passed.');
+          JSTEST
+      - name: Validate the fix, all frontend tests, and production build
+        run: |
+          cp "$RUNNER_TEMP/asset-location-fixed.tsx" src/main.tsx
+          npm test
+          npm run build
