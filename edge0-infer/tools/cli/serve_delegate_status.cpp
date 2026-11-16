@@ -56,6 +56,8 @@ void account(Accounting& a, const Json& body) {
         }
         take(a.generated_tokens, integer(usage, "completion_tokens"));
         take(a.generated_tokens, integer(usage, "output_tokens"));
+        if (type == "message" || type == "message_delta")
+            take(a.reused_tokens, integer(usage, "cache_read_input_tokens"));
         if (usage.contains("prompt_tokens_details") && !a.reused_tokens)
             take(a.reused_tokens, integer(usage["prompt_tokens_details"], "cached_tokens"));
     }

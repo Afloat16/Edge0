@@ -1,0 +1,51 @@
+name: Messages cache accounting validation
+on:
+  push:
+    branches: [validation/messages-cache-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - run: brew install ninja uv
+      - run: uv sync --project tools/assets
+      - name: Reproduce the missing native and HTTP counts on upstream
+        run: |
+          cp tools/cli/serve_delegate_status.cpp "$RUNNER_TEMP/cache-fixed.cpp"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/tools/cli/serve_delegate_status.cpp > tools/cli/serve_delegate_status.cpp
+          cmake --preset cpu
+          cmake --build --preset cpu
+          if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/cache-before.log" 2>&1; then
+            cat "$RUNNER_TEMP/cache-before.log"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/cache-before.log"
+          grep -F 'check failed: messages_plain.reused_tokens == 2' "$RUNNER_TEMP/cache-before.log"
+          if uv run --project tools/assets python - <<'PYTEST' > "$RUNNER_TEMP/cache-http-before.log" 2>&1
+          import sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tests/integration').resolve()))
+          import serve_strata_test as t
+          with tempfile.TemporaryDirectory() as folder:
+              t.dialects(str(Path('build/cpu/bin/edge0-infer').resolve()), Path(folder))
+          PYTEST
+          then
+            cat "$RUNNER_TEMP/cache-http-before.log"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/cache-http-before.log"
+          grep -F "assert records[2]['reused_tokens'] == 2" "$RUNNER_TEMP/cache-http-before.log"
+      - name: Apply the fix and run the required suites
+        run: |
+          cp "$RUNNER_TEMP/cache-fixed.cpp" tools/cli/serve_delegate_status.cpp
+          cmake --build --preset cpu
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1'
+          ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
