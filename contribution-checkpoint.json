@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T20:24:37.922096+00:00",
+  "updated": "2026-11-16T20:30:54.671507+00:00",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -64,16 +64,26 @@
       },
       "head": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
       "tree": "eab3559b5d6e9c7af7c1817dadbdf5019752c712",
-      "draft": true,
-      "validation_state": "waiting_platform_checks",
-      "body": "## What & why\n\nDelegated Messages and Responses requests can report cache hits through their protocol usage objects without a `timings` object. The proxy currently leaves `reused_tokens` null for those requests, so `/status`, the last request and aggregate totals lose reported cache reuse.\n\nRead Messages `usage.cache_read_input_tokens` from both the initial message and final delta, and Responses `usage.input_tokens_details.cached_tokens`. Preserve an explicitly reported zero and the existing timing-count precedence. Forwarded HTTP bodies and SSE bytes stay unchanged.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\nThe isolated [before/after validation](https://github.com/Afloat16/Edge0/actions/runs/43935975780/job/133540536441) starts from upstream `f6bfa5546bcf89919f86946ec669bcc7f4cd526d` and tests the exact source and regressions in this PR.\n\n- Before: the native Messages reuse assertion fails; real HTTP requests through the native proxy also reproduce missing cache counts. A separate Responses control remained red with only the Messages correction applied.\n- After on Linux: native accounting regressions pass, including one-byte SSE chunks, zero counts, malformed optional fields and timing precedence. Full L0/L1: 98 passed, 3 device skips and 3 reproduced upstream failures (`platform_memory`, `ordered_json`, `template_tools`). Full `ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata`: 2 passed.\n- The HTTP regressions exercise both streaming and ordinary Messages/Responses, check byte-exact forwarding and verify per-request and aggregate counts. They use the repository's fake engine with the real native proxy, without a model or GPU claim.\n- Local Linux native and HTTP checks also passed. The local combined worktree's full L0/L1 retains the existing `app_generation` temporary-file and `platform_memory` environment failures; the production dependency-manifest check passes.\n\n**Draft pending macOS validation.** The fork's macOS job has not obtained a runner, including one retry. Linux results are available above; macOS has not run for this change. This draft uses the repository's existing official macOS CI and will be marked ready after that check succeeds.\n\n## Checklist\n\n- [ ] Full local L0/L1 passes: the reproduced environment/baseline failures are listed above.\n- [x] Ran the affected native and HTTP integration tests.\n- [x] Added regression tests for the changed behavior.\n- [x] Updated the relevant server documentation.\n",
+      "draft": false,
+      "validation_state": "passed",
+      "body": "## What & why\n\nDelegated Messages and Responses requests can report cache hits through their protocol usage objects without a `timings` object. The proxy currently leaves `reused_tokens` null for those requests, so `/status`, the last request and aggregate totals lose reported cache reuse.\n\nRead Messages `usage.cache_read_input_tokens` from both the initial message and final delta, and Responses `usage.input_tokens_details.cached_tokens`. Preserve an explicitly reported zero and the existing timing-count precedence. Forwarded HTTP bodies and SSE bytes stay unchanged.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\nThe isolated [before/after validation](https://github.com/Afloat16/Edge0/actions/runs/43935975780/job/133540536441) starts from upstream `f6bfa5546bcf89919f86946ec669bcc7f4cd526d` and tests the exact source and regressions in this PR.\n\n- Before: the native Messages reuse assertion fails; real HTTP requests through the native proxy also reproduce missing cache counts. A separate Responses control remained red with only the Messages correction applied.\n- After on Linux: native accounting regressions pass, including one-byte SSE chunks, zero counts, malformed optional fields and timing precedence. Full L0/L1: 98 passed, 3 device skips and 3 reproduced upstream failures (`platform_memory`, `ordered_json`, `template_tools`). Full `ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata`: 2 passed.\n- The HTTP regressions exercise both streaming and ordinary Messages/Responses, check byte-exact forwarding and verify per-request and aggregate counts. They use the repository's fake engine with the real native proxy, without a model or GPU claim.\n- Local Linux native and HTTP checks also passed. The local combined worktree's full L0/L1 retains the existing `app_generation` temporary-file and `platform_memory` environment failures; the production dependency-manifest check passes.\n\n**macOS validation completed.** The repository's [official macOS CI](https://github.com/Edge0-AI/Edge0/actions/runs/43948411609/job/133584090515) passed: all 101 runnable L0/L1 tests passed, 3 device tests were skipped, and both delegated-engine L2 tests passed. The earlier fork macOS job had not obtained a runner; the official run now supplies that platform result.\n\n## Checklist\n\n- [ ] Full local L0/L1 passes: the reproduced environment/baseline failures are listed above.\n- [x] Ran the affected native and HTTP integration tests.\n- [x] Added regression tests for the changed behavior.\n- [x] Updated the relevant server documentation.\n",
       "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/messages-cache-counts-20261116?expand=1&title=fix%28server%29%3A+retain+delegated+cache+counts+from+protocol+usage&body=%23%23+What+%26+why%0A%0ADelegated+Messages+and+Responses+requests+can+report+cache+hits+through+their+protocol+usage+objects+without+a+%60timings%60+object.+The+proxy+currently+leaves+%60reused_tokens%60+null+for+those+requests%2C+so+%60%2Fstatus%60%2C+the+last+request+and+aggregate+totals+lose+reported+cache+reuse.%0A%0ARead+Messages+%60usage.cache_read_input_tokens%60+from+both+the+initial+message+and+final+delta%2C+and+Responses+%60usage.input_tokens_details.cached_tokens%60.+Preserve+an+explicitly+reported+zero+and+the+existing+timing-count+precedence.+Forwarded+HTTP+bodies+and+SSE+bytes+stay+unchanged.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Engine%2C+CLI+or+server+%28%60edge0-infer%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0AThe+isolated+%5Bbefore%2Fafter+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43935975780%2Fjob%2F133540536441%29+starts+from+upstream+%60f6bfa5546bcf89919f86946ec669bcc7f4cd526d%60+and+tests+the+exact+source+and+regressions+in+this+PR.%0A%0A-+Before%3A+the+native+Messages+reuse+assertion+fails%3B+real+HTTP+requests+through+the+native+proxy+also+reproduce+missing+cache+counts.+A+separate+Responses+control+remained+red+with+only+the+Messages+correction+applied.%0A-+After+on+Linux%3A+native+accounting+regressions+pass%2C+including+one-byte+SSE+chunks%2C+zero+counts%2C+malformed+optional+fields+and+timing+precedence.+Full+L0%2FL1%3A+98+passed%2C+3+device+skips+and+3+reproduced+upstream+failures+%28%60platform_memory%60%2C+%60ordered_json%60%2C+%60template_tools%60%29.+Full+%60ctest+--preset+cpu+--no-tests%3Derror+--output-on-failure+-L+L2+-R+strata%60%3A+2+passed.%0A-+The+HTTP+regressions+exercise+both+streaming+and+ordinary+Messages%2FResponses%2C+check+byte-exact+forwarding+and+verify+per-request+and+aggregate+counts.+They+use+the+repository%27s+fake+engine+with+the+real+native+proxy%2C+without+a+model+or+GPU+claim.%0A-+Local+Linux+native+and+HTTP+checks+also+passed.+The+local+combined+worktree%27s+full+L0%2FL1+retains+the+existing+%60app_generation%60+temporary-file+and+%60platform_memory%60+environment+failures%3B+the+production+dependency-manifest+check+passes.%0A%0A%2A%2ADraft+pending+macOS+validation.%2A%2A+The+fork%27s+macOS+job+has+not+obtained+a+runner%2C+including+one+retry.+Linux+results+are+available+above%3B+macOS+has+not+run+for+this+change.+This+draft+uses+the+repository%27s+existing+official+macOS+CI+and+will+be+marked+ready+after+that+check+succeeds.%0A%0A%23%23+Checklist%0A%0A-+%5B+%5D+Full+local+L0%2FL1+passes%3A+the+reproduced+environment%2Fbaseline+failures+are+listed+above.%0A-+%5Bx%5D+Ran+the+affected+native+and+HTTP+integration+tests.%0A-+%5Bx%5D+Added+regression+tests+for+the+changed+behavior.%0A-+%5Bx%5D+Updated+the+relevant+server+documentation.%0A&draft=true",
       "number": 254,
       "url": "https://github.com/Edge0-AI/Edge0/pull/254",
       "state": "open",
       "merged": false,
       "maintainer_can_modify": false,
-      "changed_files": 5
+      "changed_files": 5,
+      "official_ci": {
+        "run": 43948411609,
+        "job": 133584090515,
+        "conclusion": "success",
+        "platform": "macOS",
+        "l0_l1_passed": 101,
+        "device_skipped": 3,
+        "l2_passed": 2,
+        "log": "audit/edge0_pr254_official_macos.log.gz"
+      }
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -582,7 +592,17 @@
       "merged": false,
       "draft": false,
       "maintainer_can_modify": false,
-      "changed_files": 6
+      "changed_files": 6,
+      "official_ci": {
+        "run": 43948678252,
+        "job": 133585030977,
+        "conclusion": "success",
+        "platform": "macOS",
+        "l0_l1_passed": 101,
+        "device_skipped": 3,
+        "l2_passed": 2,
+        "log": "audit/edge0_pr255_official_macos.log.gz"
+      }
     },
     {
       "batch": 9,
@@ -592,7 +612,7 @@
       "branch": "fix/weight-read-completion-20261116",
       "validation_branch": "validation/weight-read-completion-20261116",
       "title": "fix(weights): release read allocations before completing futures",
-      "status": "validation_pending",
+      "status": "ready",
       "dedupe": "audit/edge0_weights_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -613,10 +633,41 @@
       "local_after": {
         "retained_allocations": 0,
         "completed_loads": 1000,
-        "log": "audit/edge0_batch9_after.log"
+        "log": "audit/edge0_batch9_after.log",
+        "l0_l1_failures": [
+          "moe_test_app_generation",
+          "moe_test_platform_memory"
+        ],
+        "tests_total": 104,
+        "device_skipped": 3,
+        "l0_l1_log": "audit/edge0_batch9_local_l0_l1.log",
+        "l0_l1_passed": 99,
+        "l2_cpu_weights_passed": 2,
+        "l2_log": "audit/edge0_batch9_local_l2.log"
       },
       "validation_head": "ef03270b47c780f88a6289af8de91f314fe0eaac",
-      "validation_tree": "9b3a926af5100c96e36fa10973bf75a5011f01c7"
+      "validation_tree": "9b3a926af5100c96e36fa10973bf75a5011f01c7",
+      "validation_run": 43949392747,
+      "validation_result": {
+        "run": 43949392747,
+        "job": 133587525602,
+        "conclusion": "success",
+        "before": "first 1000 passed; second retained 115/1000 charges and failed",
+        "after": "0/10000 residual charges across 10 runs",
+        "l0_l1_passed": 98,
+        "device_skipped": 3,
+        "baseline_failures": [
+          "moe_test_platform_memory",
+          "moe_test_ordered_json",
+          "moe_test_template_tools"
+        ],
+        "l2_cpu_weights_passed": 2,
+        "log": "audit/edge0_batch9_linux_validation.log.gz"
+      },
+      "body": "## What & why\n\nAn asynchronous weight read retains its allocation in the packaged-task closure. Its future can become ready before that closure is destroyed, so `complete()` followed by `close()` can leave the resident-weight budget charged until the worker releases its task. The existing mixed-storage test also intermittently encounters this residual charge.\n\nMove the worker's allocation reference into a local lifetime guard when the task starts. It keeps the buffer alive throughout the read and releases the reference before the task publishes its result, including an error return or exception. Add a regression that completes, checks the loaded bytes and closes 1,000 small weight loads, checking that no completed load retains a resident charge.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\nThe [isolated before/after validation](https://github.com/Afloat16/Edge0/actions/runs/43949392747/job/133587525602) tests these two files against upstream `f6bfa5546bcf89919f86946ec669bcc7f4cd526d`.\n\n- Before: the first 1,000-load stress run did not reproduce the race; the second left a resident charge after 115 of 1,000 completed loads and failed the regression. The original, unmodified mixed-storage test also reproduced its existing budget assertion failure in [42 of 100 runs](https://github.com/Afloat16/Edge0/actions/runs/43945833532/job/133575120819).\n- After: 10 consecutive stress runs, totaling 10,000 completed loads, retained zero charges. Existing shared views, group protection, independent copies and staged admission checks passed.\n- Full Linux L0/L1: 98 passed, 3 device skips and the 3 previously reproduced upstream failures (`platform_memory`, `ordered_json`, `template_tools`). All runnable weights tests passed, including lifecycle and staged read-error coverage.\n- CPU L2 `weights_compute` and `weights_group_compute`: both passed.\n- Local Linux: the regression changed from 14/1,000 residual charges to zero; full L0/L1 had 99 passes, 3 device skips and the 2 existing local environment failures (`app_generation` temporary file and `platform_memory`). Both CPU L2 weights tests passed locally as well.\n\n## Checklist\n\n- [ ] Full local L0/L1 passes: the reproduced environment/baseline failures are listed above.\n- [x] Ran affected native and CPU L2 tests.\n- [x] Added a regression for the changed behavior.\n- [x] Reviewed documentation impact: the patch restores the existing completion and budget-release behavior.\n",
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/weight-read-completion-20261116?expand=1&title=fix%28weights%29%3A+release+read+allocations+before+completing+futures&body=%23%23+What+%26+why%0A%0AAn+asynchronous+weight+read+retains+its+allocation+in+the+packaged-task+closure.+Its+future+can+become+ready+before+that+closure+is+destroyed%2C+so+%60complete%28%29%60+followed+by+%60close%28%29%60+can+leave+the+resident-weight+budget+charged+until+the+worker+releases+its+task.+The+existing+mixed-storage+test+also+intermittently+encounters+this+residual+charge.%0A%0AMove+the+worker%27s+allocation+reference+into+a+local+lifetime+guard+when+the+task+starts.+It+keeps+the+buffer+alive+throughout+the+read+and+releases+the+reference+before+the+task+publishes+its+result%2C+including+an+error+return+or+exception.+Add+a+regression+that+completes%2C+checks+the+loaded+bytes+and+closes+1%2C000+small+weight+loads%2C+checking+that+no+completed+load+retains+a+resident+charge.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Engine%2C+CLI+or+server+%28%60edge0-infer%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0AThe+%5Bisolated+before%2Fafter+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43949392747%2Fjob%2F133587525602%29+tests+these+two+files+against+upstream+%60f6bfa5546bcf89919f86946ec669bcc7f4cd526d%60.%0A%0A-+Before%3A+the+first+1%2C000-load+stress+run+did+not+reproduce+the+race%3B+the+second+left+a+resident+charge+after+115+of+1%2C000+completed+loads+and+failed+the+regression.+The+original%2C+unmodified+mixed-storage+test+also+reproduced+its+existing+budget+assertion+failure+in+%5B42+of+100+runs%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43945833532%2Fjob%2F133575120819%29.%0A-+After%3A+10+consecutive+stress+runs%2C+totaling+10%2C000+completed+loads%2C+retained+zero+charges.+Existing+shared+views%2C+group+protection%2C+independent+copies+and+staged+admission+checks+passed.%0A-+Full+Linux+L0%2FL1%3A+98+passed%2C+3+device+skips+and+the+3+previously+reproduced+upstream+failures+%28%60platform_memory%60%2C+%60ordered_json%60%2C+%60template_tools%60%29.+All+runnable+weights+tests+passed%2C+including+lifecycle+and+staged+read-error+coverage.%0A-+CPU+L2+%60weights_compute%60+and+%60weights_group_compute%60%3A+both+passed.%0A-+Local+Linux%3A+the+regression+changed+from+14%2F1%2C000+residual+charges+to+zero%3B+full+L0%2FL1+had+99+passes%2C+3+device+skips+and+the+2+existing+local+environment+failures+%28%60app_generation%60+temporary+file+and+%60platform_memory%60%29.+Both+CPU+L2+weights+tests+passed+locally+as+well.%0A%0A%23%23+Checklist%0A%0A-+%5B+%5D+Full+local+L0%2FL1+passes%3A+the+reproduced+environment%2Fbaseline+failures+are+listed+above.%0A-+%5Bx%5D+Ran+affected+native+and+CPU+L2+tests.%0A-+%5Bx%5D+Added+a+regression+for+the+changed+behavior.%0A-+%5Bx%5D+Reviewed+documentation+impact%3A+the+patch+restores+the+existing+completion+and+budget-release+behavior.%0A",
+      "head": "d78c7f643029d0bcbef2f7e9f649bdff8138abbe",
+      "tree": "fe03d960f4aacb178dbdf8c9b1db15d34acd1e9f"
     }
   ],
   "dedupe": {
@@ -688,7 +739,7 @@
     "app_dependency_approval": "Adding/replacing an App library or changing its major version requires maintainer approval, per edge0-infer/tools/checks/README.md#example-app-dependencies. No allowlist change made."
   },
   "portfolio": {
-    "updated": "2026-11-16T20:22:59.502567+00:00",
+    "updated": "2026-11-16T20:28:32.727958+00:00",
     "repositories": [
       {
         "repository": "serengil/deepface",
@@ -3311,10 +3362,20 @@
             "head": "56c4eafdc64ec8a3b8503874d18de173e1bf676e",
             "state": "open",
             "merged": false,
-            "draft": true,
-            "validation_state": "waiting_platform_checks",
+            "draft": false,
+            "validation_state": "passed",
             "maintainer_can_modify": false,
-            "validation_run": 43935975780
+            "validation_run": 43935975780,
+            "official_ci": {
+              "run": 43948411609,
+              "job": 133584090515,
+              "conclusion": "success",
+              "platform": "macOS",
+              "l0_l1_passed": 101,
+              "device_skipped": 3,
+              "l2_passed": 2,
+              "log": "audit/edge0_pr254_official_macos.log.gz"
+            }
           },
           {
             "number": 255,
@@ -3340,6 +3401,16 @@
               ],
               "mixed_weights_baseline": "42 failures in 100 runs of unmodified upstream mixed_storage test; after full suite did not reproduce this transient failure",
               "log": "audit/edge0_batch8_linux_final.log.gz"
+            },
+            "official_ci": {
+              "run": 43948678252,
+              "job": 133585030977,
+              "conclusion": "success",
+              "platform": "macOS",
+              "l0_l1_passed": 101,
+              "device_skipped": 3,
+              "l2_passed": 2,
+              "log": "audit/edge0_pr255_official_macos.log.gz"
             }
           }
         ],
@@ -3348,18 +3419,18 @@
           "open": 7,
           "merged": 0,
           "closed_unmerged": 0,
-          "draft_open": 1,
-          "ready_open": 6,
-          "effective": 6
+          "draft_open": 0,
+          "ready_open": 7,
+          "effective": 7
         },
         "submitted": 7,
         "open": 7,
         "merged": 0,
         "closed_unmerged": 0,
-        "effective": 6,
-        "remaining_to_20": 14,
-        "draft_open": 1,
-        "ready_open": 6
+        "effective": 7,
+        "remaining_to_20": 13,
+        "draft_open": 0,
+        "ready_open": 7
       }
     ]
   },
