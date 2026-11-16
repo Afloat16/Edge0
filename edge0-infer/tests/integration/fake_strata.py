@@ -276,6 +276,7 @@ def handler_for(fake):
             except ValueError:
                 self.send_json(400, {'error': {'message': 'invalid JSON', 'type': 'invalid_request_error'}})
                 return
+            self.sse_framing = request.get('fake_sse_framing', {})
             if path == '/v1/messages/count_tokens':
                 fake.save_sent(self.send_json(int(request.get('fake_status', 200)), {'input_tokens': 17}))
                 return
@@ -360,6 +361,24 @@ def handler_for(fake):
             fake.finished_generation()
 
         def stream(self, events):
+            framing = getattr(self, 'sse_framing', {})
+            if framing:
+                ending = framing.get('line_ending', '\n')
+                reframed = []
+                for event in events:
+                    lines = []
+                    for line in event.decode().splitlines():
+                        if framing.get('multiline') and line.startswith('data: {'):
+                            fields = ['data: ' + part for part in json.dumps(json.loads(line[6:]), indent=2).splitlines()]
+                            fields[1:1] = [': between data fields', 'data']
+                            lines.extend(fields)
+                        else:
+                            lines.append(line)
+                    reframed.append((ending.join(lines) + ending).encode())
+                if framing.get('unterminated'):
+                    reframed[-1] = reframed[-1][:-len(ending)]
+                size = framing.get('chunk_bytes', 0)
+                events = [event[start:start + size] for event in reframed for start in range(0, len(event), size)] if size else reframed
             self.send_response(200)
             self.send_header('Content-Type', 'text/event-stream')
             self.send_header('Cache-Control', 'no-cache')
