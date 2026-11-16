@@ -1,0 +1,39 @@
+name: Asset manifest validation
+on:
+  push:
+    branches: [validation/asset-manifest-20261116]
+permissions:
+  contents: read
+jobs:
+  assets:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.14']
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --project tools/assets --python ${{ matrix.python }}
+      - name: Reproduce checker false positives on upstream
+        run: |
+          cp tools/assets/check_assets.py "$RUNNER_TEMP/check-assets-fixed.py"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/tools/assets/check_assets.py > tools/assets/check_assets.py
+          if uv run --project tools/assets --no-sync pytest -q tools/assets/tests/test_check_assets.py -k 'format_version_requires or catalog_spelling or leading_zeros' --junitxml="$RUNNER_TEMP/manifest-before.xml"; then exit 1; fi
+          uv run --project tools/assets --no-sync python - <<'PYTEST'
+          import os, xml.etree.ElementTree as ET
+          tests = list(ET.parse(os.path.join(os.environ['RUNNER_TEMP'], 'manifest-before.xml')).iter('testcase'))
+          failures = [test for test in tests if test.find('failure') is not None]
+          errors = [test for test in tests if test.find('error') is not None]
+          assert len(tests) == 11 and len(failures) == 10 and not errors, (len(tests), len(failures), len(errors))
+          print('Reproduced ten false positives; legal leading zeros still passed.')
+          PYTEST
+      - name: Validate the fix with all asset unit tests
+        run: |
+          cp "$RUNNER_TEMP/check-assets-fixed.py" tools/assets/check_assets.py
+          uv run --project tools/assets --no-sync pytest -q -m l1 tools/assets/tests
