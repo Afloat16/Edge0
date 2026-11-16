@@ -520,6 +520,63 @@ def dialects(cli, root):
     print('PASS dialects: /status records Responses and Messages finish state and input tokens; malformed fields do not touch forwarding')
 
 
+def event_framing(cli, root):
+    """Real proxy accounting follows SSE event boundaries without changing valid wire bytes."""
+    engine = make_engine(root / 'framing-engine')
+    model = make_model(root / 'framing-model')
+    record = root / 'framing-record'
+    server = Running(cli, model, engine, record, env=environment(record, chunk_delay=0))
+    mismatches = []
+    index = 0
+    try:
+        content = {'model': ALIAS, 'stream': True, 'messages': [{'role': 'user', 'content': 'count these words'}]}
+        for path in ('/v1/chat/completions', '/v1/responses', '/v1/messages'):
+            expected = None
+            for name, framing in (
+                    ('single_line', {}),
+                    ('multiline_lf', {'multiline': True, 'chunk_bytes': 7}),
+                    ('multiline_crlf', {'multiline': True, 'line_ending': '\r\n', 'chunk_bytes': 7}),
+                    ('multiline_cr', {'multiline': True, 'line_ending': '\r', 'chunk_bytes': 7}),
+                    ('no_final_blank_line', {'unterminated': True})):
+                code, kind, wire = request(server.port, 'POST', path, dict(content, fake_sse_framing=framing))
+                index += 1
+                assert code == 200 and kind == 'text/event-stream', (path, name, code, kind)
+                original = sent(record, index)
+                deadline = time.time() + 10
+                while True:
+                    status = json.loads(request(server.port, 'GET', '/status')[2])
+                    if status['current'] is None and len(status['recent_requests']) == index:
+                        break
+                    assert time.time() < deadline, status
+                    time.sleep(0.02)
+                latest = status['recent_requests'][0]
+                fields = ('http_status', 'stop_reason', 'input_tokens', 'generated_tokens')
+                actual = {field: latest.get(field) for field in fields}
+                if name == 'single_line':
+                    expected = actual
+                    assert actual['http_status'] == 200 and actual['stop_reason'] == 'end_of_generation', latest
+                    assert actual['input_tokens'] > 0 and actual['generated_tokens'] > 0, latest
+                    assert wire == original
+                elif framing.get('unterminated'):
+                    if (latest['http_status'] != 502 or latest.get('code') != 'engine_unavailable'
+                            or latest.get('stop_reason') != 'failed' or not wire.startswith(original) or wire == original):
+                        mismatches.append({'endpoint': path, 'case': name, 'expected': 'incomplete event must not finish the request',
+                                           'actual': actual, 'code': latest.get('code'), 'wire_unchanged': wire == original})
+                elif actual != expected or wire != original:
+                    mismatches.append({'endpoint': path, 'case': name, 'expected': expected, 'actual': actual,
+                                       'wire_unchanged': wire == original,
+                                       'appended_bytes': wire[len(original):].decode('utf-8', 'replace')})
+                assert status['last']['stop_reason'] == latest['stop_reason']
+                assert status['totals']['requests'] == index
+                for field in ('input_tokens', 'generated_tokens'):
+                    assert status['totals'][field] == sum(item.get(field) or 0 for item in status['recent_requests'])
+    finally:
+        assert server.stop() == 0
+    assert_no_leftovers(record)
+    assert not mismatches, mismatches
+    print('PASS SSE framing: three protocols, multi-data fields, LF/CRLF/CR, fragmented HTTP bodies and incomplete EOF')
+
+
 def non_loopback_address():
     addresses = socket.gethostbyname_ex(socket.gethostname())[2]
     address = next((value for value in addresses if not value.startswith(('127.', '169.254.'))), None)
@@ -1175,6 +1232,7 @@ def main():
         # Every /status read above against the field table: types, n/a fields null, every field exercised.
         check_status_schema(snapshots)
         dialects(args.cli, root)
+        event_framing(args.cli, root)
         authentication(args.cli, root)
         platform_launch(args.cli, root)
         lifecycle(args.cli, root)

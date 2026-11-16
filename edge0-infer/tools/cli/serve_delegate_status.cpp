@@ -114,21 +114,34 @@ std::int64_t content_fragments(const Json& event) {
 
 void account_sse(Accounting& a, std::string& pending, const char* data, std::size_t size, double elapsed) {
     pending.append(data, size);
-    std::size_t start = 0;
+    std::size_t start = 0, consumed = 0;
+    std::string payload;
     for (;;) {
-        const auto end = pending.find('\n', start);
+        const auto end = pending.find_first_of("\r\n", start);
         if (end == std::string::npos) break;
         std::string line = pending.substr(start, end - start);
         start = end + 1;
-        if (!line.empty() && line.back() == '\r') line.pop_back();
-        if (line.compare(0, 5, "data:") != 0) continue;
-        auto payload = line.substr(5);
-        if (!payload.empty() && payload.front() == ' ') payload.erase(0, 1);
-        if (payload == "[DONE]") {
+        if (pending[end] == '\r' && start < pending.size() && pending[start] == '\n') ++start;
+        if (!line.empty()) {
+            if (line == "data" || line.compare(0, 5, "data:") == 0) {
+                auto value = line == "data" ? std::string{} : line.substr(5);
+                if (!value.empty() && value.front() == ' ') value.erase(0, 1);
+                payload += value;
+                payload += '\n';
+            }
+            continue;
+        }
+        // An SSE event ends at a blank line, not at an individual data field.
+        consumed = start;
+        if (payload.empty()) continue;
+        std::string event_data;
+        event_data.swap(payload);
+        event_data.pop_back();
+        if (event_data == "[DONE]") {
             if (a.endpoint == "/v1/chat/completions") a.complete = true;
             continue;
         }
-        const auto value = Json::parse(payload, nullptr, false);
+        const auto value = Json::parse(event_data, nullptr, false);
         if (value.is_discarded()) continue;
         try {
             const auto type = text(value, "type");
@@ -156,7 +169,8 @@ void account_sse(Accounting& a, std::string& pending, const char* data, std::siz
             // Accounting never affects forwarding: an event that cannot be read is left out of the record.
         }
     }
-    pending.erase(0, start);
+    // Keep the whole unfinished event; EOF must not commit its partial data.
+    pending.erase(0, consumed);
 }
 
 StatusJson proxy_error(int status, const std::string& path) {

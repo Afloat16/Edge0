@@ -672,16 +672,53 @@ int main() {
                std::to_string(t.generated_tokens) + "," + std::to_string(t.prompt_tokens_read) + "," +
                std::to_string(t.predicted_tokens) + "," + std::to_string(t.first_seconds) + "," + std::to_string(t.decode_seconds);
     };
+    // Multi-data events are joined before accounting; blank lines, not data lines, commit the event.
+    for (const auto& c : live_cases) {
+        const auto expected_record = record_of(record_only(c.sse));
+        const std::string endpoint = std::string("/v1/") + (std::string(c.name) == "chat" ? "chat/completions" : c.name);
+        for (const std::string ending : {"\n", "\r\n", "\r"}) {
+            std::string wire;
+            std::istringstream lines(c.sse);
+            for (std::string line; std::getline(lines, line);) {
+                if (line.rfind("data: {", 0) == 0) {
+                    std::istringstream pretty(Json::parse(line.substr(6)).dump(2));
+                    bool first = true;
+                    for (std::string part; std::getline(pretty, part);) {
+                        wire += "data: " + part + ending;
+                        if (first) wire += ": ignored comment" + ending + "data" + ending;
+                        first = false;
+                    }
+                } else wire += line + ending;
+            }
+            for (std::size_t split : {std::size_t(1), std::size_t(7), std::size_t(64), wire.size()}) {
+                Accounting framed;
+                framed.endpoint = endpoint;
+                std::string pending;
+                for (std::size_t i = 0; i < wire.size(); i += split)
+                    account_sse(framed, pending, wire.data() + i, std::min(split, wire.size() - i), 1.5);
+                CHECK(framed.streamed_tokens == c.fragments);
+                CHECK(record_of(framed) == expected_record);
+                CHECK(framed.complete && pending.empty() && framed.first_token_seconds == 1.5);
+            }
+        }
+        Accounting unfinished;
+        unfinished.endpoint = endpoint;
+        std::string pending;
+        account_sse(unfinished, pending, c.sse.data(), c.sse.size() - 1);
+        CHECK(!unfinished.complete && !pending.empty());
+        account_sse(unfinished, pending, "\n", 1);
+        CHECK(unfinished.complete && pending.empty() && record_of(unfinished) == expected_record);
+    }
     for (const auto& c : live_cases) {
         std::int64_t counted = 0;
-        std::size_t first_line_end = std::string::npos;  // the newline that completes the first counted event
+        std::size_t first_event_end = std::string::npos;  // the blank line that commits the first counted event
         {
             std::istringstream lines(c.sse);
             std::size_t offset = 0;
             for (std::string line; std::getline(lines, line); offset += line.size() + 1)
                 if (line.rfind("data: {", 0) == 0) {
                     const auto n = content_fragments(Json::parse(line.substr(6)));
-                    if (n && first_line_end == std::string::npos) first_line_end = offset + line.size();
+                    if (n && first_event_end == std::string::npos) first_event_end = offset + line.size() + 1;
                     counted += n;
                 }
         }
@@ -694,7 +731,7 @@ int main() {
             account_sse(a, pending, c.sse.data(), cut, 1.0);
             account_sse(a, pending, c.sse.data() + cut, c.sse.size() - cut, 2.0);
             CHECK(pending.empty() && a.saw_content && a.streamed_tokens == c.fragments);
-            CHECK(a.first_token_seconds == (cut > first_line_end ? 1.0 : 2.0));
+            CHECK(a.first_token_seconds == (cut > first_event_end ? 1.0 : 2.0));
             CHECK(record_of(a) == expected_record);
         }
         // Fixed chunk sizes; the n-th chunk arrives at n s.
@@ -704,7 +741,7 @@ int main() {
             for (std::size_t i = 0; i < c.sse.size(); i += split)
                 account_sse(a, pending, c.sse.data() + i, std::min(split, c.sse.size() - i), double(i / split + 1));
             CHECK(pending.empty() && a.streamed_tokens == c.fragments);
-            CHECK(a.first_token_seconds == double(first_line_end / split + 1));
+            CHECK(a.first_token_seconds == double(first_event_end / split + 1));
             CHECK(record_of(a) == expected_record);
         }
     }
