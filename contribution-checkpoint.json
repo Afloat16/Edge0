@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T18:55:17.704Z",
+  "updated": "2026-11-16T19:21:24.508491+00:00",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -8,12 +8,12 @@
       "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
       "branch": "fix/messages-cache-counts-20261116",
       "validation_branch": "validation/messages-cache-20261116",
-      "title": "fix(server): account for Messages cache reads in delegated status",
+      "title": "fix(server): retain delegated cache counts from protocol usage",
       "batch": 1,
       "repository": "Edge0-AI/Edge0",
       "status": "validating",
-      "validation_head": "37fbe09f781cf09c53e29e74e8922bc61d09924e",
-      "validation_tree": "cf70bbf480ca069f39528ee85168fd52173fdbe5",
+      "validation_head": "d9cee6d8f5409fef8fd82dda931ec741abcbaac9",
+      "validation_tree": "9db9d24173c695f0c5c80a03624ada0ad2959920",
       "dedupe": "audit/edge0_protocol_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -32,8 +32,28 @@
         "full_http": "through live progress, dialects and schema passed; later non-loopback authentication blocked by sandbox network"
       },
       "previous_validation_heads": [
-        "1b70770cab421834d94c9ab2c72287bc17c17899"
-      ]
+        "1b70770cab421834d94c9ab2c72287bc17c17899",
+        "37fbe09f781cf09c53e29e74e8922bc61d09924e"
+      ],
+      "local_responses_extension": {
+        "before_native": "cached.reused_tokens==7 failed with Messages-only fix",
+        "before_http": "Responses plain and stream reused_tokens=None, expected3/4",
+        "after_native": "strata_registry passed",
+        "after_http": "dialects and live_progress passed",
+        "native_assembler": "audit/edge0_native_responses_cache.json",
+        "grouping": "Same missing protocol-usage cache accounting root cause; one PR"
+      },
+      "validation_run": 43935975780,
+      "linux_validation": {
+        "job": 133540536441,
+        "conclusion": "success",
+        "l0_l1": "98 passed, 3 skipped, 3 previously reproduced upstream failures",
+        "failures": [
+          "moe_test_platform_memory",
+          "moe_test_ordered_json",
+          "moe_test_template_tools"
+        ]
+      }
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -43,7 +63,7 @@
       "title": "fix(model): reject overflowing JSON round-trip candidates",
       "batch": 2,
       "repository": "Edge0-AI/Edge0",
-      "status": "ready",
+      "status": "published",
       "dedupe": "audit/edge0_json_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -106,7 +126,15 @@
       },
       "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/json-binary64-limits-20261116?expand=1&title=fix%28model%29%3A+reject+overflowing+JSON+round-trip+candidates&body=%23%23+What+%26+why%0A%0AOn+libstdc%2B%2B%2C+the+shortest-number+search+can+serialize+the+largest+finite+binary64+value+as+%602e%2B308%60.+Parsing+that+candidate+saturates+to+%60DBL_MAX%60+and+sets+the+stream+failure+flag%2C+but+the+equality-only+check+accepts+it.+A+finite+JSON+value+therefore+becomes+an+overflowing+representation.%0A%0AReject+failed+round+trips+that+saturated+to+the+maximum+finite+magnitude+and+continue+searching+at+higher+precision.+Keep+valid+subnormal+round+trips%3A+libc%2B%2B+can+set+the+failure+flag+for+subnormal+underflow+even+when+the+parsed+value+is+correct%2C+so+rejecting+every+failed+stream+would+change+existing+valid+output.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Engine%2C+CLI+or+server+%28%60edge0-infer%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0A-+%5BLinux%2Flibstdc%2B%2B+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43930624772%29%3A+reproduced+the+original+%60DBL_MAX%60+failure%2C+then+passed+%2A%2A1%2C030+ordered-JSON+comparisons+and+rejection+cases%2A%2A+with+this+exact+fix.%0A-+%5BmacOS%2Flibc%2B%2B+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43928604436%2Fjob%2F133514659142%29%3A+%2A%2A101+L0%2FL1+tests+passed%2C+3+Vulkan+tests+skipped%2A%2A%2C+and+all+1%2C030+JSON+comparisons+passed.+This+includes+the+smallest+signed+subnormals+as+compatibility+controls.%0A-+Added+positive+and+negative+maximum+finite+values%2C+their+finite+neighbors%2C+minimum+normal+values%2C+signed+subnormals%2C+and+rejection+controls+just+above+the+finite+range+to+the+existing+Python-oracle+test%2C+alongside+its+1%2C000+seeded+random+finite+values.%0A-+Local+Linux+JSON+comparisons+passed.+The+full+local+L0%2FL1+command+also+ran+in+the+development+checkout%2C+which+contains+separate+cache-accounting+and+asset-checker+changes%3A+%2A%2A99+passed%2C+3+skipped%2A%2A%2C+with+the+previously+reproduced+sandbox+%60std%3A%3Atmpfile%60+and+Linux+platform-memory+test+failures+remaining.+An+earlier+remote+Linux+full-suite+attempt+also+failed+in+the+unchanged+baseline%27s+slots+configuration+test+before+reaching+the+fixed-code+step%3B+it+is+not+counted+as+a+successful+validation.%0A%0A%23%23+Checklist%0A%0A-+%5Bx%5D+Added+numeric-boundary+regressions+and+compatibility+controls.%0A-+%5Bx%5D+Ran+the+affected+native+JSON+probe+on+Linux+and+macOS.%0A-+%5Bx%5D+Ran+the+required+L0%2FL1+command+and+recorded+platform%2Fenvironment+failures+separately.%0A",
       "tree": "6f5c2927a870ab846187e8cc12d3abe81d2e17a6",
-      "head": "d36c82352bc1784a23268f7284bb77067b3480d9"
+      "head": "d36c82352bc1784a23268f7284bb77067b3480d9",
+      "upstream_url": "https://github.com/Edge0-AI/Edge0/pull/251",
+      "number": 251,
+      "state": "open",
+      "merged": false,
+      "maintainer_can_modify": false,
+      "browser_verified": true,
+      "api_verified": true,
+      "url": "https://github.com/Edge0-AI/Edge0/pull/251"
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -253,6 +281,11 @@
         "semantic_uncheck": "success; Value 0 verified before and after publication",
         "prior_rejection": "generic AX toggle was rejected by automatic approval review; replaced with explicit permission-narrowing uncheck",
         "ui_verified": true
+      },
+      "official_ci": {
+        "run_id": 43933338039,
+        "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43933338039",
+        "conclusion": "success"
       }
     },
     {
@@ -263,7 +296,7 @@
       "title": "fix(desktop): clear message edits when conversations change",
       "batch": 5,
       "repository": "Edge0-AI/Edge0",
-      "status": "ready",
+      "status": "published",
       "dedupe": "audit/edge0_desktop_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -297,39 +330,141 @@
       },
       "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/conversation-edit-state-20261116?expand=1&title=fix%28desktop%29%3A+clear+message+edits+when+conversations+change&body=%23%23+What+%26+why%0A%0AThe+desktop+chat+component+keeps+its+editing+index+and+draft+text+when+the+selected+conversation+changes.+If+the+destination+also+has+a+user+message+at+that+index%2C+it+opens+an+editor+containing+the+previous+conversation%27s+text.+Switching+through+an+empty+conversation+can+also+resurrect+the+old+edit+when+its+first+message+arrives%2C+allowing+the+wrong+prompt+to+be+resent.%0A%0AClear+the+local+editing+state+when+%60conversation.id%60+changes.+Updates+within+the+same+conversation+keep+the+active+edit+intact.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Chat+app+examples+%28%60edge0-infer%2Fexamples%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0A%5BIndependent+Node+24.15.0+and+26.3.1+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43932576040%29%3A+each+runtime+reproduced+%2A%2A2+failures+with+1+passing+same-conversation+control%2A%2A+on+upstream%2C+then+passed+%2A%2Aall+217+frontend+tests%2A%2A+and+%60npm+run+build%60+with+the+fix.%0A%0AThe+regressions+mount+the+actual+%60Chat%60+component+with+ReactDOM%2C+click+its+edit%2Fsend+controls%2C+and+rerender+it+with+another+conversation.+They+check+direct+switching%2C+switching+through+an+empty+chat%2C+the+resent+prompt+and+message+index%2C+and+preserving+an+edit+during+updates+to+the+same+conversation.+%60happy-dom%60+is+added+only+as+a+development+dependency+for+this+DOM+test+environment.%0A%0ALocal+Node+24.22+also+passed+these+three+regressions%2C+the+frontend+suite%2C+and+the+production+build.+The+independent+validation+branch+contains+only+this+change%3B+no+native+Tauri+integration+or+model-inference+result+is+claimed.%0A%0A%23%23+Checklist%0A%0A-+%5Bx%5D+Added+component+regressions+and+a+same-conversation+compatibility+control.%0A-+%5Bx%5D+Ran+%60npm+test%60+and+%60npm+run+build%60+on+both+documented+Node+versions.%0A-+%5Bx%5D+Kept+the+production+change+scoped+to+the+chat+edit+lifecycle.%0A",
       "tree": "b5f45e01b8024745f837a26722e179f5626d815d",
-      "head": "ac4dd8935f6813dfb9730c813c469e1bc875de61"
+      "head": "ac4dd8935f6813dfb9730c813c469e1bc875de61",
+      "url": "https://github.com/Edge0-AI/Edge0/pull/252",
+      "number": 252,
+      "state": "open",
+      "merged": false,
+      "maintainer_can_modify": false,
+      "browser_verified": true,
+      "api_verified": true
+    },
+    {
+      "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+      "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+      "branch": "fix/generation-defaults-locale-20261116",
+      "validation_branch": "validation/generation-defaults-locale-20261116",
+      "title": "fix(model): parse generation defaults independently of numeric locale",
+      "batch": 6,
+      "repository": "Edge0-AI/Edge0",
+      "status": "validating",
+      "dedupe": "audit/edge0_defaults_history.json.gz",
+      "dedupe_counts": {
+        "all_author_prs": 117,
+        "fork_refs": 21,
+        "relevant_commits": 10,
+        "source_versions": 5
+      },
+      "local_tests": {
+        "before": "C locale succeeds; de_DE.UTF-8 converts temperature 0.625 to 0",
+        "after": "generation defaults and model catalog pass; C, German, and French locales exercised"
+      },
+      "scope": "Numeric parsing in generation_config.json; independent of JSON serialization overflow",
+      "validation_head": "41eae16bb0e0bc353565689aa8c1ac67b5586c54",
+      "validation_tree": "2dd240545f4ea837db2a8b40e9d41ffa1a2140a0",
+      "validation_run": 43936480281,
+      "linux_validation": {
+        "job": 133542304649,
+        "conclusion": "success",
+        "l0_l1": "98 passed, 3 skipped, 3 previously reproduced upstream failures",
+        "failures": [
+          "moe_test_platform_memory",
+          "moe_test_ordered_json",
+          "moe_test_template_tools"
+        ]
+      }
+    },
+    {
+      "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+      "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+      "branch": "fix/asset-root-selection-20261116",
+      "validation_branch": "validation/asset-root-selection-20261116",
+      "title": "fix(desktop): preserve selected asset root directories",
+      "batch": 7,
+      "repository": "Edge0-AI/Edge0",
+      "status": "validating",
+      "dedupe": "audit/edge0_desktop_history.json.gz",
+      "dedupe_counts": {
+        "all_author_prs": 117,
+        "fork_refs": 21,
+        "relevant_commits": 33,
+        "source_versions": 205,
+        "current_main_versions": 5
+      },
+      "dedupe_notes": "All five versions of the desktop path-picker retain the same lossy separator removal. Historical macOS/Windows sources were included; no equivalent root-preservation change found.",
+      "local_tests": {
+        "before": "2 failed, 3 passed; Z:\\ stored as Z:, / treated as cancellation",
+        "after": "226 passed in combined checkout; production build passed",
+        "scope": "Actual ReactDOM App and Models controls with mocked native chooser/persistence boundary; no native GUI execution claimed"
+      },
+      "validation_head": "b4f9d554989905c2a53b5593035b95e957c14a9c",
+      "validation_tree": "72c67330833da4afe136aa42335ede1e10a59c82"
     }
   ],
   "dedupe": {
-    "prs": 117,
-    "previous_fork_refs": 21,
-    "sources": {
-      "protocol": [
-        66,
-        49
-      ],
-      "json": [
-        2,
-        2
-      ],
-      "desktop": [
-        33,
-        205
-      ],
-      "asset_checker": [
-        3,
-        3
-      ]
-    }
+    "all_author_historical_prs": 117,
+    "preexisting_fork_refs": 21,
+    "protocol_history": {
+      "commits": 66,
+      "source_versions": 49
+    },
+    "desktop_history": {
+      "commits": 33,
+      "source_versions": 205
+    },
+    "json_history": {
+      "commits": 2,
+      "source_versions": 2
+    },
+    "defaults_history": {
+      "commits": 10,
+      "source_versions": 5
+    },
+    "refresh_latest_prs": "No intervening third-party PRs through published #252"
   },
   "rule_summary": {
-    "issue_required_for_focused_bugfixes": false,
-    "explicit_open_cap": null,
-    "mandatory_disclosure": false,
-    "exclusions": "All Genesis-Embodied-AI repositories excluded"
+    "repository": "Edge0-AI/Edge0",
+    "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+    "tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+    "open_cap": null,
+    "issue_preapproval": "Strata substantial features, refactors, architecture and default changes require agreement; focused bugfixes may go straight to PR. Root asks to link an issue being closed, without an explicit mandatory issue creation.",
+    "disclosure": "No mandatory tool disclosure found. Strata welcomes assistance but requires checked source and real evidence.",
+    "test_requirements": "Run L0/L1 locally for touched infer changes and higher applicable levels. Strata backend builds and hardware claims require actual validation, else draft.",
+    "sources": [
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/CONTRIBUTING.md",
+        "path": "CONTRIBUTING.md",
+        "content": "# Contributing to edge0\n\nThanks for your interest in contributing! edge0 is an open-source streaming MoE\ninference framework, and contributions of all kinds are welcome — bug reports,\nperformance measurements, documentation fixes, new model support, and new\nplatform/backend work.\n\n## Ways to contribute\n\n- **Report a bug / performance issue / request a feature or model** — open an\n  issue using one of the [issue forms](.github/ISSUE_TEMPLATE/). The forms ask\n  for the platform, backend, chip and memory — these fields resolve the large\n  majority of reports, so please fill them in.\n- **Ask a question or share results** — please use\n  [GitHub Discussions](https://github.com/Edge0-AI/Edge0/discussions) rather\n  than an issue.\n- **Send a pull request** — see the workflow below.\n\n## Repository layout\n\n| Path | What |\n|---|---|\n| [`edge0-infer/`](edge0-infer/) | The program you run: the native inference engine (C++, GGML), its CLI and local OpenAI- and Anthropic-compatible server, the model asset tools, and the chat app examples for desktop, Android and iOS |\n| [`edge0-strata/`](edge0-strata/EDGE0.md) | The engine for `edge0-145b` and `edge0-120b` (NVIDIA GPU on Linux or Windows, Metal on macOS), a fork of Strata that `edge0-infer` starts for these models |\n| [`docs/`](docs/) | Model design docs: MoE routing, the prerouter, and the model tiers |\n| [`paper/`](paper/) | The technical report |\n\n`edge0-infer/` is developed in a separate repository and synced here. Open\nissues and pull requests for it in this repository as usual: an accepted change\nis applied there first and arrives here with the next sync.\n\n## Development setup\n\nBuild the engine and get the model assets as described in\n[Getting started](edge0-infer/docs/getting-started.md). It covers macOS, iOS,\nAndroid, Linux and Windows. For `edge0-145b` and `edge0-120b`, also build\n`edge0-strata/` as [`edge0-strata/EDGE0.md`](edge0-strata/EDGE0.md) describes.\n\n## Running the tests\n\nThe tests are CTest tests with a level label from `L0` (static checks) to `L4`\n(acceptance on a device). From `edge0-infer/`:\n\n```bash\ncmake --preset cpu && cmake --build --preset cpu\nctest --preset cpu -L \"L0|L1\"     # no model assets needed\n```\n\n[Testing](edge0-infer/docs/testing.md) describes every level, what each needs\n(the tiny test fixtures, the real assets, a device) and the full regression\ncommands.\n\n## Adding a new model\n\nA model has two parts in `edge0-infer/`: its asset tools in\n`edge0-infer/tools/assets/<model>/` (see\n[Adding a model](edge0-infer/tools/assets/README.md#adding-a-model)) and its\ncomputation in `edge0-infer/src/models/<model>/` (see\n[Architecture](edge0-infer/docs/architecture.md)). Please include a short note\non the architecture (layers / experts / routing width / attention type) in your\nPR.\n\n## Pull request workflow\n\n1. **Fork** the repo and create a feature branch off `main`\n   (e.g. `fix/expert-slot-oob`, `docs/clarify-memory`, `feat/tool-calling`).\n2. Make your change; **add or update tests** for new behavior.\n3. Run the tests for the levels your change touches (at least `L0` and `L1`)\n   locally.\n4. Open a PR against `Edge0-AI/Edge0:main` and fill in the\n   [PR template](.github/PULL_REQUEST_TEMPLATE.md). Link the issue it closes\n   (`Fixes #NN`).\n5. Keep PRs focused — one logical change per PR is easier to review and merge.\n\n### Commit / PR style\n\nThis repo uses conventional-commit-style prefixes, e.g.\n`fix(experts): ...`, `feat(server): ...`, `docs(readme): ...`,\n`perf(decode): ...`, `chore: ...`. Please follow the same convention.\n\n## Reporting security issues\n\nDo not open a public issue for security problems. Email **samuel@edge0.ai**\ninstead.\n\n## License\n\nBy contributing, you agree that your contributions will be licensed under the\nproject's [Apache-2.0](LICENSE) license. Contributions to `edge0-strata/` are\nlicensed under that directory's [MIT](edge0-strata/LICENSE) license.\n"
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/.github/PULL_REQUEST_TEMPLATE.md",
+        "path": ".github/PULL_REQUEST_TEMPLATE.md",
+        "content": "<!-- Thanks for contributing to edge0! Keep this short but complete. -->\n\n## What & why\n\n<!-- What does this PR change, and what problem does it solve? Link issues: \"Fixes #NN\". -->\n\nFixes #\n\n## Area\n\n- [ ] Engine, CLI or server (`edge0-infer/`)\n- [ ] Model asset tools (`edge0-infer/tools/assets/`)\n- [ ] Chat app examples (`edge0-infer/examples/`)\n- [ ] Model docs (`docs/`)\n- [ ] Other\n\n## How was it tested?\n\n<!-- Commands you ran, platform and backend, hardware/chip. Paste the `edge0-infer bench` summary for perf changes. For edge0-145b / edge0-120b, which run through edge0-strata, paste the community benchmark report (BENCH.bat / ./bench.sh) instead: `edge0-infer bench` uses the native loader and cannot measure a delegated model. -->\n\n## Checklist\n\n- [ ] `ctest --preset cpu -L \"L0|L1\"` passes locally in `edge0-infer/` (engine changes)\n- [ ] Ran the higher test levels this change affects (see `edge0-infer/docs/testing.md`)\n- [ ] Added/updated tests for new behavior\n- [ ] Updated relevant docs / READMEs (incl. translations if user-facing)\n"
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-strata/CONTRIBUTING.md",
+        "path": "edge0-strata/CONTRIBUTING.md",
+        "content": "# Contributing to Strata\n\n**AI assistance is welcome. The contributor is responsible for understanding the change and supplying real evidence.**\n\nThese rules apply to issues, pull requests, benchmark reports, and the agents helping prepare them.\nYou should be able to explain every changed line and answer review questions about it.\n\n## Before starting\n\n1. Search [issues](https://github.com/Niko1221/Strata/issues) and\n   [pull requests](https://github.com/Niko1221/Strata/pulls), including closed discussions. Add new evidence to an\n   existing thread when it covers your problem.\n2. Read [EDGE0.md](EDGE0.md) and the documentation for the component you want to change.\n3. Get maintainer agreement on scope before substantial features, refactors, architecture changes, or changes to\n   defaults. Describe the user problem, proposed behavior, and tradeoffs in an issue first. Agreement on scope\n   does not guarantee a merge. Focused fixes and benchmark reports can go straight to a PR.\n4. Keep one problem per PR. Update that PR after feedback; do not open competing attempts for the same change.\n\nDo not resubmit a declined proposal under a different title or through another agent. If new evidence changes\nthe situation, bring it to the original discussion and let a maintainer decide whether to reopen it.\n\n## Report a problem people can investigate\n\nUse the matching [issue form](https://github.com/Niko1221/Strata/issues/new/choose). A bug report should include:\n\n- The smallest steps or command that reproduce the problem, and the expected and actual behavior.\n- Strata version or commit, OS, GPU and VRAM, and relevant model, quantization, and configuration.\n- The exact error and relevant logs, with credentials and private content removed.\n- Whether you reproduced it yourself. Label a finding based only on reading code or a scanner as\n  **unconfirmed static analysis**, and explain the suspected path without presenting it as an observed failure.\n\nDo not invent reproduction steps, errors, affected hardware, or severity. If you cannot reproduce something,\nsay what you inspected and what would verify the hypothesis. Feature requests should explain a concrete user\nneed and the current workaround. Questions should say what you tried and where you got stuck.\n\nExample structure, with placeholders to replace with actual observations:\n\n```text\nProblem: <one observed behavior>\nEnvironment: <commit, OS, GPU/VRAM, model/quant, relevant settings>\nReproduce: <exact command or short sequence>\nExpected: <documented or intended behavior>\nActual: <observed behavior and exact error>\nEvidence: <sanitized log attachment>\nReproduction status: <reproduced locally OR unconfirmed static analysis>\n```\n\n## Titles\n\nEvery issue and pull request title starts with its area in square brackets, then a short description: `[Engine]`, `[GUI]`, `[TUI]`,\n`[Benchmark]`, `[Docs]` or `[Other]`. For example `[Engine] fix decode stop on long prompts` or `[GUI] keep the model list after a tab\nswitch`. The issue forms ask for the area and a check on the title fails when the prefix is missing.\n\n## Prepare a focused pull request\n\nLead with the problem and resulting behavior. Explain why the approach is needed, the important limits, and\nany compatibility effects. Link the issue and scope agreement when applicable. A file-by-file narration or\nan AI-generated summary of the diff is not a substitute for this explanation.\n\n- Keep unrelated formatting, cleanup, dependency changes, and speculative abstractions out of the PR.\n- Add documentation where it changes what a user or developer needs to know. Avoid repeated summaries,\n  speculative roadmaps, and generated documentation with no actionable information.\n- Preserve existing behavior outside the intended change. New features are opt-in and must not\n  slow down or change the default path.\n- Read the complete diff, including generated files, before submitting. Remove debugging output, secrets,\n  private paths, and accidental files.\n- Prefer a small relevant regression check over tests that only restate the implementation. Documentation-only\n  changes need link, example, and consistency checks; they do not require GPU builds.\n\n## Show the validation you actually performed\n\nList exact commands, the revision and environment tested, and observed outcomes. Keep **passed**, **failed**,\nand **not run** separate. Include relevant output or a log attachment. A command you suggest running is not\nevidence that it passed; a CI run on a different revision is not validation of the submitted code.\n\nBuild every backend a code change touches, including CUDA, HIP, and SYCL where applicable, before requesting\nreview. For changes that need hardware execution, report that execution separately from compilation. A mock,\nstatic check, or successful build does not establish hardware correctness. If you lack a required environment,\nkeep the PR as a draft, identify the missing checks, and ask for targeted help in the same thread. Do not claim\ncompatibility you have not tested.\n\nPerformance claims need before/after runs on the same hardware and workload, with every changed setting\nidentified. Preserve the individual runs, failures, and variability. Follow the\n[community measurement guide](docs/COMMUNITY_BENCHMARKS.md); standard submissions will use the\n[benchmark protocol](docs/BENCHMARK_PROTOCOL.md) once it is activated. One fast run does not justify changing a\ndefault or claiming a speedup for other machines.\n\nExample PR body; placeholders are not test results:\n\n```text\nProblem and result: <trigger; behavior before and after the change>\nRelated discussion: <issue URL and scope agreement, when required>\nApproach: <why this fix; relevant compatibility effects>\nValidation:\n  Passed: <exact command, revision/environment, observed result, log>\n  Failed: <exact command and failure, or none observed>\n  Not run: <check, reason, and what remains unverified>\nLimits: <known limitations or remaining work>\n```\n\n## Rules for AI-assisted work\n\nUse agents to help investigate, implement, and explain work that you can review. Before submitting, verify\ntheir claims against the source, actual command output, or a cited primary reference.\n\nNever submit fabricated measurements, invented test results, fake logs, or copied claims you have not checked.\nDo not turn a repository scan into a batch of speculative issues or PRs. Consolidate related findings, establish\ntheir effect, and submit the useful evidence. Do not present an agent's confidence or another model's approval\nas validation. Keep review replies concise and address the requested change or evidence directly.\n\nMaintainers may request a smaller change, return a PR to draft, or close a submission that lacks evidence,\nduplicates existing work, or ignores agreed scope. A smaller, understandable contribution with honest limits\nis easier to review and maintain.\n\n## Share a benchmark\n\nA results-only PR should contain the human report, raw measurements, sanitized configuration, and supporting\nlogs. Keep it separate from engine changes and include poor results and failed requests.\n\nThe [current community benchmark guide](docs/COMMUNITY_BENCHMARKS.md) remains available for measurements made\nwith today's tools. The [new protocol](docs/BENCHMARK_PROTOCOL.md) defines the draft standard and future approval\nworkflow. Its draft status must remain visible: existing reports are not automatically standard or approved.\n"
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/README.md",
+        "path": "README.md",
+        "content": "<p align=\"center\"><img src=\"assets/edge0-release/hero.png\" alt=\"Edge0\" width=\"100%\"></p>\n\n<h1 align=\"center\">Edge0</h1>\n\n<p align=\"center\">An open-source streaming MoE inference framework</p>\n\n<br>\n\n<p align=\"center\">Think big. Run here.<br>Sparse. By design.</p>\n\n<br>\n\n<p align=\"center\">macOS · iOS · Android · Linux · Windows<br>One program for every Edge0 model</p>\n\n<p align=\"center\"><sub>Project</sub><br>\n<img src=\"assets/edge0-release/badge-group-divider.svg\" alt=\"\" width=\"540\" height=\"16\"><br>\n<a href=\"https://arxiv.org/abs/2609.18063\"><img src=\"assets/edge0-release/badges/arxiv-badge.svg\" alt=\"arXiv / 2609.18063\" height=\"18\"></a> <a href=\"https://github.com/Edge0-AI/Edge0\"><img src=\"assets/edge0-release/badges/github-badge.svg\" alt=\"GitHub / Edge0-AI/Edge0\" height=\"18\"></a> <a href=\"https://edge0.ai/discord\"><img src=\"assets/edge0-release/badges/discord-badge.svg\" alt=\"Discord / Join us\" height=\"18\"></a> <a href=\"LICENSE\"><img src=\"assets/edge0-release/badges/license-badge.svg\" alt=\"License / Apache 2.0\" height=\"18\"></a> <a href=\"https://github.com/Edge0-AI/Edge0/releases\"><img src=\"assets/edge0-release/badges/releases-badge.svg\" alt=\"Windows · macOS / Download\" height=\"18\"></a>\n</p>\n\n<p align=\"center\"><sub>Latest release</sub><br>\n<img src=\"assets/edge0-release/badge-group-divider.svg\" alt=\"\" width=\"540\" height=\"16\"><br>\n<a href=\"https://huggingface.co/Edge0/Edge0-145B-q3k\"><img src=\"assets/edge0-release/badges/Edge0-145B-q3k-badge.svg\" alt=\"Edge0 / 145B-Q3_K\" height=\"18\"></a> <a href=\"https://huggingface.co/Edge0/Edge0-145B-NVFP4\"><img src=\"assets/edge0-release/badges/Edge0-145B-NVFP4-badge.svg\" alt=\"Edge0 / 145B-NVFP4\" height=\"18\"></a> <a href=\"https://huggingface.co/Edge0/Edge0-120B-q3k\"><img src=\"assets/edge0-release/badges/Edge0-120B-q3k-badge.svg\" alt=\"Edge0 / 120B-Q3_K\" height=\"18\"></a> <a href=\"https://huggingface.co/Edge0/Edge0-120B-NVFP4\"><img src=\"assets/edge0-release/badges/Edge0-120B-NVFP4-badge.svg\" alt=\"Edge0 / 120B-NVFP4\" height=\"18\"></a>\n</p>\n\n<p align=\"center\"><sub>Old release</sub><br>\n<img src=\"assets/edge0-release/badge-group-divider.svg\" alt=\"\" width=\"540\" height=\"16\"><br>\n<a href=\"https://huggingface.co/Edge0/Edge0-35B-A3B-preview\"><img src=\"assets/edge0-release/badges/Edge0-35B-A3B-preview-hf-badge.svg\" alt=\"Hugging Face / Edge0-35B-A3B-preview\" height=\"18\"></a> <a href=\"https://huggingface.co/Edge0/Edge0-8B-A1B-preview\"><img src=\"assets/edge0-release/badges/Edge0-8B-A1B-preview-hf-badge.svg\" alt=\"Hugging Face / Edge0-8B-A1B-preview\" height=\"18\"></a> <a href=\"https://www.modelscope.cn/models/Edge0/Edge0-35B-A3B-preview\"><img src=\"assets/edge0-release/badges/Edge0-35B-A3B-preview-modelscope-badge.svg\" alt=\"ModelScope / Edge0-35B-A3B-preview\" height=\"18\"></a> <a href=\"https://www.modelscope.cn/models/Edge0/Edge0-8B-A1B-preview\"><img src=\"assets/edge0-release/badges/Edge0-8B-A1B-preview-modelscope-badge.svg\" alt=\"ModelScope / Edge0-8B-A1B-preview\" height=\"18\"></a>\n</p>\n\n<p align=\"center\">English · <a href=\"README_zh.md\">中文</a> · <a href=\"README_ja.md\">日本語</a> · <a href=\"README_es.md\">Español</a> · <a href=\"README_fr.md\">Français</a></p>\n\n<p align=\"center\"><a href=\"#news\">News</a> · <a href=\"#about\">About</a> · <a href=\"#models\">Models</a> · <a href=\"#quality\">Quality</a> · <a href=\"#benchmark\">Benchmark</a> · <a href=\"#getting-started\">Getting started</a></p>\n\n<br>\n\n## News\n\n<p><a href=\"docs/models/edge0-145b.md\"><img src=\"assets/edge0-release/news/news-2026-11-13.svg\" alt=\"13 November 2026 · 145B and 120B models · Latent MoE models for one NVIDIA GPU, in Q3_K and NVFP4.\" width=\"527\"></a></p>\n\n<p><a href=\"edge0-infer/README.md\"><img src=\"assets/edge0-release/news/news-2026-11-04.svg\" alt=\"4 November 2026 · Unified inference engine · A GGML-based engine with a shared C++ API, local server and chat examples.\" width=\"527\"></a></p>\n\n<p><a href=\"https://github.com/Edge0-AI/Edge0/tree/pre-edge0-infer\"><img src=\"assets/edge0-release/news/news-2026-09-30.svg\" alt=\"30 September 2026 · Engines for four platforms · iOS, macOS, Android and Windows engines; archived at pre-edge0-infer.\" width=\"527\"></a></p>\n\n<details open>\n<summary>More updates</summary>\n\n<p><a href=\"https://arxiv.org/abs/2609.18063\"><img src=\"assets/edge0-release/news/news-2026-09-16.svg\" alt=\"16 September 2026 · 35B technical report · Serving 35B MoEs from SSD with trained routing prediction.\" width=\"527\"></a></p>\n\n<p><a href=\"https://huggingface.co/Edge0/Edge0-35B-A3B-preview\"><img src=\"assets/edge0-release/news/news-2026-09-08.svg\" alt=\"8 September 2026 · First open-source release · The edge0 framework and 35B / 8B preview models on Hugging Face and ModelScope.\" width=\"527\"></a></p>\n\n<details>\n<summary>Full release notes</summary>\n\n- **[2026-11-13]** We released **`edge0-145b`** and **`edge0-120b`**, latent mixture-of-experts models derived from Qwen3.8-Flash-Next for a single NVIDIA GPU on Linux or Windows. They run on [edge0-strata](edge0-strata/EDGE0.md), which `edge0-infer serve` and `edge0-infer chat` start for them; see the [model page](docs/models/edge0-145b.md). Weights on Hugging Face: [`Edge0-145B-q3k`](https://huggingface.co/Edge0/Edge0-145B-q3k) · [`Edge0-145B-NVFP4`](https://huggingface.co/Edge0/Edge0-145B-NVFP4) · [`Edge0-120B-q3k`](https://huggingface.co/Edge0/Edge0-120B-q3k) · [`Edge0-120B-NVFP4`](https://huggingface.co/Edge0/Edge0-120B-NVFP4).\n- **[2026-11-04]** We released the **unified inference engine [`edge0-infer`](edge0-infer/README.md)**: built on [GGML](https://github.com/ggml-org/ggml), one engine and one native C++ API run the same model on macOS, iOS, Android and Windows, with a CLI, an OpenAI-compatible local server, and chat app examples for desktop, Android and iOS. The first release supports `edge0-35b`; `edge0-8b` follows in a later release. It replaces the Python framework and the per-platform engines; the previous code is kept at tag [`pre-edge0-infer`](https://github.com/Edge0-AI/Edge0/tree/pre-edge0-infer).\n- **[2026-09-30]** We released the **edge0 inference engines for four platforms — iOS, macOS, Android and Windows** (source at tag [`pre-edge0-infer`](https://github.com/Edge0-AI/Edge0/tree/pre-edge0-infer)).\n- **[2026-09-16]** Our technical report is on arXiv: [The Other Half of the Memory Wall: Serving 35B MoEs from SSD with Trained Routing Prediction](https://arxiv.org/abs/2609.18063).\n- **[2026-09-08]** Initial open-source release of **edge0**, together with both model tiers — [`Edge0-35B-A3B-preview`](https://huggingface.co/Edge0/Edge0-35B-A3B-preview) and [`Edge0-8B-A1B-preview`](https://huggingface.co/Edge0/Edge0-8B-A1B-preview) — on Hugging Face and ModelScope.\n\n</details>\n\n</details>\n\n<details open>\n<summary><h2>Previous release</h2></summary>\n\n→ [35B / 8B release guide](docs/legacy-models.md) — model downloads, architecture, benchmarks, supported platforms and setup instructions.\n\n</details>\n\n## About\n\n<p>Edge0 is an open-source streaming MoE inference framework for running large sparse models on consumer hardware.</p>\n\nUse it through the command line, a local API server, or the Edge0 Chat app.\n\nThe latest release brings 145B and 120B latent-MoE models to a single NVIDIA GPU or an Apple Silicon Mac.\n\nTrained natively at 4 bits, both models are available in Q3_K and NVFP4 for local agent workloads.\n\n[`edge0-infer`](edge0-infer/README.md) provides shared `serve` and `chat` commands and selects the engine from the model folder. The latest models run on [edge0-strata](edge0-strata/EDGE0.md), a fork of Strata; the previous 35B release runs on the [GGML-based native engine](docs/legacy-models.md#native-engine-design).\n\n### Platforms\n\nSupport depends on the model and its engine.\n\n| Platform | `edge0-145b`, `edge0-120b` (edge0-strata) | `edge0-35b` (native engine) |\n| --- | --- | --- |\n| **Linux** | NVIDIA GPU (CUDA 13) | CPU |\n| **Windows** | NVIDIA GPU (CUDA 13) | CPU, Vulkan |\n| **macOS** (Apple Silicon) | Metal | Metal, CPU |\n| **iOS** | — | Metal |\n| **Android** | — | CPU |\n\nUse the [145B / 120B setup](#getting-started) for the latest release. The [previous-release guide](docs/legacy-models.md#platforms) covers native backends, platform-specific builds and chat examples. The 8B checkpoint is available; native-engine support is planned.\n\n## Models\n\n<p>145B / 120B are the current latent-MoE series, derived from Qwen3.8-Flash-Next and trained natively at 4 bits.</p>\n\nThey run on edge0-strata through `edge0-infer serve` and `edge0-infer chat`, on Linux or Windows with an NVIDIA GPU and CUDA 13, or on macOS with Metal on Apple Silicon.\n\n**145B Q3_K · RTX 5090 D 24 GB:** 121.2 tok/s agent decode · 3554.9 tok/s 16K prefill.\n\n| Tier | Released checkpoint | Inference profile | Engine |\n|---|---|---|---|\n| [`edge0-145b`](docs/models/edge0-145b.md) | [`Edge0/Edge0-145B-q3k`](https://huggingface.co/Edge0/Edge0-145B-q3k) · [NVFP4](https://huggingface.co/Edge0/Edge0-145B-NVFP4) | Q3_K or NVFP4 latent experts (1792), 48 layers, 512 experts, K=10 | edge0-strata ✅ (Linux or Windows, NVIDIA GPU; macOS Apple Silicon, Metal, Q3_K) |\n| [`edge0-120b`](docs/models/edge0-145b.md) | [`Edge0/Edge0-120B-q3k`](https://huggingface.co/Edge0/Edge0-120B-q3k) · [NVFP4](https://huggingface.co/Edge0/Edge0-120B-NVFP4) | Q3_K or NVFP4 latent experts (1280), 48 layers, 512 experts, K=10 | edge0-strata ✅ (Linux or Windows, NVIDIA GPU; macOS Apple Silicon, Metal, Q3_K) |\n\n<details open>\n<summary><h3>Model overview · 145B Q3_K</h3></summary>\n\nQ3_K · RTX 5090 D 24 GB. Prefill uses a 16K-token input. Quality scores are model-level results.\n\n<a href=\"assets/edge0-release/model-overview-145B-q3k.svg\"><img src=\"assets/edge0-release/model-overview-145B-q3k.svg\" alt=\"Edge0-145B Q3_K: architecture, quality, 121.2 tok/s agent decode, 3554.9 tok/s prefill, and weights by build\" width=\"1600\"></a>\n\n</details>\n\n## Quality\n\n### 145B / 120B\n\nSix benchmarks, six models. Higher is better. Scores are reported by model, not as separate Q3_K and NVFP4 evaluations.\n\n<a href=\"assets/edge0-release/quality-overview.svg\"><img src=\"assets/edge0-release/quality-overview.svg\" alt=\"Six-model comparison on DeepSWE 1.1, Terminal-Bench 2.1, HLE, GPQA-Diamond, IFBench and AA-LCR; 0–100 scale, with missing values marked\" width=\"1400\"></a>\n\n[Copyable scores and all model names](docs/models/edge0-145b.md#quality)\n\n<details>\n<summary>Copyable scores · all six models</summary>\n\nBold values indicate the best score in each column.\n\n| Model | deepswe 1.1 | terminal-bench 2.1 | AA-LCR | IFBench | GPQA-Diamond | HLE |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n| **Edge0-145B** | **64.6** | **86.5** | 79.3 | 80.6 | 90.4 | 35.4 |\n| **Edge0-120B** | 51.3 | 75.3 | 81.0 | 79.3 | 87.4 | 31.0 |\n| DeepSeek-V4-Flash-0731 | 54.4 | 82.7 | 79.7 | 79.2 | 90.8 | 33.8 |\n| Qwen3.8-Flash-Next | 58.7 | 83.3 | 79.1 | **81.3** | **91.7** | 35.9 |\n| Qwen3.8-27B | 42.2 | 73.0 | **82.0** | 79.5 | 89.2 | 30.8 |\n| Claude-Opus-4.6 (Max) | / | 78.2 | 78.0 | 62.5 | 91.3 | **40.0** |\n\n</details>\n\n<a name=\"speed\"></a>\n\n## Benchmark\n\n### 145B / 120B\n\nAll throughput figures are in tok/s. The headline uses **145B Q3_K** on RTX 5090 D 24 GB.\n\n<details open>\n<summary>145B speed table · all machines and builds</summary>\n\nHighlighted rows show Q3_K. Click the table to view it at full size.\n\n<a href=\"assets/edge0-release/speed-145B.svg\"><img src=\"assets/edge0-release/speed-145B.svg\" alt=\"Complete seven-row Edge0-145B speed table: 4K and 16K prefill, chat and agent decode, all measured machines and builds\" width=\"1400\"></a>\n\n<details>\n<summary>Copyable 145B speed data</summary>\n\n| Machine | Build | 4K prefill | 16K prefill | Chat decode | Agent decode |\n|---|---|---:|---:|---:|---:|\n| RTX 5090 D 24 GB | Q3_K | 2169.9 | 3554.9 | 99.7 | **121.2** |\n| RTX 5090 D 24 GB | NVFP4 | 1839.6 | 3165.7 | 79.6 | 98.3 |\n| RTX 4090 24 GB | Q3_K | 2042.0 | 3179.4 | 69.9 | 91.7 |\n| RTX Spark N1X 60 GiB | Q3_K | 674.0 | 770.3 | 37.7 | 36.7 |\n| RTX Spark N1X 60 GiB | NVFP4 | 821.2 | 922.4 | 40.1 | 46.0 |\n| Apple M2 Ultra (Metal) | Q3_K | 755.6 | 800.3 | 60.9 | 57.0 |\n| 16 GiB VRAM + 20 GiB RAM | Q3_K | 249 | 335 | 36.8 | 44.9 |\n\n</details>\n\n</details>\n\n<details>\n<summary>145B measurement conditions · constrained budget and memory residency</summary>\n\nThe `16 GiB VRAM + 20 GiB RAM` rows are the same RTX 5090 D 24 GB, not a different card. VRAM is capped with `--vram-reserve-mib 8192`; system RAM by a cgroup (`MemoryMax=20G`, no swap). With residency on, the same card holds **Q3_K** (40.81 GiB of weights)\nas 23.14 GiB VRAM + 31.28 GiB RAM, and **NVFP4** (47.79 GiB) as 23.25 GiB VRAM + 38.27 GiB RAM — disjoint expert sets,\nnothing counted twice.\n\nSee [Usage & troubleshooting](#usage-help) for memory-saving options.\n\nThe 16 GiB VRAM + 20 GiB RAM budget is a test limit, not a minimum system requirement. The Apple M2 Ultra row is a Metal measurement.\n\n</details>\n\n<details open>\n<summary>120B speed table · all machines and builds</summary>\n\n<a href=\"assets/edge0-release/speed-120B.svg\"><img src=\"assets/edge0-release/speed-120B.svg\" alt=\"Complete eight-row Edge0-120B speed table\" width=\"1400\"></a>\n\n<details>\n<summary>Copyable 120B speed data</summary>\n\n| Machine | Build | 4K prefill | 16K prefill | Chat decode | Agent decode |\n|---|---|---:|---:|---:|---:|\n| RTX 5090 D 24 GB | Q3_K | 3236.7 | 4576.5 | 130.2 | **144.6** |\n| RTX 5090 D 24 GB | NVFP4 | 2668.5 | 4357.1 | 124.9 | 135.5 |\n| RTX 4090 24 GB | Q3_K | 2637.5 | 3551.1 | 95.0 | 104.9 |\n| RTX Spark N1X 60 GiB | Q3_K | 987.0 | 1081.7 | 47.2 | 68.4 |\n| RTX Spark N1X 60 GiB | NVFP4 | 996.4 | 1066.9 | 45.1 | 68.9 |\n| Apple M2 Ultra (Metal) | Q3_K | 867.6 | 908.7 | 60.4 | 63.0 |\n| 16 GiB VRAM + 20 GiB RAM | Q3_K | 430 | 778 | 62.4 | 73.3 |\n| 16 GiB VRAM + 20 GiB RAM | NVFP4 | 361.1 | 619.7 | 51.3 | 59.9 |\n\n</details>\n\n`16 GiB VRAM + 20 GiB RAM` rows are the RTX 5090 D 24 GB again, constrained by cgroup to a 16 GiB VRAM and\n20 GiB system-RAM budget — not a different card. With residency on, the same card holds **Q3_K** (27.98 GiB of weights)\nas 22.93 GiB VRAM + 18.40 GiB RAM, and **NVFP4** (32.96 GiB) as 23.02 GiB VRAM + 23.40 GiB RAM — disjoint expert sets,\nnothing counted twice.\n\nThese residency readings use expert residency enabled, `--no-prefill-borrow`, conv cache = 0 and kv-resident = 0. Host RAM is measured as `RssAnon + RssShmem`. These are single-run readings, not minimum system requirements. See [Usage & troubleshooting](#usage-help) for memory-saving options.\n\n</details>\n\n<details open>\n<summary><h2>In action</h2></summary>\n\n<p align=\"center\"><a href=\"assets/edge0-release/showcase.mp4\"><img src=\"assets/edge0-release/showcase-poster.svg\" alt=\"Play the 2 minute 1 second Edge0-145B showcase\" width=\"480\"></a></p>\n\n<p align=\"center\">Recorded with Edge0-145B · <a href=\"assets/edge0-release/showcase.mp4\">Open video ↗</a></p>\n\n<details>\n<summary>Five demonstrations · chapter guide</summary>\n\n| Time | Demonstration |\n| --- | --- |\n| 0:00 | Local Chat & Coding |\n| 0:36 | Video Production |\n| 0:58 | Manhattan in 3D |\n| 1:19 | Cathedral World Building |\n| 1:38 | PCB Design |\n\n[Chapter markers (VTT)](assets/edge0-release/showcase-chapters.vtt)\n\n</details>\n\n</details>\n\n## Architecture\n\nLatent MoE compresses expert inputs while keeping attention at full width. The 145B model uses latent width 1792; the 120B model uses 1280. Both route each token to 10 of 512 experts, alongside one shared expert.\n\n<details open>\n<summary>Architecture details · diagram and configuration</summary>\n\n<a href=\"assets/edge0-release/arch-145B.svg\"><img src=\"assets/edge0-release/arch-145B.svg\" alt=\"Edge0-145B architecture and expert routing\" width=\"1760\"></a>\n\n[Full configuration, routing and both model profiles](docs/models/edge0-145b.md#model-profile).\n\n</details>\n\n<a name=\"quick-start\"></a>\n\n## Getting Started\n\n### 145B / 120B · edge0-strata\n\nEach model folder (Q3_K or NVFP4, Edge0-145B or Edge0-120B) runs through `edge0-infer`, from the command line or from the Edge0 Chat desktop app. Keep the folder as it is:\n`edge0-infer` identifies the model by `model_name` in its `model.json`.\n\nFor 145B and 120B, use `serve` or `chat`; `run` belongs to the native engine.\n\n<details>\n<summary>Platform & documentation notes</summary>\n\nThe build instructions cover NVIDIA GPUs with CUDA 13 on Linux or Windows (x64 or ARM64), and Metal on Apple Silicon macOS.\n\n</details>\n\n<details>\n<summary>Build & command-line instructions</summary>\n\n**1. Build.** Clone the repository, then build two parts. Run the launch commands below from `edge0-infer/`:\n\n```bash\ngit clone https://github.com/Edge0-AI/Edge0.git edge0\n```\n\n- **edge0-strata**, the engine: follow \"Build (Linux, NVIDIA)\", \"Build (Windows, NVIDIA)\" or \"Build (macOS, Apple Silicon)\" in [edge0-strata/EDGE0.md](edge0-strata/EDGE0.md).\n- **edge0-infer**: follow \"Build\" (Linux) or \"Windows\" in [edge0-infer/docs/getting-started.md](edge0-infer/docs/getting-started.md).\n\n**2. Run from the command line.** Pass one model folder, such as `Edge0-145B-q3k`, not the folder that holds several of\nthem. On Windows the program is `build\\windows\\bin\\edge0-infer.exe`.\n\n```bash\nbuild/cpu/bin/edge0-infer serve --model /path/to/Edge0-145B-q3k\n```\n\nIt prints `Listening: http://127.0.0.1:8000 model=<name>` once the weights are loaded, where `<name>` is `edge0_145b`,\nand then serves OpenAI- and Anthropic-compatible endpoints:\n\n```bash\ncurl localhost:8000/v1/chat/completions -H 'content-type: application/json' -d '{\"model\":\"edge0_145b\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"max_tokens\":64}'\n```\n\n`edge0-infer chat --model /path/to/Edge0-145B-q3k` opens an interactive session instead. More options:\n[edge0-infer/docs/edge0-145b.md](edge0-infer/docs/edge0-145b.md).\n\n</details>\n\n<details>\n<summary>Two GPUs · a second card's expert tier</summary>\n\nA second NVIDIA card holds the experts that do not fit in the first one's VRAM, and decoding uses it\nfor both expert formats. The cards need no NVLink or P2P.\n\n`edge0-infer` runs the engine on one card (its `--device` is one card), so for two cards start the\nengine with the config `serve/server.py --config` reads (it holds `exe`, `args`, `cwd`, `env`):\n\n- set `\"gpu\": [0, 1]` — the engine's device 0 is the first card, device 1 the second;\n- append to `\"args\"`: `\"--peer-device\", \"1\", \"--peer-reserve-mib\", \"1024\", \"--peer-slots\", \"0\"`.\n\n```bash\ncd /path/to/Edge0-145B-q3k\n/path/to/edge0-strata/.venv/bin/python /path/to/edge0-strata/serve/server.py \\\n  --engine strata --config ./model-two-gpus.json\n```\n\nThe startup log prints the second card's tier (`peer GPU 1: … experts, … GiB`), and the server serves\nthe same endpoints as on one card. `--peer-device` cannot be combined with `--layer-split` or\n`--expert-cache-device1..3`. More: [Two GPUs](edge0-strata/EDGE0.md#two-gpus-linux-nvidia).\n\n</details>\n\n<details>\n<summary>Desktop app · Windows · macOS</summary>\n\n⬇️ **Download:** **[GitHub Releases](https://github.com/Edge0-AI/Edge0/releases)**\n\nOpen **Edge0 Chat** on Windows or macOS (Apple Silicon) and choose a model folder, such as `Edge0-145B-q3k`, to run the model locally. To build the app from source, follow the [Edge0 Chat](edge0-infer/examples/desktop/README.md) guide.\n\n</details>\n\n<details>\n<summary>Images · vision</summary>\n\n`mmproj-BF16.gguf` in the model folder is the vision encoder. Add this to the model's `model.json`, next to `args`:\n\n```json\n\"vision\": {\"exe\": \"/path/to/strata-vision\", \"mmproj\": \"./mmproj-BF16.gguf\",\n           \"model\": \"./model-skeleton.gguf\", \"gpu\": false}\n```\n\nand `--vision` to `\"args\"`. `strata-vision` is not in this repository: `setup.py --setup --vision yes` fetches it, or\nbuild `tools/vision` in a Strata checkout. The log then says `images on`; send a picture with `/image` in the chat, or an\n`image_url` part over the OpenAI API.\n\n</details>\n\n<a name=\"memory-update\"></a>\n<a name=\"deployment-qa\"></a>\n<a name=\"memory-deployment\"></a>\n<a name=\"usage-help\"></a>\n\n## Usage & troubleshooting\n\n145B / 120B · Memory options\n\n<details>\n<summary><a name=\"low-memory\"></a>Low RAM · SSD offload</summary>\n\n- **SSD mode:** `--mmap-experts` — read uncached experts from SSD on demand.\n- **Low-memory arguments:**\n\n```bash\n--resident-budget-gib 20 --expert-profile expert-profile.bin\n```\n\nUp to **20 GiB** of host RAM for the expert cache; uncached experts are read from SSD on demand. Includes `--mmap-experts` and disjoint GPU/RAM caches automatically.\n\n**Required:** a static expert profile. Replace `expert-profile.bin` with your profile path.\n\n</details>\n<details>\n<summary><a name=\"ram-budget\"></a>RAM budget · what 20 GiB covers</summary>\n\n- **Expert cache:** `--resident-budget-gib 20` caps host-RAM expert caching at **20 GiB**, lowered further to fit available memory.\n- **Total RAM:** expert cache + other runtime allocations. This flag does **not** set a total-process RAM limit.\n- **Benchmark limit:** the 20 GiB total RAM test budget is a separate measurement condition.\n\n</details>\n<details>\n<summary><a name=\"expert-residency\"></a>GPU / RAM · avoid duplicate experts</summary>\n\n- **Enable:** `--resident-experts` or `--resident-budget-gib N`, with a static `--expert-profile`.\n- **Effect:** experts cached in VRAM need no duplicate RAM copy. Compatible with SSD loading.\n- **Default:** off, prioritizing speed.\n- **Automatically enabled:** `--mmap-experts`, `--resident-cpu-experts`, `--resident-pin`.\n\n</details>\n\n### Capacity controls · VRAM and host RAM\n\nThese live in the pack's `model.json` (`args` for flags, `env` for environment variables), so a change there\napplies to every launch of the model.\n\n| Flag | Meaning | Default |\n|---|---|---|\n| `--vram-reserve-mib N` | VRAM left free for the desktop, the driver and other processes; the engine sizes its caches from what remains. | `700` |\n| `--expert-cache N\\|auto` | Expert slots kept in VRAM. `auto` derives the count from the free VRAM after the fixed footprint (projections, MTP draft, verify buffers, D/U device buffers). | `0` |\n| `--kv-resident N` | KV cells kept in VRAM per QSA layer; the rest streams from pinned host RAM, which frees VRAM for experts. | `0` |\n| `--spec N` | The MTP drafter's verify window: tokens proposed per check. A bigger window needs bigger verify buffers (about 180 MiB at 4) and pays off when every window has a fixed per-layer cost. Without an MTP layer there is no speculation. | `4` |\n| `--resident-budget-gib N` | Cap on the host-RAM expert cache. It holds only the experts the VRAM cache does **not** hold, so the two sets are disjoint, and the value is clamped to the RAM available minus headroom. Needs a static `--expert-profile`. | `0` |\n| `--mmap-experts` | Read experts through the pack file on demand instead of pinning them, so nothing is resident in RAM. | off |\n\n## Documentation\n\n**Latest release · 145B / 120B**\n\n- [Models, measurements and architecture](docs/models/edge0-145b.md)\n- [edge0-strata · build and launch contract](edge0-strata/EDGE0.md)\n- edge0-infer model guides: [145B](edge0-infer/docs/edge0-145b.md) / [120B](edge0-infer/docs/edge0-120b.md)\n\n**Framework**\n\n- [edge0-infer](edge0-infer/README.md) · command line, local server and chat applications\n- [Local server](edge0-infer/docs/local-server.md) / [Testing](edge0-infer/docs/testing.md)\n- [Model asset tools and adding a model](edge0-infer/tools/assets/README.md)\n\n<details>\n<summary>Previous release · models and native-engine documentation</summary>\n\n- [35B / 8B release guide](docs/legacy-models.md)\n- [MoE routing and experts](docs/moe.md) / [prerouter](docs/prerouter.md)\n- Model references: [edge0-35b](docs/models/edge0-35b.md) / [edge0-8b](docs/models/edge0-8b.md)\n- [Getting started](edge0-infer/docs/getting-started.md): native build, model assets, run, chat and serve across supported platforms\n- [Configuration](edge0-infer/docs/configuration.md) / [Native API](edge0-infer/docs/native-api.md)\n- [Architecture](edge0-infer/docs/architecture.md) / [Native-engine design](edge0-infer/docs/architecture.md#native-engine) / [Known limitations](edge0-infer/docs/limitations.md)\n- [Benchmarking](edge0-infer/docs/benchmarking.md)\n- Technical report: [The Other Half of the Memory Wall](https://arxiv.org/abs/2609.18063) ([PDF](paper/main.pdf))\n\n</details>\n\n## Roadmap\n\n<details>\n<summary>Q4 2026 · architecture and inference</summary>\n\n**Models & algorithms**\n\nQ4 works two fronts: bringing a next-generation architecture into the\nframework, and turning latent reasoning into a real latency saving rather\nthan just an arithmetic one.\n\n- **Next-gen architecture support (Qwen3.8-Flash class)** — run hybrid\n  linear attention (GDN + QSA), gated multi-branch residual, and N-gram\n  embedding topologies on edge0. These designs suit SSD streaming offload\n  naturally: O(1)-state attention keeps long thinking from becoming a\n  KV-cache problem, and lookup-only N-gram tables stream on demand. Goal:\n  the tier runs on a single device and benchmarks within an acceptable\n  gap of the fp16 base.\n- **Latent thinking + batched expert pre-prediction** — make latent\n  reasoning a *latency* saving, not only an arithmetic one. The core\n  engineering problem: move expert routing from per-position to **once\n  per block**, so one prediction covers every position and round of a\n  block and **expert load volume decouples from the reasoning loop\n  count** — plus cross-block prefetch that loads the next block's experts\n  inside the current block's compute window. Progress is measured as\n  **end-to-end thinking-phase time at matched accuracy** (never tokens/s).\n\n[Previous-release milestones and planned native-engine support](docs/legacy-models.md#roadmap).\n\n</details>\n\n## Contributing\n\n<details>\n<summary>Development workflow and checks</summary>\n\nContributions are welcome — issues, PRs, benchmark reports and model\nports all count.\n\nBuilding and testing are described in [Testing](edge0-infer/docs/testing.md);\nthe checks that need no model assets:\n\n```bash\ncd edge0-infer\ncmake --preset cpu && cmake --build --preset cpu\nctest --preset cpu -L \"L0|L1\"\n```\n\nFor changes under `edge0-infer/`, open issues and PRs in this repository\nas usual; the directory is developed in a separate repository, and an\naccepted change is applied there first by the maintainers and arrives here\nwith the next sync. See [CONTRIBUTING](CONTRIBUTING.md).\n\nWorkflow: fork → feature branch → PR against `main`. Please keep the\ntests passing and add tests for new behavior.\n\n</details>\n\n## Citation\n\nThe technical report covers 35B SSD streaming and trained routing prediction.\n\nIf you find edge0 useful, please cite our technical report:\n\n```bibtex\n@article{lin2026other,\n  title   = {The Other Half of the Memory Wall: Serving 35B MoEs from SSD\n             with Trained Routing Prediction},\n  author  = {Lin, Yu and Wang, Yiming and Cai, Runyuan and Liu, Hanze and\n             Zeng, Xiaodong},\n  journal = {arXiv preprint arXiv:2609.18063},\n  year    = {2026},\n  url     = {https://arxiv.org/abs/2609.18063}\n}\n```\n\n## Contact Us\n\n- **Discord**: [edge0.ai/discord](https://edge0.ai/discord) — community chat and support\n- **Email**: samuel@edge0.ai\n\nFor bugs and feature requests, please use\n[GitHub Issues](https://github.com/Edge0-AI/Edge0/issues).\n\n<details>\n<summary><h2>License</h2></summary>\n\n### Framework code\n\nThe framework code remains under [Apache-2.0](LICENSE). Bundled components retain their own licenses and [notices](NOTICE), including the [MIT license](edge0-strata/LICENSE) for Strata.\n\n### Model license\n\nEdge0-specific model contributions are licensed under the [Edge0 Community Model License 1.0](licenses/edge0-model/LICENSE), which applies only to contributions that Edge0 owns or is authorized to license. Prior valid licenses remain unchanged.\n\nSubject to applicable upstream terms, the license permits personal use, research, education, modification, noncommercial sharing, internal use and commercial use of generated outputs. It does not require disclosure of private modifications or an Edge0 interface badge.\n\nSeparate written Edge0 permission is required for:\n\n- **Model sales and paid distribution**, including covered adapters, deltas and commercial bundles whose principal value is model access.\n- **Commercial model services** offering inference or fine-tuning, funded by fees, subscriptions, advertising or related sponsorship.\n- **Independent commercial coding or office assistants**, whether inference runs on a server or on the user's device.\n\nSee the full license for definitions, exceptions and redistribution requirements. Commercial licensing: [info@edge0.ai](mailto:info@edge0.ai).\n\n### Upstream terms and scope\n\nQwen materials remain governed by their applicable upstream license. The retained [Qwen Community License 1.0](licenses/edge0-model/third-party/Qwen-LICENSE.txt) is reproduced unchanged; Edge0 permission does not waive Qwen's attribution or separate commercial authorization requirements.\n\nSee the [model NOTICE](licenses/edge0-model/NOTICE) for attribution and licensing scope. Framework and third-party code licenses are unaffected.\n\n<details>\n<summary><b>Acknowledgements · model lineage and engine credits</b></summary>\n\nWe thank the teams behind [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) and [Strata](https://github.com/Niko1221/Strata). Edge0 adds latent MoE support to the Strata engine. `edge0-strata` is a fork of Strata by Niko1221 and the Strata contributors and retains its [MIT license](edge0-strata/LICENSE).\n\nThe Edge0 framework code is released under [Apache-2.0](LICENSE); bundled third-party components keep their own licenses (see [NOTICE](NOTICE)). The [earlier releases](docs/legacy-models.md#models) retain their Qwen3.6 and Ling model lineage.\n\n</details>\n\n</details>\n"
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/edge0-infer/docs/testing.md",
+        "path": "edge0-infer/docs/testing.md",
+        "content": "# Testing\n\nThe tests are CTest tests. Each one carries a level label, `L0` to `L4`, ordered from cheapest to most expensive; tests that need a GPU or other device also carry the label `device`. Every property is tested at the cheapest level that can decide it.\n\n## Levels\n\n| Level | What it checks | Needs |\n| --- | --- | --- |\n| `L0` static | Public headers compile on their own, language and documentation checks, dependency and layering rules, vendored source checks. Runs in a few seconds. | Nothing |\n| `L1` unit | Pure logic: tokenizer, prefix matching, sampling, slot selection, CLI parsing, the asset and measurement tools | The Python environment of the asset tools |\n| `L2` integration | Several modules together on a tiny random-weight model with the same structure as the 35B; single-turn computation is compared with the reference answers in [`tests/fixtures/answers/`](../tests/fixtures/answers/README.md) | `$MOE_TINY`; `$MOE_SOURCE_35B` for the asset tools' fixture test |\n| `L3` real assets | The 35B on real assets: logits, routing, expert loads, memory peaks | `$MOE_ASSETS_35B` |\n| `L4` acceptance | Fixed scenarios through the CLI only, per platform | `$MOE_ASSETS_35B`, the target device |\n\n`L3`, `L4` and `device` tests run one at a time even when CTest runs others in parallel, because they assert memory peaks or share the GPU. A test that cannot run in the current environment, such as a Metal test without a Metal device or a check that needs Git metadata, exits with code 77 and is reported as skipped, not as passed.\n\n## Setup\n\n1. Create the Python environment that the Python tests use (it lives in the ignored `tools/assets/.venv`):\n\n   ```sh\n   uv sync --project tools/assets\n   ```\n\n2. For `L2`, generate the tiny fixtures as described in the [asset tools guide](../tools/assets/README.md#tiny-fixtures) and export their directory as `MOE_TINY`. This needs only three small text files of the 35B source, not the full weights; keep `MOE_SOURCE_35B` exported: the asset tools' fixture test needs it and is otherwise skipped.\n3. For `L3` and `L4`, convert the 35B as described in [Getting started](getting-started.md#get-a-model) and export `MOE_ASSETS_35B`.\n\n## Running\n\n```sh\ncmake --preset cpu && cmake --build --preset cpu\nctest --preset cpu -L \"L0|L1\"                                    # no assets needed\nctest --preset cpu --no-tests=error -L \"L0|L1|L2\" -LE device     # with $MOE_TINY\n\ncmake --preset mac-metal && cmake --build --preset mac-metal\nctest --preset mac-metal --no-tests=error -L \"device|L3\"         # Metal and real assets\n```\n\nThese commands, with both presets built, are the full regression on macOS. Tests are registered only when `MOE_BUILD_TESTS` is ON, the default when this repository is the top-level project; it defaults to OFF when the repository is [added to another CMake project](getting-started.md#use-from-another-cmake-project). `ctest -N -L <level>` lists the tests of a level without running them.\n\n`tools/run_checks.py` configures, builds and runs the chosen levels in one step and lists every test as passed, failed or not executed, with the reason:\n\n```sh\nuv run --no-project python -I tools/run_checks.py --preset cpu --levels L0,L1,L2\n```\n\n## Platform and performance tests\n\n- [Platform CLI scenarios](../tests/platform/README.md) run the `L4` scenarios on Android and iOS devices, through wrappers that stand in for `edge0-infer` on the host, and on Windows directly.\n- [Measurement tools](../tests/perf/README.md) produce the performance reports described in [Benchmarking](benchmarking.md); measurements are not part of the test levels.\n"
+      },
+      {
+        "url": "https://github.com/Edge0-AI/Edge0/blob/f6bfa5546bcf89919f86946ec669bcc7f4cd526d/.github/workflows/ci.yml",
+        "path": ".github/workflows/ci.yml",
+        "content": "name: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n\nconcurrency:\n  group: ci-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  edge0-infer:\n    name: edge0-infer L0/L1 (macOS, cpu preset)\n    runs-on: macos-latest\n    timeout-minutes: 45\n    defaults:\n      run:\n        working-directory: edge0-infer\n    steps:\n      - uses: actions/checkout@v4\n      - name: Install tools\n        run: brew install ninja uv\n      - name: Python environment for the tests\n        run: uv sync --project tools/assets\n      - name: Configure\n        run: cmake --preset cpu\n      - name: Build\n        run: cmake --build --preset cpu\n      - name: Test (L0, L1)\n        run: ctest --preset cpu --no-tests=error --output-on-failure -L \"L0|L1\"\n      - name: Test (L2, delegated engine)\n        run: ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata\n"
+      }
+    ]
   },
   "portfolio": {
-    "updated": "2026-11-16T18:53:16.682633+00:00",
+    "updated": "2026-11-16T19:19:12.385627+00:00",
     "repositories": [
       {
         "repository": "serengil/deepface",
@@ -2846,22 +2981,76 @@
               "before_failed_tests": 10,
               "before_passed_tests": 1,
               "after_passed_tests": 112
+            },
+            "official_ci": {
+              "run_id": 43933338039,
+              "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43933338039",
+              "conclusion": "success"
+            }
+          },
+          {
+            "number": 251,
+            "title": "fix(model): reject overflowing JSON round-trip candidates",
+            "head": "d36c82352bc1784a23268f7284bb77067b3480d9",
+            "state": "open",
+            "merged": false,
+            "maintainer_can_modify": false,
+            "validation_run": 43930624772,
+            "validation_result": {
+              "linux": {
+                "run": 43930624772,
+                "job": 133521727433,
+                "conclusion": "success",
+                "json_comparisons": 1030,
+                "before": "DBL_MAX overflow reproduced"
+              },
+              "macos": {
+                "run": 43928604436,
+                "job": 133514659142,
+                "conclusion": "success",
+                "l0_l1": "101 passed, 3 skipped",
+                "json_comparisons": 1030
+              }
+            },
+            "url": "https://github.com/Edge0-AI/Edge0/pull/251"
+          },
+          {
+            "number": 252,
+            "url": "https://github.com/Edge0-AI/Edge0/pull/252",
+            "title": "fix(desktop): clear message edits when conversations change",
+            "head": "ac4dd8935f6813dfb9730c813c469e1bc875de61",
+            "state": "open",
+            "merged": false,
+            "maintainer_can_modify": false,
+            "validation_run": 43932576040,
+            "validation_result": {
+              "conclusion": "success",
+              "node_versions": [
+                "24.15.0",
+                "26.3.1"
+              ],
+              "jobs": [
+                133528606534,
+                133528606968
+              ],
+              "before": "2 failed, 1 passed",
+              "after": "217 passed; production build passed"
             }
           }
         ],
         "counts": {
-          "submitted": 2,
-          "open": 2,
+          "submitted": 4,
+          "open": 4,
           "merged": 0,
           "closed_unmerged": 0,
-          "effective": 2
+          "effective": 4
         },
-        "submitted": 2,
-        "open": 2,
+        "submitted": 4,
+        "open": 4,
         "merged": 0,
         "closed_unmerged": 0,
-        "effective": 2,
-        "remaining_to_20": 18
+        "effective": 4,
+        "remaining_to_20": 16
       }
     ]
   }
