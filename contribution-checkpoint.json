@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T18:30:51.477Z",
+  "updated": "2026-11-16T18:55:17.704Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -43,7 +43,7 @@
       "title": "fix(model): reject overflowing JSON round-trip candidates",
       "batch": 2,
       "repository": "Edge0-AI/Edge0",
-      "status": "validating",
+      "status": "ready",
       "dedupe": "audit/edge0_json_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -55,8 +55,8 @@
         "before": "maximum finite binary64 serialized as 2e+308 instead of 1.7976931348623157e+308",
         "after": "1030 ordered JSON comparisons and rejection cases passed"
       },
-      "validation_head": "b990c0b8908b49538ded42bd4f8c8490af419327",
-      "validation_tree": "4403a66309691d080f39dbb86cb2f542bdad17f2",
+      "validation_head": "c6175bd7cbb1ff1db937e68d95bf78cb172d1e7a",
+      "validation_tree": "6527818bc4a07dc7c8fcdc2783d8f951a09adbf5",
       "local_after": {
         "l0_l1": "99 passed, 3 Vulkan skipped, 2 pre-existing failures",
         "remaining": [
@@ -65,8 +65,48 @@
         ]
       },
       "previous_validation_heads": [
-        "d956153e4eed6a7b95d5540c01ec9d0f8ef8aab9"
-      ]
+        "d956153e4eed6a7b95d5540c01ec9d0f8ef8aab9",
+        "b990c0b8908b49538ded42bd4f8c8490af419327"
+      ],
+      "macos_validation": {
+        "run": 43928604436,
+        "job": 133514659142,
+        "conclusion": "success",
+        "l0_l1": "101 passed, 3 skipped",
+        "json_comparisons": 1030
+      },
+      "previous_linux_result": {
+        "run": 43928604436,
+        "job": 133514659812,
+        "conclusion": "failure in upstream baseline; fixed-code step skipped",
+        "baseline_failures": [
+          "moe_test_platform_memory",
+          "moe_test_ordered_json",
+          "moe_test_template_tools",
+          "moe_test_edge0_35b_slots_config"
+        ]
+      },
+      "body": "## What & why\n\nOn libstdc++, the shortest-number search can serialize the largest finite binary64 value as `2e+308`. Parsing that candidate saturates to `DBL_MAX` and sets the stream failure flag, but the equality-only check accepts it. A finite JSON value therefore becomes an overflowing representation.\n\nReject failed round trips that saturated to the maximum finite magnitude and continue searching at higher precision. Keep valid subnormal round trips: libc++ can set the failure flag for subnormal underflow even when the parsed value is correct, so rejecting every failed stream would change existing valid output.\n\n## Area\n\n- [x] Engine, CLI or server (`edge0-infer/`)\n\n## How was it tested?\n\n- [Linux/libstdc++ validation](https://github.com/Afloat16/Edge0/actions/runs/43930624772): reproduced the original `DBL_MAX` failure, then passed **1,030 ordered-JSON comparisons and rejection cases** with this exact fix.\n- [macOS/libc++ validation](https://github.com/Afloat16/Edge0/actions/runs/43928604436/job/133514659142): **101 L0/L1 tests passed, 3 Vulkan tests skipped**, and all 1,030 JSON comparisons passed. This includes the smallest signed subnormals as compatibility controls.\n- Added positive and negative maximum finite values, their finite neighbors, minimum normal values, signed subnormals, and rejection controls just above the finite range to the existing Python-oracle test, alongside its 1,000 seeded random finite values.\n- Local Linux JSON comparisons passed. The full local L0/L1 command also ran in the development checkout, which contains separate cache-accounting and asset-checker changes: **99 passed, 3 skipped**, with the previously reproduced sandbox `std::tmpfile` and Linux platform-memory test failures remaining. An earlier remote Linux full-suite attempt also failed in the unchanged baseline's slots configuration test before reaching the fixed-code step; it is not counted as a successful validation.\n\n## Checklist\n\n- [x] Added numeric-boundary regressions and compatibility controls.\n- [x] Ran the affected native JSON probe on Linux and macOS.\n- [x] Ran the required L0/L1 command and recorded platform/environment failures separately.\n",
+      "validation_run": 43930624772,
+      "validation_result": {
+        "linux": {
+          "run": 43930624772,
+          "job": 133521727433,
+          "conclusion": "success",
+          "json_comparisons": 1030,
+          "before": "DBL_MAX overflow reproduced"
+        },
+        "macos": {
+          "run": 43928604436,
+          "job": 133514659142,
+          "conclusion": "success",
+          "l0_l1": "101 passed, 3 skipped",
+          "json_comparisons": 1030
+        }
+      },
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/json-binary64-limits-20261116?expand=1&title=fix%28model%29%3A+reject+overflowing+JSON+round-trip+candidates&body=%23%23+What+%26+why%0A%0AOn+libstdc%2B%2B%2C+the+shortest-number+search+can+serialize+the+largest+finite+binary64+value+as+%602e%2B308%60.+Parsing+that+candidate+saturates+to+%60DBL_MAX%60+and+sets+the+stream+failure+flag%2C+but+the+equality-only+check+accepts+it.+A+finite+JSON+value+therefore+becomes+an+overflowing+representation.%0A%0AReject+failed+round+trips+that+saturated+to+the+maximum+finite+magnitude+and+continue+searching+at+higher+precision.+Keep+valid+subnormal+round+trips%3A+libc%2B%2B+can+set+the+failure+flag+for+subnormal+underflow+even+when+the+parsed+value+is+correct%2C+so+rejecting+every+failed+stream+would+change+existing+valid+output.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Engine%2C+CLI+or+server+%28%60edge0-infer%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0A-+%5BLinux%2Flibstdc%2B%2B+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43930624772%29%3A+reproduced+the+original+%60DBL_MAX%60+failure%2C+then+passed+%2A%2A1%2C030+ordered-JSON+comparisons+and+rejection+cases%2A%2A+with+this+exact+fix.%0A-+%5BmacOS%2Flibc%2B%2B+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43928604436%2Fjob%2F133514659142%29%3A+%2A%2A101+L0%2FL1+tests+passed%2C+3+Vulkan+tests+skipped%2A%2A%2C+and+all+1%2C030+JSON+comparisons+passed.+This+includes+the+smallest+signed+subnormals+as+compatibility+controls.%0A-+Added+positive+and+negative+maximum+finite+values%2C+their+finite+neighbors%2C+minimum+normal+values%2C+signed+subnormals%2C+and+rejection+controls+just+above+the+finite+range+to+the+existing+Python-oracle+test%2C+alongside+its+1%2C000+seeded+random+finite+values.%0A-+Local+Linux+JSON+comparisons+passed.+The+full+local+L0%2FL1+command+also+ran+in+the+development+checkout%2C+which+contains+separate+cache-accounting+and+asset-checker+changes%3A+%2A%2A99+passed%2C+3+skipped%2A%2A%2C+with+the+previously+reproduced+sandbox+%60std%3A%3Atmpfile%60+and+Linux+platform-memory+test+failures+remaining.+An+earlier+remote+Linux+full-suite+attempt+also+failed+in+the+unchanged+baseline%27s+slots+configuration+test+before+reaching+the+fixed-code+step%3B+it+is+not+counted+as+a+successful+validation.%0A%0A%23%23+Checklist%0A%0A-+%5Bx%5D+Added+numeric-boundary+regressions+and+compatibility+controls.%0A-+%5Bx%5D+Ran+the+affected+native+JSON+probe+on+Linux+and+macOS.%0A-+%5Bx%5D+Ran+the+required+L0%2FL1+command+and+recorded+platform%2Fenvironment+failures+separately.%0A",
+      "tree": "6f5c2927a870ab846187e8cc12d3abe81d2e17a6",
+      "head": "d36c82352bc1784a23268f7284bb77067b3480d9"
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -148,7 +188,13 @@
       "url": "https://github.com/Edge0-AI/Edge0/pull/249",
       "state": "open",
       "merged": false,
-      "maintainer_can_modify": false
+      "maintainer_can_modify": false,
+      "official_ci": {
+        "run_id": 43929236020,
+        "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43929236020",
+        "conclusion": "success",
+        "job_id": 133516894203
+      }
     },
     {
       "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
@@ -158,7 +204,7 @@
       "title": "fix(assets): match native manifest parsing in asset checks",
       "batch": 4,
       "repository": "Edge0-AI/Edge0",
-      "status": "validating",
+      "status": "published",
       "dedupe": "audit/edge0_asset_checks_history.json.gz",
       "dedupe_counts": {
         "all_author_prs": 117,
@@ -176,7 +222,82 @@
         "result": "Native open_catalog rejects nine forms the Python checker accepted; quoted base is preserved literally by native parsing and was incorrectly unquoted by the checker. Valid and leading-zero catalogs are accepted."
       },
       "validation_head": "a964c2f88ef2d93212a5cbf5dd21dccad89d71c2",
-      "validation_tree": "bc9fe3280df2b4cf062a3ad605fc594ae7737b61"
+      "validation_tree": "bc9fe3280df2b4cf062a3ad605fc594ae7737b61",
+      "body": "## What & why\n\n`check_assets.py check` can report `passed` for manifests that the native loader rejects or interprets differently. `csv.DictReader` discards surplus fields and blank rows and removes quoting, while Python's integer conversion accepts byte counts containing signs, whitespace, underscores, or non-ASCII digits. Python equality also treats `true` and `1.0` as manifest version `1`.\n\nRead the catalog as literal tab-separated columns, require exactly four fields and ASCII decimal byte counts, and require an integer format version. Valid leading-zero byte counts remain accepted.\n\n## Area\n\n- [x] Model asset tools (`edge0-infer/tools/assets/`)\n\n## How was it tested?\n\n[Independent Python 3.10 and 3.14 validation](https://github.com/Afloat16/Edge0/actions/runs/43929597788): each runtime reproduced **10 failures and 1 passing legal-input control** against upstream, then passed **all 112 asset unit tests** with the fix.\n\nThe before/after cases use complete small asset fixtures, not just isolated string predicates. A local probe linked to the actual C++ `open_catalog` confirmed that nine malformed forms rejected by native parsing previously passed the Python checker. For the quoted-role case, native parsing retains the quote characters, whereas the previous checker incorrectly normalized them into the valid `base` role. Normal catalogs and leading-zero counts pass both readers.\n\nLocal Python 3.12 also passed all 112 asset unit tests. The full local L0/L1 command was run in the development checkout (which also contains separate JSON and cache-accounting fixes): 99 passed, 3 Vulkan tests skipped, and the two previously reproduced `std::tmpfile` sandbox and Linux platform-memory test failures remained.\n\n## Checklist\n\n- [x] Added regression tests and a valid-input compatibility control.\n- [x] Ran the affected asset suite on Python 3.10, 3.12, and 3.14.\n- [x] Compared manifest behavior with the native catalog parser.\n",
+      "validation_run": "https://github.com/Afloat16/Edge0/actions/runs/43929597788",
+      "validation_result": {
+        "conclusion": "success",
+        "python_versions": [
+          "3.10",
+          "3.14"
+        ],
+        "before_failed_tests": 10,
+        "before_passed_tests": 1,
+        "after_passed_tests": 112
+      },
+      "local_full_l0_l1": {
+        "passed": 99,
+        "skipped": 3,
+        "failed": 2,
+        "limits": "Shared checkout includes separate JSON/cache fixes; failures are pre-existing std::tmpfile sandbox and Linux platform-memory assertions."
+      },
+      "head": "a94243737db10ca80166648ca1943edd39a54cd2",
+      "tree": "ec523f15c8676185f353453221d5cb1d9eed2347",
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/asset-manifest-grammar-20261116?expand=1&title=fix(assets)%3A%20match%20native%20manifest%20parsing%20in%20asset%20checks&body=%23%23%20What%20%26%20why%0A%0A%60check_assets.py%20check%60%20can%20report%20%60passed%60%20for%20manifests%20that%20the%20native%20loader%20rejects%20or%20interprets%20differently.%20%60csv.DictReader%60%20discards%20surplus%20fields%20and%20blank%20rows%20and%20removes%20quoting%2C%20while%20Python's%20integer%20conversion%20accepts%20byte%20counts%20containing%20signs%2C%20whitespace%2C%20underscores%2C%20or%20non-ASCII%20digits.%20Python%20equality%20also%20treats%20%60true%60%20and%20%601.0%60%20as%20manifest%20version%20%601%60.%0A%0ARead%20the%20catalog%20as%20literal%20tab-separated%20columns%2C%20require%20exactly%20four%20fields%20and%20ASCII%20decimal%20byte%20counts%2C%20and%20require%20an%20integer%20format%20version.%20Valid%20leading-zero%20byte%20counts%20remain%20accepted.%0A%0A%23%23%20Area%0A%0A-%20%5Bx%5D%20Model%20asset%20tools%20(%60edge0-infer%2Ftools%2Fassets%2F%60)%0A%0A%23%23%20How%20was%20it%20tested%3F%0A%0A%5BIndependent%20Python%203.10%20and%203.14%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43929597788)%3A%20each%20runtime%20reproduced%20**10%20failures%20and%201%20passing%20legal-input%20control**%20against%20upstream%2C%20then%20passed%20**all%20112%20asset%20unit%20tests**%20with%20the%20fix.%0A%0AThe%20before%2Fafter%20cases%20use%20complete%20small%20asset%20fixtures%2C%20not%20just%20isolated%20string%20predicates.%20A%20local%20probe%20linked%20to%20the%20actual%20C%2B%2B%20%60open_catalog%60%20confirmed%20that%20nine%20malformed%20forms%20rejected%20by%20native%20parsing%20previously%20passed%20the%20Python%20checker.%20For%20the%20quoted-role%20case%2C%20native%20parsing%20retains%20the%20quote%20characters%2C%20whereas%20the%20previous%20checker%20incorrectly%20normalized%20them%20into%20the%20valid%20%60base%60%20role.%20Normal%20catalogs%20and%20leading-zero%20counts%20pass%20both%20readers.%0A%0ALocal%20Python%203.12%20also%20passed%20all%20112%20asset%20unit%20tests.%20The%20full%20local%20L0%2FL1%20command%20was%20run%20in%20the%20development%20checkout%20(which%20also%20contains%20separate%20JSON%20and%20cache-accounting%20fixes)%3A%2099%20passed%2C%203%20Vulkan%20tests%20skipped%2C%20and%20the%20two%20previously%20reproduced%20%60std%3A%3Atmpfile%60%20sandbox%20and%20Linux%20platform-memory%20test%20failures%20remained.%0A%0A%23%23%20Checklist%0A%0A-%20%5Bx%5D%20Added%20regression%20tests%20and%20a%20valid-input%20compatibility%20control.%0A-%20%5Bx%5D%20Ran%20the%20affected%20asset%20suite%20on%20Python%203.10%2C%203.12%2C%20and%203.14.%0A-%20%5Bx%5D%20Compared%20manifest%20behavior%20with%20the%20native%20catalog%20parser.%0A",
+      "number": 250,
+      "url": "https://github.com/Edge0-AI/Edge0/pull/250",
+      "state": "open",
+      "merged": false,
+      "maintainer_can_modify": false,
+      "browser_submission": {
+        "semantic_uncheck": "success; Value 0 verified before and after publication",
+        "prior_rejection": "generic AX toggle was rejected by automatic approval review; replaced with explicit permission-narrowing uncheck",
+        "ui_verified": true
+      }
+    },
+    {
+      "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+      "base_tree": "827cb6bd8872ebd304a5f24d92030c9df9394f84",
+      "branch": "fix/conversation-edit-state-20261116",
+      "validation_branch": "validation/conversation-edit-20261116",
+      "title": "fix(desktop): clear message edits when conversations change",
+      "batch": 5,
+      "repository": "Edge0-AI/Edge0",
+      "status": "ready",
+      "dedupe": "audit/edge0_desktop_history.json.gz",
+      "dedupe_counts": {
+        "all_author_prs": 117,
+        "fork_refs": 21,
+        "relevant_commits": 33,
+        "source_versions": 205
+      },
+      "dedupe_notes": "Current Chat.tsx has one historical implementation with no conversation-identity reset. Historical macOS/Windows MessageItem editing used per-message instances; no prior equivalent reset or focused fix found.",
+      "local_tests": {
+        "before": "2 failed, 1 passed",
+        "after": "3 focused passed; 221 full frontend tests including separate SSE tests passed",
+        "build": "TypeScript and Vite passed"
+      },
+      "test_environment": "ReactDOM mounted and rerendered in happy-dom; no native Tauri or GPU execution claimed",
+      "validation_head": "f33c4ce5b4f34ed66100d30c1393c1c0ac49b7f3",
+      "validation_tree": "18db36aaf78e629fc0d364f48880dc6e1acf9c0d",
+      "body": "## What & why\n\nThe desktop chat component keeps its editing index and draft text when the selected conversation changes. If the destination also has a user message at that index, it opens an editor containing the previous conversation's text. Switching through an empty conversation can also resurrect the old edit when its first message arrives, allowing the wrong prompt to be resent.\n\nClear the local editing state when `conversation.id` changes. Updates within the same conversation keep the active edit intact.\n\n## Area\n\n- [x] Chat app examples (`edge0-infer/examples/`)\n\n## How was it tested?\n\n[Independent Node 24.15.0 and 26.3.1 validation](https://github.com/Afloat16/Edge0/actions/runs/43932576040): each runtime reproduced **2 failures with 1 passing same-conversation control** on upstream, then passed **all 217 frontend tests** and `npm run build` with the fix.\n\nThe regressions mount the actual `Chat` component with ReactDOM, click its edit/send controls, and rerender it with another conversation. They check direct switching, switching through an empty chat, the resent prompt and message index, and preserving an edit during updates to the same conversation. `happy-dom` is added only as a development dependency for this DOM test environment.\n\nLocal Node 24.22 also passed these three regressions, the frontend suite, and the production build. The independent validation branch contains only this change; no native Tauri integration or model-inference result is claimed.\n\n## Checklist\n\n- [x] Added component regressions and a same-conversation compatibility control.\n- [x] Ran `npm test` and `npm run build` on both documented Node versions.\n- [x] Kept the production change scoped to the chat edit lifecycle.\n",
+      "validation_run": 43932576040,
+      "validation_result": {
+        "conclusion": "success",
+        "node_versions": [
+          "24.15.0",
+          "26.3.1"
+        ],
+        "jobs": [
+          133528606534,
+          133528606968
+        ],
+        "before": "2 failed, 1 passed",
+        "after": "217 passed; production build passed"
+      },
+      "prefilled_url": "https://github.com/Edge0-AI/Edge0/compare/main...Afloat16:fix/conversation-edit-state-20261116?expand=1&title=fix%28desktop%29%3A+clear+message+edits+when+conversations+change&body=%23%23+What+%26+why%0A%0AThe+desktop+chat+component+keeps+its+editing+index+and+draft+text+when+the+selected+conversation+changes.+If+the+destination+also+has+a+user+message+at+that+index%2C+it+opens+an+editor+containing+the+previous+conversation%27s+text.+Switching+through+an+empty+conversation+can+also+resurrect+the+old+edit+when+its+first+message+arrives%2C+allowing+the+wrong+prompt+to+be+resent.%0A%0AClear+the+local+editing+state+when+%60conversation.id%60+changes.+Updates+within+the+same+conversation+keep+the+active+edit+intact.%0A%0A%23%23+Area%0A%0A-+%5Bx%5D+Chat+app+examples+%28%60edge0-infer%2Fexamples%2F%60%29%0A%0A%23%23+How+was+it+tested%3F%0A%0A%5BIndependent+Node+24.15.0+and+26.3.1+validation%5D%28https%3A%2F%2Fgithub.com%2FAfloat16%2FEdge0%2Factions%2Fruns%2F43932576040%29%3A+each+runtime+reproduced+%2A%2A2+failures+with+1+passing+same-conversation+control%2A%2A+on+upstream%2C+then+passed+%2A%2Aall+217+frontend+tests%2A%2A+and+%60npm+run+build%60+with+the+fix.%0A%0AThe+regressions+mount+the+actual+%60Chat%60+component+with+ReactDOM%2C+click+its+edit%2Fsend+controls%2C+and+rerender+it+with+another+conversation.+They+check+direct+switching%2C+switching+through+an+empty+chat%2C+the+resent+prompt+and+message+index%2C+and+preserving+an+edit+during+updates+to+the+same+conversation.+%60happy-dom%60+is+added+only+as+a+development+dependency+for+this+DOM+test+environment.%0A%0ALocal+Node+24.22+also+passed+these+three+regressions%2C+the+frontend+suite%2C+and+the+production+build.+The+independent+validation+branch+contains+only+this+change%3B+no+native+Tauri+integration+or+model-inference+result+is+claimed.%0A%0A%23%23+Checklist%0A%0A-+%5Bx%5D+Added+component+regressions+and+a+same-conversation+compatibility+control.%0A-+%5Bx%5D+Ran+%60npm+test%60+and+%60npm+run+build%60+on+both+documented+Node+versions.%0A-+%5Bx%5D+Kept+the+production+change+scoped+to+the+chat+edit+lifecycle.%0A",
+      "tree": "b5f45e01b8024745f837a26722e179f5626d815d",
+      "head": "ac4dd8935f6813dfb9730c813c469e1bc875de61"
     }
   ],
   "dedupe": {
@@ -208,7 +329,7 @@
     "exclusions": "All Genesis-Embodied-AI repositories excluded"
   },
   "portfolio": {
-    "updated": "2026-11-16T18:29:06.483041+00:00",
+    "updated": "2026-11-16T18:53:16.682633+00:00",
     "repositories": [
       {
         "repository": "serengil/deepface",
@@ -2699,22 +2820,48 @@
               "after_passed_tests": 218,
               "build": "passed",
               "native_http": "passed"
+            },
+            "official_ci": {
+              "run_id": 43929236020,
+              "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43929236020",
+              "conclusion": "success",
+              "job_id": 133516894203
+            }
+          },
+          {
+            "number": 250,
+            "url": "https://github.com/Edge0-AI/Edge0/pull/250",
+            "title": "fix(assets): match native manifest parsing in asset checks",
+            "head": "a94243737db10ca80166648ca1943edd39a54cd2",
+            "state": "open",
+            "merged": false,
+            "maintainer_can_modify": false,
+            "validation_run": "https://github.com/Afloat16/Edge0/actions/runs/43929597788",
+            "validation_result": {
+              "conclusion": "success",
+              "python_versions": [
+                "3.10",
+                "3.14"
+              ],
+              "before_failed_tests": 10,
+              "before_passed_tests": 1,
+              "after_passed_tests": 112
             }
           }
         ],
         "counts": {
-          "submitted": 1,
-          "open": 1,
+          "submitted": 2,
+          "open": 2,
           "merged": 0,
           "closed_unmerged": 0,
-          "effective": 1
+          "effective": 2
         },
-        "submitted": 1,
-        "open": 1,
+        "submitted": 2,
+        "open": 2,
         "merged": 0,
         "closed_unmerged": 0,
-        "effective": 1,
-        "remaining_to_20": 19
+        "effective": 2,
+        "remaining_to_20": 18
       }
     ]
   }
