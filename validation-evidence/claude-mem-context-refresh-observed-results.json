@@ -1,0 +1,64 @@
+{
+  "baseline": {
+    "passed": 10,
+    "failed": 4,
+    "source_commit": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+    "failed_cases": [
+      "cursor two overlapping responses reversed",
+      "cursor three overlapping responses reversed",
+      "grok two overlapping responses reversed",
+      "grok three overlapping responses reversed"
+    ],
+    "observed_content": "older snapshot replaced newer/newest snapshot"
+  },
+  "related_after": {
+    "passed": 43,
+    "failed": 0,
+    "files": 3,
+    "http_scenarios": 14
+  },
+  "controls": [
+    "ordinary completion order",
+    "HTTP 503 on later request",
+    "empty later response",
+    "real rename/write failure on later request",
+    "independent workspaces",
+    "successful subsequent refresh after all earlier requests finish"
+  ],
+  "typecheck": "success: root and viewer",
+  "build": "success: all build targets; rebuilt worker runtime bundle and source map",
+  "commands": [
+    "bun test tests/integration/context-refresh-order.test.ts",
+    "bun test tests/integration/context-refresh-order.test.ts tests/integration/grok-build-rules.test.ts tests/cursor-registry.test.ts",
+    "npm run typecheck",
+    "npm run build"
+  ],
+  "runtime": {
+    "bun": "1.4.4",
+    "node": "24.22.1",
+    "platform": "Linux"
+  },
+  "source_of_results": "Observed executor output before workspace became unavailable. Tests and exact production blobs are preserved in the published commit.",
+  "original_local_logs": [
+    "audit/claude-mem-context-refresh-before.log",
+    "audit/claude-mem-context-refresh-after.log",
+    "audit/claude-mem-context-refresh-typecheck.log",
+    "audit/claude-mem-context-refresh-build.log"
+  ],
+  "logs_availability": "Workspace unavailable after successful tests/build; original local raw logs not yet copied to remote checkpoint.",
+  "dedupe": {
+    "upstream_pr_heads": 3453,
+    "user_fork_heads": 469,
+    "reachable_commits": 16235,
+    "cursor_source_blobs": 83,
+    "grok_source_blobs": 7,
+    "total_source_blobs": 90,
+    "equivalent_found": false,
+    "final_ref_refresh_added_relevant_blobs": false,
+    "raw_audit_paths": [
+      "audit/claude-mem-cursor-refresh-history-functions-20261116.json",
+      "audit/claude-mem-grok-refresh-history-functions-20261116.json",
+      "audit/claude-mem-context-refresh-history-final-20261116.log"
+    ]
+  }
+}

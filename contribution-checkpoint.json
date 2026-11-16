@@ -1,6 +1,6 @@
 {
   "repository": "Edge0-AI/Edge0",
-  "updated": "2026-11-16T23:11:53.339Z",
+  "updated": "2026-11-16T23:26:22.789Z",
   "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
   "ready": [
     {
@@ -1282,7 +1282,7 @@
     "app_dependency_approval": "Adding/replacing an App library or changing its major version requires maintainer approval, per edge0-infer/tools/checks/README.md#example-app-dependencies. No allowlist change made."
   },
   "portfolio": {
-    "updated": "2026-11-16T23:11:53.339Z",
+    "updated": "2026-11-16T23:26:22.789Z",
     "repositories": [
       {
         "repository": "serengil/deepface",
@@ -1917,6 +1917,8 @@
           "open": 0,
           "merged": 12,
           "closed_unmerged": 9,
+          "draft_open": 0,
+          "ready_open": 0,
           "effective": 12
         },
         "remaining_to_20": 8,
@@ -2854,6 +2856,8 @@
           "open": 20,
           "merged": 0,
           "closed_unmerged": 0,
+          "draft_open": 0,
+          "ready_open": 20,
           "effective": 20
         },
         "remaining_to_20": 0
@@ -3324,6 +3328,8 @@
           "open": 20,
           "merged": 0,
           "closed_unmerged": 0,
+          "draft_open": 0,
+          "ready_open": 20,
           "effective": 20
         },
         "remaining_to_20": 0
@@ -3742,6 +3748,8 @@
           "open": 20,
           "merged": 0,
           "closed_unmerged": 0,
+          "draft_open": 0,
+          "ready_open": 20,
           "effective": 20
         },
         "submitted": 20,
@@ -4119,15 +4127,15 @@
             "maintainer_can_modify": false,
             "official_ci": [
               {
-                "id": 43977034891,
-                "name": "Windows",
-                "status": "in_progress",
-                "conclusion": null,
-                "run_number": 8117,
-                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/jobs",
-                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/logs",
-                "workflow_id": 268562650,
-                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
+                "id": 43977034876,
+                "name": "Native ODS integration",
+                "status": "completed",
+                "conclusion": "success",
+                "run_number": 60,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/logs",
+                "workflow_id": 392578694,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
               },
               {
                 "id": 43977034970,
@@ -4141,15 +4149,15 @@
                 "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
               },
               {
-                "id": 43977034876,
-                "name": "Native ODS integration",
+                "id": 43977034891,
+                "name": "Windows",
                 "status": "completed",
                 "conclusion": "success",
-                "run_number": 60,
-                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/jobs",
-                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/logs",
-                "workflow_id": 392578694,
-                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
+                "run_number": 8117,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/logs",
+                "workflow_id": 268562650,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
               }
             ],
             "validation_local": {
@@ -4181,21 +4189,140 @@
               }
             },
             "created_at": "2026-11-16T23:11:07Z"
+          },
+          {
+            "number": 6232,
+            "url": "https://github.com/thedotmack/claude-mem/pull/6232",
+            "title": "fix(integrations): keep newer context when refreshes overlap",
+            "state": "open",
+            "merged": false,
+            "draft": false,
+            "head": "e2e64128e8eeeb8145a36ddb1de927f95713e536",
+            "maintainer_can_modify": false,
+            "official_ci": [
+              {
+                "id": 43979130020,
+                "name": "Native ODS integration",
+                "status": "completed",
+                "conclusion": "success",
+                "run_number": 61,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/logs",
+                "workflow_id": 392578694,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979130020"
+              },
+              {
+                "id": 43979129460,
+                "name": "Windows",
+                "status": "in_progress",
+                "conclusion": null,
+                "run_number": 8118,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/logs",
+                "workflow_id": 268562650,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129460"
+              },
+              {
+                "id": 43979129450,
+                "name": "CI",
+                "status": "in_progress",
+                "conclusion": null,
+                "run_number": 8098,
+                "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/jobs",
+                "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/logs",
+                "workflow_id": 285261453,
+                "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450"
+              }
+            ],
+            "validation_local": {
+              "baseline": {
+                "passed": 10,
+                "failed": 4,
+                "source_commit": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+                "failed_cases": [
+                  "cursor two overlapping responses reversed",
+                  "cursor three overlapping responses reversed",
+                  "grok two overlapping responses reversed",
+                  "grok three overlapping responses reversed"
+                ],
+                "observed_content": "older snapshot replaced newer/newest snapshot"
+              },
+              "related_after": {
+                "passed": 43,
+                "failed": 0,
+                "files": 3,
+                "http_scenarios": 14
+              },
+              "controls": [
+                "ordinary completion order",
+                "HTTP 503 on later request",
+                "empty later response",
+                "real rename/write failure on later request",
+                "independent workspaces",
+                "successful subsequent refresh after all earlier requests finish"
+              ],
+              "typecheck": "success: root and viewer",
+              "build": "success: all build targets; rebuilt worker runtime bundle and source map",
+              "commands": [
+                "bun test tests/integration/context-refresh-order.test.ts",
+                "bun test tests/integration/context-refresh-order.test.ts tests/integration/grok-build-rules.test.ts tests/cursor-registry.test.ts",
+                "npm run typecheck",
+                "npm run build"
+              ],
+              "runtime": {
+                "bun": "1.4.4",
+                "node": "24.22.1",
+                "platform": "Linux"
+              },
+              "source_of_results": "Observed executor output before workspace became unavailable. Tests and exact production blobs are preserved in the published commit.",
+              "original_local_logs": [
+                "audit/claude-mem-context-refresh-before.log",
+                "audit/claude-mem-context-refresh-after.log",
+                "audit/claude-mem-context-refresh-typecheck.log",
+                "audit/claude-mem-context-refresh-build.log"
+              ],
+              "logs_availability": "Workspace unavailable after successful tests/build; original local raw logs not yet copied to remote checkpoint.",
+              "dedupe": {
+                "upstream_pr_heads": 3453,
+                "user_fork_heads": 469,
+                "reachable_commits": 16235,
+                "cursor_source_blobs": 83,
+                "grok_source_blobs": 7,
+                "total_source_blobs": 90,
+                "equivalent_found": false,
+                "final_ref_refresh_added_relevant_blobs": false,
+                "raw_audit_paths": [
+                  "audit/claude-mem-cursor-refresh-history-functions-20261116.json",
+                  "audit/claude-mem-grok-refresh-history-functions-20261116.json",
+                  "audit/claude-mem-context-refresh-history-final-20261116.log"
+                ]
+              }
+            },
+            "created_at": "2026-11-16T23:25:14Z"
           }
         ],
         "counts": {
-          "submitted": 2,
-          "open": 2,
+          "submitted": 3,
+          "open": 3,
           "merged": 0,
           "closed_unmerged": 0,
           "draft_open": 0,
-          "ready_open": 2,
-          "effective": 2
+          "ready_open": 3,
+          "effective": 3
         },
-        "remaining_to_20": 18
+        "remaining_to_20": 17
       }
     ],
-    "verification_scope": "Refreshed claude-mem #6231 PR state/head/maintainer permissions and workflow attachment, and #6230 official CI; other projects retain their previously verified snapshots."
+    "verification_scope": "Refreshed claude-mem #6232 state, exact head, all seven file SHAs, maintainer permissions and workflow attachment; refreshed #6231 workflows (Windows and Native ODS success, CI running). Other PR states retain their previously verified snapshots.",
+    "counts": {
+      "submitted": 93,
+      "open": 72,
+      "merged": 12,
+      "closed_unmerged": 9,
+      "draft_open": 0,
+      "ready_open": 72,
+      "effective": 84
+    }
   },
   "new_findings": {
     "sse_errors": {
@@ -4309,5 +4436,5 @@
       "observed": "Original and #255 controls lose counts in all9 valid multi-data streams; Responses/Messages append false in-band engine_unavailable errors. All3 unterminated-event controls are falsely completed. Provisional fix passes all15 HTTP cases; final heartbeat refinement under validation."
     }
   },
-  "environment_status": "Executor restored. Claude-Mem #6230 directly published via connector. SSE macOS capacity retry succeeded; no retry of Edge0 create-PR403 or permission changes."
+  "environment_status": "Executor became unavailable after all context-refresh local tests and build passed. Exact seven production blobs, commit and branch were already uploaded; #6232 was then directly published and REST-verified via GitHub connector. No repeated executor probes or Edge0 create-PR403 retries."
 }

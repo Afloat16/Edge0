@@ -1,0 +1,162 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "fork": "Afloat16/claude-mem",
+  "branch": "fix/context-refresh-order-20261116",
+  "base": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+  "base_tree": "9dc29a31054b5bc4a876235f3cb665a2c22e896e",
+  "head": "e2e64128e8eeeb8145a36ddb1de927f95713e536",
+  "tree": "aacac21c0eb3d4b4f2e42afea678f775844fdf75",
+  "status": "published",
+  "url": "https://github.com/thedotmack/claude-mem/pull/6232",
+  "number": 6232,
+  "draft": false,
+  "maintainer_can_modify": false,
+  "title": "fix(integrations): keep newer context when refreshes overlap",
+  "body": "## Summary\n\nTwo saved summaries for the same project can start overlapping context refreshes. If the earlier request finishes after the later one, Cursor and Grok Build currently replace the newer rules-file snapshot with the older response. The next session then reads stale context.\n\nThis adds a shared publication guard for overlapping refreshes of the same rules file within one worker process. A refresh advances the published sequence only after its synchronous file write succeeds. HTTP errors, empty responses, and write failures still allow an earlier usable result to be published. Per-file counters are removed when the last request finishes.\n\nBoth integrations use the same guard. Existing Grok registration/file checks remain in place, and the worker bundle and source map are rebuilt. This handles in-process refresh ordering; it does not add cross-process file arbitration or change project-exclusion semantics.\n\n## Validation\n\n- A real loopback HTTP fixture drives both public update functions in isolated processes and inspects the rules files on disk. Two- and three-request reverse completion reproduce **4 failures on the original implementation**, with **10 passing controls**.\n- All **14 HTTP scenarios pass** after the fix, including normal completion order, HTTP 503, empty content, a real rename/write failure, independent workspaces, and a subsequent refresh after overlapping requests finish.\n- `bun test tests/integration/context-refresh-order.test.ts tests/integration/grok-build-rules.test.ts tests/cursor-registry.test.ts`: **43 passed**.\n- `npm run typecheck`: passed for root and viewer.\n- `npm run build`: passed.",
+  "files": [
+    {
+      "path": "plugin/scripts/worker-service.cjs",
+      "blob": "e147660848d6914551f4321526880428072d5984",
+      "mode": "100755",
+      "status": "modified"
+    },
+    {
+      "path": "plugin/scripts/worker-service.cjs.map",
+      "blob": "10ea8b581b97ec8867214a3025dde5afa1f7bf82",
+      "mode": "100644",
+      "status": "modified"
+    },
+    {
+      "path": "src/services/integrations/CursorHooksInstaller.ts",
+      "blob": "a5a485d9901295287e9ccc78680a1a7b1581c3e1",
+      "mode": "100644",
+      "status": "modified"
+    },
+    {
+      "path": "src/services/integrations/GrokBuildRules.ts",
+      "blob": "c0c738fffad5d341f182a41e02bb7be61973a633",
+      "mode": "100644",
+      "status": "modified"
+    },
+    {
+      "path": "src/services/integrations/context-refresh.ts",
+      "blob": "97e164ac5352622af957b3d3986895d78088141c",
+      "mode": "100644",
+      "status": "added"
+    },
+    {
+      "path": "tests/integration/context-refresh-order-child.ts",
+      "blob": "eeb2548d9b769ba4686cb3fd87ebb916e9f3430c",
+      "mode": "100644",
+      "status": "added"
+    },
+    {
+      "path": "tests/integration/context-refresh-order.test.ts",
+      "blob": "0b6e7f4716cbd7d730777d108e6e72a80be779ac",
+      "mode": "100644",
+      "status": "added"
+    }
+  ],
+  "validation": {
+    "baseline": {
+      "passed": 10,
+      "failed": 4,
+      "source_commit": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+      "failed_cases": [
+        "cursor two overlapping responses reversed",
+        "cursor three overlapping responses reversed",
+        "grok two overlapping responses reversed",
+        "grok three overlapping responses reversed"
+      ],
+      "observed_content": "older snapshot replaced newer/newest snapshot"
+    },
+    "related_after": {
+      "passed": 43,
+      "failed": 0,
+      "files": 3,
+      "http_scenarios": 14
+    },
+    "controls": [
+      "ordinary completion order",
+      "HTTP 503 on later request",
+      "empty later response",
+      "real rename/write failure on later request",
+      "independent workspaces",
+      "successful subsequent refresh after all earlier requests finish"
+    ],
+    "typecheck": "success: root and viewer",
+    "build": "success: all build targets; rebuilt worker runtime bundle and source map",
+    "commands": [
+      "bun test tests/integration/context-refresh-order.test.ts",
+      "bun test tests/integration/context-refresh-order.test.ts tests/integration/grok-build-rules.test.ts tests/cursor-registry.test.ts",
+      "npm run typecheck",
+      "npm run build"
+    ],
+    "runtime": {
+      "bun": "1.4.4",
+      "node": "24.22.1",
+      "platform": "Linux"
+    },
+    "source_of_results": "Observed executor output before workspace became unavailable. Tests and exact production blobs are preserved in the published commit.",
+    "original_local_logs": [
+      "audit/claude-mem-context-refresh-before.log",
+      "audit/claude-mem-context-refresh-after.log",
+      "audit/claude-mem-context-refresh-typecheck.log",
+      "audit/claude-mem-context-refresh-build.log"
+    ],
+    "logs_availability": "Workspace unavailable after successful tests/build; original local raw logs not yet copied to remote checkpoint.",
+    "dedupe": {
+      "upstream_pr_heads": 3453,
+      "user_fork_heads": 469,
+      "reachable_commits": 16235,
+      "cursor_source_blobs": 83,
+      "grok_source_blobs": 7,
+      "total_source_blobs": 90,
+      "equivalent_found": false,
+      "final_ref_refresh_added_relevant_blobs": false,
+      "raw_audit_paths": [
+        "audit/claude-mem-cursor-refresh-history-functions-20261116.json",
+        "audit/claude-mem-grok-refresh-history-functions-20261116.json",
+        "audit/claude-mem-context-refresh-history-final-20261116.log"
+      ]
+    }
+  },
+  "official_ci": [
+    {
+      "id": 43979130020,
+      "name": "Native ODS integration",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 61,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/logs",
+      "workflow_id": 392578694,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979130020"
+    },
+    {
+      "id": 43979129460,
+      "name": "Windows",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_number": 8118,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/logs",
+      "workflow_id": 268562650,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129460"
+    },
+    {
+      "id": 43979129450,
+      "name": "CI",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_number": 8098,
+      "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/jobs",
+      "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/logs",
+      "workflow_id": 285261453,
+      "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450"
+    }
+  ],
+  "verified_at": "2026-11-16T23:26:22.789Z",
+  "scope": "Overlapping refreshes of the same rules file within one worker process. No cross-process arbitration or change to existing project-exclusion semantics.",
+  "prefilled_url": "https://github.com/thedotmack/claude-mem/compare/main...Afloat16:fix/context-refresh-order-20261116?expand=1&title=fix(integrations)%3A%20keep%20newer%20context%20when%20refreshes%20overlap&body=%23%23%20Summary%0A%0ATwo%20saved%20summaries%20for%20the%20same%20project%20can%20start%20overlapping%20context%20refreshes.%20If%20the%20earlier%20request%20finishes%20after%20the%20later%20one%2C%20Cursor%20and%20Grok%20Build%20currently%20replace%20the%20newer%20rules-file%20snapshot%20with%20the%20older%20response.%20The%20next%20session%20then%20reads%20stale%20context.%0A%0AThis%20adds%20a%20shared%20publication%20guard%20for%20overlapping%20refreshes%20of%20the%20same%20rules%20file%20within%20one%20worker%20process.%20A%20refresh%20advances%20the%20published%20sequence%20only%20after%20its%20synchronous%20file%20write%20succeeds.%20HTTP%20errors%2C%20empty%20responses%2C%20and%20write%20failures%20still%20allow%20an%20earlier%20usable%20result%20to%20be%20published.%20Per-file%20counters%20are%20removed%20when%20the%20last%20request%20finishes.%0A%0ABoth%20integrations%20use%20the%20same%20guard.%20Existing%20Grok%20registration%2Ffile%20checks%20remain%20in%20place%2C%20and%20the%20worker%20bundle%20and%20source%20map%20are%20rebuilt.%20This%20handles%20in-process%20refresh%20ordering%3B%20it%20does%20not%20add%20cross-process%20file%20arbitration%20or%20change%20project-exclusion%20semantics.%0A%0A%23%23%20Validation%0A%0A-%20A%20real%20loopback%20HTTP%20fixture%20drives%20both%20public%20update%20functions%20in%20isolated%20processes%20and%20inspects%20the%20rules%20files%20on%20disk.%20Two-%20and%20three-request%20reverse%20completion%20reproduce%20**4%20failures%20on%20the%20original%20implementation**%2C%20with%20**10%20passing%20controls**.%0A-%20All%20**14%20HTTP%20scenarios%20pass**%20after%20the%20fix%2C%20including%20normal%20completion%20order%2C%20HTTP%20503%2C%20empty%20content%2C%20a%20real%20rename%2Fwrite%20failure%2C%20independent%20workspaces%2C%20and%20a%20subsequent%20refresh%20after%20overlapping%20requests%20finish.%0A-%20%60bun%20test%20tests%2Fintegration%2Fcontext-refresh-order.test.ts%20tests%2Fintegration%2Fgrok-build-rules.test.ts%20tests%2Fcursor-registry.test.ts%60%3A%20**43%20passed**.%0A-%20%60npm%20run%20typecheck%60%3A%20passed%20for%20root%20and%20viewer.%0A-%20%60npm%20run%20build%60%3A%20passed."
+}
