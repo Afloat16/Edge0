@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
@@ -30,12 +31,19 @@ jobs:
         run: |
           cp src/chat.ts "$RUNNER_TEMP/chat-fixed.ts"
           git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/examples/desktop/src/chat.ts > src/chat.ts
-          if npm test -- src/chat-completion.test.ts > "$RUNNER_TEMP/sse-before.log" 2>&1; then
+          if npm test -- src/chat-completion.test.ts --reporter=json --outputFile="$RUNNER_TEMP/sse-before.json" > "$RUNNER_TEMP/sse-before.log" 2>&1; then
             cat "$RUNNER_TEMP/sse-before.log"
             exit 1
           fi
           cat "$RUNNER_TEMP/sse-before.log"
-          grep -F 'Tests  4 failed (4)' "$RUNNER_TEMP/sse-before.log"
+          node --input-type=module - <<'JSTEST'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const result = JSON.parse(fs.readFileSync(`${process.env.RUNNER_TEMP}/sse-before.json`, 'utf8'));
+          assert.equal(result.numFailedTests, 4);
+          assert.equal(result.numPassedTests, 0);
+          console.log('Upstream reproduced all four expected failures.');
+          JSTEST
       - name: Validate all frontend tests, build, and real HTTP completion
         run: |
           cp "$RUNNER_TEMP/chat-fixed.ts" src/chat.ts
