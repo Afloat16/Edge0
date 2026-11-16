@@ -606,6 +606,26 @@ int main() {
     account(cache_timing,Json::parse(R"({"type":"message","usage":{"cache_read_input_tokens":2},"timings":{"cache_n":4}})"));
     CHECK(cache_timing.reused_tokens==4);
 
+    // Responses report cached input tokens in their own usage detail object, without requiring timings.
+    const std::string response_cache_sse = "data: {\"type\":\"response.created\",\"response\":{\"object\":\"response\",\"status\":\"in_progress\",\"usage\":null}}\n\n"
+        "data: {\"type\":\"response.completed\",\"response\":{\"object\":\"response\",\"status\":\"completed\","
+        "\"usage\":{\"input_tokens\":10,\"input_tokens_details\":{\"cached_tokens\":7},\"output_tokens\":3}}}\n\n";
+    for(std::size_t split:{std::size_t(1),std::size_t(7),response_cache_sse.size()}) {
+        Accounting cached;cached.endpoint="/v1/responses";std::string pending;
+        for(std::size_t i=0;i<response_cache_sse.size();i+=split)
+            account_sse(cached,pending,response_cache_sse.data()+i,std::min(split,response_cache_sse.size()-i));
+        CHECK(cached.complete && pending.empty() && cached.input_tokens==10 && cached.reused_tokens==7);
+    }
+    for(const auto& value:Json::array({0,3,nullptr,"3",Json::object()})) {
+        Accounting cached;
+        account(cached,Json{{"object","response"},{"usage",{{"input_tokens_details",{{"cached_tokens",value}}}}}});
+        CHECK(value.is_number_integer() ? cached.reused_tokens==value.get<std::int64_t>() : !cached.reused_tokens);
+    }
+    Accounting response_timing;
+    account(response_timing,Json::parse(R"({"type":"response.completed","timings":{"cache_n":4},
+        "response":{"object":"response","usage":{"input_tokens_details":{"cached_tokens":2}}}})"));
+    CHECK(response_timing.reused_tokens==4);
+
     // Fields of the wrong type count as missing; nothing throws.
     for (const char* text : {R"({"object":null,"status":"completed"})", R"({"object":5,"status":"completed"})",
                              R"({"object":"response","status":null})", R"({"object":"response","status":5})",

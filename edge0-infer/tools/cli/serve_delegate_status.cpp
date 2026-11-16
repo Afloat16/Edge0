@@ -60,6 +60,8 @@ void account(Accounting& a, const Json& body) {
             take(a.reused_tokens, integer(usage, "cache_read_input_tokens"));
         if (usage.contains("prompt_tokens_details") && !a.reused_tokens)
             take(a.reused_tokens, integer(usage["prompt_tokens_details"], "cached_tokens"));
+        if (usage.contains("input_tokens_details") && !a.reused_tokens)
+            take(a.reused_tokens, integer(usage["input_tokens_details"], "cached_tokens"));
     }
     if (body.contains("timings") && body["timings"].is_object()) {
         const auto& t = body["timings"];

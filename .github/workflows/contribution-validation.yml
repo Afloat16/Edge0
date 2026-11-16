@@ -1,4 +1,4 @@
-name: Messages cache accounting validation
+name: Protocol cache accounting validation
 on:
   push:
     branches: [validation/messages-cache-20261116]
@@ -50,7 +50,7 @@ jobs:
             exit 1
           fi
           cat "$RUNNER_TEMP/cache-http-before.log"
-          grep -F "assert records[2]['reused_tokens'] == 2" "$RUNNER_TEMP/cache-http-before.log"
+          grep -F "assert records[0]['reused_tokens'] == 3" "$RUNNER_TEMP/cache-http-before.log"
       - name: Apply the fix and run the required suites
         run: |
           cp "$RUNNER_TEMP/cache-fixed.cpp" tools/cli/serve_delegate_status.cpp
