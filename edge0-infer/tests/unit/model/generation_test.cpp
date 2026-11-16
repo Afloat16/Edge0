@@ -4,6 +4,11 @@
 #include <fstream>
 #include <chrono>
 #include <cstdlib>
+#include <clocale>
+#include <cmath>
+#include <future>
+#include <optional>
+#include <vector>
 using namespace edge0;
 int main(int argc, char**) {
     if (argc > 1) {
@@ -43,5 +48,62 @@ int main(int argc, char**) {
         auto result = model::read_generation_defaults(root.string());
         CHECK(!result && result.error().category == ErrorCategory::asset_invalid);
     }
+    const std::string original_locale = std::setlocale(LC_NUMERIC, nullptr);
+    // Match the host's original stod range behavior, including subnormals.
+    CHECK(std::setlocale(LC_NUMERIC, "C"));
+    const std::vector<std::string> numbers = {"0.0", "-0.0", "0e-400", "-0e-400", "0.625", "6.25e-1",
+        "2.2250738585072014e-308", "2.225073858507201e-308", "5e-324", "1e-400",
+        "1.7976931348623157e308", "1.7976931348623159e308", "1e999"};
+    std::vector<std::optional<double>> expected;
+    for (const auto& number : numbers) {
+        try { expected.push_back(std::stod(number)); }
+        catch (const std::out_of_range&) { expected.push_back(std::nullopt); }
+    }
+    for (const auto* locale : {"C", "de_DE.UTF-8", "de_DE.utf8", "fr_FR.UTF-8", "German_Germany.1252"}) {
+        if (!std::setlocale(LC_NUMERIC, locale)) continue;
+        std::cerr << "generation defaults with LC_NUMERIC=" << locale << '\n';
+        { std::ofstream out(root / "generation_config.json"); out << R"({"temperature":0.625})"; }
+        const auto temperature = model::read_generation_defaults(root.string());
+        CHECK(temperature);
+        std::cerr << "temperature=" << temperature.value().temperature.value_or(-1) << '\n';
+        CHECK(temperature.value().temperature == 0.625);
+        for (const auto& text : {
+            R"({"temperature":0.625,"top_p":0.95,"repetition_penalty":1.25,"top_k":20})",
+            R"({"temperature":6.25e-1,"top_p":9.5e-1,"repetition_penalty":1.25e0,"top_k":20})"}) {
+            { std::ofstream out(root / "generation_config.json"); out << text; }
+            const auto result = model::read_generation_defaults(root.string());
+            CHECK(result);
+            CHECK(result.value().temperature == 0.625 && result.value().top_p == 0.95);
+            CHECK(result.value().repetition_penalty == 1.25 && result.value().top_k == 20);
+        }
+        for (std::size_t i = 0; i < numbers.size(); ++i) {
+            { std::ofstream out(root / "generation_config.json"); out << "{\"temperature\":" << numbers[i] << "}"; }
+            const auto result = model::read_generation_defaults(root.string());
+            CHECK(bool(result) == expected[i].has_value());
+            if (result) {
+                CHECK(result.value().temperature == expected[i]);
+                CHECK(std::signbit(*result.value().temperature) == std::signbit(*expected[i]));
+            }
+            // Unknown provider fields remain ignorable even when out of range.
+            { std::ofstream out(root / "generation_config.json"); out << "{\"ignored\":" << numbers[i] << ",\"temperature\":0.625}"; }
+            const auto ignored = model::read_generation_defaults(root.string());
+            CHECK(ignored && ignored.value().temperature == 0.625);
+        }
+        { std::ofstream out(root / "generation_config.json"); out << R"({"temperature":0.625,"top_p":0.95})"; }
+        const std::string before_reads = std::setlocale(LC_NUMERIC, nullptr);
+        std::vector<std::future<bool>> readers;
+        for (int worker = 0; worker < 8; ++worker) {
+            readers.push_back(std::async(std::launch::async, [&] {
+                for (int read = 0; read < 100; ++read) {
+                    const auto result = model::read_generation_defaults(root.string());
+                    if (!result || result.value().temperature != 0.625 || result.value().top_p != 0.95) return false;
+                }
+                return true;
+            }));
+        }
+        for (auto& reader : readers) CHECK(reader.get());
+        CHECK(std::string(std::setlocale(LC_NUMERIC, nullptr)) == before_reads);
+    }
+    CHECK(std::setlocale(LC_NUMERIC, original_locale.c_str()));
     std::filesystem::remove_all(root);
 }
