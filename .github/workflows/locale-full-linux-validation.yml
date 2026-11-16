@@ -1,0 +1,77 @@
+name: Native locale full Linux comparison
+on:
+  push:
+    branches: [validation/generation-defaults-full-linux-20261116]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 2
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d
+      - uses: astral-sh/setup-uv@v6
+      - run: sudo apt-get update && sudo apt-get install -y ninja-build locales && sudo locale-gen de_DE.UTF-8 fr_FR.UTF-8
+      - run: uv sync --project tools/assets
+      - name: Establish full-suite failures with the original parser
+        run: |
+          cp src/model/asset_index.cpp "$RUNNER_TEMP/locale-fixed.cpp"
+          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/src/model/asset_index.cpp > src/model/asset_index.cpp
+          cmake --preset cpu
+          cmake --build --preset cpu
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/locale-before.xml"
+          before=$?
+          set -e
+          echo "baseline full-suite exit: $before"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, json, subprocess, xml.etree.ElementTree as ET
+          from pathlib import Path
+          root = ET.parse(Path(os.environ['RUNNER_TEMP'], 'locale-before.xml'))
+          failures = {t.attrib['name'] for t in root.iter('testcase') if t.find('failure') is not None}
+          expected = {'moe_test_model_generation_defaults', 'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools', 'moe_test_weights_mixed'}
+          print('Original-parser full-suite failures:', sorted(failures))
+          assert 'moe_test_model_generation_defaults' in failures
+          assert failures <= expected, (failures, expected)
+          weight_failures = 0
+          for attempt in range(100):
+              result = subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], capture_output=True, text=True)
+              if result.returncode:
+                  assert 'budget.current(exec::Purpose::resident_weights)' in result.stderr, result.stderr
+                  weight_failures += 1
+          print('Unchanged mixed-storage baseline failures out of 100:', weight_failures)
+          if weight_failures:
+              failures.add('moe_test_weights_mixed')
+          Path(os.environ['RUNNER_TEMP'], 'locale-baseline-failures.json').write_text(json.dumps(sorted(failures)))
+          PYTEST
+      - name: Validate the fixed parser across the complete Linux suite
+        run: |
+          cp "$RUNNER_TEMP/locale-fixed.cpp" src/model/asset_index.cpp
+          cmake --build --preset cpu
+          set +e
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/locale-after.xml"
+          after=$?
+          set -e
+          echo "fixed-parser full-suite exit: $after"
+          uv run --project tools/assets python - <<'PYTEST'
+          import os, json, xml.etree.ElementTree as ET
+          from pathlib import Path
+          root = ET.parse(Path(os.environ['RUNNER_TEMP'], 'locale-after.xml'))
+          tests = list(root.iter('testcase'))
+          failures = {t.attrib['name'] for t in tests if t.find('failure') is not None}
+          skipped = [t.attrib['name'] for t in tests if t.find('skipped') is not None]
+          baseline = set(json.loads(Path(os.environ['RUNNER_TEMP'], 'locale-baseline-failures.json').read_text()))
+          baseline.discard('moe_test_model_generation_defaults')
+          print('Fixed-parser full-suite failures:', sorted(failures))
+          print('Previously reproduced baseline failures:', sorted(baseline))
+          print('Fixed-parser runnable passes:', len(tests) - len(failures) - len(skipped))
+          print('Fixed-parser device skips:', len(skipped))
+          assert failures <= baseline, (failures, baseline)
+          assert 'moe_test_model_generation_defaults' not in failures
+          PYTEST
