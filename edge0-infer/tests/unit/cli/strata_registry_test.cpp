@@ -672,6 +672,16 @@ int main() {
                std::to_string(t.generated_tokens) + "," + std::to_string(t.prompt_tokens_read) + "," +
                std::to_string(t.predicted_tokens) + "," + std::to_string(t.first_seconds) + "," + std::to_string(t.decode_seconds);
     };
+    // Comment-only heartbeats and ignored fields must not accumulate while no data event is pending.
+    {
+        Accounting a;
+        std::string pending;
+        const std::string ignored = ": heartbeat\r\nid: seen\nretry: 1000\n";
+        for (int i = 0; i < 100; ++i) {
+            account_sse(a, pending, ignored.data(), ignored.size());
+            CHECK(pending.empty() && !a.complete && !a.saw_content);
+        }
+    }
     // Multi-data events are joined before accounting; blank lines, not data lines, commit the event.
     for (const auto& c : live_cases) {
         const auto expected_record = record_of(record_only(c.sse));

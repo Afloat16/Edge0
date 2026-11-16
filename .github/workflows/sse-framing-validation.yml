@@ -5,24 +5,6 @@ on:
 permissions:
   contents: read
 jobs:
-  history:
-    runs-on: ubuntu-latest
-    timeout-minutes: 35
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          filter: blob:none
-      - name: Fetch every existing fork branch and upstream PR history
-        run: |
-          git fetch --no-tags --filter=blob:none origin '+refs/heads/*:refs/audit/fork/*'
-          git fetch --no-tags --filter=blob:none https://github.com/Edge0-AI/Edge0.git '+refs/heads/*:refs/audit/upstream/*' '+refs/pull/*/head:refs/audit/upstream-pr/*'
-          python validation/sse_history.py
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: edge0-sse-complete-history
-          path: audit/edge0-sse-history.json
   cpu:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -33,85 +15,77 @@ jobs:
         working-directory: edge0-infer
     steps:
       - uses: actions/checkout@v4
-      - run: git fetch --no-tags --depth=1 origin f6bfa5546bcf89919f86946ec669bcc7f4cd526d b894877cd2a14d6593061f7fb121432249943af8
+      - run: git fetch --no-tags --depth=1 origin 1e1c013542034d5db144e1a45220896f2863a139
       - uses: astral-sh/setup-uv@v6
       - run: sudo apt-get update && sudo apt-get install -y ninja-build
       - run: uv sync --project tools/assets
-      - name: Reproduce data loss through the original native HTTP proxy
+      - name: Preserve streaming heartbeat buffer behavior
         run: |
-          cp tools/cli/serve_delegate_status.cpp "$RUNNER_TEMP/sse-framing-fixed.cpp"
-          git show f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/tools/cli/serve_delegate_status.cpp > tools/cli/serve_delegate_status.cpp
-          python -m py_compile tests/integration/fake_strata.py tests/integration/serve_strata_test.py ../validation/sse_http.py
+          cp tools/cli/serve_delegate_status.cpp "$RUNNER_TEMP/sse-final.cpp"
+          git show 1e1c013542034d5db144e1a45220896f2863a139:edge0-infer/tools/cli/serve_delegate_status.cpp > tools/cli/serve_delegate_status.cpp
           cmake --preset cpu
-          cmake --build --preset cpu
-          if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/sse-unit-before.log" 2>&1; then
-            cat "$RUNNER_TEMP/sse-unit-before.log"
+          cmake --build --preset cpu --target moe_test_strata_registry
+          if build/cpu/bin/moe_test_strata_registry > "$RUNNER_TEMP/sse-heartbeat-before.log" 2>&1; then
+            cat "$RUNNER_TEMP/sse-heartbeat-before.log"
             exit 1
           fi
-          cat "$RUNNER_TEMP/sse-unit-before.log"
-          grep -F 'check failed: framed.streamed_tokens == c.fragments' "$RUNNER_TEMP/sse-unit-before.log"
-          python -u ../validation/sse_http.py --expect-failure --label original
-          set +e
-          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/sse-before.xml"
-          before=$?
-          set -e
-          echo "original full-suite exit: $before"
+          cat "$RUNNER_TEMP/sse-heartbeat-before.log"
+          grep -F 'check failed: pending.empty() && !a.complete && !a.saw_content' "$RUNNER_TEMP/sse-heartbeat-before.log"
+      - name: Check the final source and all native suites
+        run: |
+          cp "$RUNNER_TEMP/sse-final.cpp" tools/cli/serve_delegate_status.cpp
+          git diff --exit-code -- tools/cli/serve_delegate_status.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py
+          python -m py_compile tests/integration/fake_strata.py tests/integration/serve_strata_test.py ../validation/sse_http.py
+          cmake --build --preset cpu
+          build/cpu/bin/moe_test_strata_registry
+          python -u ../validation/sse_http.py --label final
           uv run --project tools/assets python - <<'PYTEST'
-          import os, json, subprocess, xml.etree.ElementTree as ET
+          import json, os, subprocess
           from pathlib import Path
-          root = ET.parse(Path(os.environ['RUNNER_TEMP'], 'sse-before.xml'))
-          failures = {t.attrib['name'] for t in root.iter('testcase') if t.find('failure') is not None}
-          expected = {'moe_test_strata_registry', 'moe_test_platform_memory', 'moe_test_ordered_json', 'moe_test_template_tools', 'moe_test_weights_mixed'}
-          print('SSE full-suite original failures:', sorted(failures))
-          assert 'moe_test_strata_registry' in failures
-          assert failures <= expected, (failures, expected)
           count = 0
           for attempt in range(100):
               result = subprocess.run(['build/cpu/bin/moe_test_weights_mixed'], capture_output=True, text=True)
               if result.returncode:
                   assert 'budget.current(exec::Purpose::resident_weights)' in result.stderr, result.stderr
                   count += 1
-          print('Unchanged weights failures out of100:', count)
-          if count:
-              failures.add('moe_test_weights_mixed')
-          Path(os.environ['RUNNER_TEMP'], 'sse-baseline-failures.json').write_text(json.dumps(sorted(failures)))
+          print('Final runner unchanged weights failures out of100:', count)
+          Path(os.environ['RUNNER_TEMP'], 'sse-final-weight-baseline.json').write_text(json.dumps(count))
           PYTEST
-      - name: Verify that the existing error-recording fix does not repair framing
-        run: |
-          for file in serve_delegate_status.h serve_delegate_status.cpp serve_delegate_proxy.cpp; do
-            git show "b894877cd2a14d6593061f7fb121432249943af8:edge0-infer/tools/cli/$file" > "tools/cli/$file"
-          done
-          cmake --build --preset cpu --target edge0-infer moe_test_strata_registry
-          python -u ../validation/sse_http.py --expect-failure --label existing-pr255
-      - name: Validate fixed framing and the complete native suites
-        run: |
-          for file in serve_delegate_status.h serve_delegate_proxy.cpp; do
-            git show "f6bfa5546bcf89919f86946ec669bcc7f4cd526d:edge0-infer/tools/cli/$file" > "tools/cli/$file"
-          done
-          cp "$RUNNER_TEMP/sse-framing-fixed.cpp" tools/cli/serve_delegate_status.cpp
-          git diff --exit-code -- tools/cli/serve_delegate_status.cpp tools/cli/serve_delegate_status.h tools/cli/serve_delegate_proxy.cpp tests/unit/cli/strata_registry_test.cpp tests/integration/fake_strata.py tests/integration/serve_strata_test.py
-          cmake --build --preset cpu
-          build/cpu/bin/moe_test_strata_registry
-          python -u ../validation/sse_http.py --label fixed
           set +e
-          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/sse-after.xml"
-          after=$?
+          ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1' --output-junit "$RUNNER_TEMP/sse-final.xml"
+          result=$?
           set -e
-          echo "fixed full-suite exit: $after"
+          echo "final full-suite exit: $result"
           uv run --project tools/assets python - <<'PYTEST'
           import os, json, xml.etree.ElementTree as ET
           from pathlib import Path
-          root = ET.parse(Path(os.environ['RUNNER_TEMP'], 'sse-after.xml'))
+          root = ET.parse(Path(os.environ['RUNNER_TEMP'], 'sse-final.xml'))
           tests = list(root.iter('testcase'))
           failures = {t.attrib['name'] for t in tests if t.find('failure') is not None}
           skipped = [t.attrib['name'] for t in tests if t.find('skipped') is not None]
-          baseline = set(json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-baseline-failures.json').read_text()))
-          baseline.discard('moe_test_strata_registry')
-          print('SSE fixed full-suite failures:', sorted(failures))
-          print('SSE previously reproduced baseline failures:', sorted(baseline))
-          print('SSE fixed runnable passes:', len(tests) - len(failures) - len(skipped))
-          print('SSE fixed device skips:', len(skipped))
-          assert failures <= baseline, (failures, baseline)
-          assert 'moe_test_strata_registry' not in failures
+          evidence = json.loads(Path('../validation/sse-baseline-evidence.json').read_text())
+          permitted = set(evidence['unchanged_full_suite_failures'])
+          if json.loads(Path(os.environ['RUNNER_TEMP'], 'sse-final-weight-baseline.json').read_text()):
+              permitted.add('moe_test_weights_mixed')
+          print('SSE final full-suite failures:', sorted(failures))
+          print('SSE reproduced baseline failures:', sorted(permitted))
+          print('SSE final runnable passes:', len(tests) - len(failures) - len(skipped))
+          print('SSE final device skips:', len(skipped))
+          assert failures <= permitted, (failures, permitted)
           PYTEST
           ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
+  macos:
+    name: Native macOS L0/L1 and delegated L2
+    runs-on: macos-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: edge0-infer
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install ninja uv
+      - run: uv sync --project tools/assets
+      - run: cmake --preset cpu
+      - run: cmake --build --preset cpu
+      - run: ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1'
+      - run: ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata

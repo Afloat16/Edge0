@@ -1,0 +1,26 @@
+{
+  "run": 43963750094,
+  "job": 133637634704,
+  "head": "1e1c013542034d5db144e1a45220896f2863a139",
+  "base": "f6bfa5546bcf89919f86946ec669bcc7f4cd526d",
+  "url": "https://github.com/Afloat16/Edge0/actions/runs/43963750094/job/133637634704",
+  "unchanged_full_suite_failures": [
+    "moe_test_ordered_json",
+    "moe_test_platform_memory",
+    "moe_test_template_tools"
+  ],
+  "original_new_native_regression": "framed.streamed_tokens == c.fragments fails",
+  "original_http_failures": 12,
+  "old_pr255_http_failures": 12,
+  "fixed_http_cases_passed": 15,
+  "fixed_l0_l1": {
+    "passed": 98,
+    "skipped": 3,
+    "baseline_failures": 3
+  },
+  "fixed_l2_passed": 2,
+  "unchanged_weights_probe": {
+    "failed": 14,
+    "attempts": 100
+  }
+}

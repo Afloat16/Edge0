@@ -128,6 +128,9 @@ void account_sse(Accounting& a, std::string& pending, const char* data, std::siz
                 if (!value.empty() && value.front() == ' ') value.erase(0, 1);
                 payload += value;
                 payload += '\n';
+            } else if (payload.empty()) {
+                // Heartbeats and ignored fields before data need no event buffer.
+                consumed = start;
             }
             continue;
         }
