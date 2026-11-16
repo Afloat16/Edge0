@@ -1,0 +1,765 @@
+﻿2026-11-16T22:48:16.8338810Z Current runner version: '2.338.2'
+2026-11-16T22:48:16.8350910Z ##[group]Runner Image Provisioner
+2026-11-16T22:48:16.8351380Z Hosted Compute Agent
+2026-11-16T22:48:16.8351730Z Version: 20261028.624
+2026-11-16T22:48:16.8352220Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-16T22:48:16.8352730Z Build Date: 2026-10-28T21:51:42Z
+2026-11-16T22:48:16.8353150Z Worker ID: {d64d8eba-3829-43c3-bdd8-77bf6de772f0}
+2026-11-16T22:48:16.8353560Z Region: westus
+2026-11-16T22:48:16.8353880Z Cloud: MacCloud
+2026-11-16T22:48:16.8354250Z ##[endgroup]
+2026-11-16T22:48:16.8354950Z ##[group]Operating System
+2026-11-16T22:48:16.8355300Z macOS
+2026-11-16T22:48:16.8355600Z 26.7.2
+2026-11-16T22:48:16.8355980Z 25G332
+2026-11-16T22:48:16.8356290Z ##[endgroup]
+2026-11-16T22:48:16.8356740Z ##[group]Runner Image
+2026-11-16T22:48:16.8357090Z Image: macos-26-arm64
+2026-11-16T22:48:16.8357440Z Version: 20261102.0473.1
+2026-11-16T22:48:16.8358230Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20261102.0473/images/macos/macos-26-arm64-Readme.md
+2026-11-16T22:48:16.8359160Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20261102.0473
+2026-11-16T22:48:16.8359760Z ##[endgroup]
+2026-11-16T22:48:16.8360400Z ##[group]GITHUB_TOKEN Permissions
+2026-11-16T22:48:16.8361260Z Contents: read
+2026-11-16T22:48:16.8396700Z Metadata: read
+2026-11-16T22:48:16.8397050Z ##[endgroup]
+2026-11-16T22:48:16.8398340Z Secret source: Actions
+2026-11-16T22:48:16.8398820Z Cache mode: write
+2026-11-16T22:48:16.8399200Z Prepare workflow directory
+2026-11-16T22:48:16.8617220Z Prepare all required actions
+2026-11-16T22:48:16.8649660Z Getting action download info
+2026-11-16T22:48:17.0351530Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-16T22:48:17.2136940Z Complete job name: Native macOS L0/L1 and delegated L2
+2026-11-16T22:48:17.2568680Z ##[group]Run actions/checkout@v4
+2026-11-16T22:48:17.2569140Z with:
+2026-11-16T22:48:17.2569430Z   repository: Afloat16/Edge0
+2026-11-16T22:48:17.2571800Z   token: ***
+2026-11-16T22:48:17.2572090Z   ssh-strict: true
+2026-11-16T22:48:17.2572380Z   ssh-user: git
+2026-11-16T22:48:17.2572670Z   persist-credentials: true
+2026-11-16T22:48:17.2572990Z   clean: true
+2026-11-16T22:48:17.2573290Z   sparse-checkout-cone-mode: true
+2026-11-16T22:48:17.2573640Z   fetch-depth: 1
+2026-11-16T22:48:17.2573930Z   fetch-tags: false
+2026-11-16T22:48:17.2574220Z   show-progress: true
+2026-11-16T22:48:17.2574520Z   lfs: false
+2026-11-16T22:48:17.2574800Z   submodules: false
+2026-11-16T22:48:17.2575100Z   set-safe-directory: true
+2026-11-16T22:48:17.2575440Z   allow-unsafe-pr-checkout: false
+2026-11-16T22:48:17.2575860Z ##[endgroup]
+2026-11-16T22:48:17.3788780Z Syncing repository: Afloat16/Edge0
+2026-11-16T22:48:17.3790140Z ##[group]Getting Git version info
+2026-11-16T22:48:17.3790640Z Working directory is '/Users/runner/work/Edge0/Edge0'
+2026-11-16T22:48:17.3791670Z [command]/opt/homebrew/bin/git version
+2026-11-16T22:48:17.4206050Z git version 2.56.0
+2026-11-16T22:48:17.4216950Z ##[endgroup]
+2026-11-16T22:48:17.4223160Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/b7c23b35-4480-4a4d-a24d-218996ec1c37/.gitconfig'
+2026-11-16T22:48:17.4230490Z Temporarily overriding HOME='/Users/runner/work/_temp/b7c23b35-4480-4a4d-a24d-218996ec1c37' before making global git config changes
+2026-11-16T22:48:17.4231410Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-16T22:48:17.4233370Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Edge0/Edge0
+2026-11-16T22:48:17.4309470Z Deleting the contents of '/Users/runner/work/Edge0/Edge0'
+2026-11-16T22:48:17.4312750Z ##[group]Initializing the repository
+2026-11-16T22:48:17.4315530Z [command]/opt/homebrew/bin/git init /Users/runner/work/Edge0/Edge0
+2026-11-16T22:48:17.4459450Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-16T22:48:17.4460290Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-16T22:48:17.4461370Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-16T22:48:17.4461950Z hint: call:
+2026-11-16T22:48:17.4462310Z hint:
+2026-11-16T22:48:17.4462700Z hint: 	git config --global init.defaultBranch <name>
+2026-11-16T22:48:17.4463100Z hint:
+2026-11-16T22:48:17.4463490Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-16T22:48:17.4464230Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-16T22:48:17.4464880Z hint:
+2026-11-16T22:48:17.4465390Z hint: 	git branch -m <name>
+2026-11-16T22:48:17.4465820Z hint:
+2026-11-16T22:48:17.4466380Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-16T22:48:17.4467150Z Initialized empty Git repository in /Users/runner/work/Edge0/Edge0/.git/
+2026-11-16T22:48:17.4472300Z [command]/opt/homebrew/bin/git remote add origin https://github.com/Afloat16/Edge0
+2026-11-16T22:48:17.4530360Z ##[endgroup]
+2026-11-16T22:48:17.4530880Z ##[group]Disabling automatic garbage collection
+2026-11-16T22:48:17.4532800Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2026-11-16T22:48:17.4579130Z ##[endgroup]
+2026-11-16T22:48:17.4579590Z ##[group]Setting up auth
+2026-11-16T22:48:17.4583500Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-16T22:48:17.4631020Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-16T22:48:17.5300480Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-16T22:48:17.5347580Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-16T22:48:17.5975750Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-16T22:48:17.6025160Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-16T22:48:17.6703610Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-16T22:48:17.6742590Z ##[endgroup]
+2026-11-16T22:48:17.6743300Z ##[group]Fetching the repository
+2026-11-16T22:48:17.6748020Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f8d66d6bef40b6716f8549bb87aa9d241d6484bf:refs/remotes/origin/validation/sse-event-framing-20261116
+2026-11-16T22:48:19.5994950Z From https://github.com/Afloat16/Edge0
+2026-11-16T22:48:19.5995820Z  * [new ref]         f8d66d6bef40b6716f8549bb87aa9d241d6484bf -> origin/validation/sse-event-framing-20261116
+2026-11-16T22:48:19.5997830Z ##[endgroup]
+2026-11-16T22:48:19.5998410Z ##[group]Determining the checkout info
+2026-11-16T22:48:19.5999040Z ##[endgroup]
+2026-11-16T22:48:19.6003740Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2026-11-16T22:48:19.6071200Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-16T22:48:19.6131450Z ##[group]Checking out the ref
+2026-11-16T22:48:19.6138480Z [command]/opt/homebrew/bin/git checkout --progress --force -B validation/sse-event-framing-20261116 refs/remotes/origin/validation/sse-event-framing-20261116
+2026-11-16T22:48:20.1114430Z Switched to a new branch 'validation/sse-event-framing-20261116'
+2026-11-16T22:48:20.1117080Z branch 'validation/sse-event-framing-20261116' set up to track 'origin/validation/sse-event-framing-20261116'.
+2026-11-16T22:48:20.1126030Z ##[endgroup]
+2026-11-16T22:48:20.1215850Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2026-11-16T22:48:20.1282780Z f8d66d6bef40b6716f8549bb87aa9d241d6484bf
+2026-11-16T22:48:20.1426020Z ##[group]Run brew install ninja uv
+2026-11-16T22:48:20.1426550Z [36;1mbrew install ninja uv[0m
+2026-11-16T22:48:20.1470300Z shell: /bin/bash -e {0}
+2026-11-16T22:48:20.1470530Z ##[endgroup]
+2026-11-16T22:48:21.4531270Z [33mWarning:[0m ninja 1.13.2 is already installed and up-to-date.
+2026-11-16T22:48:21.4531790Z To reinstall 1.13.2, run:
+2026-11-16T22:48:21.8514450Z   brew reinstall ninja
+2026-11-16T22:48:21.8514920Z [32m==>[0m [1mDownloading bottle manifests[0m
+2026-11-16T22:48:21.8562020Z ✔︎ Bottle Manifest uv (0.13.6)
+2026-11-16T22:48:21.8995560Z [32m==>[0m [1mFetching downloads for: [32muv[39m[0m
+2026-11-16T22:48:23.3731320Z ✔︎ Bottle uv (0.13.6)
+2026-11-16T22:48:23.3815320Z [34m==>[0m [1mPouring uv--0.13.6.arm64_tahoe.bottle.tar.gz[0m
+2026-11-16T22:48:23.8471110Z 🍺  /opt/homebrew/Cellar/uv/0.13.6: 17 files, 33.8MB
+2026-11-16T22:48:23.8476780Z [32m==>[0m [1mCaveats[0m
+2026-11-16T22:48:23.8477100Z Bash completion has been installed to:
+2026-11-16T22:48:23.8477430Z   /opt/homebrew/etc/bash_completion.d
+2026-11-16T22:48:23.8571080Z ##[group]Run uv sync --project tools/assets
+2026-11-16T22:48:23.8571320Z [36;1muv sync --project tools/assets[0m
+2026-11-16T22:48:23.8597940Z shell: /bin/bash -e {0}
+2026-11-16T22:48:23.8598100Z ##[endgroup]
+2026-11-16T22:48:24.0317760Z Using CPython 3.15.2 interpreter at: /opt/homebrew/opt/python@3.15/bin/python3.15
+2026-11-16T22:48:24.0318410Z Creating virtual environment at: tools/assets/.venv
+2026-11-16T22:48:24.0405030Z Resolved 15 packages in 5ms
+2026-11-16T22:48:24.1704070Z Downloading pygments (1.2MiB)
+2026-11-16T22:48:24.1704950Z Downloading numpy (5.2MiB)
+2026-11-16T22:48:24.2444350Z  Downloaded pygments
+2026-11-16T22:48:24.3163070Z  Downloaded numpy
+2026-11-16T22:48:24.3165710Z Prepared 8 packages in 274ms
+2026-11-16T22:48:24.3419100Z Installed 8 packages in 25ms
+2026-11-16T22:48:24.3420640Z  + iniconfig==2.3.1
+2026-11-16T22:48:24.3421300Z  + jinja2==3.1.6
+2026-11-16T22:48:24.3421860Z  + markupsafe==3.0.4
+2026-11-16T22:48:24.3424100Z  + numpy==2.5.4
+2026-11-16T22:48:24.3424930Z  + packaging==26.3
+2026-11-16T22:48:24.3425800Z  + pluggy==1.6.0
+2026-11-16T22:48:24.3426090Z  + pygments==2.21.0
+2026-11-16T22:48:24.3426450Z  + pytest==9.1.1
+2026-11-16T22:48:24.3499360Z ##[group]Run cmake --preset cpu
+2026-11-16T22:48:24.3499570Z [36;1mcmake --preset cpu[0m
+2026-11-16T22:48:24.3527830Z shell: /bin/bash -e {0}
+2026-11-16T22:48:24.3528040Z ##[endgroup]
+2026-11-16T22:48:24.9316400Z -- The C compiler identification is AppleClang 21.0.0.21000101
+2026-11-16T22:48:25.9869940Z -- The CXX compiler identification is AppleClang 21.0.0.21000101
+2026-11-16T22:48:26.0184050Z -- Detecting C compiler ABI info
+2026-11-16T22:48:26.1604450Z -- Detecting C compiler ABI info - done
+2026-11-16T22:48:26.1875990Z -- Check for working C compiler: /usr/bin/cc - skipped
+2026-11-16T22:48:26.1881600Z -- Detecting C compile features
+2026-11-16T22:48:26.1889600Z -- Detecting C compile features - done
+2026-11-16T22:48:26.1955210Z -- Detecting CXX compiler ABI info
+2026-11-16T22:48:26.3214590Z -- Detecting CXX compiler ABI info - done
+2026-11-16T22:48:26.3491340Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+2026-11-16T22:48:26.3494030Z -- Detecting CXX compile features
+2026-11-16T22:48:26.3498670Z -- Detecting CXX compile features - done
+2026-11-16T22:48:26.3842810Z -- The ASM compiler identification is AppleClang
+2026-11-16T22:48:26.3859420Z -- Found assembler: /usr/bin/cc
+2026-11-16T22:48:26.4120020Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+2026-11-16T22:48:26.5894160Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+2026-11-16T22:48:26.6046980Z -- Found Threads: TRUE
+2026-11-16T22:48:26.6240230Z -- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+2026-11-16T22:48:26.6627600Z -- CMAKE_SYSTEM_PROCESSOR: arm64
+2026-11-16T22:48:26.6628170Z -- GGML_SYSTEM_ARCH: ARM
+2026-11-16T22:48:26.6639810Z -- Including CPU backend
+2026-11-16T22:48:26.6642250Z -- ARM detected
+2026-11-16T22:48:26.6647220Z -- Performing Test GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E
+2026-11-16T22:48:26.7342540Z -- Performing Test GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E - Failed
+2026-11-16T22:48:26.7530690Z CMake Warning at third_party/ggml/src/ggml-cpu/CMakeLists.txt:140 (message):
+2026-11-16T22:48:26.7531650Z   ARM -march/-mcpu not found, -mcpu=native will be used
+2026-11-16T22:48:26.7534130Z Call Stack (most recent call first):
+2026-11-16T22:48:26.7535260Z   third_party/ggml/src/CMakeLists.txt:586 (ggml_add_cpu_backend_variant_impl)
+2026-11-16T22:48:26.7535860Z 
+2026-11-16T22:48:26.7535860Z 
+2026-11-16T22:48:26.7540850Z -- Performing Test GGML_MACHINE_SUPPORTS_dotprod
+2026-11-16T22:48:26.9789000Z -- Performing Test GGML_MACHINE_SUPPORTS_dotprod - Success
+2026-11-16T22:48:26.9789890Z -- Performing Test GGML_MACHINE_SUPPORTS_i8mm
+2026-11-16T22:48:27.2031770Z -- Performing Test GGML_MACHINE_SUPPORTS_i8mm - Success
+2026-11-16T22:48:27.2033060Z -- Performing Test GGML_MACHINE_SUPPORTS_sve
+2026-11-16T22:48:27.4716930Z -- Performing Test GGML_MACHINE_SUPPORTS_sve - Failed
+2026-11-16T22:48:27.4717650Z -- Performing Test GGML_MACHINE_SUPPORTS_nosve
+2026-11-16T22:48:27.6646700Z -- Performing Test GGML_MACHINE_SUPPORTS_nosve - Success
+2026-11-16T22:48:27.6647280Z -- Performing Test GGML_MACHINE_SUPPORTS_sme
+2026-11-16T22:48:28.0060160Z -- Performing Test GGML_MACHINE_SUPPORTS_sme - Failed
+2026-11-16T22:48:28.0061070Z -- Performing Test GGML_MACHINE_SUPPORTS_nosme
+2026-11-16T22:48:28.1526390Z -- Performing Test GGML_MACHINE_SUPPORTS_nosme - Success
+2026-11-16T22:48:28.1526760Z -- Checking for ARM features using flags:
+2026-11-16T22:48:28.1527010Z --   -U__ARM_FEATURE_SVE
+2026-11-16T22:48:28.1527200Z --   -U__ARM_FEATURE_SME
+2026-11-16T22:48:28.1527420Z --   -mcpu=native+dotprod+i8mm+nosve+nosme
+2026-11-16T22:48:28.1529480Z -- Performing Test HAVE_DOTPROD
+2026-11-16T22:48:28.3052470Z -- Performing Test HAVE_DOTPROD - Success
+2026-11-16T22:48:28.3053330Z -- Performing Test HAVE_SVE
+2026-11-16T22:48:28.4040410Z -- Performing Test HAVE_SVE - Failed
+2026-11-16T22:48:28.4041270Z -- Performing Test HAVE_MATMUL_INT8
+2026-11-16T22:48:28.5249230Z -- Performing Test HAVE_MATMUL_INT8 - Success
+2026-11-16T22:48:28.5249720Z -- Performing Test HAVE_FMA
+2026-11-16T22:48:28.6646910Z -- Performing Test HAVE_FMA - Success
+2026-11-16T22:48:28.6647220Z -- Performing Test HAVE_FP16_VECTOR_ARITHMETIC
+2026-11-16T22:48:28.7677180Z -- Performing Test HAVE_FP16_VECTOR_ARITHMETIC - Failed
+2026-11-16T22:48:28.7678580Z -- Performing Test HAVE_SME
+2026-11-16T22:48:28.8699440Z -- Performing Test HAVE_SME - Failed
+2026-11-16T22:48:28.8699890Z -- Adding CPU backend variant ggml-cpu: -U__ARM_FEATURE_SVE;-U__ARM_FEATURE_SME;-mcpu=native+dotprod+i8mm+nosve+nosme 
+2026-11-16T22:48:28.8755930Z -- ggml version: 0.24.0
+2026-11-16T22:48:28.8756140Z -- ggml commit:  f8d66d6
+2026-11-16T22:48:28.8920350Z -- Configuring done (4.5s)
+2026-11-16T22:48:28.9682470Z -- Generating done (0.1s)
+2026-11-16T22:48:28.9689450Z -- Build files have been written to: /Users/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:48:28.9754850Z ##[group]Run cmake --build --preset cpu
+2026-11-16T22:48:28.9755080Z [36;1mcmake --build --preset cpu[0m
+2026-11-16T22:48:28.9782280Z shell: /bin/bash -e {0}
+2026-11-16T22:48:28.9782430Z ##[endgroup]
+2026-11-16T22:48:29.0198220Z [0/2] Re-checking globbed directories...
+2026-11-16T22:48:29.5256590Z [1/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+2026-11-16T22:48:29.7562480Z [2/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+2026-11-16T22:48:29.9219980Z [3/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+2026-11-16T22:48:30.4116350Z [4/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+2026-11-16T22:48:30.5051980Z [5/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+2026-11-16T22:48:30.6258450Z [6/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+2026-11-16T22:48:30.8910770Z [7/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+2026-11-16T22:48:30.9211580Z [8/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+2026-11-16T22:48:31.2093340Z [9/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+2026-11-16T22:48:31.5645990Z [10/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/iqp.cpp.o
+2026-11-16T22:48:31.6985600Z [11/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+2026-11-16T22:48:32.0041100Z [12/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+2026-11-16T22:48:32.0543090Z [13/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+2026-11-16T22:48:32.2839020Z [14/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+2026-11-16T22:48:32.4164110Z [15/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+2026-11-16T22:48:32.4866220Z [16/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+2026-11-16T22:48:32.8569610Z [17/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+2026-11-16T22:48:32.9325910Z [18/290] Building C object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/arm/quants.c.o
+2026-11-16T22:48:33.4103900Z [19/290] Building C object third_party/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+2026-11-16T22:48:33.4304340Z [20/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml.dir/ggml-backend-dl.cpp.o
+2026-11-16T22:48:33.8094150Z [21/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+2026-11-16T22:48:34.3305380Z [22/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/arm/repack.cpp.o
+2026-11-16T22:48:34.5513860Z [23/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o
+2026-11-16T22:48:34.5615220Z [24/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/backend.cpp.o
+2026-11-16T22:48:34.7300410Z [25/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+2026-11-16T22:48:34.8603430Z [26/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+2026-11-16T22:48:34.9004560Z [27/290] Linking CXX static library third_party/ggml/src/libggml-base.a
+2026-11-16T22:48:34.9772690Z [28/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/file.cpp.o
+2026-11-16T22:48:35.3600550Z [29/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/memory.cpp.o
+2026-11-16T22:48:35.5573240Z [30/290] Building CXX object src/platform/CMakeFiles/moe_platform.dir/system.cpp.o
+2026-11-16T22:48:35.6397060Z [31/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/runtime.cpp.o
+2026-11-16T22:48:36.0925970Z [32/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/mixed.cpp.o
+2026-11-16T22:48:36.6314570Z [33/290] Building CXX object src/model/CMakeFiles/moe_model.dir/sha256.cpp.o
+2026-11-16T22:48:36.7051760Z [34/290] Building CXX object src/session/CMakeFiles/moe_session.dir/runtime.cpp.o
+2026-11-16T22:48:36.7252330Z [35/290] Building CXX object src/session/CMakeFiles/moe_session.dir/session.cpp.o
+2026-11-16T22:48:36.9511540Z [36/290] Building CXX object src/weights/CMakeFiles/moe_weights.dir/expert_slots.cpp.o
+2026-11-16T22:48:37.2981030Z [37/290] Building CXX object src/exec/CMakeFiles/moe_exec.dir/execution.cpp.o
+2026-11-16T22:48:37.5940850Z [38/290] Building CXX object src/model/CMakeFiles/moe_model.dir/json.cpp.o
+2026-11-16T22:48:38.4311660Z [39/290] Building CXX object src/models/api/CMakeFiles/moe_models_api.dir/api.cpp.o
+2026-11-16T22:48:38.6017340Z [40/290] Refreshing build identity
+2026-11-16T22:48:38.8837630Z [41/290] Building CXX object src/weights/CMakeFiles/moe_weights.dir/runtime.cpp.o
+2026-11-16T22:48:39.1565260Z [42/290] Building CXX object src/model/CMakeFiles/moe_model.dir/asset_index.cpp.o
+2026-11-16T22:48:39.3190020Z [43/290] Building CXX object src/model/CMakeFiles/moe_model.dir/adapter.cpp.o
+2026-11-16T22:48:39.4796770Z [44/290] Building CXX object third_party/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+2026-11-16T22:48:39.4899460Z [45/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/text.cpp.o
+2026-11-16T22:48:39.5558110Z [46/290] Linking CXX static library third_party/ggml/src/libggml-cpu.a
+2026-11-16T22:48:39.6299580Z [47/290] Linking CXX static library third_party/ggml/src/libggml.a
+2026-11-16T22:48:39.6400000Z [48/290] Building CXX object src/model/CMakeFiles/moe_model.dir/mixed_loading.cpp.o
+2026-11-16T22:48:39.7002170Z [49/290] Linking CXX static library src/platform/libmoe_platform.a
+2026-11-16T22:48:39.7604860Z [50/290] Linking CXX static library src/exec/libmoe_exec.a
+2026-11-16T22:48:39.8207610Z [51/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/output.cpp.o
+2026-11-16T22:48:39.8408690Z [52/290] Linking CXX static library src/weights/libmoe_weights.a
+2026-11-16T22:48:39.8910230Z [53/290] Linking CXX static library src/session/libmoe_session.a
+2026-11-16T22:48:40.3028610Z [54/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/decode.cpp.o
+2026-11-16T22:48:41.1377250Z [55/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/compute.cpp.o
+2026-11-16T22:48:41.2285210Z [56/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/bpe.cpp.o
+2026-11-16T22:48:41.2978290Z [57/290] Building CXX object src/model/CMakeFiles/moe_model.dir/loading.cpp.o
+2026-11-16T22:48:41.3279220Z [58/290] Building CXX object src/app/CMakeFiles/moe_app.dir/runtime.cpp.o
+2026-11-16T22:48:41.3680980Z [59/290] Linking CXX static library src/model/libmoe_model.a
+2026-11-16T22:48:41.4209720Z [60/290] Linking CXX static library src/models/api/libmoe_models_api.a
+2026-11-16T22:48:41.6747930Z [61/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/assets.cpp.o
+2026-11-16T22:48:41.8627130Z [62/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/unicode-data.cpp.o
+2026-11-16T22:48:42.1567430Z [63/290] Building CXX object src/app/CMakeFiles/moe_app.dir/adapters.cpp.o
+2026-11-16T22:48:42.8802460Z [64/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/api.cpp.o
+2026-11-16T22:48:42.9841780Z [65/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/rules.cpp.o
+2026-11-16T22:48:43.0472140Z [66/290] Building CXX object src/app/CMakeFiles/moe_app.dir/assets.cpp.o
+2026-11-16T22:48:43.6352160Z [67/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/history.cpp.o
+2026-11-16T22:48:43.7603660Z [68/290] Building CXX object src/app/CMakeFiles/moe_app.dir/diagnostics.cpp.o
+2026-11-16T22:48:44.0333870Z [69/290] Building CXX object src/app/CMakeFiles/moe_app.dir/submission_timing.cpp.o
+2026-11-16T22:48:44.0757070Z [70/290] Building CXX object src/app/CMakeFiles/moe_app.dir/forward_check.cpp.o
+2026-11-16T22:48:44.2295700Z [71/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/tool_results.cpp.o
+2026-11-16T22:48:44.3585010Z [72/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/stop.cpp.o
+2026-11-16T22:48:44.3901870Z [73/290] Building CXX object CMakeFiles/edge0.dir/cmake/aggregate.cpp.o
+2026-11-16T22:48:44.4522600Z [74/290] Building CXX object src/app/CMakeFiles/moe_app.dir/text/unicode.cpp.o
+2026-11-16T22:48:44.5767720Z [75/290] Building CXX object src/app/CMakeFiles/moe_app.dir/sampling.cpp.o
+2026-11-16T22:48:44.8577550Z [76/290] Building CXX object src/app/CMakeFiles/moe_app.dir/runtime_hooks.cpp.o
+2026-11-16T22:48:44.9842650Z [77/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/info.cpp.o
+2026-11-16T22:48:45.2011240Z [78/290] Building CXX object src/app/CMakeFiles/moe_app.dir/stage_forward.cpp.o
+2026-11-16T22:48:45.2646050Z [79/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/inspect.cpp.o
+2026-11-16T22:48:45.4342720Z [80/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/main.cpp.o
+2026-11-16T22:48:45.4953280Z [81/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/text.cpp.o
+2026-11-16T22:48:45.5154500Z [82/290] Building CXX object src/models/edge0_35b/CMakeFiles/moe_models_edge0_35b.dir/forward.cpp.o
+2026-11-16T22:48:45.5808130Z [83/290] Linking CXX static library src/models/edge0_35b/libmoe_models_edge0_35b.a
+2026-11-16T22:48:45.7153480Z [84/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/logging.cpp.o
+2026-11-16T22:48:45.9318940Z [85/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/weight_activity.cpp.o
+2026-11-16T22:48:46.0804820Z [86/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/forward.cpp.o
+2026-11-16T22:48:46.1106000Z [87/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/diagnostics.cpp.o
+2026-11-16T22:48:46.3341060Z [88/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat_line.cpp.o
+2026-11-16T22:48:46.5988110Z [89/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat_history.cpp.o
+2026-11-16T22:48:46.6288850Z [90/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/describe.cpp.o
+2026-11-16T22:48:46.8997890Z [91/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/generation_summary.cpp.o
+2026-11-16T22:48:47.0640410Z [92/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/sampling.cpp.o
+2026-11-16T22:48:47.0941490Z [93/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/output.cpp.o
+2026-11-16T22:48:47.5354110Z [94/290] Building CXX object src/app/CMakeFiles/moe_app.dir/generation.cpp.o
+2026-11-16T22:48:47.5916620Z [95/290] Linking CXX static library src/app/libmoe_app.a
+2026-11-16T22:48:47.6533920Z [96/290] Linking CXX static library libedge0.a
+2026-11-16T22:48:47.9537060Z [97/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/chat.cpp.o
+2026-11-16T22:48:48.1321710Z [98/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_engine.cpp.o
+2026-11-16T22:48:48.3273050Z [99/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/run.cpp.o
+2026-11-16T22:48:48.4700390Z [100/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/bench.cpp.o
+2026-11-16T22:48:49.4991230Z [101/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_commands.cpp.o
+2026-11-16T22:48:49.7598250Z [102/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_status.cpp.o
+2026-11-16T22:48:51.6748610Z [103/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_status.cpp.o
+2026-11-16T22:48:51.9378640Z [104/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_registry.cpp.o
+2026-11-16T22:48:52.5800920Z [105/290] Building CXX object tests/CMakeFiles/moe_test_platform.dir/unit/platform/backend_test.cpp.o
+2026-11-16T22:48:53.1157670Z [106/290] Building CXX object examples/CMakeFiles/moe_example_native_chat.dir/native_chat.cpp.o
+2026-11-16T22:48:53.6542270Z [107/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_protocol.cpp.o
+2026-11-16T22:48:53.7347410Z [108/290] Building CXX object tests/CMakeFiles/moe_test_metal_runtime.dir/device/metal_test.cpp.o
+2026-11-16T22:48:54.7191660Z [109/290] Building CXX object tests/CMakeFiles/moe_test_app.dir/unit/app/runtime_test.cpp.o
+2026-11-16T22:48:55.7375220Z [110/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_process.cpp.o
+2026-11-16T22:48:55.7779010Z [111/290] Building CXX object tests/CMakeFiles/moe_test_text_bpe.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:48:55.8623430Z [112/290] Building CXX object tests/CMakeFiles/moe_test_text_decode.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:48:56.7118210Z [113/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_text.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:48:57.5353100Z [114/290] Building CXX object tests/CMakeFiles/moe_test_model_catalog.dir/unit/model/catalog_test.cpp.o
+2026-11-16T22:48:57.5954660Z [115/290] Building CXX object tests/CMakeFiles/moe_test_model_index.dir/support/fread_probe.cpp.o
+2026-11-16T22:48:57.7692490Z [116/290] Building CXX object tests/CMakeFiles/moe_test_text_corpus.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:48:57.7917940Z [117/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_chat.cpp.o
+2026-11-16T22:48:57.8130950Z [118/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_text_tokens.dir/unit/app/text_tests.cpp.o
+2026-11-16T22:48:58.6631300Z [119/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve.cpp.o
+2026-11-16T22:48:58.9158570Z [120/290] Building CXX object tests/CMakeFiles/moe_model_variant_tool.dir/unit/model/variant_tool.cpp.o
+2026-11-16T22:48:59.2668430Z [121/290] Building CXX object tests/CMakeFiles/moe_test_model_index.dir/unit/model/index_test.cpp.o
+2026-11-16T22:48:59.4781740Z [122/290] Building CXX object tests/CMakeFiles/moe_test_text_api.dir/integration/text_api_test.cpp.o
+2026-11-16T22:48:59.8328270Z [123/290] Building CXX object tests/CMakeFiles/moe_test_platform_runtime.dir/unit/platform/runtime_test.cpp.o
+2026-11-16T22:48:59.8930970Z [124/290] Building CXX object tests/CMakeFiles/moe_test_model_inspect.dir/unit/app/inspect_test.cpp.o
+2026-11-16T22:48:59.9691180Z [125/290] Building CXX object tests/CMakeFiles/moe_test_model_adapter.dir/unit/model/adapter_test.cpp.o
+2026-11-16T22:49:00.2087460Z [126/290] Building CXX object tests/CMakeFiles/moe_test_text_rules.dir/unit/app/text_rules_test.cpp.o
+2026-11-16T22:49:00.6063550Z [127/290] Building CXX object tests/CMakeFiles/moe_test_exec_budget.dir/unit/exec/budget_test.cpp.o
+2026-11-16T22:49:01.3531970Z [128/290] Building CXX object tests/CMakeFiles/moe_test_session_storage.dir/unit/session/storage_test.cpp.o
+2026-11-16T22:49:01.5317480Z [129/290] Building CXX object tests/CMakeFiles/moe_test_weights_staged.dir/unit/weights/staged_fill_test.cpp.o
+2026-11-16T22:49:01.6941070Z [130/290] Building CXX object tests/CMakeFiles/moe_test_exec_runtime.dir/unit/exec/execution_test.cpp.o
+2026-11-16T22:49:01.7893000Z [131/290] Building CXX object tests/CMakeFiles/moe_test_weights_storage.dir/unit/weights/storage_test.cpp.o
+2026-11-16T22:49:01.8496080Z [132/290] Building CXX object tests/CMakeFiles/moe_test_weights_vulkan_fill.dir/unit/weights/vulkan_fill_test.cpp.o
+2026-11-16T22:49:01.9424270Z [133/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_assets.dir/unit/models/edge0_35b/assets_test.cpp.o
+2026-11-16T22:49:02.2160850Z [134/290] Building CXX object tools/cli/CMakeFiles/edge0-infer.dir/serve_delegate_proxy.cpp.o
+2026-11-16T22:49:02.7798950Z [135/290] Building CXX object tests/CMakeFiles/moe_test_weights_vulkan_concurrent.dir/unit/weights/vulkan_concurrent_test.cpp.o
+2026-11-16T22:49:02.8543750Z [136/290] Building CXX object tests/CMakeFiles/moe_test_session_attention.dir/unit/session/attention_test.cpp.o
+2026-11-16T22:49:03.0078610Z [137/290] Building CXX object tests/CMakeFiles/moe_test_weights_compute.dir/unit/weights/compute_test.cpp.o
+2026-11-16T22:49:03.1098490Z [138/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_admission.dir/unit/app/admission_test.cpp.o
+2026-11-16T22:49:03.3112280Z [139/290] Building CXX object tests/CMakeFiles/moe_test_session_transactions.dir/unit/session/session_test.cpp.o
+2026-11-16T22:49:03.4072320Z [140/290] Building CXX object tests/CMakeFiles/moe_test_app_generation.dir/support/file_read_counter.cpp.o
+2026-11-16T22:49:03.4172540Z [141/290] Building CXX object tests/CMakeFiles/moe_test_model_generation_defaults.dir/unit/model/generation_test.cpp.o
+2026-11-16T22:49:03.8049030Z [142/290] Building CXX object tests/CMakeFiles/moe_test_cli_logging.dir/unit/app/cli_logging_test.cpp.o
+2026-11-16T22:49:03.8873290Z [143/290] Building CXX object tests/CMakeFiles/moe_test_session_rows.dir/unit/session/rows_test.cpp.o
+2026-11-16T22:49:04.2348650Z [144/290] Building CXX object tests/CMakeFiles/moe_test_cli_logging.dir/__/tools/cli/logging.cpp.o
+2026-11-16T22:49:04.6788950Z [145/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_loading.dir/unit/models/edge0_35b/loading_test.cpp.o
+2026-11-16T22:49:05.0011650Z [146/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_reuse.dir/unit/models/edge0_35b/reuse_test.cpp.o
+2026-11-16T22:49:05.4855940Z [147/290] Building CXX object tests/CMakeFiles/moe_test_weights_lifecycle.dir/unit/weights/lifecycle_test.cpp.o
+2026-11-16T22:49:05.6210170Z [148/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_forward.dir/unit/models/edge0_35b/forward_test.cpp.o
+2026-11-16T22:49:05.8418430Z [149/290] Building CXX object tests/CMakeFiles/moe_test_weights_slots.dir/unit/weights/slots_test.cpp.o
+2026-11-16T22:49:05.9336430Z [150/290] Building CXX object tests/CMakeFiles/moe_test_generate.dir/unit/app/generate_model_test.cpp.o
+2026-11-16T22:49:06.3132300Z [151/290] Building CXX object tests/CMakeFiles/moe_test_platform_memory.dir/unit/platform/memory_test.cpp.o
+2026-11-16T22:49:07.0847880Z [152/290] Building CXX object tests/CMakeFiles/moe_test_weights_read_batch.dir/unit/weights/read_batch_test.cpp.o
+2026-11-16T22:49:07.2689820Z [153/290] Building CXX object tests/CMakeFiles/moe_test_model_slots_loading.dir/unit/model/slots_loading_test.cpp.o
+2026-11-16T22:49:07.4339080Z [154/290] Building CXX object tests/CMakeFiles/moe_test_state_bytes.dir/unit/app/state_bytes_test.cpp.o
+2026-11-16T22:49:07.5736950Z [155/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots.dir/unit/models/edge0_35b/slots_test.cpp.o
+2026-11-16T22:49:08.1568920Z [156/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots_failure.dir/unit/app/slots_failure_test.cpp.o
+2026-11-16T22:49:08.6625430Z [157/290] Building CXX object tests/CMakeFiles/moe_test_session_reuse.dir/unit/session/reuse_test.cpp.o
+2026-11-16T22:49:08.8179050Z [158/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_slots_config.dir/unit/models/edge0_35b/slots_config_test.cpp.o
+2026-11-16T22:49:09.1454990Z [159/290] Building CXX object tests/CMakeFiles/moe_test_weights_priority.dir/unit/weights/priority_test.cpp.o
+2026-11-16T22:49:09.1655910Z [160/290] Building CXX object tests/CMakeFiles/moe_template_probe.dir/unit/app/template_probe.cpp.o
+2026-11-16T22:49:09.2883330Z [161/290] Building CXX object tests/CMakeFiles/moe_test_history.dir/unit/app/history_test.cpp.o
+2026-11-16T22:49:09.6951070Z [162/290] Building CXX object tests/CMakeFiles/moe_test_prerouter_state.dir/unit/models/edge0_35b/prerouter_test.cpp.o
+2026-11-16T22:49:09.7552360Z [163/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/unit/cli/chat_lines_test.cpp.o
+2026-11-16T22:49:09.9559150Z [164/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/__/tools/cli/chat_line.cpp.o
+2026-11-16T22:49:10.1175720Z [165/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/unit/app/chat_line_test.cpp.o
+2026-11-16T22:49:10.2969910Z [166/290] Building CXX object tests/CMakeFiles/moe_test_chat_line.dir/__/tools/cli/chat_history.cpp.o
+2026-11-16T22:49:10.3370800Z [167/290] Building CXX object tests/CMakeFiles/moe_test_checkpoint_budget.dir/unit/app/checkpoint_budget_test.cpp.o
+2026-11-16T22:49:10.3994030Z [168/290] Building CXX object tests/CMakeFiles/moe_json_probe.dir/unit/model/json_probe.cpp.o
+2026-11-16T22:49:10.7333760Z [169/290] Building CXX object tests/CMakeFiles/moe_template_tools_probe.dir/unit/app/template_tools_probe.cpp.o
+2026-11-16T22:49:10.9454660Z [170/290] Building CXX object tests/CMakeFiles/moe_test_prerouter_admission.dir/unit/models/edge0_35b/prerouter_admission_test.cpp.o
+2026-11-16T22:49:10.9555080Z [171/290] Building CXX object tests/CMakeFiles/moe_test_checkpoint.dir/unit/models/edge0_35b/checkpoint_test.cpp.o
+2026-11-16T22:49:11.0378770Z [172/290] Building CXX object tests/CMakeFiles/moe_test_tool_results.dir/unit/app/tool_results_test.cpp.o
+2026-11-16T22:49:11.0981480Z [173/290] Building CXX object tests/CMakeFiles/moe_test_stop_match.dir/unit/app/stop_match_test.cpp.o
+2026-11-16T22:49:11.1181730Z [174/290] Building CXX object tests/CMakeFiles/moe_test_app_generation.dir/unit/app/generation_test.cpp.o
+2026-11-16T22:49:11.3512360Z [175/290] Building CXX object tests/CMakeFiles/moe_test_edge0_35b_output.dir/unit/models/edge0_35b/output_parser_test.cpp.o
+2026-11-16T22:49:11.8972460Z [176/290] Building CXX object tests/CMakeFiles/moe_thinking_rerender_probe.dir/unit/app/thinking_rerender_test.cpp.o
+2026-11-16T22:49:12.1268890Z [177/290] Building CXX object tests/CMakeFiles/moe_test_sampling_rules.dir/unit/app/sampling_test.cpp.o
+2026-11-16T22:49:12.5346360Z [178/290] Building CXX object tests/CMakeFiles/moe_portal_decode.dir/integration/portal_decode.cpp.o
+2026-11-16T22:49:12.8969890Z [179/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/unit/cli/serve_engine_test.cpp.o
+2026-11-16T22:49:12.9519830Z [180/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/__/tools/cli/serve_engine.cpp.o
+2026-11-16T22:49:13.4219430Z [181/290] Building CXX object tests/CMakeFiles/moe_test_mixed_buffers.dir/unit/platform/mixed_buffers_test.cpp.o
+2026-11-16T22:49:13.6562110Z [182/290] Building CXX object tests/CMakeFiles/moe_test_threads_cli_selection.dir/unit/app/thread_selection_test.cpp.o
+2026-11-16T22:49:13.6964410Z [183/290] Building CXX object tests/CMakeFiles/moe_test_thinking_tools_35b.dir/integration/thinking_tools_35b_test.cpp.o
+2026-11-16T22:49:13.8419710Z [184/290] Building CXX object tests/CMakeFiles/moe_test_delivery_failure_continue.dir/integration/portal_failure_probe.cpp.o
+2026-11-16T22:49:14.1912380Z [185/290] Building CXX object tests/CMakeFiles/moe_test_exec_stages.dir/unit/exec/stages_test.cpp.o
+2026-11-16T22:49:14.6795100Z [186/290] Building CXX object tests/CMakeFiles/moe_test_exec_vulkan_replicas.dir/unit/exec/vulkan_replicas_test.cpp.o
+2026-11-16T22:49:14.6831270Z [187/290] Building CXX object tests/CMakeFiles/moe_test_exec_replicas.dir/unit/exec/replicas_test.cpp.o
+2026-11-16T22:49:15.1238710Z [188/290] Building CXX object tests/CMakeFiles/moe_test_weights_mixed.dir/unit/weights/mixed_storage_test.cpp.o
+2026-11-16T22:49:15.1539530Z [189/290] Building CXX object tests/CMakeFiles/moe_test_session_mixed_kv.dir/unit/session/mixed_kv_test.cpp.o
+2026-11-16T22:49:15.7267620Z [190/290] Building CXX object tests/CMakeFiles/moe_test_platform_ios_cleanup.dir/unit/cli/ios_cleanup_test.cpp.o
+2026-11-16T22:49:16.2262160Z [191/290] Building CXX object tests/CMakeFiles/moe_test_platform_system.dir/unit/platform/system_test.cpp.o
+2026-11-16T22:49:16.8889020Z [192/290] Building CXX object tests/CMakeFiles/moe_test_mixed_vulkan_stages.dir/unit/app/mixed_vulkan_stages_test.cpp.o
+2026-11-16T22:49:17.1827120Z [193/290] Building CXX object tests/CMakeFiles/moe_test_mixed_metal.dir/unit/app/mixed_metal_test.cpp.o
+2026-11-16T22:49:17.2373690Z [194/290] Building CXX object tests/CMakeFiles/moe_test_serve_protocol.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:49:17.5082070Z [195/290] Building CXX object tests/CMakeFiles/moe_test_serve_engine.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:49:18.0300090Z [196/290] Building CXX object tests/CMakeFiles/moe_test_mixed_stages.dir/unit/app/mixed_stages_test.cpp.o
+2026-11-16T22:49:18.1708060Z [197/290] Building CXX object tests/CMakeFiles/moe_test_delegated_directory.dir/unit/app/delegated_directory_test.cpp.o
+2026-11-16T22:49:18.2208880Z [198/290] Building CXX object tests/CMakeFiles/moe_test_observe_concurrency.dir/unit/app/observe_concurrency_test.cpp.o
+2026-11-16T22:49:18.6521310Z [199/290] Building CXX object tests/CMakeFiles/moe_test_serve_protocol.dir/unit/cli/serve_protocol_test.cpp.o
+2026-11-16T22:49:18.7692000Z [200/290] Linking CXX executable bin/edge0-infer
+2026-11-16T22:49:18.8704320Z [201/290] Linking CXX executable bin/moe_example_native_chat
+2026-11-16T22:49:18.9639020Z [202/290] Linking CXX executable bin/moe_test_platform
+2026-11-16T22:49:19.0683150Z [203/290] Linking CXX executable bin/moe_test_app
+2026-11-16T22:49:19.1747690Z [204/290] Linking CXX executable bin/moe_test_metal_runtime
+2026-11-16T22:49:19.2806630Z [205/290] Linking CXX executable bin/moe_test_text_bpe
+2026-11-16T22:49:19.3736200Z [206/290] Linking CXX executable bin/moe_test_text_decode
+2026-11-16T22:49:19.4068540Z [207/290] Building CXX object tests/CMakeFiles/moe_test_serve_status.dir/__/tools/cli/serve_status.cpp.o
+2026-11-16T22:49:19.4872250Z [208/290] Linking CXX executable bin/moe_test_edge0_35b_text
+2026-11-16T22:49:19.5199610Z [209/290] Linking CXX executable bin/moe_test_edge0_35b_text_tokens
+2026-11-16T22:49:19.5902450Z [210/290] Linking CXX executable bin/moe_test_text_corpus
+2026-11-16T22:49:19.6344260Z [211/290] Linking CXX executable bin/moe_test_model_catalog
+2026-11-16T22:49:19.7046320Z [212/290] Linking CXX executable bin/moe_test_model_index
+2026-11-16T22:49:19.7273290Z [213/290] Building CXX object tests/CMakeFiles/moe_test_serve_status.dir/unit/cli/serve_status_test.cpp.o
+2026-11-16T22:49:19.7474820Z [214/290] Linking CXX executable bin/moe_test_model_adapter
+2026-11-16T22:49:19.8118050Z [215/290] Linking CXX executable bin/moe_test_edge0_35b_assets
+2026-11-16T22:49:19.8512150Z [216/290] Linking CXX executable bin/moe_test_model_inspect
+2026-11-16T22:49:19.8612370Z [217/290] Linking CXX executable bin/moe_model_variant_tool
+2026-11-16T22:49:19.9339080Z [218/290] Linking CXX executable bin/moe_test_text_api
+2026-11-16T22:49:19.9760680Z [219/290] Linking CXX executable bin/moe_test_text_rules
+2026-11-16T22:49:19.9860840Z [220/290] Linking CXX executable bin/moe_test_platform_runtime
+2026-11-16T22:49:20.0379120Z [221/290] Linking CXX executable bin/moe_test_exec_budget
+2026-11-16T22:49:20.1001870Z [222/290] Linking CXX executable bin/moe_test_exec_runtime
+2026-11-16T22:49:20.1102140Z [223/290] Linking CXX executable bin/moe_test_session_storage
+2026-11-16T22:49:20.1535400Z [224/290] Linking CXX executable bin/moe_test_weights_storage
+2026-11-16T22:49:20.2146530Z [225/290] Linking CXX executable bin/moe_test_weights_staged
+2026-11-16T22:49:20.2247100Z [226/290] Linking CXX executable bin/moe_test_weights_vulkan_fill
+2026-11-16T22:49:20.2699680Z [227/290] Linking CXX executable bin/moe_test_weights_vulkan_concurrent
+2026-11-16T22:49:20.3215900Z [228/290] Linking CXX executable bin/moe_test_session_attention
+2026-11-16T22:49:20.3316270Z [229/290] Linking CXX executable bin/moe_test_weights_compute
+2026-11-16T22:49:20.3930770Z [230/290] Linking CXX executable bin/moe_test_edge0_35b_loading
+2026-11-16T22:49:20.4420400Z [231/290] Linking CXX executable bin/moe_test_edge0_35b_forward
+2026-11-16T22:49:20.4531990Z [232/290] Linking CXX executable bin/moe_test_edge0_35b_admission
+2026-11-16T22:49:20.5068410Z [233/290] Linking CXX executable bin/moe_test_session_transactions
+2026-11-16T22:49:20.5668380Z [234/290] Linking CXX executable bin/moe_test_model_generation_defaults
+2026-11-16T22:49:20.5768700Z [235/290] Linking CXX executable bin/moe_test_session_rows
+2026-11-16T22:49:20.6308220Z [236/290] Linking CXX executable bin/moe_test_edge0_35b_reuse
+2026-11-16T22:49:20.6812830Z [237/290] Linking CXX executable bin/moe_test_cli_logging
+2026-11-16T22:49:20.6912820Z [238/290] Linking CXX executable bin/moe_test_generate
+2026-11-16T22:49:20.7013200Z [239/290] Linking CXX executable bin/moe_test_app_generation
+2026-11-16T22:49:20.7869740Z [240/290] Linking CXX executable bin/moe_test_weights_lifecycle
+2026-11-16T22:49:20.7970700Z [241/290] Linking CXX executable bin/moe_test_weights_slots
+2026-11-16T22:49:20.8175210Z [242/290] Linking CXX executable bin/moe_test_edge0_35b_slots
+2026-11-16T22:49:20.8982130Z [243/290] Linking CXX executable bin/moe_test_model_slots_loading
+2026-11-16T22:49:20.9088390Z [244/290] Linking CXX executable bin/moe_test_edge0_35b_slots_failure
+2026-11-16T22:49:20.9283300Z [245/290] Linking CXX executable bin/moe_test_edge0_35b_slots_config
+2026-11-16T22:49:21.0132260Z [246/290] Linking CXX executable bin/moe_test_platform_memory
+2026-11-16T22:49:21.0237890Z [247/290] Linking CXX executable bin/moe_test_weights_read_batch
+2026-11-16T22:49:21.0438270Z [248/290] Linking CXX executable bin/moe_test_state_bytes
+2026-11-16T22:49:21.1191450Z [249/290] Linking CXX executable bin/moe_test_weights_priority
+2026-11-16T22:49:21.1291550Z [250/290] Linking CXX executable bin/moe_test_prerouter_state
+2026-11-16T22:49:21.1616780Z [251/290] Linking CXX executable bin/moe_test_prerouter_admission
+2026-11-16T22:49:21.2244400Z [252/290] Linking CXX executable bin/moe_test_session_reuse
+2026-11-16T22:49:21.2574980Z [253/290] Linking CXX executable bin/moe_template_probe
+2026-11-16T22:49:21.2758810Z [254/290] Linking CXX executable bin/moe_test_history
+2026-11-16T22:49:21.3267770Z [255/290] Linking CXX executable bin/moe_test_chat_line
+2026-11-16T22:49:21.3368020Z [256/290] Linking CXX executable bin/moe_test_checkpoint
+2026-11-16T22:49:21.3708310Z [257/290] Linking CXX executable bin/moe_test_checkpoint_budget
+2026-11-16T22:49:21.4324260Z [258/290] Linking CXX executable bin/moe_json_probe
+2026-11-16T22:49:21.4424440Z [259/290] Linking CXX executable bin/moe_template_tools_probe
+2026-11-16T22:49:21.4836550Z [260/290] Linking CXX executable bin/moe_test_edge0_35b_output
+2026-11-16T22:49:21.5460480Z [261/290] Linking CXX executable bin/moe_test_tool_results
+2026-11-16T22:49:21.5560840Z [262/290] Linking CXX executable bin/moe_test_stop_match
+2026-11-16T22:49:21.6085490Z [263/290] Linking CXX executable bin/moe_test_thinking_tools_35b
+2026-11-16T22:49:21.6494770Z [264/290] Linking CXX executable bin/moe_test_serve_protocol
+2026-11-16T22:49:21.6595900Z [265/290] Linking CXX executable bin/moe_thinking_rerender_probe
+2026-11-16T22:49:21.6696150Z [266/290] Linking CXX executable bin/moe_test_sampling_rules
+2026-11-16T22:49:21.7016710Z [267/290] Linking CXX executable bin/moe_test_serve_engine
+2026-11-16T22:49:21.7820970Z [268/290] Linking CXX executable bin/moe_test_delivery_failure_continue
+2026-11-16T22:49:21.7926660Z [269/290] Linking CXX executable bin/moe_portal_decode
+2026-11-16T22:49:21.8127980Z [270/290] Linking CXX executable bin/moe_test_threads_cli_selection
+2026-11-16T22:49:21.8980050Z [271/290] Linking CXX executable bin/moe_test_exec_stages
+2026-11-16T22:49:21.9082750Z [272/290] Linking CXX executable bin/moe_test_mixed_buffers
+2026-11-16T22:49:21.9321100Z [273/290] Linking CXX executable bin/moe_test_exec_replicas
+2026-11-16T22:49:22.0130990Z [274/290] Linking CXX executable bin/moe_test_exec_vulkan_replicas
+2026-11-16T22:49:22.0231790Z [275/290] Linking CXX executable bin/moe_test_weights_mixed
+2026-11-16T22:49:22.0536410Z [276/290] Linking CXX executable bin/moe_test_session_mixed_kv
+2026-11-16T22:49:22.1264570Z [277/290] Linking CXX executable bin/moe_test_mixed_metal
+2026-11-16T22:49:22.1364790Z [278/290] Linking CXX executable bin/moe_test_mixed_stages
+2026-11-16T22:49:22.1824900Z [279/290] Linking CXX executable bin/moe_test_mixed_vulkan_stages
+2026-11-16T22:49:22.1925490Z [280/290] Linking CXX executable bin/moe_test_platform_ios_cleanup
+2026-11-16T22:49:22.2530370Z [281/290] Linking CXX executable bin/moe_test_platform_system
+2026-11-16T22:49:22.2978340Z [282/290] Linking CXX executable bin/moe_test_serve_status
+2026-11-16T22:49:22.3079210Z [283/290] Linking CXX executable bin/moe_test_observe_concurrency
+2026-11-16T22:49:22.3581850Z [284/290] Linking CXX executable bin/moe_test_delegated_directory
+2026-11-16T22:49:22.7511460Z [285/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_delegate_status.cpp.o
+2026-11-16T22:49:23.1548130Z [286/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_delegate_registry.cpp.o
+2026-11-16T22:49:24.7377060Z [287/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/__/tools/cli/serve_protocol.cpp.o
+2026-11-16T22:49:24.7986360Z [288/290] Building CXX object tests/CMakeFiles/moe_test_strata_registry.dir/unit/cli/strata_registry_test.cpp.o
+2026-11-16T22:49:24.8403740Z [289/290] Linking CXX executable bin/moe_test_strata_registry
+2026-11-16T22:49:24.8695600Z ##[group]Run ctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1'
+2026-11-16T22:49:24.8696000Z [36;1mctest --preset cpu --no-tests=error --output-on-failure -L 'L0|L1'[0m
+2026-11-16T22:49:24.8724490Z shell: /bin/bash -e {0}
+2026-11-16T22:49:24.8724630Z ##[endgroup]
+2026-11-16T22:49:24.9342720Z Test project /Users/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:49:24.9407390Z         Start   1: moe_test_platform
+2026-11-16T22:49:24.9414610Z         Start   2: moe_test_app
+2026-11-16T22:49:24.9420560Z         Start   3: moe_public_header_check
+2026-11-16T22:49:24.9426760Z         Start   4: moe_public_app_check
+2026-11-16T22:49:24.9497430Z   1/104 Test   #1: moe_test_platform ........................   Passed    0.01 sec
+2026-11-16T22:49:24.9500840Z         Start   8: check_docs
+2026-11-16T22:49:24.9543750Z   2/104 Test   #2: moe_test_app .............................   Passed    0.01 sec
+2026-11-16T22:49:24.9544640Z         Start   9: check_language
+2026-11-16T22:49:25.1199720Z   3/104 Test   #8: check_docs ...............................   Passed    0.16 sec
+2026-11-16T22:49:25.1200170Z         Start  10: check_layers
+2026-11-16T22:49:25.2370230Z   4/104 Test  #10: check_layers .............................   Passed    0.12 sec
+2026-11-16T22:49:25.2470350Z         Start  11: check_deps
+2026-11-16T22:49:25.2571420Z   5/104 Test   #9: check_language ...........................   Passed    0.29 sec
+2026-11-16T22:49:25.2671880Z         Start  12: check_app_deps
+2026-11-16T22:49:25.3506470Z   6/104 Test  #12: check_app_deps ...........................   Passed    0.10 sec
+2026-11-16T22:49:25.3606730Z         Start  13: check_app_tokens
+2026-11-16T22:49:25.4109220Z   7/104 Test  #13: check_app_tokens .........................   Passed    0.06 sec
+2026-11-16T22:49:25.4209590Z         Start  14: check_ggml_origin
+2026-11-16T22:49:25.5377220Z   8/104 Test  #14: check_ggml_origin ........................   Passed    0.13 sec
+2026-11-16T22:49:25.5377690Z         Start  15: check_model_terms
+2026-11-16T22:49:25.6632530Z   9/104 Test  #15: check_model_terms ........................   Passed    0.12 sec
+2026-11-16T22:49:25.6732750Z         Start  16: check_public_options
+2026-11-16T22:49:25.7034210Z  10/104 Test  #16: check_public_options .....................   Passed    0.04 sec
+2026-11-16T22:49:25.7135290Z         Start  17: check_signing
+2026-11-16T22:49:25.9282170Z  11/104 Test   #3: moe_public_header_check ..................   Passed    0.99 sec
+2026-11-16T22:49:25.9282940Z         Start  18: test_layers
+2026-11-16T22:49:25.9556120Z  12/104 Test  #11: check_deps ...............................   Passed    0.73 sec
+2026-11-16T22:49:25.9556890Z         Start  19: test_deps
+2026-11-16T22:49:25.9847550Z  13/104 Test   #4: moe_public_app_check .....................   Passed    1.04 sec
+2026-11-16T22:49:26.0026570Z         Start  20: test_app_deps
+2026-11-16T22:49:26.4819350Z  14/104 Test  #20: test_app_deps ............................   Passed    0.48 sec
+2026-11-16T22:49:26.4820610Z         Start  21: test_app_tokens
+2026-11-16T22:49:26.5668630Z  15/104 Test  #21: test_app_tokens ..........................   Passed    0.08 sec
+2026-11-16T22:49:26.5669060Z         Start  22: test_ggml_origin
+2026-11-16T22:49:27.6421390Z  16/104 Test  #22: test_ggml_origin .........................   Passed    1.08 sec
+2026-11-16T22:49:27.6423100Z         Start  23: test_run_checks
+2026-11-16T22:49:27.7250490Z  17/104 Test  #23: test_run_checks ..........................   Passed    0.08 sec
+2026-11-16T22:49:27.7251090Z         Start  24: test_docs
+2026-11-16T22:49:28.1192490Z  18/104 Test  #19: test_deps ................................   Passed    2.16 sec
+2026-11-16T22:49:28.1293530Z         Start  25: test_language
+2026-11-16T22:49:28.2096600Z  19/104 Test  #25: test_language ............................   Passed    0.09 sec
+2026-11-16T22:49:28.2200770Z         Start  26: test_model_terms
+2026-11-16T22:49:28.4313830Z  20/104 Test  #17: check_signing ............................   Passed    2.73 sec
+2026-11-16T22:49:28.4314650Z         Start  27: test_signing
+2026-11-16T22:49:28.4988800Z  21/104 Test  #27: test_signing .............................   Passed    0.07 sec
+2026-11-16T22:49:28.4989460Z         Start  28: moe_test_text_bpe
+2026-11-16T22:49:28.5034000Z  22/104 Test  #28: moe_test_text_bpe ........................   Passed    0.00 sec
+2026-11-16T22:49:28.5035040Z         Start  29: moe_test_text_decode
+2026-11-16T22:49:28.6164450Z  23/104 Test  #24: test_docs ................................   Passed    0.89 sec
+2026-11-16T22:49:28.6165610Z         Start  30: moe_test_edge0_35b_text
+2026-11-16T22:49:28.6209160Z  24/104 Test  #30: moe_test_edge0_35b_text ..................   Passed    0.00 sec
+2026-11-16T22:49:28.6210020Z         Start  33: moe_test_text_upstream
+2026-11-16T22:49:28.6773070Z  25/104 Test  #33: moe_test_text_upstream ...................   Passed    0.06 sec
+2026-11-16T22:49:28.6774330Z         Start  34: moe_test_model_catalog
+2026-11-16T22:49:28.7074370Z  26/104 Test  #34: moe_test_model_catalog ...................   Passed    0.03 sec
+2026-11-16T22:49:28.7075010Z         Start  35: moe_test_model_index
+2026-11-16T22:49:28.7144050Z  27/104 Test  #35: moe_test_model_index .....................   Passed    0.01 sec
+2026-11-16T22:49:28.7145070Z         Start  36: moe_test_model_adapter
+2026-11-16T22:49:28.7212950Z  28/104 Test  #36: moe_test_model_adapter ...................   Passed    0.01 sec
+2026-11-16T22:49:28.7213950Z         Start  37: moe_test_edge0_35b_assets
+2026-11-16T22:49:28.7537010Z  29/104 Test  #37: moe_test_edge0_35b_assets ................   Passed    0.03 sec
+2026-11-16T22:49:28.7538120Z         Start  38: moe_test_model_inspect
+2026-11-16T22:49:28.7717680Z  30/104 Test  #38: moe_test_model_inspect ...................   Passed    0.02 sec
+2026-11-16T22:49:28.7718730Z         Start  39: moe_test_edge0_35b_manifest
+2026-11-16T22:49:28.8636780Z  31/104 Test  #39: moe_test_edge0_35b_manifest ..............   Passed    0.09 sec
+2026-11-16T22:49:28.8637350Z         Start  48: moe_test_text_rules
+2026-11-16T22:49:28.8684470Z  32/104 Test  #48: moe_test_text_rules ......................   Passed    0.00 sec
+2026-11-16T22:49:28.8685900Z         Start  49: moe_test_platform_runtime
+2026-11-16T22:49:28.8770730Z  33/104 Test  #49: moe_test_platform_runtime ................   Passed    0.01 sec
+2026-11-16T22:49:28.8774490Z         Start  50: check_runtime_backends
+2026-11-16T22:49:28.9239760Z  34/104 Test  #50: check_runtime_backends ...................   Passed    0.05 sec
+2026-11-16T22:49:28.9240840Z         Start  51: check_strata_files
+2026-11-16T22:49:28.9610600Z  35/104 Test  #51: check_strata_files .......................   Passed    0.04 sec
+2026-11-16T22:49:28.9611680Z         Start  52: moe_test_exec_budget
+2026-11-16T22:49:28.9751540Z  36/104 Test  #52: moe_test_exec_budget .....................   Passed    0.01 sec
+2026-11-16T22:49:28.9752770Z         Start  53: moe_test_exec_runtime
+2026-11-16T22:49:28.9980490Z  37/104 Test  #53: moe_test_exec_runtime ....................   Passed    0.02 sec
+2026-11-16T22:49:28.9981190Z         Start  54: moe_test_session_storage
+2026-11-16T22:49:29.0035820Z  38/104 Test  #54: moe_test_session_storage .................   Passed    0.01 sec
+2026-11-16T22:49:29.0036840Z         Start  55: moe_test_weights_storage
+2026-11-16T22:49:29.0135570Z  39/104 Test  #55: moe_test_weights_storage .................   Passed    0.01 sec
+2026-11-16T22:49:29.0137540Z         Start  56: moe_test_weights_staged
+2026-11-16T22:49:29.0561300Z  40/104 Test  #56: moe_test_weights_staged ..................   Passed    0.04 sec
+2026-11-16T22:49:29.0562020Z         Start  63: check_model_no_compute
+2026-11-16T22:49:29.0959590Z  41/104 Test  #63: check_model_no_compute ...................   Passed    0.04 sec
+2026-11-16T22:49:29.0960770Z         Start  64: moe_test_edge0_35b_estimate
+2026-11-16T22:49:29.1022910Z  42/104 Test  #64: moe_test_edge0_35b_estimate ..............   Passed    0.01 sec
+2026-11-16T22:49:29.1024430Z         Start  73: moe_test_answers_judge
+2026-11-16T22:49:29.8009620Z  43/104 Test  #26: test_model_terms .........................   Passed    1.59 sec
+2026-11-16T22:49:29.8010070Z         Start  74: moe_test_asset_tools_l1
+2026-11-16T22:49:30.2823770Z  44/104 Test  #18: test_layers ..............................   Passed    4.35 sec
+2026-11-16T22:49:30.2827470Z         Start  76: moe_test_answers_inventory
+2026-11-16T22:49:30.3651820Z  45/104 Test  #73: moe_test_answers_judge ...................   Passed    1.26 sec
+2026-11-16T22:49:30.3653170Z         Start  79: check_cpu_kernels
+2026-11-16T22:49:30.4094600Z  46/104 Test  #79: check_cpu_kernels ........................   Passed    0.04 sec
+2026-11-16T22:49:30.4103350Z         Start  80: moe_test_session_transactions
+2026-11-16T22:49:30.4152730Z  47/104 Test  #80: moe_test_session_transactions ............   Passed    0.01 sec
+2026-11-16T22:49:30.4154430Z         Start  81: moe_test_model_generation_defaults
+2026-11-16T22:49:30.4241900Z  48/104 Test  #81: moe_test_model_generation_defaults .......   Passed    0.01 sec
+2026-11-16T22:49:30.4242620Z         Start  83: moe_test_session_rows
+2026-11-16T22:49:30.4352300Z  49/104 Test  #83: moe_test_session_rows ....................   Passed    0.01 sec
+2026-11-16T22:49:30.4353280Z         Start  91: moe_test_app_generation
+2026-11-16T22:49:30.6950100Z  50/104 Test  #76: moe_test_answers_inventory ...............   Passed    0.41 sec
+2026-11-16T22:49:30.6951660Z         Start  95: moe_test_cli_logging
+2026-11-16T22:49:30.6979210Z  51/104 Test  #95: moe_test_cli_logging .....................   Passed    0.00 sec
+2026-11-16T22:49:30.6980750Z         Start  97: moe_test_weights_lifecycle
+2026-11-16T22:49:30.8213420Z  52/104 Test  #91: moe_test_app_generation ..................   Passed    0.39 sec
+2026-11-16T22:49:30.8215040Z         Start  98: moe_test_weights_slots
+2026-11-16T22:49:30.8787320Z  53/104 Test  #97: moe_test_weights_lifecycle ...............   Passed    0.18 sec
+2026-11-16T22:49:30.8787840Z         Start 103: moe_test_model_slots_loading
+2026-11-16T22:49:30.8794540Z  54/104 Test  #98: moe_test_weights_slots ...................   Passed    0.06 sec
+2026-11-16T22:49:30.8795090Z         Start 105: moe_test_edge0_35b_slots_config
+2026-11-16T22:49:30.8951590Z  55/104 Test #103: moe_test_model_slots_loading .............   Passed    0.02 sec
+2026-11-16T22:49:30.8954250Z         Start 106: moe_test_platform_memory
+2026-11-16T22:49:30.9055370Z  56/104 Test #106: moe_test_platform_memory .................   Passed    0.01 sec
+2026-11-16T22:49:30.9056750Z         Start 112: moe_test_single_turn_metrics
+2026-11-16T22:49:30.9214840Z  57/104 Test #105: moe_test_edge0_35b_slots_config ..........   Passed    0.04 sec
+2026-11-16T22:49:30.9216170Z         Start 113: moe_test_build_identity
+2026-11-16T22:49:31.0571390Z  58/104 Test #112: moe_test_single_turn_metrics .............   Passed    0.15 sec
+2026-11-16T22:49:31.0572570Z         Start 114: moe_test_subproject
+2026-11-16T22:49:31.5996860Z  59/104 Test  #74: moe_test_asset_tools_l1 ..................   Passed    1.80 sec
+2026-11-16T22:49:31.5998270Z         Start 115: moe_test_abba
+2026-11-16T22:49:31.9142720Z  60/104 Test #113: moe_test_build_identity ..................   Passed    0.99 sec
+2026-11-16T22:49:31.9143140Z         Start 116: moe_test_perf_hosts
+2026-11-16T22:49:31.9515540Z  61/104 Test #115: moe_test_abba ............................   Passed    0.35 sec
+2026-11-16T22:49:31.9519700Z         Start 117: moe_test_perf_report
+2026-11-16T22:49:32.3809690Z  62/104 Test #116: moe_test_perf_hosts ......................   Passed    0.47 sec
+2026-11-16T22:49:32.3814010Z         Start 118: moe_test_perf_turns
+2026-11-16T22:49:32.4995810Z  63/104 Test #117: moe_test_perf_report .....................   Passed    0.55 sec
+2026-11-16T22:49:32.4997250Z         Start 119: moe_test_model_support
+2026-11-16T22:49:32.6164490Z  64/104 Test #118: moe_test_perf_turns ......................   Passed    0.23 sec
+2026-11-16T22:49:32.6171620Z         Start 120: moe_test_perf_sweep
+2026-11-16T22:49:32.6823000Z  65/104 Test #119: moe_test_model_support ...................   Passed    0.18 sec
+2026-11-16T22:49:32.6825050Z         Start 124: moe_test_weights_read_batch
+2026-11-16T22:49:32.7453830Z  66/104 Test #124: moe_test_weights_read_batch ..............   Passed    0.06 sec
+2026-11-16T22:49:32.7458750Z         Start 132: moe_test_weights_priority
+2026-11-16T22:49:32.7585510Z  67/104 Test #132: moe_test_weights_priority ................   Passed    0.01 sec
+2026-11-16T22:49:32.7590660Z         Start 143: moe_test_route_trace
+2026-11-16T22:49:32.8793190Z  68/104 Test #143: moe_test_route_trace .....................   Passed    0.12 sec
+2026-11-16T22:49:32.8796010Z         Start 146: moe_test_edge0_35b_prerouter_admission
+2026-11-16T22:49:32.9125990Z  69/104 Test #146: moe_test_edge0_35b_prerouter_admission ...   Passed    0.03 sec
+2026-11-16T22:49:32.9127840Z         Start 149: moe_test_session_reuse
+2026-11-16T22:49:32.9184370Z  70/104 Test #149: moe_test_session_reuse ...................   Passed    0.01 sec
+2026-11-16T22:49:32.9185400Z         Start 153: moe_test_template_preserve
+2026-11-16T22:49:32.9290560Z  71/104 Test #120: moe_test_perf_sweep ......................   Passed    0.31 sec
+2026-11-16T22:49:32.9293510Z         Start 154: moe_test_history
+2026-11-16T22:49:32.9331960Z  72/104 Test #154: moe_test_history .........................   Passed    0.00 sec
+2026-11-16T22:49:32.9350530Z         Start 160: moe_test_chat_line
+2026-11-16T22:49:32.9355090Z  73/104 Test #160: moe_test_chat_line .......................   Passed    0.00 sec
+2026-11-16T22:49:32.9356330Z         Start 166: moe_test_ordered_json
+2026-11-16T22:49:33.0286970Z  74/104 Test #166: moe_test_ordered_json ....................   Passed    0.09 sec
+2026-11-16T22:49:33.0288360Z         Start 167: moe_test_template_tools
+2026-11-16T22:49:33.0805380Z  75/104 Test #153: moe_test_template_preserve ...............   Passed    0.16 sec
+2026-11-16T22:49:33.0806820Z         Start 168: moe_test_edge0_35b_output
+2026-11-16T22:49:33.1095230Z  76/104 Test #168: moe_test_edge0_35b_output ................   Passed    0.03 sec
+2026-11-16T22:49:33.1158890Z         Start 169: moe_test_tool_results
+2026-11-16T22:49:33.1199970Z  77/104 Test #169: moe_test_tool_results ....................   Passed    0.00 sec
+2026-11-16T22:49:33.1200560Z         Start 170: moe_test_stop_match
+2026-11-16T22:49:33.1238260Z  78/104 Test #170: moe_test_stop_match ......................   Passed    0.00 sec
+2026-11-16T22:49:33.1239560Z         Start 174: moe_test_sampling_rules
+2026-11-16T22:49:33.1346270Z  79/104 Test #174: moe_test_sampling_rules ..................   Passed    0.01 sec
+2026-11-16T22:49:33.1347390Z         Start 177: moe_test_serve_protocol
+2026-11-16T22:49:33.1445130Z  80/104 Test #177: moe_test_serve_protocol ..................   Passed    0.01 sec
+2026-11-16T22:49:33.1446740Z         Start 178: moe_test_serve_engine
+2026-11-16T22:49:33.1525040Z  81/104 Test #178: moe_test_serve_engine ....................   Passed    0.01 sec
+2026-11-16T22:49:33.1527810Z         Start 186: moe_test_memory_metric
+2026-11-16T22:49:33.2236420Z  82/104 Test #186: moe_test_memory_metric ...................   Passed    0.07 sec
+2026-11-16T22:49:33.2319310Z         Start 187: moe_test_multi_turn_counts
+2026-11-16T22:49:33.3217710Z  83/104 Test #187: moe_test_multi_turn_counts ...............   Passed    0.09 sec
+2026-11-16T22:49:33.3223620Z         Start 190: moe_test_platform_android
+2026-11-16T22:49:35.1137880Z  84/104 Test #167: moe_test_template_tools ..................   Passed    2.08 sec
+2026-11-16T22:49:35.1143400Z         Start 191: moe_test_platform_android_cli
+2026-11-16T22:49:36.4146750Z  85/104 Test  #29: moe_test_text_decode .....................   Passed    7.91 sec
+2026-11-16T22:49:36.4297320Z         Start 192: moe_test_platform_serve_sync
+2026-11-16T22:49:36.5728660Z  86/104 Test #192: moe_test_platform_serve_sync .............   Passed    0.14 sec
+2026-11-16T22:49:36.5812630Z         Start 195: moe_test_exec_stages
+2026-11-16T22:49:36.5915260Z  87/104 Test #195: moe_test_exec_stages .....................   Passed    0.01 sec
+2026-11-16T22:49:36.6036120Z         Start 196: moe_test_exec_replicas
+2026-11-16T22:49:36.6235410Z  88/104 Test #196: moe_test_exec_replicas ...................   Passed    0.02 sec
+2026-11-16T22:49:36.6352160Z         Start 198: moe_test_weights_mixed
+2026-11-16T22:49:36.6717790Z  89/104 Test #198: moe_test_weights_mixed ...................   Passed    0.03 sec
+2026-11-16T22:49:36.6854980Z         Start 199: moe_test_session_mixed_kv
+2026-11-16T22:49:36.6970600Z  90/104 Test #199: moe_test_session_mixed_kv ................   Passed    0.01 sec
+2026-11-16T22:49:36.7015940Z         Start 204: moe_test_platform_ios_cleanup
+2026-11-16T22:49:36.7116200Z  91/104 Test #204: moe_test_platform_ios_cleanup ............   Passed    0.00 sec
+2026-11-16T22:49:36.7140940Z         Start 205: moe_test_platform_ios
+2026-11-16T22:49:39.5625100Z  92/104 Test #205: moe_test_platform_ios ....................   Passed    2.87 sec
+2026-11-16T22:49:39.5726870Z         Start 206: moe_test_platform_ios_cli
+2026-11-16T22:49:41.0074020Z  93/104 Test #190: moe_test_platform_android ................   Passed    7.69 sec
+2026-11-16T22:49:41.0075220Z         Start 207: moe_test_platform_system
+2026-11-16T22:49:41.0132590Z  94/104 Test #207: moe_test_platform_system .................   Passed    0.01 sec
+2026-11-16T22:49:41.0133670Z         Start 209: moe_test_serve_status
+2026-11-16T22:49:41.0195450Z  95/104 Test #209: moe_test_serve_status ....................   Passed    0.01 sec
+2026-11-16T22:49:41.0196640Z         Start 210: moe_test_delegated_directory
+2026-11-16T22:49:41.0286260Z  96/104 Test #210: moe_test_delegated_directory .............   Passed    0.01 sec
+2026-11-16T22:49:41.0286980Z         Start 211: moe_test_fake_strata
+2026-11-16T22:49:41.6707980Z  97/104 Test #211: moe_test_fake_strata .....................   Passed    0.64 sec
+2026-11-16T22:49:41.6709720Z         Start 212: moe_test_strata_registry
+2026-11-16T22:49:41.7844190Z  98/104 Test #212: moe_test_strata_registry .................   Passed    0.11 sec
+2026-11-16T22:49:45.4479640Z  99/104 Test #206: moe_test_platform_ios_cli ................   Passed    5.89 sec
+2026-11-16T22:49:53.7379740Z 100/104 Test #191: moe_test_platform_android_cli ............   Passed   18.62 sec
+2026-11-16T22:50:08.2288790Z 101/104 Test #114: moe_test_subproject ......................   Passed   37.17 sec
+2026-11-16T22:50:08.2292060Z         Start  57: moe_test_weights_vulkan_fill
+2026-11-16T22:50:08.2346350Z 102/104 Test  #57: moe_test_weights_vulkan_fill .............***Skipped   0.01 sec
+2026-11-16T22:50:08.2349530Z         Start  58: moe_test_weights_vulkan_concurrent
+2026-11-16T22:50:08.2397670Z 103/104 Test  #58: moe_test_weights_vulkan_concurrent .......***Skipped   0.00 sec
+2026-11-16T22:50:08.2400590Z         Start 197: moe_test_exec_vulkan_replicas
+2026-11-16T22:50:08.2450280Z 104/104 Test #197: moe_test_exec_vulkan_replicas ............***Skipped   0.00 sec
+2026-11-16T22:50:08.2454270Z 
+2026-11-16T22:50:08.2454510Z 100% tests passed out of 104
+2026-11-16T22:50:08.2454760Z 
+2026-11-16T22:50:08.2454830Z Label Time Summary:
+2026-11-16T22:50:08.2455070Z L0        =   5.63 sec*proc (15 tests)
+2026-11-16T22:50:08.2455250Z L1        = 103.70 sec*proc (89 tests)
+2026-11-16T22:50:08.2455490Z device    =   0.02 sec*proc (3 tests)
+2026-11-16T22:50:08.2455640Z 
+2026-11-16T22:50:08.2455710Z Total Test time (real) =  43.31 sec
+2026-11-16T22:50:08.2455860Z 
+2026-11-16T22:50:08.2455940Z The following tests did not run:
+2026-11-16T22:50:08.2456380Z 	 57 - moe_test_weights_vulkan_fill (Skipped)
+2026-11-16T22:50:08.2456640Z 	 58 - moe_test_weights_vulkan_concurrent (Skipped)
+2026-11-16T22:50:08.2457070Z 	197 - moe_test_exec_vulkan_replicas (Skipped)
+2026-11-16T22:50:08.2512340Z ##[group]Run ctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata
+2026-11-16T22:50:08.2512750Z [36;1mctest --preset cpu --no-tests=error --output-on-failure -L L2 -R strata[0m
+2026-11-16T22:50:08.2637360Z shell: /bin/bash -e {0}
+2026-11-16T22:50:08.2637520Z ##[endgroup]
+2026-11-16T22:50:08.3020390Z Test project /Users/runner/work/Edge0/Edge0/edge0-infer/build/cpu
+2026-11-16T22:50:08.3056030Z     Start 213: moe_test_serve_strata
+2026-11-16T22:50:08.3060920Z     Start 214: moe_test_chat_strata
+2026-11-16T22:50:25.9965070Z 1/2 Test #214: moe_test_chat_strata .............   Passed   17.69 sec
+2026-11-16T22:51:06.3988240Z 2/2 Test #213: moe_test_serve_strata ............   Passed   58.09 sec
+2026-11-16T22:51:06.3998050Z 
+2026-11-16T22:51:06.3998210Z 100% tests passed out of 2
+2026-11-16T22:51:06.4002190Z 
+2026-11-16T22:51:06.4002400Z Label Time Summary:
+2026-11-16T22:51:06.4002650Z L2    =  75.78 sec*proc (2 tests)
+2026-11-16T22:51:06.4002820Z 
+2026-11-16T22:51:06.4003000Z Total Test time (real) =  58.10 sec
+2026-11-16T22:51:06.4122300Z Post job cleanup.
+2026-11-16T22:51:06.5169070Z [command]/opt/homebrew/bin/git version
+2026-11-16T22:51:06.5235630Z git version 2.56.0
+2026-11-16T22:51:06.5254870Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/3555deca-15d8-4263-a2e8-37c1a3ac148f/.gitconfig'
+2026-11-16T22:51:06.5262150Z Temporarily overriding HOME='/Users/runner/work/_temp/3555deca-15d8-4263-a2e8-37c1a3ac148f' before making global git config changes
+2026-11-16T22:51:06.5262800Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-16T22:51:06.5266470Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Edge0/Edge0
+2026-11-16T22:51:06.5338230Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-16T22:51:06.5392400Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-16T22:51:06.6101970Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-16T22:51:06.6148120Z http.https://github.com/.extraheader
+2026-11-16T22:51:06.6155940Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-16T22:51:06.6220790Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-16T22:51:06.6914350Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-16T22:51:06.6968780Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-16T22:51:06.7973880Z Cleaning up orphan processes
+2026-11-16T22:51:08.3912270Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

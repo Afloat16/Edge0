@@ -1,0 +1,28 @@
+{
+  "host_reference": "Aider-AI/aider v0.86.2 aider/main.py and aider/args.py",
+  "configargparse": "1.7.1",
+  "pyyaml": "6.0.3",
+  "before": {
+    "bundle": "worker-service-before-precedence.cjs",
+    "install_exit": 0,
+    "effective_read": [
+      "APP.md"
+    ],
+    "root_config_unchanged": false,
+    "memory_exists_at_aider_resolved_path": false
+  },
+  "after": {
+    "bundle": "worker-service.cjs",
+    "install_exit": 0,
+    "effective_read": [
+      "APP.md",
+      ".claude-mem/aider-memory.md"
+    ],
+    "root_config_unchanged": true,
+    "memory_exists_at_aider_resolved_path": true,
+    "status_exit": 0,
+    "uninstall_exit": 0,
+    "uninstall_restored_both_configs": true
+  },
+  "external_model_calls": 0
+}

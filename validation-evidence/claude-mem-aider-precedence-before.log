@@ -1,0 +1,42 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/integrations/aider-config.test.ts:
+64 |     const rootConfig = path.join(project, '.aider.conf.yml');
+65 |     const appConfig = path.join(app, '.aider.conf.yml');
+66 |     writeFileSync(rootConfig, 'read: [ROOT.md]\n');
+67 |     writeFileSync(appConfig, 'read: [APP.md]\n');
+68 | 
+69 |     expect(resolveAiderConfigPath(app)).toBe(appConfig);
+                                             ^
+error: expect(received).toBe(expected)
+
+Expected: "/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-HDIvni/packages/app/.aider.conf.yml"
+Received: "/workspace/scratch/4bed741d4966/tmp-claude-mem/aider-install-test-HDIvni/.aider.conf.yml"
+
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-config.test.ts:69:41)
+(fail) Aider config precedence > selects the current-directory config before the git-root config [14.11ms]
+83 |     writeFileSync(appConfig, originalApp);
+84 | 
+85 |     await captureConsoleAsync(async () => {
+86 |       expect(await installAiderIntegration({ cwd: app }, async () => '# Shared project memory\n')).toBe(0);
+87 |     });
+88 |     expect(readFileSync(rootConfig, 'utf8')).toBe(originalRoot);
+                                                  ^
+error: expect(received).toBe(expected)
+
+- "read: [ROOT.md]
++ "read: [ROOT.md, .claude-mem/aider-memory.md]  # claude-mem (managed)
+  "
+
+- Expected  - 1
++ Received  + 1
+
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-contributions-20261116/tests/integrations/aider-config.test.ts:88:46)
+(fail) Aider config precedence > installs into the effective nested config and restores it on uninstall [28.67ms]
+(pass) Aider config precedence > retains the git-root config when the current directory has none [9.49ms]
+
+ 1 pass
+ 59 filtered out
+ 2 fail
+ 4 expect() calls
+Ran 3 tests across 1 file. [143.00ms]

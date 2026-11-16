@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T21:15:27Z",
+  "updated": "2026-11-16T22:53:15.854Z",
   "repositories": [
     {
       "repository": "serengil/deepface",
@@ -2767,7 +2767,76 @@
       "remaining_to_20": 11,
       "draft_open": 0,
       "ready_open": 9
+    },
+    {
+      "repository": "thedotmack/claude-mem",
+      "prs": [
+        {
+          "number": 6230,
+          "url": "https://github.com/thedotmack/claude-mem/pull/6230",
+          "title": "fix(aider): honor working-directory config precedence",
+          "state": "open",
+          "merged": false,
+          "draft": false,
+          "head": "f7acbbd1b03819237c745103a5abf0350586aa8f",
+          "maintainer_can_modify": false,
+          "official_ci": [
+            {
+              "id": 43973824279,
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279",
+              "name": "Windows",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "id": 43973824185,
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824185",
+              "name": "CI",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "id": 43973824170,
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824170",
+              "name": "Native ODS integration",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ],
+          "validation_local": {
+            "before": {
+              "passed": 1,
+              "failed": 2
+            },
+            "after": {
+              "passed": 63,
+              "failed": 0
+            },
+            "typecheck": "success",
+            "build": "success",
+            "native_cli": "audit/claude-mem-aider-config-native-validation.json",
+            "dedupe": {
+              "pr_heads": 3451,
+              "fork_branches": 467,
+              "reachable_commits": 16233,
+              "path_history_unchanged_after_refresh": true,
+              "distinct_resolver_blobs": 1
+            }
+          },
+          "created_at": "2026-11-16T22:50:15Z"
+        }
+      ],
+      "counts": {
+        "submitted": 1,
+        "open": 1,
+        "merged": 0,
+        "closed_unmerged": 0,
+        "draft_open": 0,
+        "ready_open": 1,
+        "effective": 1
+      },
+      "remaining_to_20": 19
     }
   ],
-  "verification_scope": "Edge0 #257 and its official CI refreshed; other repositories preserve their previously verified durable records."
+  "verification_scope": "Claude-Mem #6230 state/head/maintainer permission and official CI refreshed; Edge0 SSE is prepared, not a published PR. Other repositories preserve their previously verified durable records."
 }

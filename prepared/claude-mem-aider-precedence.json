@@ -1,0 +1,82 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "fork": "Afloat16/claude-mem",
+  "branch": "fix/aider-config-precedence-20261116",
+  "base": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+  "base_tree": "9dc29a31054b5bc4a876235f3cb665a2c22e896e",
+  "files": [
+    {
+      "path": "src/shared/aider-paths.ts",
+      "bytes": 3035,
+      "utf16_length": 3033,
+      "blob": "a92d1474a724ddf14b7081e1953959f75188d03d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integrations/aider-config.test.ts",
+      "bytes": 33810,
+      "utf16_length": 33806,
+      "blob": "8f05624aa364bf1a87e22fb76c215c16b4bca24b",
+      "mode": "100644"
+    },
+    {
+      "path": "docs/public/aider-integration.mdx",
+      "bytes": 13025,
+      "utf16_length": 12959,
+      "blob": "0687a4825b96348e352c45df61acee79416b48a9",
+      "mode": "100644"
+    },
+    {
+      "path": "plugin/scripts/worker-service.cjs",
+      "bytes": 5301154,
+      "utf16_length": 5301066,
+      "blob": "43702c8ba7e78c69c383b2ac8c437c61d9f032c9",
+      "mode": "100755"
+    },
+    {
+      "path": "plugin/scripts/worker-service.cjs.map",
+      "bytes": 5664748,
+      "utf16_length": 5664748,
+      "blob": "15393bd45ea142069d351b83040d4ba760e7e7b7",
+      "mode": "100644"
+    }
+  ],
+  "head": "f7acbbd1b03819237c745103a5abf0350586aa8f",
+  "tree": "3895898f66f6e2eec73dbd49ec897562b0decb19",
+  "title": "fix(aider): honor working-directory config precedence",
+  "body": "## Why\n\nWhen a Git checkout and its current subdirectory both have `.aider.conf.yml`, Aider lets the current-directory settings win. Claude-Mem currently edits the Git-root file instead. Installation returns success, but the effective `read:` list still lacks the memory file.\n\nSelect the existing current-directory config before the Git-root and home configs. Keep the existing destination for a new config: the Git root, or the current directory outside Git. Update the integration guide and regenerate the installed worker bundle and source map.\n\nThis follows [Aider's documented configuration precedence](https://aider.chat/docs/config/aider_conf.html) and its [0.86.2 parser setup](https://github.com/Aider-AI/aider/blob/v0.86.2/aider/main.py).\n\n## Validation\n\n- New real-Git/disk regressions: original source fails the config-selection and nested-install cases; the root-only control passes. After the fix, `bun test tests/integrations/aider-config.test.ts tests/integrations/aider-sync.test.ts` passes **63 tests**.\n- `npm run typecheck` passes both root and viewer checks.\n- `npm run build` succeeds. The affected committed worker bundle and source map are included.\n- Exercised the original and rebuilt worker CLIs against a local HTTP context fixture, then parsed both configs using Aider 0.86.2's ConfigArgParse 1.7.1 / PyYAML 6.0.3 setup. Before: install exits 0 but the effective list is only `APP.md`, and no memory file exists at Aider's resolved path. After: the list includes the memory file, its contents are present, status succeeds, and uninstall restores both configs while leaving the root config unchanged. This verification makes no model requests.\n",
+  "published": true,
+  "status": "open",
+  "maintainer_can_modify": false,
+  "draft": false,
+  "prefilled_url": "https://github.com/thedotmack/claude-mem/compare/main...Afloat16:fix/aider-config-precedence-20261116?expand=1&title=fix(aider)%3A%20honor%20working-directory%20config%20precedence&body=%23%23%20Why%0A%0AWhen%20a%20Git%20checkout%20and%20its%20current%20subdirectory%20both%20have%20%60.aider.conf.yml%60%2C%20Aider%20lets%20the%20current-directory%20settings%20win.%20Claude-Mem%20currently%20edits%20the%20Git-root%20file%20instead.%20Installation%20returns%20success%2C%20but%20the%20effective%20%60read%3A%60%20list%20still%20lacks%20the%20memory%20file.%0A%0ASelect%20the%20existing%20current-directory%20config%20before%20the%20Git-root%20and%20home%20configs.%20Keep%20the%20existing%20destination%20for%20a%20new%20config%3A%20the%20Git%20root%2C%20or%20the%20current%20directory%20outside%20Git.%20Update%20the%20integration%20guide%20and%20regenerate%20the%20installed%20worker%20bundle%20and%20source%20map.%0A%0AThis%20follows%20%5BAider's%20documented%20configuration%20precedence%5D(https%3A%2F%2Faider.chat%2Fdocs%2Fconfig%2Faider_conf.html)%20and%20its%20%5B0.86.2%20parser%20setup%5D(https%3A%2F%2Fgithub.com%2FAider-AI%2Faider%2Fblob%2Fv0.86.2%2Faider%2Fmain.py).%0A%0A%23%23%20Validation%0A%0A-%20New%20real-Git%2Fdisk%20regressions%3A%20original%20source%20fails%20the%20config-selection%20and%20nested-install%20cases%3B%20the%20root-only%20control%20passes.%20After%20the%20fix%2C%20%60bun%20test%20tests%2Fintegrations%2Faider-config.test.ts%20tests%2Fintegrations%2Faider-sync.test.ts%60%20passes%20**63%20tests**.%0A-%20%60npm%20run%20typecheck%60%20passes%20both%20root%20and%20viewer%20checks.%0A-%20%60npm%20run%20build%60%20succeeds.%20The%20affected%20committed%20worker%20bundle%20and%20source%20map%20are%20included.%0A-%20Exercised%20the%20original%20and%20rebuilt%20worker%20CLIs%20against%20a%20local%20HTTP%20context%20fixture%2C%20then%20parsed%20both%20configs%20using%20Aider%200.86.2's%20ConfigArgParse%201.7.1%20%2F%20PyYAML%206.0.3%20setup.%20Before%3A%20install%20exits%200%20but%20the%20effective%20list%20is%20only%20%60APP.md%60%2C%20and%20no%20memory%20file%20exists%20at%20Aider's%20resolved%20path.%20After%3A%20the%20list%20includes%20the%20memory%20file%2C%20its%20contents%20are%20present%2C%20status%20succeeds%2C%20and%20uninstall%20restores%20both%20configs%20while%20leaving%20the%20root%20config%20unchanged.%20This%20verification%20makes%20no%20model%20requests.%0A",
+  "validation": {
+    "before": {
+      "passed": 1,
+      "failed": 2
+    },
+    "after": {
+      "passed": 63,
+      "failed": 0
+    },
+    "typecheck": "success",
+    "build": "success",
+    "native_cli": "audit/claude-mem-aider-config-native-validation.json",
+    "dedupe": {
+      "pr_heads": 3451,
+      "fork_branches": 467,
+      "reachable_commits": 16233,
+      "path_history_unchanged_after_refresh": true,
+      "distinct_resolver_blobs": 1
+    }
+  },
+  "number": 6230,
+  "url": "https://github.com/thedotmack/claude-mem/pull/6230",
+  "api_verified": {
+    "head": "f7acbbd1b03819237c745103a5abf0350586aa8f",
+    "draft": false,
+    "maintainer_can_modify": false,
+    "files": 5,
+    "merged": false
+  }
+}

@@ -1,0 +1,208 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> claude-mem@15.19.0 build
+> node scripts/sync-plugin-manifests.js && node scripts/build-hooks.js && node scripts/gen-plugin-lockfile.cjs
+
+✓ Synced plugin manifests from package.json
+🔨 Building claude-mem hooks and worker service...
+
+📌 Version: 15.19.0
+
+📦 Preparing output directories...
+✓ Output directories ready
+
+📦 Generating plugin package.json...
+✓ plugin/package.json generated
+
+📋 Building React viewer...
+Building React viewer...
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm warn deprecated @tsparticles/react@3.0.0: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-opacity@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/plugin-easing-quad@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-size@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-color@3.9.1: this package was deprecated in tsparticles v4, replaced by @tsparticles/updater-paint
+npm warn deprecated @tsparticles/plugin-hsl-color@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/plugin-rgb-color@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-stroke-color@3.9.1: this package was deprecated in tsparticles v4, replaced by @tsparticles/updater-paint
+npm warn deprecated @tsparticles/move-parallax@3.9.1: this package was deprecated in tsparticles v4, replaced by @tsparticles/interaction-external-parallax
+npm warn deprecated @tsparticles/interaction-external-pause@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-line@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-square@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-particles-attract@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-circle@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-star@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-emoji@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/basic@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/slim@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-particles-collisions@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/move-base@3.9.1: this package was deprecated in tsparticles v4, replaced by @tsparticles/plugin-move
+npm warn deprecated @tsparticles/interaction-external-push@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-remove@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-polygon@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-out-modes@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-slow@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-rotate@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-bounce@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-attract@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-grab@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-connect@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/updater-life@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-repulse@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-external-bubble@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/interaction-particles-links@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/shape-image@3.9.1: Please update to version 4.1.1
+npm warn deprecated @tsparticles/engine@3.9.1: Please update to version 4.1.1
+
+added 480 packages in 14s
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> my-work-wireframe@0.0.0 build
+> tsc -b && vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:15:41). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2998 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../plugin/ui/work-view/index.html                                              1.04 kB │ gzip:   0.43 kB
+../../../plugin/ui/work-view/assets/claude-DqipVtpa.webp                             5.02 kB
+../../../plugin/ui/work-view/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+../../../plugin/ui/work-view/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+../../../plugin/ui/work-view/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+../../../plugin/ui/work-view/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+../../../plugin/ui/work-view/assets/momentum-B5jYpaUT.webp                          18.57 kB
+../../../plugin/ui/work-view/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+../../../plugin/ui/work-view/assets/sync-DY44LZY3.webp                              29.42 kB
+../../../plugin/ui/work-view/assets/storytelling-DqKfuXh2.webp                      36.03 kB
+../../../plugin/ui/work-view/assets/workspace-DMk4h232.webp                         37.72 kB
+../../../plugin/ui/work-view/assets/on-the-go-iphone-feed-BOm9aG2q.webp             39.32 kB
+../../../plugin/ui/work-view/assets/metrics-COyC2R9c.webp                           41.48 kB
+../../../plugin/ui/work-view/assets/wellbeing-CttXKky2.webp                         43.75 kB
+../../../plugin/ui/work-view/assets/collaboration-DLKMGJKR.webp                     47.12 kB
+../../../plugin/ui/work-view/assets/knowledge-DI0168X9.webp                         48.20 kB
+../../../plugin/ui/work-view/assets/at-home-modern-computer-JH_MTm9z.webp           87.97 kB
+../../../plugin/ui/work-view/assets/HankenGrotesk-wght-2z-3qhAN.ttf                132.89 kB
+../../../plugin/ui/work-view/assets/setup-page-B8sQmQI5.css                         36.89 kB │ gzip:   8.40 kB
+../../../plugin/ui/work-view/assets/index-AFigrdgT.css                             149.08 kB │ gzip:  26.27 kB
+../../../plugin/ui/work-view/assets/use-animation-DWg1HmKY.js                        0.96 kB │ gzip:   0.51 kB
+../../../plugin/ui/work-view/assets/swipe-to-decide-BBP-YBeX.js                      3.56 kB │ gzip:   1.70 kB
+../../../plugin/ui/work-view/assets/glare-card-D4HkXdS7.js                           4.83 kB │ gzip:   1.85 kB
+../../../plugin/ui/work-view/assets/setup-sample-B4bL9lOM.js                         6.60 kB │ gzip:   2.80 kB
+../../../plugin/ui/work-view/assets/suggested-areas-C1P66SWl.js                      6.85 kB │ gzip:   2.61 kB
+../../../plugin/ui/work-view/assets/data-goals-OEak7sSc.js                           8.23 kB │ gzip:   3.15 kB
+../../../plugin/ui/work-view/assets/past-focus-BnI4kSKI.js                           8.35 kB │ gzip:   2.90 kB
+../../../plugin/ui/work-view/assets/data-lcZTvPaL.js                                 8.88 kB │ gzip:   3.59 kB
+../../../plugin/ui/work-view/assets/setup-data-B-mQFvVr.js                          10.30 kB │ gzip:   4.17 kB
+../../../plugin/ui/work-view/assets/animate-CmYd_zae.js                             11.64 kB │ gzip:   4.96 kB
+../../../plugin/ui/work-view/assets/parse-sse-frame-RQ5Ec6Uw.js                     20.37 kB │ gzip:   7.72 kB
+../../../plugin/ui/work-view/assets/my-rules-CIOqYMrt.js                            42.56 kB │ gzip:  12.54 kB
+../../../plugin/ui/work-view/assets/request-detail-BjUutnid.js                      47.01 kB │ gzip:  13.88 kB
+../../../plugin/ui/work-view/assets/setup-page-BFnQr31k.js                          85.80 kB │ gzip:  38.96 kB
+../../../plugin/ui/work-view/assets/sparkles-CVehdZBN.js                           147.35 kB │ gzip:  41.87 kB
+../../../plugin/ui/work-view/assets/textarea-Cc-3pF0U.js                           240.09 kB │ gzip:  77.73 kB
+../../../plugin/ui/work-view/assets/index-Bu3EfWl8.js                              422.96 kB │ gzip: 131.27 kB
+../../../plugin/ui/work-view/assets/ui-message-De7LewWd.js                         505.76 kB │ gzip: 171.46 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 781ms
+✓ React viewer built successfully
+  - plugin/ui/viewer-bundle.js
+  - plugin/ui/viewer.html (from viewer-template.html)
+  - plugin/ui/tv.html (from src/ui/tv.html)
+  - plugin/ui/work-view/* (My Work app, Vite build of src/ui/my-work)
+  - plugin/ui/assets/fonts/* (font files)
+  - plugin/ui/icon-thick-*.svg (5 icon files)
+
+🔧 Building worker service...
+✓ worker-service built (5176.91 KB)
+
+🔧 Building hook service...
+✓ hook-service built (800.78 KB)
+⚠️  worker-service.cjs is 5176.91 KB (advisory budget 2900 KB). If this jumped unexpectedly, check whether a server-only dependency leaked into the worker bundle (see #2584).
+
+🔧 Building sqlite runtime modules...
+✓ plugin/sqlite/SessionStore.js built (205.50 KB)
+✓ plugin/sqlite/observations/files.js built (9.38 KB)
+✓ plugin/skills/request-progress/scripts/request-groups.mjs built (455.21 KB)
+
+🔧 Building server beta service...
+✓ server-service built (2252.21 KB)
+
+🔧 Building MCP server...
+✓ mcp-server built (922.76 KB)
+⚠️  mcp-server.cjs is 922.76 KB (advisory budget 600 KB). If this jumped unexpectedly, a transitive import may have pulled worker-service.ts or another heavy module into the MCP bundle (see #1645).
+
+🔧 Building context generator...
+✓ context-generator built (144.58 KB)
+
+🔧 Building transcript watcher...
+✓ transcript-watcher built (477.00 KB)
+⚠️  transcript-watcher.cjs is 477.00 KB (advisory budget 200 KB). If this jumped unexpectedly, check src/services/transcripts/processor.ts and watcher.ts for heavy imports.
+
+🔧 Building claude-mem hook launcher...
+✓ claude-mem-launcher built (8.47 KB)
+
+🔧 Building ensure-launcher self-heal...
+✓ ensure-launcher built (36.11 KB)
+
+🔧 Building auto-clear mod...
+✓ auto-clear mod built (15.79 KB)
+
+🔧 Building NPX CLI...
+✓ npx-cli built (2189.84 KB)
+
+🔧 Building bug-report CLI...
+✓ bug-report built (1145.08 KB)
+
+🔧 Building OpenClaw plugin...
+✓ openclaw plugin built (16.11 KB)
+
+🔧 Building eve memory provider...
+✓ eve memory provider built (26.96 KB)
+
+🔧 Building OpenCode plugin...
+✓ opencode plugin built (504.22 KB)
+✓ Pi memory extension built
+✓ DeepSeek Harness memory plugin built
+
+📋 Copying onboarding explainer to plugin tree...
+✓ Copied src/services/worker/onboarding-explainer.md → plugin/skills/how-it-works/onboarding-explainer.md
+
+📋 Verifying distribution files...
+✓ All required distribution files present
+
+📋 Verifying Rule A shell templates match the canonical generator...
+✓ Rule A shell templates match the canonical generator
+
+✅ All build targets compiled successfully!
+   Output: plugin/scripts/
+   - Worker: worker-service.cjs
+   - Server: server-service.cjs
+   - MCP Server: mcp-server.cjs
+   - Context Generator: context-generator.cjs
+   - Transcript Watcher: transcript-watcher.cjs
+   Output: dist/npx-cli/
+   - NPX CLI: index.js
+   Output: openclaw/dist/
+   - OpenClaw Plugin: index.js
+   Output: dist/opencode-plugin/
+   - OpenCode Plugin: index.js
+
+🔒 Generating plugin/bun.lock...
+bun install v1.4.4 (38afee6c8)
+
+Done! Checked 119 packages (no changes) [10.00ms]
+✓ plugin/bun.lock generated
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

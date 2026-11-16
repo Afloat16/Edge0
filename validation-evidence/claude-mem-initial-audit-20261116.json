@@ -1,0 +1,83 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "source_head": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+  "source_tree": "9dc29a31054b5bc4a876235f3cb665a2c22e896e",
+  "scope": {
+    "stars": 117674,
+    "user_merged": 371,
+    "not_first_witness_merged": 662,
+    "basis": "restored root scope plus fresh public metadata"
+  },
+  "historical_refs": {
+    "upstream_pr_heads": 3451,
+    "user_fork_branches": 467,
+    "reachable_commits": 16231
+  },
+  "rules": {
+    "concurrent_pr_cap": null,
+    "mandatory_attribution_found": false,
+    "issue_preapproval_found": false,
+    "read": [
+      "AGENTS.md",
+      "docs/architecture/observer-lifecycle.md",
+      "docs/architecture/state-machines.md",
+      "README.md",
+      ".github/SECURITY.md",
+      "https://docs.claude-mem.ai/development"
+    ],
+    "required": [
+      "Relevant behavioral tests",
+      "Root TypeScript typecheck",
+      "Actual runtime bundle build; commit affected bundles"
+    ],
+    "security_policy": "Security vulnerabilities must use private reporting; no public vulnerability PRs."
+  },
+  "runtime": {
+    "bun": "1.4.4",
+    "node": "24.22.1",
+    "root_install_status": "success with documented ONNXRUNTIME_NODE_INSTALL_CUDA=skip: 357 packages"
+  },
+  "new_candidates_confirmed": [
+    {
+      "candidate": "Aider config precedence",
+      "branch": "fix/aider-config-precedence-20261116",
+      "upstream_pr": null,
+      "before": {
+        "fail": 2,
+        "pass": 1
+      },
+      "after": {
+        "pass": 63,
+        "fail": 0
+      },
+      "typecheck": "success",
+      "baseline_build": "success",
+      "patched_build": "success",
+      "native_validation": "audit/claude-mem-aider-config-native-validation.json",
+      "dedupe": "audit/claude-mem-aider-path-history-20261116.log; 1 historical resolver blob, 3 installer blobs, all preexisting implementations same root-first order"
+    }
+  ],
+  "created_upstream_prs": [],
+  "discarded_or_unproven_leads": [
+    {
+      "lead": "invalid reinforcement dates",
+      "reason": "already prior equivalent fix c8c0bbcca"
+    },
+    {
+      "lead": "pgvector upsert stale trailing parts",
+      "reason": "no reachable production mutation path established"
+    },
+    {
+      "lead": "MemoryItemsRepository platformSource update",
+      "reason": "public update schema intentionally excludes immutable provenance"
+    },
+    {
+      "lead": "SessionSearch concepts alias",
+      "reason": "actual callers strip unsupported observation-only filter"
+    },
+    {
+      "lead": "spread call overflow in smart-file search",
+      "reason": "512KiB input bound makes realistic overflow unproven"
+    }
+  ]
+}
