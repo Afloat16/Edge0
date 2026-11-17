@@ -1,0 +1,25 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "pr": 6232,
+  "head": "e2e64128e8eeeb8145a36ddb1de927f95713e536",
+  "run_id": 43979129450,
+  "job_id": 133690714347,
+  "job_url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450/job/133690714347",
+  "conclusion": "success",
+  "retrieved_at": "2026-11-17T06:39:35.018Z",
+  "archive_path": "validation-evidence/claude-mem-6232-official-job-133690714347.log.gz",
+  "raw_sha256": "4ac3c73a675f731fb89dea33c0162defb8badc0f7ee97c143dc79e1a15c11949",
+  "gzip_sha256": "552186b04e4fe63180187018949e2e668539c5f218d3cc8e32a2d10238db1047",
+  "raw_bytes": 2970706,
+  "gzip_bytes": 655427,
+  "observed": {
+    "typecheck": "root/viewer success",
+    "build": "All build targets compiled successfully",
+    "new_http_scenarios": {
+      "passed": 14,
+      "failed": 0
+    },
+    "integration_lane_reported_tests": 1107
+  },
+  "provenance": "Full original GitHub Actions job log obtained through job_logs, gzip round trip byte equality verified. This is not the lost local before/after log."
+}

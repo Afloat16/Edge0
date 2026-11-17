@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T23:26:22.789Z",
+  "updated": "2026-11-17T06:39:35.018Z",
   "repositories": [
     {
       "repository": "serengil/deepface",
@@ -34,7 +34,10 @@
               "url": "https://github.com/serengil/deepface/pull/1739#issuecomment-6915452949"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "dab1f4a56b81af1238605ea5f25e7f9a1ccf3bcf",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.344Z"
         },
         {
           "number": 1740,
@@ -84,7 +87,10 @@
               "url": "https://github.com/serengil/deepface/pull/1740#issuecomment-6923332580",
               "body": "Updated the existing branch `fix/gallery-store-lifetime-20261116` to `a3c727ba09229970acc3130474ff6044c4a356c4`, rebased on master `c2a6fd9`. The HTTP/FTP server tests are replaced with `unittest.mock` cleanup checks, and #1753, #1758, and #1760 are retained.\r\n\r\n[Validation](https://github.com/Afloat16/deepface/actions/runs/43913436340): Python 3.10 and 3.12 each pass all 84 related tests across this and the Pinecone-cleanup revision; Pylint is 10.00/10 and MyPy passes all 145 source files.\r\n\r\nThe PR remains closed and still displays the previous head, and my author view has no Reopen button. Could you reopen this PR so it can pick up the revised branch?"
             }
-          }
+          },
+          "merge_commit_sha": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.227Z"
         },
         {
           "number": 1741,
@@ -107,7 +113,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T11:54:34Z",
           "closed_at": "2026-11-16T11:54:34Z",
-          "updated_at": "2026-11-16T11:54:35Z"
+          "updated_at": "2026-11-16T11:54:35Z",
+          "merge_commit_sha": "42d5038b7d342fc91cd40bacab0205fe685c5fe1",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.316Z"
         },
         {
           "number": 1742,
@@ -130,7 +139,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T11:55:50Z",
           "closed_at": "2026-11-16T11:55:50Z",
-          "updated_at": "2026-11-16T11:55:50Z"
+          "updated_at": "2026-11-16T11:55:50Z",
+          "merge_commit_sha": "d817afc5e81fb3a80100e817824320986deac282",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.254Z"
         },
         {
           "number": 1743,
@@ -153,7 +165,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T11:57:42Z",
           "closed_at": "2026-11-16T11:57:42Z",
-          "updated_at": "2026-11-16T11:57:42Z"
+          "updated_at": "2026-11-16T11:57:42Z",
+          "merge_commit_sha": "d56e74cc2a551ba8c43e2aa9fc7057f152cd1914",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.746Z"
         },
         {
           "number": 1744,
@@ -185,7 +200,10 @@
               "url": "https://github.com/serengil/deepface/pull/1744#issuecomment-6915779529"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "91d56edc9d57d0fb03eebd2a063a2d1310b7228a",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:52.001Z"
         },
         {
           "number": 1745,
@@ -217,7 +235,10 @@
               "url": "https://github.com/serengil/deepface/pull/1745#issuecomment-6915790296"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "02f3cde90317e00749adbd2dd1f7d6500f3d3c8d",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.846Z"
         },
         {
           "number": 1746,
@@ -240,7 +261,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T11:59:46Z",
           "closed_at": "2026-11-16T11:59:46Z",
-          "updated_at": "2026-11-16T11:59:46Z"
+          "updated_at": "2026-11-16T11:59:46Z",
+          "merge_commit_sha": "3478d3320b42afbc9cb59eabb89805c5e22831dd",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:51.711Z"
         },
         {
           "number": 1747,
@@ -263,7 +287,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T11:51:19Z",
           "closed_at": "2026-11-16T11:51:19Z",
-          "updated_at": "2026-11-16T11:51:19Z"
+          "updated_at": "2026-11-16T11:51:19Z",
+          "merge_commit_sha": "59c71a9752be7236932e6bfd2fa985220bc5179b",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:52.412Z"
         },
         {
           "number": 1748,
@@ -296,7 +323,10 @@
               "url": "https://github.com/serengil/deepface/pull/1748#issuecomment-6915583357"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "2fef4032a8cce7f7f02c6367965860ca22cbd7b8",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:52.529Z"
         },
         {
           "number": 1749,
@@ -328,7 +358,10 @@
               "url": "https://github.com/serengil/deepface/pull/1749#issuecomment-6915512872"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "faba3f0d8d0c1653af5a7360b00d2838d12c9c0e",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:52.720Z"
         },
         {
           "number": 1750,
@@ -361,7 +394,10 @@
               "url": "https://github.com/serengil/deepface/pull/1750#issuecomment-6915550966"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "f001ab217f33aa8c107f7924b4cc221ed3426faa",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:52.559Z"
         },
         {
           "number": 1751,
@@ -394,7 +430,10 @@
               "url": "https://github.com/serengil/deepface/pull/1751#issuecomment-6915942358"
             }
           ],
-          "revision_invited": false
+          "revision_invited": false,
+          "merge_commit_sha": "cd55a507e255e4fa291d507a5c20c79dbcc88174",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.229Z"
         },
         {
           "number": 1752,
@@ -417,7 +456,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T15:13:39Z",
           "closed_at": "2026-11-16T15:13:39Z",
-          "updated_at": "2026-11-16T15:13:39Z"
+          "updated_at": "2026-11-16T15:13:39Z",
+          "merge_commit_sha": "c8bc91eb269861e4c0c4c208806ac7f635a000bc",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.430Z"
         },
         {
           "number": 1753,
@@ -440,7 +482,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T15:14:49Z",
           "closed_at": "2026-11-16T15:14:49Z",
-          "updated_at": "2026-11-16T15:14:49Z"
+          "updated_at": "2026-11-16T15:14:49Z",
+          "merge_commit_sha": "7ba2ccf8a58ac8c92bf203098202dfd05e9773d2",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.151Z"
         },
         {
           "number": 1754,
@@ -463,7 +508,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T15:15:47Z",
           "closed_at": "2026-11-16T15:15:47Z",
-          "updated_at": "2026-11-16T15:15:48Z"
+          "updated_at": "2026-11-16T15:15:48Z",
+          "merge_commit_sha": "44dcc68925613bcbf9312275cc4ee1561a8da0f6",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.162Z"
         },
         {
           "number": 1755,
@@ -513,7 +561,10 @@
               "url": "https://github.com/serengil/deepface/pull/1755#issuecomment-6923324126",
               "body": "Updated the existing branch `fix/pinecone-client-lifetime-20261116` to `e87d2d261585ec657a19671288b191ef8303a4c7`, rebased on master `c2a6fd9`. The loopback-server test is replaced with `unittest.mock` cleanup checks, and #1753, #1758, and #1760 are retained.\r\n\r\n[Validation](https://github.com/Afloat16/deepface/actions/runs/43913436340): Python 3.10 and 3.12 each pass all 84 related tests across this and the gallery-cleanup revision; Pylint is 10.00/10 and MyPy passes all 145 source files.\r\n\r\nThe PR remains closed and still displays the previous head, and my author view has no Reopen button. Could you reopen this PR so it can pick up the revised branch?"
             }
-          }
+          },
+          "merge_commit_sha": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.980Z"
         },
         {
           "number": 1756,
@@ -551,7 +602,10 @@
           ],
           "metadata_update_pending": false,
           "closed_at": "2026-11-16T15:25:28Z",
-          "updated_at": "2026-11-16T15:25:28Z"
+          "updated_at": "2026-11-16T15:25:28Z",
+          "merge_commit_sha": "5e16bdf618d9bb82cdd6ebd45c5ac61aa1ebcde9",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.805Z"
         },
         {
           "number": 1757,
@@ -577,7 +631,10 @@
           "validation_run": "https://github.com/Afloat16/deepface/actions/runs/43872136361",
           "official_ci_scope": "upstream lint/type checks; unit execution disabled in upstream workflow",
           "maintainer_can_modify": false,
-          "updated_at": "2026-11-16T15:18:22Z"
+          "updated_at": "2026-11-16T15:18:22Z",
+          "merge_commit_sha": "b78649c73a63c005f0561ce72a2153394af43ed9",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.829Z"
         },
         {
           "number": 1758,
@@ -603,7 +660,10 @@
           "validation_run": "https://github.com/Afloat16/deepface/actions/runs/43876255050",
           "official_ci_scope": "upstream lint/type checks; unit execution disabled in upstream workflow",
           "maintainer_can_modify": false,
-          "updated_at": "2026-11-16T15:23:27Z"
+          "updated_at": "2026-11-16T15:23:27Z",
+          "merge_commit_sha": "bbe4ace215c9896cae7e2f6b8dae856d69da1867",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:53.886Z"
         },
         {
           "number": 1759,
@@ -626,7 +686,10 @@
           "maintainer_can_modify": false,
           "merged_at": "2026-11-16T15:19:42Z",
           "closed_at": "2026-11-16T15:19:42Z",
-          "updated_at": "2026-11-16T15:19:42Z"
+          "updated_at": "2026-11-16T15:19:42Z",
+          "merge_commit_sha": "a298af025a7d7f198630989fe264a4529ccfe0d3",
+          "draft": false,
+          "verified_at": "2026-11-17T06:34:54.393Z"
         }
       ],
       "counts": {
@@ -710,7 +773,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43827757000"
-          ]
+          ],
+          "merge_commit_sha": "0e74184fbea8ffe27856dad938aef299cf6ae93d",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:54.994Z"
         },
         {
           "number": 4778,
@@ -755,7 +822,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43827757000"
-          ]
+          ],
+          "merge_commit_sha": "632e43e2a510c2c2cfc355ca8c62dbec6a9b4a9b",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:54.929Z"
         },
         {
           "number": 4779,
@@ -800,7 +871,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43829291509"
-          ]
+          ],
+          "merge_commit_sha": "8e963b3484e168b7c2bdff73d353382dc1933d77",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:55.049Z"
         },
         {
           "number": 4780,
@@ -845,7 +920,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43829291509"
-          ]
+          ],
+          "merge_commit_sha": "10ad87585acfd0e1b0e023efb8d1bd3cadb20e00",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.051Z"
         },
         {
           "number": 4781,
@@ -890,16 +969,20 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43831196050"
-          ]
+          ],
+          "merge_commit_sha": "ce59730452101baf135378b326dc7452581f4140",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.049Z"
         },
         {
           "number": 4782,
           "url": "https://github.com/Unstructured-IO/unstructured/pull/4782",
           "title": "fix: retain coordinates when classifying text as an email address",
-          "state": "open",
-          "merged": false,
-          "merged_at": null,
-          "closed_at": null,
+          "state": "closed",
+          "merged": true,
+          "merged_at": "2026-11-17T00:46:39Z",
+          "closed_at": "2026-11-17T00:46:39Z",
           "head": "4ef2221d28a0c5c20b6fc38bb79d87afe0313302",
           "head_ref": "Afloat16/retain-email-text-coordinates-20261116",
           "created_at": "2026-11-16T08:30:10Z",
@@ -935,7 +1018,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43831196050"
-          ]
+          ],
+          "merge_commit_sha": "d63cf141c2d70f61baad31939bbbeed501dcb5e4",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:55.474Z"
         },
         {
           "number": 4783,
@@ -980,7 +1067,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43832948454"
-          ]
+          ],
+          "merge_commit_sha": "de493773d2c67d8b480e751d770de78bad43e523",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.020Z"
         },
         {
           "number": 4784,
@@ -1025,7 +1116,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43832948454"
-          ]
+          ],
+          "merge_commit_sha": "091bf92e965ae4f2164df2d512da27f5a0c7d54a",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.887Z"
         },
         {
           "number": 4785,
@@ -1070,16 +1165,20 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43833221474"
-          ]
+          ],
+          "merge_commit_sha": "6ca0405e123e63a46c8225521236991567cb5a8f",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.991Z"
         },
         {
           "number": 4786,
           "url": "https://github.com/Unstructured-IO/unstructured/pull/4786",
           "title": "fix: preserve repeated quoted CSV headers without a final newline",
-          "state": "open",
-          "merged": false,
-          "merged_at": null,
-          "closed_at": null,
+          "state": "closed",
+          "merged": true,
+          "merged_at": "2026-11-17T00:46:39Z",
+          "closed_at": "2026-11-17T00:46:39Z",
           "head": "7e9f39dfbf6578a3fdcadfc738df7e6ca803c289",
           "head_ref": "Afloat16/preserve-quoted-csv-headers-at-eof-20261116",
           "created_at": "2026-11-16T08:45:01Z",
@@ -1115,7 +1214,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43833221474"
-          ]
+          ],
+          "merge_commit_sha": "08c7eb14529eee26c866a6fb3c56a78e36ef01b6",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:56.651Z"
         },
         {
           "number": 4787,
@@ -1160,7 +1263,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43834042923"
-          ]
+          ],
+          "merge_commit_sha": "14e5e833bf756dbc050447154c5466912f218d97",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:56.962Z"
         },
         {
           "number": 4788,
@@ -1205,7 +1312,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43834484507"
-          ]
+          ],
+          "merge_commit_sha": "6e8d893ff88ec52282836ca8b6d214fb094b76bb",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:34:57.949Z"
         },
         {
           "number": 4789,
@@ -1250,7 +1361,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43835732537"
-          ]
+          ],
+          "merge_commit_sha": "6f245321b6276a521b9e5fac2f1050d028be9718",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:57.967Z"
         },
         {
           "number": 4790,
@@ -1295,7 +1410,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43836054403"
-          ]
+          ],
+          "merge_commit_sha": "e978d963967179e5c28847d56981d219a243330c",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:57.938Z"
         },
         {
           "number": 4791,
@@ -1340,7 +1459,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43836963378"
-          ]
+          ],
+          "merge_commit_sha": "a8ae28f3f3d5c02c7bca44fe096d8c324bf4be29",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:58.248Z"
         },
         {
           "number": 4792,
@@ -1385,7 +1508,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43838198205"
-          ]
+          ],
+          "merge_commit_sha": "d5ce32073e3204938b1ad3af1e0dd3ba6c3fea1b",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:59.170Z"
         },
         {
           "number": 4793,
@@ -1430,7 +1557,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43838901589"
-          ]
+          ],
+          "merge_commit_sha": "20ee00b19f61720ceabc2509060c6e24cdc8d6ff",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:59.175Z"
         },
         {
           "number": 4794,
@@ -1475,7 +1606,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43839379263"
-          ]
+          ],
+          "merge_commit_sha": "660893ded7f378f9f60170531276a5f2f9eec895",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:59.152Z"
         },
         {
           "number": 4795,
@@ -1520,7 +1655,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43840031999"
-          ]
+          ],
+          "merge_commit_sha": "dd4af303b54841d42ca51b6e43b4f13143b89410",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:34:59.341Z"
         },
         {
           "number": 4796,
@@ -1565,16 +1704,20 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/unstructured/actions/runs/43843777142"
-          ]
+          ],
+          "merge_commit_sha": "21e6cd546ce13ffc87f02fabf671f7e6b8b30f0a",
+          "draft": false,
+          "maintainer_can_modify": false,
+          "verified_at": "2026-11-17T06:35:00.404Z"
         }
       ],
       "counts": {
         "submitted": 20,
-        "open": 20,
-        "merged": 0,
+        "open": 18,
+        "merged": 2,
         "closed_unmerged": 0,
         "draft_open": 0,
-        "ready_open": 20,
+        "ready_open": 18,
         "effective": 20
       },
       "remaining_to_20": 0
@@ -1602,7 +1745,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "98f562e90e7433713745bee88a75397f1bff13a3",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:00.063Z"
         },
         {
           "number": 489,
@@ -1624,7 +1771,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "d3fcbc79d77b1d880b948412d9cc3e1394cbb93d",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:00.149Z"
         },
         {
           "number": 490,
@@ -1646,7 +1797,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "88527b0a9eabc9fcaecf80b520c25e25a8f05c33",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:00.233Z"
         },
         {
           "number": 491,
@@ -1668,7 +1823,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "07d982a835a12fe5b377f70b9ce15f8d3478cf02",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:01.104Z"
         },
         {
           "number": 496,
@@ -1693,7 +1852,11 @@
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43816125889",
             "https://github.com/Afloat16/claude-seo/actions/runs/43816741801"
-          ]
+          ],
+          "merge_commit_sha": "9cb61b690364dc8e2667a47a08d41d6f17cd0d4d",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:01.428Z"
         },
         {
           "number": 497,
@@ -1718,7 +1881,11 @@
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43816125889",
             "https://github.com/Afloat16/claude-seo/actions/runs/43816741801"
-          ]
+          ],
+          "merge_commit_sha": "685d7aff329dae67f230a7a06a26cda6f7243ffe",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:01.244Z"
         },
         {
           "number": 498,
@@ -1740,7 +1907,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "c878dd75ce52431c772c99a2ca4ab4f171134797",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:01.149Z"
         },
         {
           "number": 499,
@@ -1762,7 +1933,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "eaf3f4f08653bc06807f6673684815ee78157b32",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:02.190Z"
         },
         {
           "number": 502,
@@ -1784,7 +1959,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "5fcf323f13e29aeb9d413332be4e635bc758500f",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:02.376Z"
         },
         {
           "number": 503,
@@ -1806,7 +1985,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "43ce8d517ee4e1661be2c454d930a6cf7c45116a",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:02.202Z"
         },
         {
           "number": 504,
@@ -1828,7 +2011,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "83e25d220198099a3afc7c000fcc570c696a38b4",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:02.098Z"
         },
         {
           "number": 505,
@@ -1850,7 +2037,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "146d4721cc2561de96fc43c04f1adba08ac69978",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.169Z"
         },
         {
           "number": 506,
@@ -1872,7 +2063,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "1d6db31bba956ff9c8537729152381ec6e45c250",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.170Z"
         },
         {
           "number": 507,
@@ -1894,7 +2089,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "089e1cef4b2e5771790d5c35a995ec9c4ce4eb01",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.165Z"
         },
         {
           "number": 508,
@@ -1916,7 +2115,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "c2735ef3c1bf5a1eb20913809388aed34b6cf225",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.110Z"
         },
         {
           "number": 509,
@@ -1938,7 +2141,11 @@
               "conclusion": "success"
             }
           ],
-          "validation_links": []
+          "validation_links": [],
+          "merge_commit_sha": "3575a517a9cbead4568e510425ee6351638dcd0c",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.950Z"
         },
         {
           "number": 510,
@@ -1962,7 +2169,11 @@
           ],
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43823686345"
-          ]
+          ],
+          "merge_commit_sha": "3027b4abbb6ebed2504153ea547a23ccf6c0d390",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.966Z"
         },
         {
           "number": 511,
@@ -1987,7 +2198,11 @@
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43824699459",
             "https://github.com/Afloat16/claude-seo/actions/runs/43826132849"
-          ]
+          ],
+          "merge_commit_sha": "7322270e2675198f833838ff9af4047edffad08d",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.887Z"
         },
         {
           "number": 512,
@@ -2012,7 +2227,11 @@
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43824699459",
             "https://github.com/Afloat16/claude-seo/actions/runs/43826132849"
-          ]
+          ],
+          "merge_commit_sha": "bfcc3303a47fe582fcf8a6d5aba2f830f191f568",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:03.870Z"
         },
         {
           "number": 513,
@@ -2037,7 +2256,11 @@
           "validation_links": [
             "https://github.com/Afloat16/claude-seo/actions/runs/43824699459",
             "https://github.com/Afloat16/claude-seo/actions/runs/43826132849"
-          ]
+          ],
+          "merge_commit_sha": "3b2738532ad708521e4fa42feffbebd2bc445c67",
+          "draft": false,
+          "maintainer_can_modify": true,
+          "verified_at": "2026-11-17T06:35:04.648Z"
         }
       ],
       "counts": {
@@ -2071,7 +2294,12 @@
               "status": "completed",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "231f9d2928d4a27d680c7e6bd1fb30247cbccf6c",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:04.831Z"
         },
         {
           "number": 442,
@@ -2094,7 +2322,12 @@
               "workflow_id": 126392280,
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43885950856"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "15a4b14a59f20b4b1d592f9a788377c39a1c7b7e",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:04.812Z"
         },
         {
           "number": 443,
@@ -2117,7 +2350,12 @@
               "workflow_id": 126392280,
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43887290597"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "6d4bdca8dc2a6e054704cd8b38a98a74e6d42d9f",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:04.797Z"
         },
         {
           "number": 444,
@@ -2148,7 +2386,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43906171331"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "21fa9f28d64d7f3be8150ec2543ae75a9caba729",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:05.960Z"
         },
         {
           "number": 445,
@@ -2171,7 +2414,12 @@
               "workflow_id": 126392280,
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43890952649"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "98931a52ed2fee6e40fad08610f3ee55a1b113f8",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:05.500Z"
         },
         {
           "number": 446,
@@ -2194,7 +2442,12 @@
               "workflow_id": 126392280,
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43892178969"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "364f38fd9df200a3085622c733af22349d33cf53",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:05.543Z"
         },
         {
           "number": 447,
@@ -2213,7 +2466,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43893586662"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "743694e3b4a1cd9b4a7377855c2b8cd5666f3ded",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:05.447Z"
         },
         {
           "number": 448,
@@ -2231,7 +2489,12 @@
               "status": "completed",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "fe0a68540fe967232817065ce54badafd1cb6903",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:06.568Z"
         },
         {
           "number": 449,
@@ -2249,7 +2512,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43898144324"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "9a8e04194b152dab69d7dcd4e657be720228df11",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:06.655Z"
         },
         {
           "number": 450,
@@ -2267,7 +2535,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43900137992"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "e14e6fb0737ea8aae5fb7044e84c877956150cac",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:06.666Z"
         },
         {
           "number": 451,
@@ -2285,7 +2558,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43900612676"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "1c9e4468144f7b2a0561ef8d2a5267994546ec19",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:06.811Z"
         },
         {
           "number": 452,
@@ -2303,7 +2581,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43902277999"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "230fd67671b8addee7dbdfe6c9c653ac308a6396",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:07.514Z"
         },
         {
           "number": 453,
@@ -2321,7 +2604,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43904380333"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "635fde8312552bfc0aee5a996021d0d6dbc93ec3",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:07.472Z"
         },
         {
           "number": 454,
@@ -2339,7 +2627,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43906041461"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "9ea93ce26255eb218038560bd957699b3b0c10dd",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:07.415Z"
         },
         {
           "number": 455,
@@ -2362,7 +2655,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43907300103"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "84e586e013f117063bba16079634b378f50cbd30",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:07.512Z"
         },
         {
           "number": 456,
@@ -2385,7 +2683,12 @@
               "conclusion": "success",
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43909383365"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "5f245f9bd5f327987bbb04853dce3ed90087a8ea",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.339Z"
         },
         {
           "number": 457,
@@ -2404,7 +2707,12 @@
               "status": "completed",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "69fa9f05bd3187dd3a72c23725b89e598941f7b3",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.290Z"
         },
         {
           "number": 458,
@@ -2423,7 +2731,12 @@
               "status": "completed",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "a3b01523264c148563a527cf88e0c295bcc0ad7b",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.180Z"
         },
         {
           "number": 459,
@@ -2440,7 +2753,12 @@
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43919078569",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "d408d67206c040d3ff17aadfd9255601e02feca8",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.181Z"
         },
         {
           "number": 460,
@@ -2457,7 +2775,12 @@
               "url": "https://github.com/Eigenwise/atomic-agents/actions/runs/43920427169",
               "conclusion": "success"
             }
-          ]
+          ],
+          "merged_at": null,
+          "merge_commit_sha": "00d98947ad17f28176f564c0363ac289e3917ed3",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.998Z"
         }
       ],
       "counts": {
@@ -2504,7 +2827,12 @@
             "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43929236020",
             "conclusion": "success",
             "job_id": 133516894203
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "39a1ecdcf8280b8c77648bb45dd2ddc08876abda",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:09.033Z"
         },
         {
           "number": 250,
@@ -2529,7 +2857,12 @@
             "run_id": 43933338039,
             "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43933338039",
             "conclusion": "success"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "281c4c71816d077b942f2cb611c7e4526a9ec7e8",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.943Z"
         },
         {
           "number": 251,
@@ -2560,7 +2893,12 @@
             "run": 43937652709,
             "status": "completed",
             "conclusion": "success"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "1a02278404d61c1a416e7bb0c842d1f6594e9f54",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:08.829Z"
         },
         {
           "number": 252,
@@ -2590,7 +2928,12 @@
             "conclusion": "success",
             "job": 133564969010,
             "head": "e4177591e033fd7363ddbe9544b682df8530f153"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "af76ceba2f2a913a2e2d7a880b740984bfb26389",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:09.663Z"
         },
         {
           "number": 253,
@@ -2621,7 +2964,12 @@
             "conclusion": "success",
             "head_sha": "80219f28ef6ebc2a3e9d8533b4e413af03f52473",
             "url": "https://github.com/Edge0-AI/Edge0/actions/runs/43943398103"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "df044dd223044bca9d7e787a1ace09be0c5f84b9",
+          "closed_at": null,
+          "draft": false,
+          "verified_at": "2026-11-17T06:35:09.656Z"
         },
         {
           "number": 254,
@@ -2643,7 +2991,11 @@
             "device_skipped": 3,
             "l2_passed": 2,
             "log": "audit/edge0_pr254_official_macos.log.gz"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "ad9d63fa34b5803e99362fb21207da660cc3f097",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:09.511Z"
         },
         {
           "number": 255,
@@ -2679,7 +3031,11 @@
             "device_skipped": 3,
             "l2_passed": 2,
             "log": "audit/edge0_pr255_official_macos.log.gz"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "1fdbaea6cf651489b9f5cca719e8f86e1ad3eee6",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:09.461Z"
         },
         {
           "number": 256,
@@ -2717,7 +3073,11 @@
             "device_skipped": 3,
             "l2_strata_passed": 2,
             "log": "audit/edge0_pr256_official_macos.log.gz"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "1f677bf5a2ee69c34123e07b8e50f14a60385f92",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:10.137Z"
         },
         {
           "number": 257,
@@ -2755,7 +3115,11 @@
             "device_skipped": 3,
             "l2_strata_passed": 2,
             "log": "validation-evidence/edge0-pr257-official-macos.log"
-          }
+          },
+          "merged_at": null,
+          "merge_commit_sha": "d5a02c11f31ecd63cafea748d21e6f966ce5025d",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:10.175Z"
         }
       ],
       "counts": {
@@ -2790,25 +3154,25 @@
           "maintainer_can_modify": false,
           "official_ci": [
             {
-              "id": 43973824185,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824185",
-              "name": "CI",
-              "status": "completed",
-              "conclusion": "success"
-            },
-            {
               "id": 43973824170,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824170",
               "name": "Native ODS integration",
               "status": "completed",
-              "conclusion": "success"
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824170"
             },
             {
               "id": 43973824279,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279",
               "name": "Windows",
               "status": "completed",
-              "conclusion": "success"
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279"
+            },
+            {
+              "id": 43973824185,
+              "name": "CI",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824185"
             }
           ],
           "validation_local": {
@@ -2831,7 +3195,18 @@
               "distinct_resolver_blobs": 1
             }
           },
-          "created_at": "2026-11-16T22:50:15Z"
+          "created_at": "2026-11-16T22:50:15Z",
+          "merged_at": null,
+          "merge_commit_sha": "9e8d17763cddd6c5cb2eb640cd6c4bbfee69b02b",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:09.665Z",
+          "review_checked_at": "2026-11-17T06:35:28.344Z",
+          "review_followup": {
+            "source": "Greptile automated review",
+            "comment_id": 4592794824,
+            "status": "test_revision_in_preparation",
+            "request": "Verify empty-config fallback with isolated home inside nested Git folder and outside Git."
+          }
         },
         {
           "number": 6231,
@@ -2844,37 +3219,25 @@
           "maintainer_can_modify": false,
           "official_ci": [
             {
-              "id": 43977034876,
-              "name": "Native ODS integration",
-              "status": "completed",
-              "conclusion": "success",
-              "run_number": 60,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034876/logs",
-              "workflow_id": 392578694,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
-            },
-            {
-              "id": 43977034970,
-              "name": "CI",
-              "status": "in_progress",
-              "conclusion": null,
-              "run_number": 8097,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034970/logs",
-              "workflow_id": 285261453,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
-            },
-            {
               "id": 43977034891,
               "name": "Windows",
               "status": "completed",
               "conclusion": "success",
-              "run_number": 8117,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43977034891/logs",
-              "workflow_id": 268562650,
               "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
+            },
+            {
+              "id": 43977034970,
+              "name": "CI",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
+            },
+            {
+              "id": 43977034876,
+              "name": "Native ODS integration",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
             }
           ],
           "validation_local": {
@@ -2905,7 +3268,18 @@
               "exact_equivalent_found": false
             }
           },
-          "created_at": "2026-11-16T23:11:07Z"
+          "created_at": "2026-11-16T23:11:07Z",
+          "merged_at": null,
+          "merge_commit_sha": "98afe411236cc3b5d48679d66c1d50272ae6287d",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:09.665Z",
+          "review_checked_at": "2026-11-17T06:35:28.344Z",
+          "review_followup": {
+            "source": "Greptile automated review",
+            "comment_id": 4593001099,
+            "status": "test_revision_in_preparation",
+            "request": "Independently parse original/installed/removed YAML and compare exact filename arrays."
+          }
         },
         {
           "number": 6232,
@@ -2918,37 +3292,25 @@
           "maintainer_can_modify": false,
           "official_ci": [
             {
+              "id": 43979129450,
+              "name": "CI",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450"
+            },
+            {
               "id": 43979130020,
               "name": "Native ODS integration",
               "status": "completed",
               "conclusion": "success",
-              "run_number": 61,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979130020/logs",
-              "workflow_id": 392578694,
               "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979130020"
             },
             {
               "id": 43979129460,
               "name": "Windows",
-              "status": "in_progress",
-              "conclusion": null,
-              "run_number": 8118,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129460/logs",
-              "workflow_id": 268562650,
+              "status": "completed",
+              "conclusion": "success",
               "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129460"
-            },
-            {
-              "id": 43979129450,
-              "name": "CI",
-              "status": "in_progress",
-              "conclusion": null,
-              "run_number": 8098,
-              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/jobs",
-              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/43979129450/logs",
-              "workflow_id": 285261453,
-              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450"
             }
           ],
           "validation_local": {
@@ -3015,7 +3377,37 @@
               ]
             }
           },
-          "created_at": "2026-11-16T23:25:14Z"
+          "created_at": "2026-11-16T23:25:14Z",
+          "merged_at": null,
+          "merge_commit_sha": "8b00e1351a708e92f7186fed7c4462f50af5fe21",
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:35:10.177Z",
+          "review_checked_at": "2026-11-17T06:35:28.344Z",
+          "official_validation": {
+            "repository": "thedotmack/claude-mem",
+            "pr": 6232,
+            "head": "e2e64128e8eeeb8145a36ddb1de927f95713e536",
+            "run_id": 43979129450,
+            "job_id": 133690714347,
+            "job_url": "https://github.com/thedotmack/claude-mem/actions/runs/43979129450/job/133690714347",
+            "conclusion": "success",
+            "retrieved_at": "2026-11-17T06:39:35.018Z",
+            "archive_path": "validation-evidence/claude-mem-6232-official-job-133690714347.log.gz",
+            "raw_sha256": "4ac3c73a675f731fb89dea33c0162defb8badc0f7ee97c143dc79e1a15c11949",
+            "gzip_sha256": "552186b04e4fe63180187018949e2e668539c5f218d3cc8e32a2d10238db1047",
+            "raw_bytes": 2970706,
+            "gzip_bytes": 655427,
+            "observed": {
+              "typecheck": "root/viewer success",
+              "build": "All build targets compiled successfully",
+              "new_http_scenarios": {
+                "passed": 14,
+                "failed": 0
+              },
+              "integration_lane_reported_tests": 1107
+            },
+            "provenance": "Full original GitHub Actions job log obtained through job_logs, gzip round trip byte equality verified. This is not the lost local before/after log."
+          }
         }
       ],
       "counts": {
@@ -3030,14 +3422,14 @@
       "remaining_to_20": 17
     }
   ],
-  "verification_scope": "Refreshed claude-mem #6232 state, exact head, all seven file SHAs, maintainer permissions and workflow attachment; refreshed #6231 workflows (Windows and Native ODS success, CI running). Other PR states retain their previously verified snapshots.",
+  "verification_scope": "All 93 task PRs refreshed via exact GitHub REST pull endpoints on 2026-11-17, including merged_at/merge SHA. All three claude-mem PRs have successful CI, Windows and Native ODS workflows at their recorded heads. Review/comments fetched for all three; nonblocking automated test-coverage suggestions on #6230/#6231 are pending test-only follow-up. Mintlify preview for #6230 still requires a maintainer's approval.",
   "counts": {
     "submitted": 93,
-    "open": 72,
-    "merged": 12,
+    "open": 70,
+    "merged": 14,
     "closed_unmerged": 9,
     "draft_open": 0,
-    "ready_open": 72,
+    "ready_open": 70,
     "effective": 84
   }
 }
