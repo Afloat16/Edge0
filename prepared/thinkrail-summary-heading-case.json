@@ -1,0 +1,124 @@
+{
+  "repository": "JetBrains/thinkrail",
+  "kind": "plan_summary_heading_case",
+  "status": "prepared_blocked_checks",
+  "upstream_pr": null,
+  "base_sha": "10319b4ad8fc5f75dafd730d84b4a8a9e83f9959",
+  "head_sha": "8d533628a188796aec7e4613da5b19ab122ebe8a",
+  "tree_sha": "e88acc749017bfc2d77ccacc1d7da513bac242e2",
+  "branch": "fix/plan-summary-heading-case-20261117",
+  "title": "fix(assist): preserve summary bodies under mixed-case headings",
+  "body": "## Problem\n\nThe plan-summary parser recognizes section headings without regard to case, but retrieves their bodies with a case-sensitive comparison. An otherwise usable completion headed `## summary`, `## CHANGES`, or `## TeStInG` can therefore lose its summary and test evidence and be replaced by placeholder text.\n\n## Approach\n\nUse the same case-insensitive matching when finding each recognized section body. Keep the exact-heading ordered fast path, so already canonical output remains unchanged and noncanonical headings are normalized.\n\n## Changes\n\n- Preserve section bodies through one case-insensitive lookup.\n- Cover mixed case, reordered sections with one missing section, and the existing first-recognized-section behavior when a heading repeats.\n- Clarify heading matching in the assist spec.\n\n### Validation\n\nNative Bun 1.4.4 with the server's isolated-home preload: **6 passed / 3 failed** before the fix; **9 passed / 0 failed** after it (33 assertions). Full repository lint passes (2,524 files), server typecheck passes, the public-spec check passes, and `git diff --check` passes.\n\n**Required full gates remain incomplete; this is a prepared proposal.** The same base's full typecheck is blocked by the paired Hutch download (DNS `EAI_AGAIN`), and Chromium installation fails with an invalid downloaded archive. Full unit testing with the separate speech fix finished with 24/26 tasks successful; two package-directory failures were independently reproduced on the clean base in this workspace, and one full-suite watcher-latency failure remains unresolved. Those results are not presented as a passing full-suite run for this branch.\n\n## Screenshots\n\nNot applicable — no frontend changes.\n\n## Checklist\n\n- [ ] Fast gates pass: `bun run lint`, `bun run typecheck`, `bun run test`\n- [ ] E2E suite passes for app-affecting changes (`bun run e2e`, or `bun run e2e:full` when touching agent behavior)\n- [x] Before/after screenshots are included for frontend changes, or marked not applicable\n- [x] Relevant `SPEC.md` / top-level specs updated to reflect any boundary, contract, or behavior change\n- [x] I have read the [Contributing guide](../CONTRIBUTING.md) and agree to the [Code of Conduct](../CODE_OF_CONDUCT.md)\n",
+  "prefilled_url": "https://github.com/JetBrains/thinkrail/compare/main...Afloat16:fix/plan-summary-heading-case-20261117?expand=1&title=fix(assist)%3A%20preserve%20summary%20bodies%20under%20mixed-case%20headings&body=%23%23%20Problem%0A%0AThe%20plan-summary%20parser%20recognizes%20section%20headings%20without%20regard%20to%20case%2C%20but%20retrieves%20their%20bodies%20with%20a%20case-sensitive%20comparison.%20An%20otherwise%20usable%20completion%20headed%20%60%23%23%20summary%60%2C%20%60%23%23%20CHANGES%60%2C%20or%20%60%23%23%20TeStInG%60%20can%20therefore%20lose%20its%20summary%20and%20test%20evidence%20and%20be%20replaced%20by%20placeholder%20text.%0A%0A%23%23%20Approach%0A%0AUse%20the%20same%20case-insensitive%20matching%20when%20finding%20each%20recognized%20section%20body.%20Keep%20the%20exact-heading%20ordered%20fast%20path%2C%20so%20already%20canonical%20output%20remains%20unchanged%20and%20noncanonical%20headings%20are%20normalized.%0A%0A%23%23%20Changes%0A%0A-%20Preserve%20section%20bodies%20through%20one%20case-insensitive%20lookup.%0A-%20Cover%20mixed%20case%2C%20reordered%20sections%20with%20one%20missing%20section%2C%20and%20the%20existing%20first-recognized-section%20behavior%20when%20a%20heading%20repeats.%0A-%20Clarify%20heading%20matching%20in%20the%20assist%20spec.%0A%0A%23%23%23%20Validation%0A%0ANative%20Bun%201.4.4%20with%20the%20server's%20isolated-home%20preload%3A%20**6%20passed%20%2F%203%20failed**%20before%20the%20fix%3B%20**9%20passed%20%2F%200%20failed**%20after%20it%20(33%20assertions).%20Full%20repository%20lint%20passes%20(2%2C524%20files)%2C%20server%20typecheck%20passes%2C%20the%20public-spec%20check%20passes%2C%20and%20%60git%20diff%20--check%60%20passes.%0A%0A**Required%20full%20gates%20remain%20incomplete%3B%20this%20is%20a%20prepared%20proposal.**%20The%20same%20base's%20full%20typecheck%20is%20blocked%20by%20the%20paired%20Hutch%20download%20(DNS%20%60EAI_AGAIN%60)%2C%20and%20Chromium%20installation%20fails%20with%20an%20invalid%20downloaded%20archive.%20Full%20unit%20testing%20with%20the%20separate%20speech%20fix%20finished%20with%2024%2F26%20tasks%20successful%3B%20two%20package-directory%20failures%20were%20independently%20reproduced%20on%20the%20clean%20base%20in%20this%20workspace%2C%20and%20one%20full-suite%20watcher-latency%20failure%20remains%20unresolved.%20Those%20results%20are%20not%20presented%20as%20a%20passing%20full-suite%20run%20for%20this%20branch.%0A%0A%23%23%20Screenshots%0A%0ANot%20applicable%20%E2%80%94%20no%20frontend%20changes.%0A%0A%23%23%20Checklist%0A%0A-%20%5B%20%5D%20Fast%20gates%20pass%3A%20%60bun%20run%20lint%60%2C%20%60bun%20run%20typecheck%60%2C%20%60bun%20run%20test%60%0A-%20%5B%20%5D%20E2E%20suite%20passes%20for%20app-affecting%20changes%20(%60bun%20run%20e2e%60%2C%20or%20%60bun%20run%20e2e%3Afull%60%20when%20touching%20agent%20behavior)%0A-%20%5Bx%5D%20Before%2Fafter%20screenshots%20are%20included%20for%20frontend%20changes%2C%20or%20marked%20not%20applicable%0A-%20%5Bx%5D%20Relevant%20%60SPEC.md%60%20%2F%20top-level%20specs%20updated%20to%20reflect%20any%20boundary%2C%20contract%2C%20or%20behavior%20change%0A-%20%5Bx%5D%20I%20have%20read%20the%20%5BContributing%20guide%5D(..%2FCONTRIBUTING.md)%20and%20agree%20to%20the%20%5BCode%20of%20Conduct%5D(..%2FCODE_OF_CONDUCT.md)%0A",
+  "count_as_submitted": false,
+  "count_as_ready": false,
+  "maintainer_can_modify": false,
+  "rules": {
+    "no_numeric_cap_found": true,
+    "no_issue_preapproval_found": true,
+    "mandatory_attribution_found": false,
+    "requires_pre_pr_gates": true,
+    "evidence": [
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/CONTRIBUTING.md",
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/AGENTS.md",
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/packages/pi-thinkrail-workflow/skills/shipping-a-pr/creating.md"
+    ]
+  },
+  "validation": {
+    "status": "blocked_checks",
+    "successful": [
+      "bun run check:deps",
+      "bun run check:boundaries",
+      "bun run check:seams",
+      "bun run check:spec-surface",
+      "bun run check:i18n",
+      "bun run check:compiler",
+      "bun run lint",
+      "cd packages/server && bun run typecheck"
+    ],
+    "root_typecheck": {
+      "command": "bun run typecheck --concurrency=2",
+      "exit_code": 1,
+      "successful_tasks": 23,
+      "total_tasks": 26,
+      "failed_task": "@thinkrail/desktop#typecheck",
+      "cause": "electrobun prepare could not acquire paired Hutch 0.28.2: EAI_AGAIN github.com and hutch.blackboard.sh"
+    },
+    "full_unit": {
+      "command": "bun run test --concurrency=2 --env-mode=loose",
+      "exit_code": 1,
+      "successful_tasks": 24,
+      "total_tasks": 26,
+      "server": {
+        "pass": 2860,
+        "skip": 7,
+        "fail": 3,
+        "assertions": 13490
+      },
+      "artifact_initial": {
+        "pass": 77,
+        "skip": 10,
+        "fail": 1,
+        "error": "sparse checkout omitted .github/actions/build-binary/action.yml"
+      },
+      "artifact_after_checkout": {
+        "pass": 103,
+        "skip": 10,
+        "fail": 0
+      },
+      "failure_analysis": [
+        {
+          "cases": [
+            "installing for the repository a folder the user already declares returns the one row and clears every key",
+            "switching off a repository's local package also covers a user declaration of the same folder"
+          ],
+          "control": "Both also fail on a clean unmodified checkout at 10319b4a with the same TMPDIR nested under the outer workspace Git repository. repositoryRoot manually walks .git directories; GIT_CEILING_DIRECTORIES would not apply."
+        },
+        {
+          "case": "deleting most of a large tree does not block the event loop",
+          "measured_max_lag_ms": 1027.1060830000206,
+          "limit_ms": 1000,
+          "control": "The isolated clean-baseline control passed. Failure in the full suite remains unresolved; no baseline-failure or full-green claim."
+        }
+      ]
+    },
+    "e2e": {
+      "command": "bun run e2e --shards=2",
+      "exit_code": 130,
+      "status": "interrupted_after_environment_blocker",
+      "web_build": "success",
+      "cause": "Playwright chromium_headless_shell-1228 executable absent",
+      "installation": {
+        "command": "PLAYWRIGHT_BROWSERS_PATH=<workspace browser directory> node node_modules/.bin/playwright install chromium --only-shell",
+        "exit_code": 1,
+        "cause": "Download reported 0 MiB; archive missing ZIP end-of-central-directory signature after the installer's automatic retries."
+      }
+    },
+    "fork_ci": {
+      "repository": "Afloat16/thinkrail",
+      "pr": 1,
+      "head": "664a0e3a5e81aabc91cbcabce17d0849a2bcdc39",
+      "observed_workflow_runs": [],
+      "note": "No run was observed. No inference that Actions are disabled; no settings or permissions changed."
+    }
+  },
+  "updated_at": "2026-11-17T07:44:58.289Z",
+  "local_tests": {
+    "before": "6 passed, 3 failed",
+    "after": "9 passed, 0 failed",
+    "assertions": 33
+  },
+  "dedupe": {
+    "upstream_pull_refs": 966,
+    "pre_task_fork_branches": 30,
+    "reachable_commits": 6504,
+    "source_blobs_considered": 28,
+    "relevant_blobs": 7,
+    "previously_equivalent": false
+  },
+  "peer_review": {
+    "reviewer": "/root/merged_inventory",
+    "scope": "read-only AGENTS, SPEC and production parser",
+    "verdict": "No blocking semantic issue; keep exact ordered fast path; regression should preserve first recognized duplicate section."
+  }
+}

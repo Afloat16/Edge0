@@ -1,1 +1,134 @@
-{"repository":"JetBrains/thinkrail","kind":"speech_download_short_write","status":"validating","upstream_pr":null,"base_sha":"10319b4ad8fc5f75dafd730d84b4a8a9e83f9959","head_sha":"664a0e3a5e81aabc91cbcabce17d0849a2bcdc39","tree_sha":"dd6db9488cf9694561cd83a3ea8ed1eb854b2e78","validation_branch":"validation/speech-short-write-20261117","validation_pr":"https://github.com/Afloat16/thinkrail/pull/1","local_tests":"6 pass/1 fail before; 7 pass/0 fail after, 21 assertions","native_reproduction":{"http_bytes":8192,"rlimit_fsize":4096,"before":{"returned":true,"destination":4096,"partial":null},"after":{"returned":false,"code":"EFBIG","destination":null,"partial":4096}},"pending":["existing fork full lint/typecheck/unit/no-agent e2e"],"count_as_submitted":false}
+{
+  "repository": "JetBrains/thinkrail",
+  "kind": "speech_download_short_write",
+  "status": "prepared_blocked_checks",
+  "upstream_pr": null,
+  "base_sha": "10319b4ad8fc5f75dafd730d84b4a8a9e83f9959",
+  "head_sha": "664a0e3a5e81aabc91cbcabce17d0849a2bcdc39",
+  "tree_sha": "dd6db9488cf9694561cd83a3ea8ed1eb854b2e78",
+  "branch": "fix/speech-download-short-writes-20261117",
+  "title": "fix(speech): complete short writes before verifying downloads",
+  "body": "## Problem\n\nA short disk write can publish a truncated speech runtime or model as verified. The downloader hashes and counts the received network chunk, but a single `FileHandle.write` need not write that whole chunk.\n\nA real loopback HTTP download of 8,192 bytes with a child-process file-size limit of 4,096 bytes currently returns success and renames a 4,096-byte destination.\n\n## Approach\n\nAwait `FileHandle.writeFile` for each chunk before advancing progress. A failed write leaves the partial file available for the existing range-resume path and never publishes the destination.\n\n## Changes\n\n- Replace the single-write call with a complete-buffer write.\n- Add a Linux regression that forces an actual short disk write, checks the saved prefix, and resumes through HTTP Range.\n- Document the complete-write invariant in the speech spec.\n\n### Validation\n\nBun 1.4.4 on Linux: the download suite changes from **6 passed / 1 failed** to **7 passed / 0 failed** (21 assertions). The separate native HTTP/OS-limit reproduction now reports `EFBIG`, leaves a 4,096-byte partial, and creates no destination.\n\nLint, server typecheck, dependency/boundary/seam/spec/i18n checks, compiler census, and the E2E web build passed.\n\n**Required full gates remain incomplete; this is a prepared proposal.** Full typecheck cannot download the paired Hutch runtime (DNS `EAI_AGAIN`). Full unit testing finished with 24/26 tasks successful: server 2,860 passed / 7 skipped / 3 failed; two package-directory failures reproduce on the clean baseline under this workspace's parent Git directory. The watcher-latency failure (1,027 ms against a 1,000 ms limit) did not reproduce in the isolated baseline control and remains unresolved. A separate artifact-test failure from sparse checkout was corrected by checking out the missing action; its full package then passed 103 tests with 10 platform skips. Browser E2E could not start Chromium, and normal Playwright installation failed with an invalid downloaded archive.\n\n## Screenshots\n\nNot applicable — no frontend changes.\n\n## Checklist\n\n- [ ] Fast gates pass: `bun run lint`, `bun run typecheck`, `bun run test`\n- [ ] E2E suite passes for app-affecting changes (`bun run e2e`, or `bun run e2e:full` when touching agent behavior)\n- [x] Before/after screenshots are included for frontend changes, or marked not applicable\n- [x] Relevant `SPEC.md` / top-level specs updated to reflect any boundary, contract, or behavior change\n- [x] I have read the [Contributing guide](../CONTRIBUTING.md) and agree to the [Code of Conduct](../CODE_OF_CONDUCT.md)\n",
+  "prefilled_url": "https://github.com/JetBrains/thinkrail/compare/main...Afloat16:fix/speech-download-short-writes-20261117?expand=1&title=fix(speech)%3A%20complete%20short%20writes%20before%20verifying%20downloads&body=%23%23%20Problem%0A%0AA%20short%20disk%20write%20can%20publish%20a%20truncated%20speech%20runtime%20or%20model%20as%20verified.%20The%20downloader%20hashes%20and%20counts%20the%20received%20network%20chunk%2C%20but%20a%20single%20%60FileHandle.write%60%20need%20not%20write%20that%20whole%20chunk.%0A%0AA%20real%20loopback%20HTTP%20download%20of%208%2C192%20bytes%20with%20a%20child-process%20file-size%20limit%20of%204%2C096%20bytes%20currently%20returns%20success%20and%20renames%20a%204%2C096-byte%20destination.%0A%0A%23%23%20Approach%0A%0AAwait%20%60FileHandle.writeFile%60%20for%20each%20chunk%20before%20advancing%20progress.%20A%20failed%20write%20leaves%20the%20partial%20file%20available%20for%20the%20existing%20range-resume%20path%20and%20never%20publishes%20the%20destination.%0A%0A%23%23%20Changes%0A%0A-%20Replace%20the%20single-write%20call%20with%20a%20complete-buffer%20write.%0A-%20Add%20a%20Linux%20regression%20that%20forces%20an%20actual%20short%20disk%20write%2C%20checks%20the%20saved%20prefix%2C%20and%20resumes%20through%20HTTP%20Range.%0A-%20Document%20the%20complete-write%20invariant%20in%20the%20speech%20spec.%0A%0A%23%23%23%20Validation%0A%0ABun%201.4.4%20on%20Linux%3A%20the%20download%20suite%20changes%20from%20**6%20passed%20%2F%201%20failed**%20to%20**7%20passed%20%2F%200%20failed**%20(21%20assertions).%20The%20separate%20native%20HTTP%2FOS-limit%20reproduction%20now%20reports%20%60EFBIG%60%2C%20leaves%20a%204%2C096-byte%20partial%2C%20and%20creates%20no%20destination.%0A%0ALint%2C%20server%20typecheck%2C%20dependency%2Fboundary%2Fseam%2Fspec%2Fi18n%20checks%2C%20compiler%20census%2C%20and%20the%20E2E%20web%20build%20passed.%0A%0A**Required%20full%20gates%20remain%20incomplete%3B%20this%20is%20a%20prepared%20proposal.**%20Full%20typecheck%20cannot%20download%20the%20paired%20Hutch%20runtime%20(DNS%20%60EAI_AGAIN%60).%20Full%20unit%20testing%20finished%20with%2024%2F26%20tasks%20successful%3A%20server%202%2C860%20passed%20%2F%207%20skipped%20%2F%203%20failed%3B%20two%20package-directory%20failures%20reproduce%20on%20the%20clean%20baseline%20under%20this%20workspace's%20parent%20Git%20directory.%20The%20watcher-latency%20failure%20(1%2C027%20ms%20against%20a%201%2C000%20ms%20limit)%20did%20not%20reproduce%20in%20the%20isolated%20baseline%20control%20and%20remains%20unresolved.%20A%20separate%20artifact-test%20failure%20from%20sparse%20checkout%20was%20corrected%20by%20checking%20out%20the%20missing%20action%3B%20its%20full%20package%20then%20passed%20103%20tests%20with%2010%20platform%20skips.%20Browser%20E2E%20could%20not%20start%20Chromium%2C%20and%20normal%20Playwright%20installation%20failed%20with%20an%20invalid%20downloaded%20archive.%0A%0A%23%23%20Screenshots%0A%0ANot%20applicable%20%E2%80%94%20no%20frontend%20changes.%0A%0A%23%23%20Checklist%0A%0A-%20%5B%20%5D%20Fast%20gates%20pass%3A%20%60bun%20run%20lint%60%2C%20%60bun%20run%20typecheck%60%2C%20%60bun%20run%20test%60%0A-%20%5B%20%5D%20E2E%20suite%20passes%20for%20app-affecting%20changes%20(%60bun%20run%20e2e%60%2C%20or%20%60bun%20run%20e2e%3Afull%60%20when%20touching%20agent%20behavior)%0A-%20%5Bx%5D%20Before%2Fafter%20screenshots%20are%20included%20for%20frontend%20changes%2C%20or%20marked%20not%20applicable%0A-%20%5Bx%5D%20Relevant%20%60SPEC.md%60%20%2F%20top-level%20specs%20updated%20to%20reflect%20any%20boundary%2C%20contract%2C%20or%20behavior%20change%0A-%20%5Bx%5D%20I%20have%20read%20the%20%5BContributing%20guide%5D(..%2FCONTRIBUTING.md)%20and%20agree%20to%20the%20%5BCode%20of%20Conduct%5D(..%2FCODE_OF_CONDUCT.md)%0A",
+  "count_as_submitted": false,
+  "count_as_ready": false,
+  "maintainer_can_modify": false,
+  "rules": {
+    "no_numeric_cap_found": true,
+    "no_issue_preapproval_found": true,
+    "mandatory_attribution_found": false,
+    "requires_pre_pr_gates": true,
+    "evidence": [
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/CONTRIBUTING.md",
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/AGENTS.md",
+      "https://github.com/JetBrains/thinkrail/blob/10319b4ad8fc5f75dafd730d84b4a8a9e83f9959/packages/pi-thinkrail-workflow/skills/shipping-a-pr/creating.md"
+    ]
+  },
+  "validation": {
+    "status": "blocked_checks",
+    "successful": [
+      "bun run check:deps",
+      "bun run check:boundaries",
+      "bun run check:seams",
+      "bun run check:spec-surface",
+      "bun run check:i18n",
+      "bun run check:compiler",
+      "bun run lint",
+      "cd packages/server && bun run typecheck"
+    ],
+    "root_typecheck": {
+      "command": "bun run typecheck --concurrency=2",
+      "exit_code": 1,
+      "successful_tasks": 23,
+      "total_tasks": 26,
+      "failed_task": "@thinkrail/desktop#typecheck",
+      "cause": "electrobun prepare could not acquire paired Hutch 0.28.2: EAI_AGAIN github.com and hutch.blackboard.sh"
+    },
+    "full_unit": {
+      "command": "bun run test --concurrency=2 --env-mode=loose",
+      "exit_code": 1,
+      "successful_tasks": 24,
+      "total_tasks": 26,
+      "server": {
+        "pass": 2860,
+        "skip": 7,
+        "fail": 3,
+        "assertions": 13490
+      },
+      "artifact_initial": {
+        "pass": 77,
+        "skip": 10,
+        "fail": 1,
+        "error": "sparse checkout omitted .github/actions/build-binary/action.yml"
+      },
+      "artifact_after_checkout": {
+        "pass": 103,
+        "skip": 10,
+        "fail": 0
+      },
+      "failure_analysis": [
+        {
+          "cases": [
+            "installing for the repository a folder the user already declares returns the one row and clears every key",
+            "switching off a repository's local package also covers a user declaration of the same folder"
+          ],
+          "control": "Both also fail on a clean unmodified checkout at 10319b4a with the same TMPDIR nested under the outer workspace Git repository. repositoryRoot manually walks .git directories; GIT_CEILING_DIRECTORIES would not apply."
+        },
+        {
+          "case": "deleting most of a large tree does not block the event loop",
+          "measured_max_lag_ms": 1027.1060830000206,
+          "limit_ms": 1000,
+          "control": "The isolated clean-baseline control passed. Failure in the full suite remains unresolved; no baseline-failure or full-green claim."
+        }
+      ]
+    },
+    "e2e": {
+      "command": "bun run e2e --shards=2",
+      "exit_code": 130,
+      "status": "interrupted_after_environment_blocker",
+      "web_build": "success",
+      "cause": "Playwright chromium_headless_shell-1228 executable absent",
+      "installation": {
+        "command": "PLAYWRIGHT_BROWSERS_PATH=<workspace browser directory> node node_modules/.bin/playwright install chromium --only-shell",
+        "exit_code": 1,
+        "cause": "Download reported 0 MiB; archive missing ZIP end-of-central-directory signature after the installer's automatic retries."
+      }
+    },
+    "fork_ci": {
+      "repository": "Afloat16/thinkrail",
+      "pr": 1,
+      "head": "664a0e3a5e81aabc91cbcabce17d0849a2bcdc39",
+      "observed_workflow_runs": [],
+      "note": "No run was observed. No inference that Actions are disabled; no settings or permissions changed."
+    }
+  },
+  "updated_at": "2026-11-17T07:44:58.289Z",
+  "local_tests": {
+    "before": "6 passed, 1 failed",
+    "after": "7 passed, 0 failed",
+    "assertions": 21
+  },
+  "native_reproduction": {
+    "http_bytes": 8192,
+    "rlimit_fsize": 4096,
+    "before": {
+      "returned": true,
+      "destination": 4096,
+      "partial": null
+    },
+    "after": {
+      "returned": false,
+      "code": "EFBIG",
+      "destination": null,
+      "partial": 4096
+    }
+  },
+  "dedupe": {
+    "upstream_pull_refs": 966,
+    "pre_task_fork_branches": 30,
+    "reachable_commits": 6504,
+    "source_blobs": 2,
+    "previously_equivalent": false
+  },
+  "validation_pr": "https://github.com/Afloat16/thinkrail/pull/1"
+}

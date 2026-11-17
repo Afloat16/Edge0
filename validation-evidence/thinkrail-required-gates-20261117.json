@@ -1,0 +1,78 @@
+{
+  "status": "blocked_checks",
+  "successful": [
+    "bun run check:deps",
+    "bun run check:boundaries",
+    "bun run check:seams",
+    "bun run check:spec-surface",
+    "bun run check:i18n",
+    "bun run check:compiler",
+    "bun run lint",
+    "cd packages/server && bun run typecheck"
+  ],
+  "root_typecheck": {
+    "command": "bun run typecheck --concurrency=2",
+    "exit_code": 1,
+    "successful_tasks": 23,
+    "total_tasks": 26,
+    "failed_task": "@thinkrail/desktop#typecheck",
+    "cause": "electrobun prepare could not acquire paired Hutch 0.28.2: EAI_AGAIN github.com and hutch.blackboard.sh"
+  },
+  "full_unit": {
+    "command": "bun run test --concurrency=2 --env-mode=loose",
+    "exit_code": 1,
+    "successful_tasks": 24,
+    "total_tasks": 26,
+    "server": {
+      "pass": 2860,
+      "skip": 7,
+      "fail": 3,
+      "assertions": 13490
+    },
+    "artifact_initial": {
+      "pass": 77,
+      "skip": 10,
+      "fail": 1,
+      "error": "sparse checkout omitted .github/actions/build-binary/action.yml"
+    },
+    "artifact_after_checkout": {
+      "pass": 103,
+      "skip": 10,
+      "fail": 0
+    },
+    "failure_analysis": [
+      {
+        "cases": [
+          "installing for the repository a folder the user already declares returns the one row and clears every key",
+          "switching off a repository's local package also covers a user declaration of the same folder"
+        ],
+        "control": "Both also fail on a clean unmodified checkout at 10319b4a with the same TMPDIR nested under the outer workspace Git repository. repositoryRoot manually walks .git directories; GIT_CEILING_DIRECTORIES would not apply."
+      },
+      {
+        "case": "deleting most of a large tree does not block the event loop",
+        "measured_max_lag_ms": 1027.1060830000206,
+        "limit_ms": 1000,
+        "control": "The isolated clean-baseline control passed. Failure in the full suite remains unresolved; no baseline-failure or full-green claim."
+      }
+    ]
+  },
+  "e2e": {
+    "command": "bun run e2e --shards=2",
+    "exit_code": 130,
+    "status": "interrupted_after_environment_blocker",
+    "web_build": "success",
+    "cause": "Playwright chromium_headless_shell-1228 executable absent",
+    "installation": {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=<workspace browser directory> node node_modules/.bin/playwright install chromium --only-shell",
+      "exit_code": 1,
+      "cause": "Download reported 0 MiB; archive missing ZIP end-of-central-directory signature after the installer's automatic retries."
+    }
+  },
+  "fork_ci": {
+    "repository": "Afloat16/thinkrail",
+    "pr": 1,
+    "head": "664a0e3a5e81aabc91cbcabce17d0849a2bcdc39",
+    "observed_workflow_runs": [],
+    "note": "No run was observed. No inference that Actions are disabled; no settings or permissions changed."
+  }
+}
