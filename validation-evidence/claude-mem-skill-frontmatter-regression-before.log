@@ -1,0 +1,21 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/utils/skill-docs-placement.test.ts:
+ 8 |   it('mem-search metadata can be read by a YAML parser', () => {
+ 9 |     const content = readFileSync(join(SKILLS_DIR, 'mem-search/SKILL.md'), 'utf-8');
+10 |     const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+11 |     expect(frontmatter).not.toBeNull();
+12 | 
+13 |     const metadata = Bun.YAML.parse(frontmatter![1]) as { name: string; description: string };
+                                   ^
+SyntaxError: YAML Parse error: Unexpected token
+      at <anonymous> (/workspace/scratch/4bed741d4966/claude-mem-audit-20261117/tests/utils/skill-docs-placement.test.ts:13:31)
+(fail) skill docs placement (#1651) > mem-search metadata can be read by a YAML parser [1.29ms]
+(pass) skill docs placement (#1651) > smart-explore/SKILL.md contains Language Support section [0.79ms]
+(pass) skill docs placement (#1651) > smart-explore/SKILL.md lists bundled languages [0.17ms]
+(pass) skill docs placement (#1651) > cloud-sync/SKILL.md requires the authenticated Hub probe for success [0.80ms]
+
+ 3 pass
+ 1 fail
+ 27 expect() calls
+Ran 4 tests across 1 file. [68.00ms]

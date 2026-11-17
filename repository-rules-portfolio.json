@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T06:48:04.917Z",
+  "updated": "2026-11-17T06:55:41.696Z",
   "repositories": [
     {
       "repository": "serengil/deepface",
@@ -3375,6 +3375,43 @@
                 }
               ]
             }
+          ],
+          "official_ci_findings": [
+            {
+              "job_id": 133869393753,
+              "run_id": 44033080221,
+              "job": "sync-hub worker (DO anti-pattern grep · vitest · WS suite)",
+              "conclusion": "failure",
+              "test": "test/sync-hub.test.ts:795 hands the lease to the next push when the client leaves between pages",
+              "expected": {
+                "error": "projection_client_disconnected",
+                "projectedSeq": "100"
+              },
+              "actual": {
+                "error": "projection_upstream_timeout",
+                "projectedSeq": "0"
+              },
+              "test_budget_ms": 100,
+              "passed": 148,
+              "failed": 1,
+              "scope_tree": "b2445f273b6ff889472fafc71e569dfdb3f14763",
+              "scope_tree_equal_to": [
+                "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+                "e62aa9c3f1235d88570ca89bdb3a2a523c6c2144"
+              ],
+              "peer_job_success": {
+                "head": "e62aa9c3f1235d88570ca89bdb3a2a523c6c2144",
+                "run_id": 44033072543,
+                "job_id": 133869369390
+              },
+              "classification": "Timing assertion failed in unchanged sync-hub source/test tree; not marked passed. No same-runner baseline replay performed.",
+              "rerun": {
+                "attempts": 1,
+                "result": "403 Resource not accessible by integration",
+                "further_attempts": false
+              },
+              "log_path": "validation-evidence/claude-mem-6231-sync-hub-failure-133869393753.log"
+            }
           ]
         },
         {
@@ -3504,14 +3541,86 @@
             },
             "provenance": "Full original GitHub Actions job log obtained through job_logs, gzip round trip byte equality verified. This is not the lost local before/after log."
           }
+        },
+        {
+          "number": 6276,
+          "url": "https://github.com/thedotmack/claude-mem/pull/6276",
+          "title": "fix(skills): keep mem-search frontmatter valid YAML",
+          "state": "open",
+          "merged": false,
+          "draft": true,
+          "head": "7b8d2eefbf8825c647a207aa7f417027ff044dd8",
+          "maintainer_can_modify": false,
+          "created_at": "2026-11-17T06:54:21Z",
+          "merged_at": null,
+          "closed_at": null,
+          "verified_at": "2026-11-17T06:55:41.696Z",
+          "validation_local": {
+            "runtime": "Bun 1.4.4",
+            "before": {
+              "pass": 3,
+              "fail": 1,
+              "error": "SyntaxError in native Bun.YAML.parse for existing mem-search description"
+            },
+            "after": {
+              "pass": 4,
+              "fail": 0
+            },
+            "scan": {
+              "skillFiles": 47,
+              "withFrontmatter": 44,
+              "baselineInvalid": 1,
+              "candidateInvalid": 0,
+              "threeOpenClawFilesWithoutFrontmatter": "excluded from parser count"
+            },
+            "textPreservation": {
+              "description": true,
+              "body": true
+            },
+            "typecheck": "pending",
+            "build": "pending"
+          },
+          "dedupe": {
+            "upstreamPrHeads": 3491,
+            "ownForkHeads": 491,
+            "reachableCommits": 16302,
+            "fullHistoryPerParentRecords": 311,
+            "sourceBlobs": 49,
+            "priorEquivalent": false
+          },
+          "official_ci": [
+            {
+              "id": 44034667716,
+              "name": "CI",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 8163,
+              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44034667716/jobs",
+              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44034667716/logs",
+              "workflow_id": 285261453,
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/44034667716"
+            },
+            {
+              "id": 44034667728,
+              "name": "Windows",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_number": 8183,
+              "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44034667728/jobs",
+              "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44034667728/logs",
+              "workflow_id": 268562650,
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/44034667728"
+            }
+          ],
+          "status": "draft_waiting_official_checks"
         }
       ],
       "counts": {
-        "submitted": 3,
-        "open": 3,
+        "submitted": 4,
+        "open": 4,
         "merged": 0,
         "closed_unmerged": 0,
-        "draft_open": 0,
+        "draft_open": 1,
         "ready_open": 3,
         "effective": 3
       },
@@ -3520,11 +3629,11 @@
   ],
   "verification_scope": "All 93 task PRs refreshed via exact GitHub REST pull endpoints on 2026-11-17, including merged_at/merge SHA. All three claude-mem PRs have successful CI, Windows and Native ODS workflows at their recorded heads. Review/comments fetched for all three; nonblocking automated test-coverage suggestions on #6230/#6231 are pending test-only follow-up. Mintlify preview for #6230 still requires a maintainer's approval.",
   "counts": {
-    "submitted": 93,
-    "open": 70,
+    "submitted": 94,
+    "open": 71,
     "merged": 14,
     "closed_unmerged": 9,
-    "draft_open": 0,
+    "draft_open": 1,
     "ready_open": 70,
     "effective": 84
   }

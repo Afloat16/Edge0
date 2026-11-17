@@ -1,0 +1,28 @@
+{
+  "files": 47,
+  "before": {
+    "valid": 43,
+    "invalid": [
+      {
+        "path": "plugin/skills/mem-search/SKILL.md",
+        "error": "SyntaxError: YAML Parse error: Unexpected token"
+      }
+    ],
+    "noFrontmatter": [
+      "openclaw/SKILL.md",
+      "openclaw/skills/do/SKILL.md",
+      "openclaw/skills/make-plan/SKILL.md"
+    ]
+  },
+  "after": {
+    "valid": 44,
+    "invalid": [],
+    "noFrontmatter": [
+      "openclaw/SKILL.md",
+      "openclaw/skills/do/SKILL.md",
+      "openclaw/skills/make-plan/SKILL.md"
+    ]
+  },
+  "descriptionByteForByteEqual": true,
+  "bodyByteForByteEqual": true
+}

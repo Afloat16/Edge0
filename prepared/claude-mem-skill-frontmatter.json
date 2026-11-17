@@ -1,0 +1,69 @@
+{
+  "repository": "thedotmack/claude-mem",
+  "head": "7b8d2eefbf8825c647a207aa7f417027ff044dd8",
+  "branch": "fix/mem-search-frontmatter-20261117",
+  "base": "82d3602e2e43503ffd39c180b2af5f7521fc457b",
+  "tree": "e8f85781987bcc4ecd98555d480f0b29f4f5e2c4",
+  "files": [
+    {
+      "path": "plugin/skills/mem-search/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "23a57e9dc572f08d24557464bde0fe25c3023972"
+    },
+    {
+      "path": "tests/utils/skill-docs-placement.test.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a46a8a5547c3a863626d5d6a4ef184e3ca838b9"
+    }
+  ],
+  "updated": "2026-11-17T06:54:00.765Z",
+  "status": "draft_waiting_official_checks",
+  "issue": "https://github.com/thedotmack/claude-mem/issues/6267",
+  "validation": {
+    "runtime": "Bun 1.4.4",
+    "before": {
+      "pass": 3,
+      "fail": 1,
+      "error": "SyntaxError in native Bun.YAML.parse for existing mem-search description"
+    },
+    "after": {
+      "pass": 4,
+      "fail": 0
+    },
+    "scan": {
+      "skillFiles": 47,
+      "withFrontmatter": 44,
+      "baselineInvalid": 1,
+      "candidateInvalid": 0,
+      "threeOpenClawFilesWithoutFrontmatter": "excluded from parser count"
+    },
+    "textPreservation": {
+      "description": true,
+      "body": true
+    },
+    "typecheck": "pending",
+    "build": "pending"
+  },
+  "dedupe": {
+    "upstreamPrHeads": 3491,
+    "ownForkHeads": 491,
+    "reachableCommits": 16302,
+    "fullHistoryPerParentRecords": 311,
+    "sourceBlobs": 49,
+    "priorEquivalent": false
+  },
+  "forkValidation": {
+    "pr": 4,
+    "url": "https://github.com/Afloat16/claude-mem/pull/4",
+    "status": "no workflow run created; no settings or permissions changed"
+  },
+  "upstream": {
+    "number": 6276,
+    "url": "https://github.com/thedotmack/claude-mem/pull/6276",
+    "state": "open",
+    "draft": true
+  },
+  "body": "Closes #6267.\n\nThe `mem-search` description contains `three steps: search` in a plain YAML scalar. A strict YAML reader rejects the frontmatter, so it cannot read the search skill's metadata.\n\nUse a folded scalar for the description and exercise the actual YAML parser in the existing skill documentation test. The decoded description and the rest of the skill are byte-for-byte unchanged.\n\n### Validation\n\n- Bun 1.4.4: `bun test tests/utils/skill-docs-placement.test.ts` reports 3 passing / 1 failing on the original metadata and 4 passing / 0 failing with this change.\n- Parsed all 44 frontmatter blocks among the repository's 47 skill files: this was the only invalid block; all 44 parse after the change. The three OpenClaw files without frontmatter were excluded from that parser check.\n- Verified that the decoded description and the complete Markdown body remain unchanged.\n- Root TypeScript checks and the complete bundle build are awaiting the existing CI workflows; this remains a draft until they finish."
+}

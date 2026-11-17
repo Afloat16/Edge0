@@ -1,0 +1,12 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/utils/skill-docs-placement.test.ts:
+(pass) skill docs placement (#1651) > mem-search metadata can be read by a YAML parser [3.98ms]
+(pass) skill docs placement (#1651) > smart-explore/SKILL.md contains Language Support section [0.35ms]
+(pass) skill docs placement (#1651) > smart-explore/SKILL.md lists bundled languages [0.16ms]
+(pass) skill docs placement (#1651) > cloud-sync/SKILL.md requires the authenticated Hub probe for success [0.20ms]
+
+ 4 pass
+ 0 fail
+ 30 expect() calls
+Ran 4 tests across 1 file. [159.00ms]
