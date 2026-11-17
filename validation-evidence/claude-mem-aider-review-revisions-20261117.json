@@ -1,0 +1,267 @@
+{
+  "updated": "2026-11-17T06:48:04.917Z",
+  "revisions": [
+    {
+      "pr": 6230,
+      "branch": "fix/aider-config-precedence-20261116",
+      "parent": "f7acbbd1b03819237c745103a5abf0350586aa8f",
+      "head": "e62aa9c3f1235d88570ca89bdb3a2a523c6c2144",
+      "tree": "4ddd8858c172b5b00ddf30c809d781285c0d5b5d",
+      "path": "tests/integrations/aider-config-fallback.test.ts",
+      "blob": "0827694a7594246206c9d46b1a6fe0c245d7b987",
+      "updated": {
+        "success": true
+      },
+      "validation_status": "test-only follow-up; official checks pending"
+    },
+    {
+      "pr": 6231,
+      "branch": "fix/aider-flow-scalars-20261116",
+      "parent": "7536d3f3a4984f223890e2c3b4b24c621182dc4d",
+      "head": "da3f8966c45db8187fd3ac80a3fc18507c329850",
+      "tree": "65b8620d8e595afae2509cf3e916b15fd3a2e4b0",
+      "path": "tests/integrations/aider-flow-scalars.test.ts",
+      "blob": "10259bfe64747f2c940d1507374a7f3dcd2a0a3c",
+      "updated": {
+        "success": true
+      },
+      "validation_status": "test-only follow-up; official checks pending"
+    }
+  ],
+  "prs": [
+    {
+      "number": 6230,
+      "url": "https://github.com/thedotmack/claude-mem/pull/6230",
+      "title": "fix(aider): honor working-directory config precedence",
+      "state": "open",
+      "merged": false,
+      "draft": false,
+      "head": "e62aa9c3f1235d88570ca89bdb3a2a523c6c2144",
+      "maintainer_can_modify": false,
+      "official_ci": [
+        {
+          "id": 44033072378,
+          "name": "Windows",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 8181,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072378/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072378/logs",
+          "workflow_id": 268562650,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033072378"
+        },
+        {
+          "id": 44033072543,
+          "name": "CI",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 8161,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072543/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072543/logs",
+          "workflow_id": 285261453,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033072543"
+        },
+        {
+          "id": 44033072422,
+          "name": "Native ODS integration",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 76,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072422/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033072422/logs",
+          "workflow_id": 392578694,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033072422"
+        }
+      ],
+      "validation_local": {
+        "before": {
+          "passed": 1,
+          "failed": 2
+        },
+        "after": {
+          "passed": 63,
+          "failed": 0
+        },
+        "typecheck": "success",
+        "build": "success",
+        "native_cli": "audit/claude-mem-aider-config-native-validation.json",
+        "dedupe": {
+          "pr_heads": 3451,
+          "fork_branches": 467,
+          "reachable_commits": 16233,
+          "path_history_unchanged_after_refresh": true,
+          "distinct_resolver_blobs": 1
+        }
+      },
+      "created_at": "2026-11-16T22:50:15Z",
+      "merged_at": null,
+      "merge_commit_sha": "9e8d17763cddd6c5cb2eb640cd6c4bbfee69b02b",
+      "closed_at": null,
+      "verified_at": "2026-11-17T06:48:04.917Z",
+      "review_checked_at": "2026-11-17T06:35:28.344Z",
+      "review_followup": {
+        "source": "Greptile automated review",
+        "comment_id": 4592794824,
+        "status": "test_revision_pushed_official_ci_pending",
+        "request": "Verify empty-config fallback with isolated home inside nested Git folder and outside Git.",
+        "head": "e62aa9c3f1235d88570ca89bdb3a2a523c6c2144",
+        "source_changed": false,
+        "local_validation": {
+          "tests": 2,
+          "passed": 2,
+          "failed": 0,
+          "assertions": 10,
+          "log": "validation-evidence/claude-mem-aider-fallback-review-20261117.log"
+        }
+      },
+      "validation_history": [
+        {
+          "head": "f7acbbd1b03819237c745103a5abf0350586aa8f",
+          "official_ci": [
+            {
+              "id": 43973824170,
+              "name": "Native ODS integration",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824170"
+            },
+            {
+              "id": 43973824279,
+              "name": "Windows",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824279"
+            },
+            {
+              "id": 43973824185,
+              "name": "CI",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43973824185"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6231,
+      "url": "https://github.com/thedotmack/claude-mem/pull/6231",
+      "title": "fix(aider): preserve quoted file paths in flow lists",
+      "state": "open",
+      "merged": false,
+      "draft": false,
+      "head": "da3f8966c45db8187fd3ac80a3fc18507c329850",
+      "maintainer_can_modify": false,
+      "official_ci": [
+        {
+          "id": 44033080221,
+          "name": "CI",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 8162,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080221/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080221/logs",
+          "workflow_id": 285261453,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033080221"
+        },
+        {
+          "id": 44033080075,
+          "name": "Windows",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 8182,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080075/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080075/logs",
+          "workflow_id": 268562650,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033080075"
+        },
+        {
+          "id": 44033080286,
+          "name": "Native ODS integration",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 77,
+          "jobs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080286/jobs",
+          "logs_url": "https://api.github.com/repos/thedotmack/claude-mem/actions/runs/44033080286/logs",
+          "workflow_id": 392578694,
+          "url": "https://github.com/thedotmack/claude-mem/actions/runs/44033080286"
+        }
+      ],
+      "validation_local": {
+        "regression_before": {
+          "passed": 5,
+          "failed": 5
+        },
+        "related_after": {
+          "passed": 70,
+          "failed": 0
+        },
+        "typecheck": "success",
+        "build": "success",
+        "native_cli": {
+          "cases": 6,
+          "baseline_install_failures": 4,
+          "baseline_uninstall_corruptions": 1,
+          "after_cases_passed": 6,
+          "configargparse": "1.7.1",
+          "pyyaml": "6.0.3",
+          "external_model_calls": 0
+        },
+        "dedupe": {
+          "pr_heads": 3452,
+          "fork_branches": 468,
+          "reachable_commits": 16234,
+          "distinct_installer_source_blobs": 3,
+          "exact_equivalent_found": false
+        }
+      },
+      "created_at": "2026-11-16T23:11:07Z",
+      "merged_at": null,
+      "merge_commit_sha": "98afe411236cc3b5d48679d66c1d50272ae6287d",
+      "closed_at": null,
+      "verified_at": "2026-11-17T06:48:04.917Z",
+      "review_checked_at": "2026-11-17T06:35:28.344Z",
+      "review_followup": {
+        "source": "Greptile automated review",
+        "comment_id": 4593001099,
+        "status": "test_revision_pushed_official_ci_pending",
+        "request": "Independently parse original/installed/removed YAML and compare exact filename arrays.",
+        "head": "da3f8966c45db8187fd3ac80a3fc18507c329850",
+        "source_changed": false,
+        "local_validation": {
+          "independent_parser_fixture_smoke_passed": 6,
+          "full_revised_test_suite": "official CI pending",
+          "log": "validation-evidence/claude-mem-yaml-parser-smoke-20261117.log"
+        }
+      },
+      "validation_history": [
+        {
+          "head": "7536d3f3a4984f223890e2c3b4b24c621182dc4d",
+          "official_ci": [
+            {
+              "id": 43977034891,
+              "name": "Windows",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034891"
+            },
+            {
+              "id": 43977034970,
+              "name": "CI",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034970"
+            },
+            {
+              "id": 43977034876,
+              "name": "Native ODS integration",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/thedotmack/claude-mem/actions/runs/43977034876"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/integrations/aider-config-fallback.test.ts:
+(pass) new Aider config belongs to the Git root [65.02ms]
+(pass) new Aider config belongs to the current directory [26.21ms]
+
+ 2 pass
+ 0 fail
+ 10 expect() calls
+Ran 2 tests across 1 file. [111.00ms]
