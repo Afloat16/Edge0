@@ -38,11 +38,11 @@ Compiler warnings are printed but do not stop the build; configure with `-DMOE_W
 
 The 35B needs about 42 GB of free disk space: about 19.7 GB for the original weights and about 22 GB for the converted assets. The converter writes no other large files. Once converted, the engine needs only the assets; the tiny test fixtures need just three small text files of the original weights (see [Testing](testing.md#setup)).
 
-Weights never go into Git. Choose where to keep them and export two directories:
+Weights never go into Git. Choose where to keep them and export two directories, replacing the example paths below with your own. Keep the quotes if a path contains spaces.
 
 ```sh
-export MOE_SOURCE_35B=<directory for the original weights>
-export MOE_ASSETS_35B=<directory for the converted assets>
+export MOE_SOURCE_35B="/path/to/original weights"
+export MOE_ASSETS_35B="/path/to/converted assets"
 ```
 
 Create the Python environment for the asset tools once, and define a shortcut for running them (bash or zsh):
@@ -64,10 +64,10 @@ assets_py() { uv run --project tools/assets --offline --no-sync python -I "$@"; 
    assets_py tools/assets/edge0_35b/fetch_source.py download --out "$MOE_SOURCE_35B"
    ```
 
-   To download through a mirror, put `--endpoint` before the command name; `--files` after it downloads only the named files into a new directory:
+   To download through a mirror, replace `https://your-mirror.example` with the mirror's URL and put `--endpoint` before the command name; `--files` after it downloads only the named files into a new directory:
 
    ```sh
-   assets_py tools/assets/edge0_35b/fetch_source.py --endpoint <mirror URL> download --out "$MOE_SOURCE_35B"
+   assets_py tools/assets/edge0_35b/fetch_source.py --endpoint "https://your-mirror.example" download --out "$MOE_SOURCE_35B"
    ```
 
 3. **Convert** (about 3 to 4 minutes on an Apple M-series Mac). The output directory must not exist yet. Work happens in `<out>.partial`, which is removed on success. On failure it is kept and the error names it: delete it and rerun. The converter log is written to `<out>.log`.
