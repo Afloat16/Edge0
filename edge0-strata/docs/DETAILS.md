@@ -679,6 +679,16 @@ tables per token). The scaling is fixed for the whole run, because the KV cache 
 
   Set `limit.context` to the context you chose in setup and keep `limit.output` well under it. `strata connect` writes
   configurations for these apps for you.
+
+  If OpenCode prints tool calls as text instead of running them, first compare your provider settings with
+  `strata connect opencode`: the example uses `npm` and `options`, not `package` and `settings`, and `model`
+  selects a registered provider/model pair. The generated settings also enable `tool_call` and set `limit.input`.
+  Run `strata connect opencode --check --output json` against the server you actually started. For a manually started
+  server, supply its root address (without `/v1`) with `--url`, its model with `--model`, its context with `--context`,
+  and its key via `--key-env` if needed (see [Connect your apps](TERMINAL_LAUNCH.md#connect-your-apps-strata-connect)).
+  This sends one text prompt and one tool-call request directly; it does not launch OpenCode or check its installed configuration.
+  If the check passes but OpenCode still fails, compare whether the client's outgoing request contains `tools` and whether the
+  reply contains structured `tool_calls` or only text. Redact API keys and private prompt content before sharing logs.
 - **Codex CLI:** [below](#the-responses-api-and-codex-cli).
 
 ### Conversation cache
